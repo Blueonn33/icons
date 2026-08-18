@@ -48,7 +48,7 @@ namespace icons.Data.Models
         public virtual Icon Icon { get; set; } = null!;
 
         [ForeignKey(nameof(User))]
-        public int UserId
+        public string UserId
         {
             get; set;
         }

@@ -50,7 +50,7 @@ namespace icons.Data.Models
         } = null!;
 
         [ForeignKey(nameof(User))]
-        public int UserId
+        public string UserId
         {
             get; set;
         }
