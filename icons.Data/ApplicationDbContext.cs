@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using icons.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace icons.Data
@@ -9,5 +10,7 @@ namespace icons.Data
             : base(options)
         {
         }
+
+        public virtual DbSet<Icon> Icons { get; set; } = null!;
     }
 }
