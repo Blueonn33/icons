@@ -1,4 +1,5 @@
-﻿using icons.Data.Models;
+﻿using icons.Data.EntityConfigurations;
+using icons.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,5 +14,10 @@ namespace icons.Data
 
         public virtual DbSet<Icon> Icons { get; set; } = null!;
         public virtual DbSet<Review> Reviews { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfigurationsFromAssembly(typeof(IconEntityTypeConfiguration).Assembly);
+        }
     }
 }
