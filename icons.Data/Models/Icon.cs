@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Data.Models
@@ -40,5 +41,18 @@ namespace icons.Data.Models
         {
             get; set;
         } = null!;
+
+        [ForeignKey(nameof(User))]
+        public int UserId
+        {
+            get; set;
+        }
+
+        public virtual ApplicationUser User
+        {
+            get; set;
+        } = null!;
+
+        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
     }
 }

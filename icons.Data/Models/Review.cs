@@ -1,5 +1,6 @@
 ﻿using icons.Data.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Data.Models
@@ -37,5 +38,19 @@ namespace icons.Data.Models
         [MinLength(ReviewUsernameMinLength)]
         [MaxLength(ReviewUsernameMaxLength)]
         public string Username { get; set; } = null!;
+
+        [ForeignKey(nameof(Icon))]
+        public int IconId
+        {
+            get; set;
+        }
+        public virtual Icon Icon { get; set; } = null!;
+
+        [ForeignKey(nameof(User))]
+        public int UserId
+        {
+            get; set;
+        }
+        public virtual ApplicationUser User { get; set; } = null!;
     }
 }
