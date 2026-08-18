@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using icons.Data.Common;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using icons.Data.Common;
 using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Data.Models
@@ -31,6 +31,12 @@ namespace icons.Data.Models
         [MinLength(IconDescriptionMinLength)]
         [MaxLength(IconDescriptionMaxLength)]
         public string? Description
+        {
+            get; set;
+        }
+
+        [Range(IconAverageRangeMinValue, IconAverageRangeMaxValue)]
+        public decimal AverageRating
         {
             get; set;
         }

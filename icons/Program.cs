@@ -1,4 +1,5 @@
 using icons.Data;
+using icons.Data.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace icons
@@ -17,6 +18,9 @@ namespace icons
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
