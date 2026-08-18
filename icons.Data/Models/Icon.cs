@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using icons.Data.Common;
 using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Data.Models
 {
-    public class Icon
+    public class Icon : IEntity
     {
         [Key]
-        public int IconId
+        public int Id
         {
             get; set;
         }

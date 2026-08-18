@@ -1,14 +1,15 @@
-﻿using icons.Data.Enums;
+﻿using icons.Data.Common;
+using icons.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Data.Models
 {
-    public class Review
+    public class Review : IEntity
     {
         [Key]
-        public int ReviewId
+        public int Id
         {
             get; set;
         }
