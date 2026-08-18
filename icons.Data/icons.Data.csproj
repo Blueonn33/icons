@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="Models\" />
     <Folder Include="EntityConfigurations\" />
     <Folder Include="Constants\" />
   </ItemGroup>
