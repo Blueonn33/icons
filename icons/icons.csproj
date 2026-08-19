@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\icons.Data\icons.Data.csproj" />
+    <ProjectReference Include="..\icons.Core\icons.Core.csproj" />
   </ItemGroup>
 
 </Project>
