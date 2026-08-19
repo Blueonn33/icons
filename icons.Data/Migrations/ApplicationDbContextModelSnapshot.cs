@@ -271,7 +271,7 @@ namespace icons.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Icons");
+                    b.ToTable("Icons", (string)null);
                 });
 
             modelBuilder.Entity("icons.Data.Models.Review", b =>
@@ -317,7 +317,7 @@ namespace icons.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

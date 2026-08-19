@@ -21,7 +21,7 @@ namespace icons.Data.Seed
                         Description =
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                         Rating = EnumReviewRating.VeryGood,
-                        IconId = 1,
+                        IconId = 3,
                         UserId = "10981ce8-9e80-4156-8afe-731efa65691b",
                         Username = "Jushiro Ukitake",
                         UserProfilePictureUrl =
@@ -32,7 +32,7 @@ namespace icons.Data.Seed
                         Title = "OK👍",
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                         Rating = EnumReviewRating.Excellent,
-                        IconId = 2,
+                        IconId = 4,
                         UserId = "267d5b8b-6ba8-4c04-aa40-a11b727167d9",
                         Username = "Byakuya Kuchiki",
                         UserProfilePictureUrl =
