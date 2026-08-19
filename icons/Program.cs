@@ -52,6 +52,8 @@ namespace icons
 
                 RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
                 UserSeeder.SeedUsersAsync(services, configuration).GetAwaiter().GetResult();
+                IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
+                ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
             }
 
             app.UseHttpsRedirection();
