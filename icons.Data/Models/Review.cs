@@ -17,7 +17,11 @@ namespace icons.Data.Models
         [Required]
         [MinLength(ReviewTitleMinLength)]
         [MaxLength(ReviewTitleMaxLength)]
-        public string Title { get; set; } = null!;
+        public string Title
+        {
+            get; set;
+        }
+            = null!;
 
         [MinLength(ReviewDescriptionMinLength)]
         [MaxLength(ReviewDescriptionMaxLength)]
@@ -33,25 +37,41 @@ namespace icons.Data.Models
 
         [Required]
         [StringLength(ReviewUserProfilePictureUrlLength)]
-        public string UserProfilePictureUrl { get; set; } = null!;
+        public string UserProfilePictureUrl
+        {
+            get; set;
+        } = null!;
 
         [Required]
         [MinLength(ReviewUsernameMinLength)]
         [MaxLength(ReviewUsernameMaxLength)]
-        public string Username { get; set; } = null!;
+        public string Username
+        {
+            get; set;
+        } = null!;
 
         [ForeignKey(nameof(Icon))]
         public int IconId
         {
             get; set;
         }
-        public virtual Icon Icon { get; set; } = null!;
 
+        public virtual Icon Icon
+        {
+            get; set;
+        } = null!;
+
+        [Required]
         [ForeignKey(nameof(User))]
         public string UserId
         {
+            get;
+            set;
+        } = null!;
+
+        public virtual ApplicationUser User
+        {
             get; set;
-        }
-        public virtual ApplicationUser User { get; set; } = null!;
+        } = null!;
     }
 }

@@ -14,6 +14,12 @@ namespace icons.Data.Seed
                 var adminRole = new IdentityRole(Constants.Roles.Admin);
                 await roleManager.CreateAsync(adminRole);
             }
+
+            if (!await roleManager.RoleExistsAsync(Constants.Roles.User))
+            {
+                var userRole = new IdentityRole(Constants.Roles.User);
+                await roleManager.CreateAsync(userRole);
+            }
         }
     }
 }

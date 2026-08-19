@@ -49,11 +49,13 @@ namespace icons.Data.Models
             get; set;
         } = null!;
 
+        [Required]
         [ForeignKey(nameof(User))]
         public string UserId
         {
-            get; set;
-        }
+            get;
+            set;
+        } = null!;
 
         public virtual ApplicationUser User
         {
