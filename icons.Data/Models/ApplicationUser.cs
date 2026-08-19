@@ -13,6 +13,8 @@ public class ApplicationUser : IdentityUser
     }
 
     [Required]
+    [MinLength(UserNameMinLength)]
+    [MaxLength(UserNameMaxLength)]
     public string Name
     {
         get; set;

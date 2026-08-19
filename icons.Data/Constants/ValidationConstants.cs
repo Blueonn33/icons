@@ -26,5 +26,7 @@
 
         // User
         public const int UserProfilePictureUrlLength = 900;
+        public const int UserNameMinLength = 3;
+        public const int UserNameMaxLength = 50;
     }
 }

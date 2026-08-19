@@ -1,23 +1,17 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
+using icons.Data;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
-using icons.Data;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
+using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Areas.Identity.Pages.Account;
 
@@ -56,13 +50,19 @@ public class RegisterModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public string? ReturnUrl { get; set; }
+    public string? ReturnUrl
+    {
+        get; set;
+    }
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public IList<AuthenticationScheme>? ExternalLogins { get; set; }
+    public IList<AuthenticationScheme>? ExternalLogins
+    {
+        get; set;
+    }
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -70,6 +70,20 @@ public class RegisterModel : PageModel
     /// </summary>
     public class InputModel
     {
+        [Required]
+        [StringLength(UserProfilePictureUrlLength)]
+        [Display(Name = "ProfilePictureUrl")]
+        public string? ProfilePictureUrl
+        {
+            get; set;
+        }
+
+        [Required]
+        [MinLength(UserNameMinLength)]
+        [MaxLength(UserNameMaxLength)]
+        [Display(Name = "Name")]
+        public string Name { get; set; } = null!;
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -96,7 +110,10 @@ public class RegisterModel : PageModel
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string? ConfirmPassword { get; set; }
+        public string? ConfirmPassword
+        {
+            get; set;
+        }
     }
 
 
@@ -114,6 +131,9 @@ public class RegisterModel : PageModel
         {
             var user = CreateUser();
 
+            user.Name = Input.Name;
+            user.ProfilePictureUrl = Input.ProfilePictureUrl;
+
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
             var result = await _userManager.CreateAsync(user, Input.Password);
@@ -128,7 +148,13 @@ public class RegisterModel : PageModel
                 var callbackUrl = Url.Page(
                     "/Account/ConfirmEmail",
                     pageHandler: null,
-                    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                    values: new
+                    {
+                        area = "Identity",
+                        userId = userId,
+                        code = code,
+                        returnUrl = returnUrl
+                    },
                     protocol: Request.Scheme)!;
 
                 await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
@@ -136,7 +162,11 @@ public class RegisterModel : PageModel
 
                 if (_userManager.Options.SignIn.RequireConfirmedAccount)
                 {
-                    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    return RedirectToPage("RegisterConfirmation", new
+                    {
+                        email = Input.Email,
+                        returnUrl = returnUrl
+                    });
                 }
                 else
                 {

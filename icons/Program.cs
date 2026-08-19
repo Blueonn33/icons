@@ -1,7 +1,9 @@
+using icons.Core.Services.Email;
 using icons.Data;
 using icons.Data.Common;
 using icons.Data.Seed;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace icons
@@ -25,7 +27,7 @@ namespace icons
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             builder.Services.AddControllersWithViews();
