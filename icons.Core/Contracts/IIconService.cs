@@ -1,15 +1,15 @@
-﻿using icons.Data.Models;
+﻿using icons.Core.Dtos.Icon;
 
 namespace icons.Core.Contracts
 {
     public interface IIconService
     {
-        Task<IEnumerable<Icon>> GetAllIconsAsync();
-        Task<IEnumerable<Icon>> GetAllIconsByUserIdAsync(string userId);
-        Task<IEnumerable<Icon>> GetTop3IconsAsync();
-        Task<Icon> GetIconByIdAsync(int id);
-        Task AddIconAsync(Icon icon);
-        void UpdateIcon(Icon icon);
-        void DeleteIcon(Icon icon);
+        Task<IEnumerable<IconGetDto>> GetAllIconsAsync();
+        Task<IEnumerable<IconGetDto>> GetAllIconsByUserIdAsync(string userId);
+        Task<IEnumerable<IconGetDto>> GetTop3IconsAsync();
+        Task<IconGetDto?> GetIconByIdAsync(int id);
+        Task AddIconAsync(IconCreateDto icon);
+        Task UpdateIconAsync(int id, IconUpdateDto icon);
+        Task DeleteIconAsync(int id);
     }
 }
