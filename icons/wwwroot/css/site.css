@@ -61,3 +61,9 @@ body {
 .nel-theme {
     background: conic-gradient(from 0deg, #7b877a, #154e53 57%, #f1e8e4 100%);
 }
+.login-offset {
+    text-underline-offset: 8px;
+}
+.login-offset:hover {
+    color: aqua !important;
+}
