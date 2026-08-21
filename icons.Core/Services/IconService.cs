@@ -1,17 +1,21 @@
 ﻿using icons.Core.Contracts;
 using icons.Core.Dtos.Icon;
+using icons.Data;
 using icons.Data.Common;
 using icons.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace icons.Core.Services
 {
     public class IconService : IIconService
     {
         private readonly IRepository<Icon> _repository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public IconService(IRepository<Icon> repository)
+        public IconService(IRepository<Icon> repository, UserManager<ApplicationUser> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<IconGetDto>> GetAllIconsAsync()
@@ -70,7 +74,7 @@ namespace icons.Core.Services
 
             if (icon == null)
             {
-                throw new KeyNotFoundException($"Entity of type {typeof(IconGetDto).Name} with Id {id} was not found.");
+                throw new KeyNotFoundException($"Icon with Id {id} was not found.");
             }
 
             return new IconGetDto
@@ -84,14 +88,44 @@ namespace icons.Core.Services
             };
         }
 
-        public Task AddIconAsync(IconCreateDto icon)
+        public async Task AddIconAsync(IconCreateDto icon)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(icon.UserId);
+
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"User with Id {icon.UserId} was not found.");
+            }
+
+            var newIcon = new Icon
+            {
+                ImageUrl = icon.ImageUrl,
+                Title = icon.Title,
+                Description = icon.Description,
+                UserId = icon.UserId,
+                Username = user.Name,
+                AverageRating = 0
+            };
+
+            await _repository.AddAsync(newIcon);
+            await _repository.SaveAsync();
         }
 
-        public Task UpdateIconAsync(int id, IconUpdateDto icon)
+        public async Task UpdateIconAsync(int id, IconUpdateDto icon)
         {
-            throw new NotImplementedException();
+            var updateIcon = await _repository.GetByIdAsync(id);
+
+            if (updateIcon == null)
+            {
+                throw new KeyNotFoundException($"Icon with Id {id} was not found.");
+            }
+
+            updateIcon.ImageUrl = icon.ImageUrl;
+            updateIcon.Title = icon.Title;
+            updateIcon.Description = icon.Description;
+
+            _repository.Update(updateIcon);
+            await _repository.SaveAsync();
         }
 
         public Task DeleteIconAsync(int id)
