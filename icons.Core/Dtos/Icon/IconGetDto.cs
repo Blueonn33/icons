@@ -1,0 +1,35 @@
+﻿namespace icons.Core.Dtos.Icon
+{
+    public class IconGetDto
+    {
+        public int Id
+        {
+            get; set;
+        }
+
+        public string ImageUrl
+        {
+            get; set;
+        } = null!;
+
+        public string Title
+        {
+            get; set;
+        } = null!;
+
+        public string? Description
+        {
+            get; set;
+        }
+
+        public decimal AverageRating
+        {
+            get; set;
+        }
+
+        public string Username
+        {
+            get; set;
+        } = null!;
+    }
+}

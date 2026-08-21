@@ -3,7 +3,7 @@ using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Core.Dtos.Icon
 {
-    public class CreateIconDto
+    public class IconCreateDto
     {
         [Required]
         [StringLength(IconImageUrlLength)]
