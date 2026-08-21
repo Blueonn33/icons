@@ -128,9 +128,17 @@ namespace icons.Core.Services
             await _repository.SaveAsync();
         }
 
-        public Task DeleteIconAsync(int id)
+        public async Task DeleteIconAsync(int id)
         {
-            throw new NotImplementedException();
+            var icon = await _repository.GetByIdAsync(id);
+
+            if (icon == null)
+            {
+                throw new KeyNotFoundException($"Icon with Id {id} was not found.");
+            }
+
+            _repository.Delete(icon);
+            await _repository.SaveAsync();
         }
     }
 }
