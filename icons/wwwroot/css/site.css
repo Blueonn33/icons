@@ -49,6 +49,15 @@ body {
 .btn-register-home {
     letter-spacing: 2px;
 }
-.register-ukitake {
+.register-image, .login-image {
     max-height: 100vh;
+}
+.nav-link:hover {
+    color: aqua !important;
+}
+.rukia-theme {
+    background: conic-gradient(from 0deg, #c2f5ff, #fff 66%, #a3edff 100%);
+}
+.nel-theme {
+    background: conic-gradient(from 0deg, #7b877a, #154e53 57%, #f1e8e4 100%);
 }
