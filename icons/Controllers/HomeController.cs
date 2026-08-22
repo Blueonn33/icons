@@ -1,4 +1,6 @@
+using icons.Core.Contracts;
 using icons.Models;
+using icons.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,9 +8,21 @@ namespace icons.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IIconService _service;
+
+        public HomeController(IIconService service)
         {
-            return View();
+            _service = service;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var model = new Top3IconsViewModel()
+            {
+                Top3Icons = await _service.GetTop3IconsAsync()
+            };
+
+            return View(model);
         }
 
         public IActionResult Privacy()
