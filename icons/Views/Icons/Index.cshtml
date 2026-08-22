@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="~/css/icons/index.css" asp-append-version="true" />
 </head>
 <body>
-    <section>
-        <div class="row">
+    <section class="d-flex justify-content-center mt-5">
+        <div class="row container">
             @foreach (var icon in Model.GetAllIcons)
             {
                 <div class="col d-flex justify-content-center">
@@ -22,7 +22,6 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">@icon.Title</h5>
-                            <p class="card-text">@icon.Description</p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
