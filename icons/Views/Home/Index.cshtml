@@ -68,7 +68,14 @@
                     {
                         <div class="col d-flex justify-content-center">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="@icon.ImageUrl" alt="Card image">
+                                <div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+                                    <img src="@icon.ImageUrl" class="w-100 card-img-top" />
+                                    <a href="#">
+                                        <div class="mask" style="background-color: hsla(195, 83%, 58%, 0.2)"></div>
+                                    </a>
+                                </div>
+
+                                @* <img class="card-img-top" src="@icon.ImageUrl" alt="Card image"> *@
                                 <div class="card-body">
                                     <h5 class="card-title">@icon.Title</h5>
                                     <p class="card-text">@icon.Description</p>
