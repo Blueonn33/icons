@@ -1,4 +1,6 @@
-﻿@{
+﻿@using icons.Models.Home
+@model Top3IconsViewModel;
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -62,7 +64,20 @@
                     <h2 class="text-light pb-4">⭐ our top rated icons ⭐</h2>
                 </div>
                 <div class="row">
-                    <div class="col d-flex justify-content-center">
+                    @foreach (var icon in Model.Top3Icons)
+                    {
+                        <div class="col d-flex justify-content-center">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="@icon.ImageUrl" alt="Card image">
+                                <div class="card-body">
+                                    <h5 class="card-title">@icon.Title</h5>
+                                    <p class="card-text">@icon.Description</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @* <div class="col d-flex justify-content-center">
                         <div class="card" style="width: 18rem;">
                             <img class="card-img-top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F2010391708303761408%2FGEu7nYIw.jpg&f=1&nofb=1&ipt=aa76ca6337a2a2a1b582884f5957da4fa890240d68c4dec94ea5b55ef645fd50" alt="Card image cap">
                             <div class="card-body">
@@ -91,7 +106,7 @@
                                 <a href="#" class="btn btn-primary">Go somewhere</a>
                             </div>
                         </div>
-                    </div>
+                    </div> *@
                 </div>
             </div>
         </section>

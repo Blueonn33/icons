@@ -1,3 +1,5 @@
+using icons.Core.Contracts;
+using icons.Core.Services;
 using icons.Core.Services.Email;
 using icons.Data;
 using icons.Data.Common;
@@ -29,6 +31,8 @@ namespace icons
 
             builder.Services.AddTransient<IEmailSender, EmailSender>();
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped<IIconService, IconService>();
+
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();

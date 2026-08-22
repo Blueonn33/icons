@@ -7,10 +7,10 @@ namespace icons.Data.Common
         private readonly ApplicationDbContext _context;
         private readonly DbSet<TEntity> _set;
 
-        public Repository(ApplicationDbContext context, DbSet<TEntity> set)
+        public Repository(ApplicationDbContext context)
         {
             _context = context;
-            _set = set;
+            _set = context.Set<TEntity>();
         }
 
         public async Task AddAsync(TEntity entity)
