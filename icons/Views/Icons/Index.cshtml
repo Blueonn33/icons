@@ -8,25 +8,34 @@
     <link rel="stylesheet" href="~/css/icons/index.css" asp-append-version="true" />
 </head>
 <body>
-    <section class="d-flex justify-content-center mt-5">
-        <div class="row container">
-            @foreach (var icon in Model.GetAllIcons)
-            {
-                <div class="col d-flex justify-content-center">
-                    <div class="card" style="width: 18rem;">
-                        <div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
-                            <img src="@icon.ImageUrl" class="w-100 card-img-top" />
-                            <a href="#">
-                                <div class="mask" style="background-color: hsla(195, 83%, 58%, 0.2)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">@icon.Title</h5>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+<section class="container mt-5">
+        <div class="row d-flex justify-content-center">
+        <div class="col-4">
+                <a class="btn btn-primary btn-lg btn-block">create</a>
+        </div>
+    </div>
+</section>
+<section class="d-flex justify-content-around mt-5">
+    <div class="row">
+        @foreach (var icon in Model.GetAllIcons)
+        {
+            <div class="col-4 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+                        <img src="@icon.ImageUrl" class="w-100 card-img-top"/>
+                        <a href="#">
+                            <div class="mask" style="background-color: hsla(195, 83%, 58%, 0.2)"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@icon.Title</h5>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="btn btn-primary">visit</a>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
-    </section>
+            </div>
+        }
+    </div>
+</section>
 </body>
