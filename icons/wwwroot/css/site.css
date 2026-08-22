@@ -67,3 +67,6 @@ body {
 .login-offset:hover {
     color: aqua !important;
 }
+.no-content-container {
+    overflow: hidden;
+}
