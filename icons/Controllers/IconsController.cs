@@ -90,6 +90,24 @@ namespace icons.Controllers
             return View(updateIcon);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateIcon(int id, IconsUpdateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", model);
+            }
 
+            var updateIcon = new IconUpdateDto
+            {
+                Id = model.Id,
+                ImageUrl = model.ImageUrl,
+                Title = model.Title,
+                Description = model.Description
+            };
+
+            await _service.UpdateIconAsync(updateIcon.Id, updateIcon);
+            return RedirectToAction("Index");
+        }
     }
 }
