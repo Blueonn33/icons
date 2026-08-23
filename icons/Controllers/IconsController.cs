@@ -18,6 +18,7 @@ namespace icons.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var icons = new IconsViewModel()
@@ -33,11 +34,13 @@ namespace icons.Controllers
             return View(icons);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateIcon(IconsCreateViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -56,7 +59,14 @@ namespace icons.Controllers
             };
 
             await _service.AddIconAsync(icon);
-            return Redirect($"Index");
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteIcon(int id)
+        {
+            await _service.DeleteIconAsync(id);
+            return RedirectToAction("Index");
         }
     }
 }
