@@ -14,7 +14,7 @@
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.ProfilePictureUrl" class="form-control" autocomplete="name" aria-required="true" />
+                    <input asp-for="Input.ProfilePictureUrl" class="form-control" autocomplete="profilePictureUrl" aria-required="true" />
                     <label asp-for="Input.ProfilePictureUrl">profile picture url</label>
                     <span asp-validation-for="Input.ProfilePictureUrl" class="text-danger"></span>
                 </div>

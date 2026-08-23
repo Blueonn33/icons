@@ -1,0 +1,31 @@
+﻿@model icons.Models.Icons.IconsCreateViewModel;
+@{
+    ViewData["Title"] = "Create Icon";
+}
+
+<head>
+
+</head>
+<body>
+    <section class="container mt-5">
+        <form asp-action="Create" asp-controller="Icons">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="@Model.ImageUrl" class="form-control" aria-required="true" />
+                <label asp-for="@Model.ImageUrl">icon url</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="@Model.Title" class="form-control" aria-required="true" />
+                <label asp-for="@Model.Title">title</label>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea asp-for="@Model.Description" class="form-control" aria-required="true"></textarea>
+                <label asp-for="@Model.Description">description</label>
+            </div>
+            <div class="form-floating mb-3 d-flex justify-content-evenly mt-5">
+                <a class="btn btn-secondary" asp-action="Index" asp-controller="Icons">BACK</a>
+                <button class="btn btn-primary" type="submit">CREATE</button>
+            </div>
+        </form>
+    </section>
+</body>
