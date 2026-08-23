@@ -5,6 +5,12 @@ namespace icons.Core.Dtos.Icon
 {
     public class IconUpdateDto
     {
+        [Key]
+        public int Id
+        {
+            get; set;
+        }
+
         [Required]
         [StringLength(IconImageUrlLength)]
         public string ImageUrl

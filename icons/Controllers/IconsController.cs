@@ -55,7 +55,7 @@ namespace icons.Controllers
                 ImageUrl = model.ImageUrl,
                 Title = model.Title,
                 Description = model.Description,
-                UserId = user.Id,
+                UserId = user.Id
             };
 
             await _service.AddIconAsync(icon);
@@ -68,5 +68,28 @@ namespace icons.Controllers
             await _service.DeleteIconAsync(id);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var icon = await _service.GetIconByIdAsync(id);
+
+            if (icon == null)
+            {
+                throw new KeyNotFoundException($"Icon with id {id} was not found.");
+            }
+
+            var updateIcon = new IconsUpdateViewModel()
+            {
+                Id = id,
+                ImageUrl = icon.ImageUrl,
+                Title = icon.Title,
+                Description = icon.Description
+            };
+
+            return View(updateIcon);
+        }
+
+
     }
 }
