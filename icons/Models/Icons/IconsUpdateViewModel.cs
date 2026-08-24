@@ -11,14 +11,12 @@ namespace icons.Models.Icons
             get; set;
         }
 
-        [Required]
         [StringLength(IconTitleMaxLength, MinimumLength = IconTitleMinLength)]
         public string Title
         {
             get; set;
         } = null!;
 
-        [Required]
         [Url]
         [StringLength(IconImageUrlLength)]
         public string ImageUrl
@@ -26,7 +24,6 @@ namespace icons.Models.Icons
             get; set;
         } = null!;
 
-        [Required]
         [StringLength(IconDescriptionMaxLength, MinimumLength = IconDescriptionMinLength)]
         public string Description
         {

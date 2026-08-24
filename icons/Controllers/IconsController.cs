@@ -114,17 +114,20 @@ namespace icons.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateIcon(int id, IconsUpdateViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Index", model);
-            }
+            var currentIcon = await _service.GetIconByIdAsync(id);
 
             var updateIcon = new IconUpdateDto
             {
                 Id = model.Id,
-                ImageUrl = model.ImageUrl,
-                Title = model.Title,
-                Description = model.Description
+                ImageUrl = string.IsNullOrWhiteSpace(model.ImageUrl)
+                    ? currentIcon.ImageUrl
+                    : model.ImageUrl,
+                Title = string.IsNullOrWhiteSpace(model.Title)
+                    ? currentIcon.Title
+                    : model.Title,
+                Description = string.IsNullOrWhiteSpace(model.Description)
+                    ? currentIcon.Description
+                    : model.Description
             };
 
             await _service.UpdateIconAsync(updateIcon.Id, updateIcon);
