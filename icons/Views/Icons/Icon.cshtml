@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="~/css/icons/index.css" asp-append-version="true" />
 </head>
 <body class="icon-container">
+    <section class="container">
+        <a asp-action="Index" asp-controller="Icons" class="btn btn-secondary">back</a>
+    </section>
     <section class="container mt-5">
         <div class="row">
             <div class="col-4 d-flex justify-content-between gap-5">
                 <div>
-                    <img src="@Model.ImageUrl" class="img-fluid rounded-5" />
+                    <img src="@Model.ImageUrl" class="img-fluid rounded-5"/>
                 </div>
                 <div class="vr vr-blurry"></div>
             </div>
