@@ -34,6 +34,13 @@ namespace icons.Controllers
             return View(icons);
         }
 
+        public async Task<IActionResult> Icon(int id)
+        {
+            var icon = await _service.GetIconByIdAsync(id);
+
+            return View(icon);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
