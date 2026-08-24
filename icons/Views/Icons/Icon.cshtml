@@ -4,16 +4,30 @@
 }
 
 <head>
-
+    <link rel="stylesheet" href="~/css/icons/index.css" asp-append-version="true" />
 </head>
-<body>
-    <section class="container">
+<body class="icon-container">
+    <section class="container mt-5">
         <div class="row">
-            <div class="col-6">
-                <img src="@Model.GetAllIcons"/>
+            <div class="col-4 d-flex justify-content-between gap-5">
+                <div>
+                    <img src="@Model.ImageUrl" class="img-fluid rounded-5" />
+                </div>
+                <div class="vr vr-blurry"></div>
             </div>
-            <div class="col-6">
-
+            <div class="col-8">
+                <div>
+                    <h1 class="fs-2"><strong>icon: </strong>@Model.Title</h1>
+                </div>
+                <div class="mb-5">
+                    <h5><strong>username:</strong> @Model.Username</h5>
+                </div>
+                <div>
+                    <p><strong>description: </strong>@Model.Description</p>
+                </div>
+                <div>
+                    <p><strong>average rating: </strong>@Model.AverageRating</p>
+                </div>
             </div>
         </div>
     </section>

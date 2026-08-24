@@ -3,3 +3,10 @@
     top: 0;
     right: 0;
 }
+.icon-container {
+    background: linear-gradient(135deg, #fff 25%, #7892f0 88%, #608cb3 100%)
+}
+.vr-blurry {
+    width: 10px !important;
+    height: 100%;
+}

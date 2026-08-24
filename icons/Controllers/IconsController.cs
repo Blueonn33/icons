@@ -38,7 +38,21 @@ namespace icons.Controllers
         {
             var icon = await _service.GetIconByIdAsync(id);
 
-            return View(icon);
+            if (icon == null)
+            {
+                return NotFound();
+            }
+
+            var model = new IconViewModel
+            {
+                ImageUrl = icon.ImageUrl,
+                Title = icon.Title,
+                Description = icon.Description,
+                Username = icon.Username,
+                AverageRating = icon.AverageRating
+            };
+
+            return View(model);
         }
 
         [HttpGet]
