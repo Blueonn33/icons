@@ -9,18 +9,19 @@ namespace icons.Core.Services
 {
     public class IconService : IIconService
     {
-        private readonly IRepository<Icon> _repository;
+        private readonly IconRepository _repository;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IconService(IRepository<Icon> repository, UserManager<ApplicationUser> userManager)
+        public IconService(IconRepository repository, UserManager<ApplicationUser> userManager)
         {
             _repository = repository;
             _userManager = userManager;
         }
 
+        // TODO: Use IconRepository
         public async Task<IEnumerable<IconGetDto>> GetAllIconsAsync()
         {
-            var icons = await _repository.GetAllAsync();
+            var icons = await _repository.GetAllIconsAsync();
 
             return icons.Select(i => new IconGetDto
             {
