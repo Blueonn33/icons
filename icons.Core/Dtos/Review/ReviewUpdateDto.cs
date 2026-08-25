@@ -1,5 +1,4 @@
-﻿using icons.Data.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Core.Dtos.Review
@@ -18,11 +17,6 @@ namespace icons.Core.Dtos.Review
         [MinLength(ReviewDescriptionMinLength)]
         [MaxLength(ReviewDescriptionMaxLength)]
         public string? Description
-        {
-            get; set;
-        }
-
-        public EnumReviewRating Rating
         {
             get; set;
         }

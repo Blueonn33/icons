@@ -40,6 +40,7 @@ namespace icons.Core.Services
             }
 
             _repository.Delete(review);
+            await _repository.SaveAsync();
         }
 
         public async Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdAsync(int id)
@@ -86,14 +87,40 @@ namespace icons.Core.Services
             });
         }
 
-        public Task<ReviewGetDto?> GetReviewByIdAsync(int id)
+        public async Task<ReviewGetDto?> GetReviewByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var review = await _repository.GetByIdAsync(id);
+
+            if (review == null)
+            {
+                throw new KeyNotFoundException($"Review with id {id} was not found");
+            }
+
+            return new ReviewGetDto
+            {
+                Title = review.Title,
+                Description = review.Description,
+                Rating = review.Rating,
+                PublishedTime = review.PublishedTime,
+                Username = review.Username,
+                UserProfilePictureUrl = review.UserProfilePictureUrl
+            };
         }
 
-        public Task UpdateReviewAsync(int id, ReviewUpdateDto review)
+        public async Task UpdateReviewAsync(int id, ReviewUpdateDto review)
         {
-            throw new NotImplementedException();
+            var updateReview = await _repository.GetByIdAsync(id);
+
+            if (updateReview == null)
+            {
+                throw new KeyNotFoundException($"Review with id {id} was not found");
+            }
+
+            updateReview.Title = review.Title;
+            updateReview.Description = review.Description;
+
+            _repository.Update(updateReview);
+            await _repository.SaveAsync();
         }
     }
 }
