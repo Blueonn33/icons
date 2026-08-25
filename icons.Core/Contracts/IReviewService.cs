@@ -1,12 +1,12 @@
 ﻿using icons.Core.Dtos.Review;
-using icons.Data.Enums;
+using icons.Core.Enums;
 
 namespace icons.Core.Contracts
 {
     public interface IReviewService
     {
         Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdAsync(int id);
-        Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewRating sort);
+        Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort);
         Task<ReviewGetDto?> GetReviewByIdAsync(int id);
         Task AddReviewAsync(ReviewCreateDto review);
         Task UpdateReviewAsync(int id, ReviewUpdateDto review);
