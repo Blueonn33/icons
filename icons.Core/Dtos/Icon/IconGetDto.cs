@@ -1,4 +1,6 @@
-﻿namespace icons.Core.Dtos.Icon
+﻿using icons.Core.Dtos.Review;
+
+namespace icons.Core.Dtos.Icon
 {
     public class IconGetDto
     {
@@ -31,5 +33,11 @@
         {
             get; set;
         } = null!;
+
+        public List<ReviewGetDto> Reviews
+        {
+            get;
+            set;
+        } = new List<ReviewGetDto>();
     }
 }
