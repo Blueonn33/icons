@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace icons.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class PublishDate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,7 @@ namespace icons.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ProfilePictureUrl = table.Column<string>(type: "nvarchar(900)", maxLength: 900, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -191,6 +191,7 @@ namespace icons.Data.Migrations
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
                     Rating = table.Column<int>(type: "int", nullable: false),
+                    PublishedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserProfilePictureUrl = table.Column<string>(type: "nvarchar(900)", maxLength: 900, nullable: false),
                     Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IconId = table.Column<int>(type: "int", nullable: false),

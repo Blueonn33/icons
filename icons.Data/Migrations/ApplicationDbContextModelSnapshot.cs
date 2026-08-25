@@ -185,7 +185,8 @@ namespace icons.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -271,7 +272,7 @@ namespace icons.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Icons", (string)null);
+                    b.ToTable("Icons");
                 });
 
             modelBuilder.Entity("icons.Data.Models.Review", b =>
@@ -288,6 +289,9 @@ namespace icons.Data.Migrations
 
                     b.Property<int>("IconId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("PublishedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
@@ -317,7 +321,7 @@ namespace icons.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

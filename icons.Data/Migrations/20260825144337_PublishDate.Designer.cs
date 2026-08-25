@@ -12,8 +12,8 @@ using icons.Data;
 namespace icons.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260819093910_Initial")]
-    partial class Initial
+    [Migration("20260825144337_PublishDate")]
+    partial class PublishDate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -188,7 +188,8 @@ namespace icons.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -291,6 +292,9 @@ namespace icons.Data.Migrations
 
                     b.Property<int>("IconId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("PublishedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");

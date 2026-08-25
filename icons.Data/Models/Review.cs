@@ -35,6 +35,8 @@ namespace icons.Data.Models
             get; set;
         }
 
+        public DateTime PublishedTime { get; set; } = DateTime.Now;
+
         [Required]
         [StringLength(ReviewUserProfilePictureUrlLength)]
         public string UserProfilePictureUrl
