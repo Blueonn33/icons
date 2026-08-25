@@ -32,8 +32,9 @@ namespace icons
             builder.Services.AddTransient<IEmailSender, EmailSender>();
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IIconRepository, IconRepository>();
+            builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
             builder.Services.AddScoped<IIconService, IconService>();
-
+            builder.Services.AddScoped<IReviewService, ReviewService>();
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
