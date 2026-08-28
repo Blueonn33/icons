@@ -1,4 +1,5 @@
-﻿@model icons.Models.Icons.IconViewModel;
+﻿@using icons.Models.Reviews
+@model icons.Models.Icons.IconViewModel;
 @{
     ViewData["Title"] = "Icon";
 }
@@ -33,5 +34,15 @@
                 </div>
             </div>
         </div>
+    </section>
+    <section>
+        @await Html.PartialAsync(
+            "~/Views/Reviews/_Reviews.cshtml",
+            new ReviewsViewModel
+            {
+                Reviews = Model.Reviews,
+                // Sort = Model.Sort
+            }
+        )
     </section>
 </body>

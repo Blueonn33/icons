@@ -9,10 +9,12 @@ namespace icons.Core.Services
     public class ReviewService : IReviewService
     {
         private readonly IReviewRepository _repository;
+        private readonly IIconRepository _iconRepository;
 
-        public ReviewService(IReviewRepository repository)
+        public ReviewService(IReviewRepository repository, IIconRepository iconRepository)
         {
             _repository = repository;
+            _iconRepository = iconRepository;
         }
 
         public async Task AddReviewAsync(ReviewCreateDto review)
@@ -45,7 +47,7 @@ namespace icons.Core.Services
 
         public async Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdAsync(int id)
         {
-            var icon = await _repository.GetByIdAsync(id);
+            var icon = await _iconRepository.GetByIdAsync(id);
 
             if (icon == null)
             {
@@ -67,7 +69,7 @@ namespace icons.Core.Services
 
         public async Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort)
         {
-            var icon = await _repository.GetByIdAsync(id);
+            var icon = await _iconRepository.GetByIdAsync(id);
 
             if (icon == null)
             {

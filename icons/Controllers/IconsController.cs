@@ -1,5 +1,6 @@
 ﻿using icons.Core.Contracts;
 using icons.Core.Dtos.Icon;
+using icons.Core.Dtos.Review;
 using icons.Data;
 using icons.Models.Icons;
 using Microsoft.AspNetCore.Identity;
@@ -10,11 +11,13 @@ namespace icons.Controllers
     public class IconsController : Controller
     {
         private readonly IIconService _service;
+        private readonly IReviewService _reviewService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IconsController(IIconService service, UserManager<ApplicationUser> userManager)
+        public IconsController(IIconService service, IReviewService reviewService, UserManager<ApplicationUser> userManager)
         {
             _service = service;
+            _reviewService = reviewService;
             _userManager = userManager;
         }
 
@@ -37,6 +40,7 @@ namespace icons.Controllers
         public async Task<IActionResult> Icon(int id)
         {
             var icon = await _service.GetIconByIdAsync(id);
+            var reviews = await _reviewService.GetAllReviewsByIconIdAsync(id);
 
             if (icon == null)
             {
@@ -49,7 +53,17 @@ namespace icons.Controllers
                 Title = icon.Title,
                 Description = icon.Description,
                 Username = icon.Username,
-                AverageRating = icon.AverageRating
+                AverageRating = icon.AverageRating,
+                Reviews = reviews.Select(r => new ReviewGetDto
+                {
+                    Id = r.Id,
+                    Title = r.Title,
+                    Description = r.Description,
+                    PublishedTime = r.PublishedTime,
+                    Rating = r.Rating,
+                    Username = r.Username,
+                    UserProfilePictureUrl = r.UserProfilePictureUrl
+                }).ToList()
             };
 
             return View(model);

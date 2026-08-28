@@ -1,0 +1,22 @@
+﻿@model icons.Models.Reviews.ReviewsViewModel
+
+<section class="container">
+    @foreach (var review in Model.Reviews)
+    {
+        <div>
+            <p>@review.Title</p>
+        </div>
+        <div>
+            <p>@review.Description</p>
+        </div>
+        <div>
+            <p>@review.Rating</p>
+        </div>
+        <div>
+            <p>@review.Username</p>
+        </div>
+        <div>
+            <img src="@review.UserProfilePictureUrl" class="img-fluid"/>
+        </div>
+    }
+</section>
