@@ -1,22 +1,30 @@
 ﻿@model icons.Models.Reviews.ReviewsViewModel
 
-<section class="container">
+<section class="container mt-5 ">
+    <div class="mb-4">
+        <h1>reviews</h1>
+    </div>
     @foreach (var review in Model.Reviews)
     {
-        <div>
-            <p>@review.Title</p>
-        </div>
-        <div>
-            <p>@review.Description</p>
-        </div>
-        <div>
-            <p>@review.Rating</p>
-        </div>
-        <div>
-            <p>@review.Username</p>
-        </div>
-        <div>
-            <img src="@review.UserProfilePictureUrl" class="img-fluid"/>
+        <div class="row get-review-container border rounded-3">
+            <div class="col-1 ps-0">
+                <img src="@review.UserProfilePictureUrl" class="img-fluid rounded-start-3"/>
+            </div>
+            <div class="col">
+                <div class="d-flex gap-5">
+                    <p>@review.Username</p>
+                    <p>@review.PublishedTime.ToShortDateString()</p>
+                </div>
+                <div>
+                    <h4>@review.Title</h4>
+                </div>
+                <div>
+                    <p>@review.Description</p>
+                </div>
+                <div>
+                    <p>@review.Rating</p>
+                </div>
+            </div>
         </div>
     }
 </section>
