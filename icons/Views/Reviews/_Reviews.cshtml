@@ -28,11 +28,11 @@
                 <div>
                     <img src="@(review.Rating switch
                               {
-                                  EnumReviewRating.Poor => Url.Content("~/img/color-blaw.png"),
-                                  EnumReviewRating.Fair => Url.Content("~/img/color-sad.png"),
-                                  EnumReviewRating.Good => Url.Content("~/img/color-pocker.png"),
+                                  EnumReviewRating.Poor => Url.Content("~/img/color-blaw.svg"),
+                                  EnumReviewRating.Fair => Url.Content("~/img/color-sad.svg"),
+                                  EnumReviewRating.Good => Url.Content("~/img/color-pocker.svg"),
                                   EnumReviewRating.VeryGood => Url.Content("~/img/color-smile.svg"),
-                                  EnumReviewRating.Excellent => Url.Content("~/img/color-cool.png"),
+                                  EnumReviewRating.Excellent => Url.Content("~/img/color-cool.svg"),
                               })" class="img-fluid"
 
                          data-bs-toggle="tooltip" data-bs-placement="top"

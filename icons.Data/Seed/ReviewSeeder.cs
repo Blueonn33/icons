@@ -38,7 +38,7 @@ namespace icons.Data.Seed
                         UserId = "9653bbf6-5fc8-42a2-aab8-d8cf7dbe70b1",
                         Username = "Byakuya Kuchiki",
                         UserProfilePictureUrl =
-                            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fitechgroups.co.uk%2Fwp-content%2Fuploads%2F2025%2F10%2Fphone-icon-telephone-icon-symbol-for-app-and-messenger-vector-768x768.jpg&f=1&nofb=1&ipt=9f1c9ddf32423859781ea4f5c2f501ef9f08c1e07c26309cad48d5caba9837ac",
+                            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pfps.gg%2Fpfps%2F5623-byakuya-kuchiki-profile-image.png&f=1&nofb=1&ipt=64ca4562e078e950da79e8feb4bd67ff9476530892e91f410071a7110c490556",
 
                     }
                 };
