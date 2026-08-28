@@ -39,17 +39,6 @@ namespace icons.Controllers
                 return Unauthorized();
             }
 
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState
-                    .Where(x => x.Value?.Errors.Count > 0)
-                    .SelectMany(x => x.Value!.Errors)
-                    .Select(x => x.ErrorMessage)
-                    .ToList();
-
-                return BadRequest(errors);
-            }
-
             var review = new ReviewCreateDto
             {
                 Title = model.Title,

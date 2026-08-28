@@ -13,7 +13,7 @@
             <label asp-for="@Model.Description"></label>
             <textarea class="form-control" asp-for="@Model.Description"></textarea>
         </div>
-        <div>
+        @* <div>
             <select asp-for="@Model.Rating">
                 <option value="@EnumReviewRating.Poor">1</option>
                 <option value="@EnumReviewRating.Fair">2</option>
@@ -21,7 +21,33 @@
                 <option value="@EnumReviewRating.VeryGood">4</option>
                 <option value="@EnumReviewRating.Excellent">5</option>
             </select>
+        </div> *@
+        <div class="row">
+            <div class="rating-select d-flex gap-3 col">
+                <label class="bg-white rounded-circle">
+                    <input type="radio" asp-for="Rating" value="@EnumReviewRating.Poor" class="d-none"/>
+                    <img src="~/img/blaw.svg" class="rating-img"/>
+                </label>
+                <label class="bg-white rounded-circle">
+                    <input type="radio" asp-for="Rating" value="@EnumReviewRating.Fair" class="d-none"/>
+                    <img src="~/img/color-sad.svg" class="rating-img"/>
+                </label>
+                <label class="bg-white rounded-circle">
+                    <input type="radio" asp-for="Rating" value="@EnumReviewRating.Good" class="d-none"/>
+                    <img src="~/img/color-pocker.svg" class="rating-img"/>
+                </label >
+                <label class="bg-white rounded-circle">
+                    <input type="radio" asp-for="Rating" value="@EnumReviewRating.VeryGood" class="d-none"/>
+                    <img src="~/img/color-smile.svg" class="rating-img"/>
+                </label>
+                <label class="bg-white rounded-circle">
+                    <input type="radio" asp-for="Rating" value="@EnumReviewRating.Excellent" class="d-none"/>
+                    <img src="~/img/color-cool.svg" class="rating-img"/>
+                </label>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <button class="btn btn-secondary" type="submit">Add</button>
+            </div>
         </div>
-        <button class="btn btn-secondary" type="submit">Add</button>
     </form>
 </section>
