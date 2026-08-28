@@ -33,7 +33,12 @@
                                   EnumReviewRating.Good => Url.Content("~/img/color-pocker.png"),
                                   EnumReviewRating.VeryGood => Url.Content("~/img/color-smile.svg"),
                                   EnumReviewRating.Excellent => Url.Content("~/img/color-cool.png"),
-                              })" class="img-fluid"/>
+                              })" class="img-fluid"
+
+                         data-bs-toggle="tooltip" data-bs-placement="top"
+                         data-bs-custom-class="custom-tooltip"
+                         data-bs-title="@review.Rating"
+                         />
 
                 </div>
             </div>

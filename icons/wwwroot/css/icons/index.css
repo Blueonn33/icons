@@ -19,3 +19,7 @@
     background-position: center, center;
     background-repeat: repeat, no-repeat;
 }
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bd-violet-bg);
+    --bs-tooltip-color: var(--bs-white);
+}

@@ -67,6 +67,10 @@
         type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
     ></script>
+    <script>
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
