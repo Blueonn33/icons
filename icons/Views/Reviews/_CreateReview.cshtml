@@ -13,36 +13,27 @@
             <label asp-for="@Model.Description"></label>
             <textarea class="form-control" asp-for="@Model.Description"></textarea>
         </div>
-        @* <div>
-            <select asp-for="@Model.Rating">
-                <option value="@EnumReviewRating.Poor">1</option>
-                <option value="@EnumReviewRating.Fair">2</option>
-                <option value="@EnumReviewRating.Good">3</option>
-                <option value="@EnumReviewRating.VeryGood">4</option>
-                <option value="@EnumReviewRating.Excellent">5</option>
-            </select>
-        </div> *@
         <div class="row">
             <div class="rating-select d-flex gap-3 col">
                 <label class="bg-white rounded-circle">
                     <input type="radio" asp-for="Rating" value="@EnumReviewRating.Poor" class="d-none"/>
-                    <img src="~/img/blaw.svg" class="rating-img"/>
+                    <img src="~/img/blaw.svg" class="rating-img" data-img="blaw.svg" onclick="changeImage(this)" />
                 </label>
                 <label class="bg-white rounded-circle">
                     <input type="radio" asp-for="Rating" value="@EnumReviewRating.Fair" class="d-none"/>
-                    <img src="~/img/color-sad.svg" class="rating-img"/>
+                    <img src="~/img/sad.svg" class="rating-img" data-img="sad.svg" onclick="changeImage(this)" />
                 </label>
                 <label class="bg-white rounded-circle">
                     <input type="radio" asp-for="Rating" value="@EnumReviewRating.Good" class="d-none"/>
-                    <img src="~/img/color-pocker.svg" class="rating-img"/>
+                    <img src="~/img/pocker.svg" class="rating-img" data-img="pocker.svg" onclick="changeImage(this)" />
                 </label >
                 <label class="bg-white rounded-circle">
                     <input type="radio" asp-for="Rating" value="@EnumReviewRating.VeryGood" class="d-none"/>
-                    <img src="~/img/color-smile.svg" class="rating-img"/>
+                    <img src="~/img/smile.svg" class="rating-img" data-img="smile.svg" onclick="changeImage(this)" />
                 </label>
                 <label class="bg-white rounded-circle">
                     <input type="radio" asp-for="Rating" value="@EnumReviewRating.Excellent" class="d-none"/>
-                    <img src="~/img/color-cool.svg" class="rating-img"/>
+                    <img src="~/img/cool.svg" class="rating-img" data-img="cool.svg" onclick="changeImage(this)" />
                 </label>
             </div>
             <div class="col d-flex justify-content-end">
@@ -51,3 +42,17 @@
         </div>
     </form>
 </section>
+<script>
+    function changeImage(imgElement) {
+        document.querySelectorAll(".rating-img").forEach(img => {
+            const original = img.getAttribute("data-img");
+            img.src = "/img/" + original;
+        });
+
+        const original = imgElement.getAttribute("data-img");
+        imgElement.src = "/img/color-" + original;
+
+        const radio = imgElement.previousElementSibling;
+        radio.checked = true;
+    }
+</script>
