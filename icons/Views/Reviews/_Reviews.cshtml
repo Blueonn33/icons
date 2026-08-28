@@ -1,13 +1,20 @@
 ﻿@using icons.Data.Enums
+@using icons.Models.Reviews
 @model icons.Models.Reviews.ReviewsViewModel
 
 <section class="container mt-5 ">
     <div class="mb-4">
         <h1>reviews</h1>
     </div>
+    <section>
+        @await Html.PartialAsync(
+            "~/Views/Reviews/_CreateReview.cshtml",
+            new ReviewsCreateViewModel()
+        )
+    </section>
     @foreach (var review in Model.Reviews)
     {
-        <div class="row get-review-container border rounded-3 text-light">
+        <div class="row get-review-container border rounded-3 text-light mb-3">
             <div class="col-1 ps-0">
                 <img src="@review.UserProfilePictureUrl" class="img-fluid rounded-start-3"/>
             </div>
@@ -45,9 +52,3 @@
         </div>
     }
 </section>
-
-@* Poor = 1,
-Fair = 2,
-Good = 3,
-VeryGood = 4,
-Excellent = 5 *@
