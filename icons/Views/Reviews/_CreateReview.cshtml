@@ -2,7 +2,9 @@
 @model icons.Models.Reviews.ReviewsCreateViewModel;
 
 <section class="container p-0">
-    <form class="add-review-form border rounded-3 p-3 text-light mb-5" asp-action="AddReview" asp-controller="Reviews" method="post">
+    <form class="add-review-form border rounded-3 p-3 text-light mb-5" asp-action="CreateReview" asp-controller="Reviews" method="post">
+        <input type="hidden" asp-for="IconId" />
+
         <div class="mb-3">
             <label asp-for="@Model.Title"></label>
             <input class="form-control" asp-for="@Model.Title"/>

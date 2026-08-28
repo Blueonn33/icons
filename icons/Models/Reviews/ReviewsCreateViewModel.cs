@@ -26,5 +26,10 @@ namespace icons.Models.Reviews
         {
             get; set;
         }
+
+        public int IconId
+        {
+            get; set;
+        }
     }
 }

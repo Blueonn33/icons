@@ -2,14 +2,14 @@
 @using icons.Models.Reviews
 @model icons.Models.Reviews.ReviewsViewModel
 
-<section class="container mt-5 ">
+<section class="container mt-5">
     <div class="mb-4">
         <h1>reviews</h1>
     </div>
     <section>
         @await Html.PartialAsync(
             "~/Views/Reviews/_CreateReview.cshtml",
-            new ReviewsCreateViewModel()
+            new ReviewsCreateViewModel{ IconId = Model.IconId }
         )
     </section>
     @foreach (var review in Model.Reviews)

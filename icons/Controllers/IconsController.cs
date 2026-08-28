@@ -49,6 +49,7 @@ namespace icons.Controllers
 
             var model = new IconViewModel
             {
+                Id = icon.Id,
                 ImageUrl = icon.ImageUrl,
                 Title = icon.Title,
                 Description = icon.Description,
@@ -62,7 +63,7 @@ namespace icons.Controllers
                     PublishedTime = r.PublishedTime,
                     Rating = r.Rating,
                     Username = r.Username,
-                    UserProfilePictureUrl = r.UserProfilePictureUrl
+                    UserProfilePictureUrl = r.UserProfilePictureUrl,
                 }).ToList()
             };
 

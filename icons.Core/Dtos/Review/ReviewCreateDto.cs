@@ -33,6 +33,21 @@ namespace icons.Core.Dtos.Review
         }
 
         [Required]
+        [StringLength(ReviewUserProfilePictureUrlLength)]
+        public string UserProfilePictureUrl
+        {
+            get; set;
+        } = null!;
+
+        [Required]
+        [MinLength(ReviewUsernameMinLength)]
+        [MaxLength(ReviewUsernameMaxLength)]
+        public string Username
+        {
+            get; set;
+        } = null!;
+
+        [Required]
         public string UserId
         {
             get;

@@ -25,6 +25,8 @@ namespace icons.Core.Services
                 Description = review.Description,
                 Rating = review.Rating,
                 IconId = review.IconId,
+                Username = review.Username,
+                UserProfilePictureUrl = review.UserProfilePictureUrl,
                 UserId = review.UserId
             };
 
