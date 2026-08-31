@@ -54,6 +54,7 @@ namespace icons.Controllers
                 Title = icon.Title,
                 Description = icon.Description,
                 Username = icon.Username,
+                UserProfilePictureUrl = icon.UserProfilePictureUrl,
                 AverageRating = icon.AverageRating,
                 Reviews = reviews.Select(r => new ReviewGetDto
                 {
@@ -64,6 +65,7 @@ namespace icons.Controllers
                     Rating = r.Rating,
                     Username = r.Username,
                     UserProfilePictureUrl = r.UserProfilePictureUrl,
+                    IconId = r.IconId
                 }).ToList()
             };
 

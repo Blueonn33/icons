@@ -60,12 +60,14 @@ namespace icons.Core.Services
 
             return reviews.Select(r => new ReviewGetDto
             {
+                Id = r.Id,
                 Title = r.Title,
                 Description = r.Description,
                 Rating = r.Rating,
                 PublishedTime = r.PublishedTime,
                 Username = r.Username,
-                UserProfilePictureUrl = r.UserProfilePictureUrl
+                UserProfilePictureUrl = r.UserProfilePictureUrl,
+                IconId = r.IconId
             });
         }
 
@@ -82,12 +84,14 @@ namespace icons.Core.Services
 
             return reviews.Select(r => new ReviewGetDto
             {
+                Id = r.Id,
                 Title = r.Title,
                 Description = r.Description,
                 Rating = r.Rating,
                 PublishedTime = r.PublishedTime,
                 Username = r.Username,
-                UserProfilePictureUrl = r.UserProfilePictureUrl
+                UserProfilePictureUrl = r.UserProfilePictureUrl,
+                IconId = r.IconId
             });
         }
 
@@ -102,12 +106,14 @@ namespace icons.Core.Services
 
             return new ReviewGetDto
             {
+                Id = review.Id,
                 Title = review.Title,
                 Description = review.Description,
                 Rating = review.Rating,
                 PublishedTime = review.PublishedTime,
                 Username = review.Username,
-                UserProfilePictureUrl = review.UserProfilePictureUrl
+                UserProfilePictureUrl = review.UserProfilePictureUrl,
+                IconId = review.IconId
             };
         }
 

@@ -34,6 +34,11 @@ namespace icons.Core.Dtos.Icon
             get; set;
         } = null!;
 
+        public string UserProfilePictureUrl
+        {
+            get; set;
+        } = null!;
+
         public List<ReviewGetDto> Reviews
         {
             get;

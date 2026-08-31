@@ -3,14 +3,14 @@
     top: 0;
     right: 0;
 }
-.icon-container {
-    background: linear-gradient(135deg, #fff 25%, #7892f0 88%, #608cb3 100%)
+.icons-container {
+    background: linear-gradient(135deg, #fff 25%, #7892f0 88%, #608cb3 100%);
 }
 .vr-blurry {
     width: 10px !important;
     height: 100%;
 }
-.get-review-container, .add-review-form {
+.icon-container, .get-review-container, .add-review-form {
     --_noise-texture: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><filter id='n' x='0' y='0' width='100%' height='100%' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='0.3' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 -0.126' in='t' result='g'/></filter></defs><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     --_noise-size: 4.5%;
     --_gradient: radial-gradient(circle at 50% -20%, #35cafd, #3193b7 25%, #286076 50%, #1b313b 75%, #000000 100%);

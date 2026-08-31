@@ -50,6 +50,14 @@ namespace icons.Data.Models
         } = null!;
 
         [Required]
+        [StringLength(UserProfilePictureUrlLength)]
+        public string UserProfilePictureUrl
+        {
+            get;
+            set;
+        } = null!;
+
+        [Required]
         [ForeignKey(nameof(User))]
         public string UserId
         {

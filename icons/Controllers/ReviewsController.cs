@@ -1,6 +1,7 @@
 ﻿using icons.Core.Contracts;
 using icons.Core.Dtos.Review;
 using icons.Data;
+using icons.Data.Models;
 using icons.Models.Reviews;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,20 @@ namespace icons.Controllers
             {
                 id = model.IconId
             });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteReview(int id)
+        {
+            var review = await _service.GetReviewByIdAsync(id);
+
+            if (review == null)
+            {
+                throw new KeyNotFoundException($"Review with id {id} was not found");
+            }
+
+            await _service.DeleteReviewAsync(id);
+            return RedirectToAction("Icon", "Icons", new Icon { Id = review.IconId });
         }
     }
 }

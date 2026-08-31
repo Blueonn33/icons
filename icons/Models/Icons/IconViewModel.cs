@@ -48,6 +48,13 @@ namespace icons.Models.Icons
             get; set;
         } = null!;
 
+        [Required]
+        [StringLength(UserProfilePictureUrlLength)]
+        public string UserProfilePictureUrl
+        {
+            get; set;
+        } = null!;
+
         public List<ReviewGetDto> Reviews
         {
             get; set;

@@ -30,7 +30,8 @@ namespace icons.Core.Services
                 Title = i.Title,
                 Description = i.Description,
                 AverageRating = i.AverageRating,
-                Username = i.Username
+                Username = i.Username,
+                UserProfilePictureUrl = i.UserProfilePictureUrl
             });
         }
 
@@ -44,8 +45,6 @@ namespace icons.Core.Services
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
                 Description = i.Description,
-                AverageRating = i.AverageRating,
-                Username = i.Username
             });
         }
 
@@ -58,9 +57,7 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
-                Description = i.Description,
-                AverageRating = i.AverageRating,
-                Username = i.Username
+                Description = i.Description
             });
         }
 
@@ -81,6 +78,7 @@ namespace icons.Core.Services
                 Description = icon.Description,
                 AverageRating = icon.AverageRating,
                 Username = icon.Username,
+                UserProfilePictureUrl = icon.UserProfilePictureUrl,
                 Reviews = icon.Reviews.Select(r => new ReviewGetDto
                 {
                     Id = r.Id,
@@ -89,7 +87,8 @@ namespace icons.Core.Services
                     Rating = r.Rating,
                     PublishedTime = r.PublishedTime,
                     Username = r.Username,
-                    UserProfilePictureUrl = r.UserProfilePictureUrl
+                    UserProfilePictureUrl = r.UserProfilePictureUrl,
+                    IconId = r.IconId
                 }).ToList()
             };
         }
@@ -110,6 +109,7 @@ namespace icons.Core.Services
                 Description = icon.Description,
                 UserId = icon.UserId,
                 Username = user.Name,
+                UserProfilePictureUrl = user.ProfilePictureUrl,
                 AverageRating = 0
             };
 

@@ -20,17 +20,19 @@
                 <div class="vr vr-blurry"></div>
             </div>
             <div class="col-8">
-                <div>
-                    <h1 class="fs-2"><strong>icon: </strong>@Model.Title</h1>
-                </div>
                 <div class="mb-5">
-                    <h5><strong>username:</strong> @Model.Username</h5>
+                    <h1 class="fs-2 text-light"><strong class="text-dark">icon: </strong>@Model.Title</h1>
                 </div>
-                <div>
-                    <p><strong>description: </strong>@Model.Description</p>
+                <div class="text-light">
+                    <p><strong class="text-dark">description: </strong>@Model.Description</p>
                 </div>
-                <div>
-                    <p><strong>average rating: </strong>@Model.AverageRating</p>
+                <div class="text-light mb-5">
+                    <p><strong class="text-dark">average rating: </strong>@Model.AverageRating</p>
+                </div>
+                <div class="text-light d-flex align-items-center">
+                    <span><strong class="text-dark">posted by:</strong></span>
+                    <img src="@Model.UserProfilePictureUrl" class="img-fluid rounded-circle mx-3" width="50" />
+                    <p class="d-inline-block mb-0">@Model.Username</p>
                 </div>
             </div>
         </div>
