@@ -5,7 +5,6 @@ namespace icons.Core.Dtos.Review
 {
     public class ReviewUpdateDto
     {
-        [Required]
         [MinLength(ReviewTitleMinLength)]
         [MaxLength(ReviewTitleMaxLength)]
         public string Title

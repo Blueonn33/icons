@@ -74,5 +74,12 @@ namespace icons.Controllers
             await _service.DeleteReviewAsync(id);
             return RedirectToAction("Icon", "Icons", new Icon { Id = review.IconId });
         }
+
+        public async Task<IActionResult> UpdateReview(int id, ReviewsUpdateViewModel model)
+        {
+            // TODO
+
+            throw new NotImplementedException();
+        }
     }
 }

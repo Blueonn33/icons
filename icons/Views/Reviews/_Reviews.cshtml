@@ -12,6 +12,7 @@
             new ReviewsCreateViewModel{ IconId = Model.IconId }
         )
     </section>
+    @await Html.PartialAsync("~/Views/Reviews/_UpdateReview.cshtml")
     @foreach (var review in Model.Reviews)
     {
         <div class="row get-review-container border rounded-3 text-light mb-3 position-relative">
