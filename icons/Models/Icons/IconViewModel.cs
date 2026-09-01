@@ -1,5 +1,6 @@
 ﻿using icons.Core.Dtos.Review;
 using System.ComponentModel.DataAnnotations;
+using icons.Core.Enums;
 using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Models.Icons
@@ -65,9 +66,9 @@ namespace icons.Models.Icons
             get; set;
         } = new();
 
-        //public EnumReviewSortOptions Sort
-        //{
-        //    get; set;
-        //}
+        public EnumReviewSortOptions Sort
+        {
+            get; set;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using icons.Core.Dtos.Review;
+using icons.Core.Enums;
 
 namespace icons.Models.Reviews
 {
@@ -15,5 +16,7 @@ namespace icons.Models.Reviews
         {
             get; set;
         } = null!;
+
+        public EnumReviewSortOptions Sort { get; set; }
     }
 }

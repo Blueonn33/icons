@@ -10,10 +10,15 @@
     <section>
         @await Html.PartialAsync(
             "~/Views/Reviews/_CreateReview.cshtml",
-            new ReviewsCreateViewModel{ IconId = Model.IconId }
+            new ReviewsCreateViewModel { IconId = Model.IconId }
         )
     </section>
-    @await Html.PartialAsync("~/Views/Reviews/_UpdateReview.cshtml", new ReviewsUpdateViewModel())
+    <section>
+        @await Html.PartialAsync("~/Views/Reviews/_UpdateReview.cshtml", new ReviewsUpdateViewModel())
+    </section>
+    <section>
+
+    </section>
     @foreach (var review in Model.Reviews)
     {
         <div class="row get-review-container border rounded-3 text-light mb-3 position-relative">
@@ -55,7 +60,7 @@
                     review.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value)
                 {
                     <div class="d-flex align-items-center gap-1 p-1">
-                        <button class="btn btn-sm btn-warning" 
+                        <button class="btn btn-sm btn-warning"
                                 data-id="@review.Id"
                                 data-title="@review.Title"
                                 data-description="@review.Description"
