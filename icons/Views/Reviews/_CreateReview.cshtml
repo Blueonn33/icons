@@ -37,7 +37,16 @@
                 </label>
             </div>
             <div class="col d-flex justify-content-end">
-                <button class="btn btn-secondary" type="submit">Add</button>
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="btn btn-secondary" type="submit">Add</button>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-secondary">Add</a>
+                    }
+                }
             </div>
         </div>
     </form>
