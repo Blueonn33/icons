@@ -55,6 +55,11 @@ namespace icons.Models.Icons
             get; set;
         } = null!;
 
+        public string UserId
+        {
+            get; set;
+        } = null!;
+
         public List<ReviewGetDto> Reviews
         {
             get; set;

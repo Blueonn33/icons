@@ -68,6 +68,7 @@ namespace icons.Controllers
                     Rating = r.Rating,
                     Username = r.Username,
                     UserProfilePictureUrl = r.UserProfilePictureUrl,
+                    UserId = r.UserId,
                     IconId = r.IconId
                 }).ToList()
             };

@@ -42,6 +42,14 @@ namespace icons.Core.Dtos.Review
             get; set;
         } = null!;
 
-        public int IconId { get; set; }
+        public string UserId
+        {
+            get; set;
+        } = null!;
+
+        public int IconId
+        {
+            get; set;
+        }
     }
 }

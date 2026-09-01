@@ -67,6 +67,7 @@ namespace icons.Core.Services
                 PublishedTime = r.PublishedTime,
                 Username = r.Username,
                 UserProfilePictureUrl = r.UserProfilePictureUrl,
+                UserId = r.UserId,
                 IconId = r.IconId
             });
         }
@@ -91,6 +92,7 @@ namespace icons.Core.Services
                 PublishedTime = r.PublishedTime,
                 Username = r.Username,
                 UserProfilePictureUrl = r.UserProfilePictureUrl,
+                UserId = r.UserId,
                 IconId = r.IconId
             });
         }
@@ -113,6 +115,7 @@ namespace icons.Core.Services
                 PublishedTime = review.PublishedTime,
                 Username = review.Username,
                 UserProfilePictureUrl = review.UserProfilePictureUrl,
+                UserId = review.UserId,
                 IconId = review.IconId
             };
         }

@@ -7,11 +7,11 @@
 
         <div class="mb-3">
             <label asp-for="@Model.Title"></label>
-            <input class="form-control" asp-for="@Model.Title"/>
+            <input class="form-control" asp-for="@Model.Title" required/>
         </div>
         <div class="mb-3">
             <label asp-for="@Model.Description"></label>
-            <textarea class="form-control" asp-for="@Model.Description"></textarea>
+            <textarea class="form-control" asp-for="@Model.Description" required></textarea>
         </div>
         <div class="row">
             <div class="rating-select d-flex gap-3 col">

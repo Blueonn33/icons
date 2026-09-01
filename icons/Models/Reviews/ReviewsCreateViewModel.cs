@@ -31,5 +31,10 @@ namespace icons.Models.Reviews
         {
             get; set;
         }
+
+        public string UserId
+        {
+            get; set;
+        } = null!;
     }
 }

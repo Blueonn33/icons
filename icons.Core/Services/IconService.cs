@@ -82,6 +82,7 @@ namespace icons.Core.Services
                 AverageRating = averageRating,
                 Username = icon.Username,
                 UserProfilePictureUrl = icon.UserProfilePictureUrl,
+                UserId = icon.UserId,
                 Reviews = icon.Reviews.Select(r => new ReviewGetDto
                 {
                     Id = r.Id,

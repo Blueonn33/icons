@@ -39,7 +39,10 @@ namespace icons.Core.Dtos.Icon
             get; set;
         } = null!;
 
-        public string UserId { get; set; } = null!;
+        public string UserId
+        {
+            get; set;
+        } = null!;
 
         public List<ReviewGetDto> Reviews
         {
