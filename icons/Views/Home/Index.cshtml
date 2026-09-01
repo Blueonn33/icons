@@ -1,4 +1,5 @@
-﻿@using icons.Models.Home
+﻿@using icons.Data.Models
+@using icons.Models.Home
 @model Top3IconsViewModel;
 @{
     ViewData["Title"] = "Home Page";
@@ -66,6 +67,7 @@
                 <div class="row">
                     @foreach (var icon in Model.Top3Icons)
                     {
+                        <input type="hidden" asp-for="@icon.Id" />
                         <div class="col d-flex justify-content-center">
                             <div class="card" style="width: 18rem;">
                                 <div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
@@ -76,8 +78,11 @@
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">@icon.Title</h5>
-                                    <p class="card-text">@icon.Description</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <div class="d-flex gap-3 align-items-center mb-3">
+                                        <img src="@icon.UserProfilePictureUrl" class="img-fluid rounded-circle" width="40"/>
+                                        <p class="card-text">@icon.Username</p>
+                                    </div>
+                                    <a asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id" class="btn btn-primary">Visit</a>
                                 </div>
                             </div>
                         </div>
