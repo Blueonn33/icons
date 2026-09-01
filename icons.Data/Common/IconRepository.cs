@@ -24,7 +24,7 @@ namespace icons.Data.Common
                 .ToListAsync();
         }
 
-        public async Task<Icon> GetIconWithReviewsByIdAsync(int id)
+        public async Task<Icon?> GetIconWithReviewsByIdAsync(int id)
         {
             return await _context.Icons
                 .AsNoTracking()

@@ -7,6 +7,6 @@ namespace icons.Data.Common
         Task<IEnumerable<Icon>> GetAllIconsAsync();
         Task<IEnumerable<Icon>> GetAllIconsByUserIdAsync(string userId);
         Task<IEnumerable<Icon>> GetTop3IconsAsync();
-        Task<Icon> GetIconWithReviewsByIdAsync(int id);
+        Task<Icon?> GetIconWithReviewsByIdAsync(int id);
     }
 }

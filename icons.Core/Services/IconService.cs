@@ -28,9 +28,6 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
-                Description = i.Description,
-                AverageRating = i.AverageRating,
-                Username = i.Username,
                 UserProfilePictureUrl = i.UserProfilePictureUrl
             });
         }
@@ -44,7 +41,7 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
-                Description = i.Description,
+                UserProfilePictureUrl = i.UserProfilePictureUrl
             });
         }
 
@@ -70,13 +67,17 @@ namespace icons.Core.Services
                 throw new KeyNotFoundException($"Icon with Id {id} was not found.");
             }
 
+            var averageRating = icon.Reviews.Any()
+                ? icon.Reviews.Average(r => (int)r.Rating)
+                : 0;
+
             return new IconGetDto
             {
                 Id = icon.Id,
                 ImageUrl = icon.ImageUrl,
                 Title = icon.Title,
                 Description = icon.Description,
-                AverageRating = icon.AverageRating,
+                AverageRating = averageRating,
                 Username = icon.Username,
                 UserProfilePictureUrl = icon.UserProfilePictureUrl,
                 Reviews = icon.Reviews.Select(r => new ReviewGetDto

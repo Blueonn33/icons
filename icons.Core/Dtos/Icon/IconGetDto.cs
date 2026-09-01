@@ -24,7 +24,7 @@ namespace icons.Core.Dtos.Icon
             get; set;
         }
 
-        public decimal AverageRating
+        public double AverageRating
         {
             get; set;
         }

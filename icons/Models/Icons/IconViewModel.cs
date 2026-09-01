@@ -35,7 +35,7 @@ namespace icons.Models.Icons
         }
 
         [Range(IconAverageRangeMinValue, IconAverageRangeMaxValue)]
-        public decimal AverageRating
+        public double AverageRating
         {
             get; set;
         }
