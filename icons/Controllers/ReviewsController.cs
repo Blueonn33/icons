@@ -75,25 +75,6 @@ namespace icons.Controllers
             return RedirectToAction("Icon", "Icons", new Icon { Id = review.IconId });
         }
 
-        //public async Task<IActionResult> _UpdateReview(int id)
-        //{
-        //    var review = await _service.GetReviewByIdAsync(id);
-
-        //    if (review == null)
-        //    {
-        //        throw new KeyNotFoundException($"Review with id {id} was not found");
-        //    }
-
-        //    var updateReview = new ReviewUpdateDto
-        //    {
-        //        Id = review.Id,
-        //        Title = review.Title,
-        //        Description = review.Description
-        //    };
-
-        //    return View(updateReview);
-        //}
-
         [HttpPost]
         public async Task<IActionResult> UpdateReview(int id, ReviewsUpdateViewModel model)
         {

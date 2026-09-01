@@ -24,9 +24,12 @@ namespace icons.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var user = await _userManager.GetUserAsync(User);
+
             var icons = new IconsViewModel()
             {
-                GetAllIcons = await _service.GetAllIconsAsync()
+                GetAllIcons = await _service.GetAllIconsAsync(),
+                UserId = user?.Id ?? string.Empty
             };
 
             if (!icons.GetAllIcons.Any())
