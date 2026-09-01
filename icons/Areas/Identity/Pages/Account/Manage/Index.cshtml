@@ -6,7 +6,7 @@
 }
 
 <head>
-
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
     <section class="container">
@@ -19,6 +19,13 @@
             <div class="col-md-6">
                 <form id="profile-form" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-floating mb-3">
+                        <div class="mb-3">
+                            <img src="@Model.Input.ProfilePictureUrl" class="img-fluid rounded-3 user-profile-img" />
+                        </div>
+                        <input asp-for="Input.ProfilePictureUrl" class="form-control"/>
+                        <label asp-for="Input.ProfilePictureUrl" class="form-label"></label>
+                    </div>
                     <div class="form-floating mb-3">
                         <input asp-for="Username" class="form-control" placeholder="please choose your username" disabled/>
                         <label asp-for="Username" class="form-label"></label>

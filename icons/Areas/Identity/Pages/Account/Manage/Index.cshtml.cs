@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+using icons.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using icons.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace icons.Areas.Identity.Pages.Account.Manage;
 
@@ -30,14 +27,20 @@ public class IndexModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public string? Username { get; set; }
+    public string? Username
+    {
+        get; set;
+    }
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     [TempData]
-    public string? StatusMessage { get; set; }
+    public string? StatusMessage
+    {
+        get; set;
+    }
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -58,7 +61,17 @@ public class IndexModel : PageModel
         /// </summary>
         [Phone]
         [Display(Name = "Phone number")]
-        public string? PhoneNumber { get; set; }
+        public string? PhoneNumber
+        {
+            get; set;
+        }
+
+        [Display(Name = "Profile picture URL")]
+        public string ProfilePictureUrl
+        {
+            get;
+            set;
+        } = null!;
     }
 
     private async Task LoadAsync(ApplicationUser user)
@@ -70,7 +83,8 @@ public class IndexModel : PageModel
 
         Input = new InputModel
         {
-            PhoneNumber = phoneNumber
+            PhoneNumber = phoneNumber,
+            ProfilePictureUrl = user.ProfilePictureUrl
         };
     }
 
@@ -101,15 +115,32 @@ public class IndexModel : PageModel
         }
 
         var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+
         if (Input.PhoneNumber != phoneNumber)
         {
             var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+
             if (!setPhoneResult.Succeeded)
             {
                 StatusMessage = "Unexpected error when trying to set phone number.";
                 return RedirectToPage();
             }
         }
+
+        var profilePictureUrl = user.ProfilePictureUrl;
+
+        if (Input.ProfilePictureUrl != profilePictureUrl)
+        {
+            user.ProfilePictureUrl = Input.ProfilePictureUrl;
+            var updateResult = await _userManager.UpdateAsync(user);
+
+            if (!updateResult.Succeeded)
+            {
+                StatusMessage = "Unexpected error when trying to set profile picture.";
+                return RedirectToPage();
+            }
+        }
+
 
         await _signInManager.RefreshSignInAsync(user);
         StatusMessage = "Your profile has been updated";

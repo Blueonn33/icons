@@ -70,3 +70,6 @@ body {
 .no-content-container {
     overflow: hidden;
 }
+.user-profile-img {
+    max-width: 150px;
+}
