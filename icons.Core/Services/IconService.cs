@@ -3,6 +3,7 @@ using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
 using icons.Data;
 using icons.Data.Common;
+using icons.Data.Enums;
 using icons.Data.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -31,6 +32,11 @@ namespace icons.Core.Services
                 UserProfilePictureUrl = i.UserProfilePictureUrl,
                 UserId = i.UserId
             });
+        }
+
+        public async Task<IEnumerable<IconGetDto>> GetAllIconsSortedAsync(EnumIconSortOptions sort)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<IconGetDto>> GetAllIconsByUserIdAsync(string userId)

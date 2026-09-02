@@ -82,7 +82,10 @@
                                         <img src="@icon.UserProfilePictureUrl" class="img-fluid rounded-circle" width="40"/>
                                         <p class="card-text">@icon.Username</p>
                                     </div>
-                                    <a asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id" class="btn btn-primary">Visit</a>
+                                    <hr/>
+                                    <div class="d-flex justify-content-center">
+                                        <a asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id" class="btn btn-primary">Visit</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

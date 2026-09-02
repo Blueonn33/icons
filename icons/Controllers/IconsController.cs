@@ -3,6 +3,7 @@ using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
 using icons.Core.Enums;
 using icons.Data;
+using icons.Data.Enums;
 using icons.Models.Icons;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,14 +24,15 @@ namespace icons.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(EnumIconSortOptions sort)
         {
             var user = await _userManager.GetUserAsync(User);
 
             var icons = new IconsViewModel()
             {
                 GetAllIcons = await _service.GetAllIconsAsync(),
-                UserId = user?.Id ?? string.Empty
+                UserId = user?.Id ?? string.Empty,
+                Sort = sort
             };
 
             if (!icons.GetAllIcons.Any())
