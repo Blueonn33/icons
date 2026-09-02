@@ -10,12 +10,12 @@ namespace icons.Data.EntityTypeConfigurations
             builder.HasMany(u => u.Icons)
                 .WithOne(i => i.User)
                 .HasForeignKey(i => i.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(u => u.Reviews)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
