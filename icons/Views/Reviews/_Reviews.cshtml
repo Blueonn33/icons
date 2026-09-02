@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using icons.Core.Enums
 @using icons.Data.Enums
 @using icons.Models.Reviews
 @model icons.Models.Reviews.ReviewsViewModel
@@ -16,7 +17,15 @@
     <section>
         @await Html.PartialAsync("~/Views/Reviews/_UpdateReview.cshtml", new ReviewsUpdateViewModel())
     </section>
-    <section>
+    <section class="my-3">
+        <form method="get" asp-action="Icon" asp-controller="Icons">
+            <input type="hidden" name="id" value="@Model.IconId" />
+
+            <select asp-for="Sort"
+                    asp-items="Html.GetEnumSelectList<EnumReviewSortOptions>()"
+                    onchange="this.form.submit()">
+            </select>
+        </form>
 
     </section>
     @foreach (var review in Model.Reviews)

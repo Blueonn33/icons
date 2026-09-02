@@ -1,6 +1,7 @@
 ﻿using icons.Core.Contracts;
 using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
+using icons.Core.Enums;
 using icons.Data;
 using icons.Models.Icons;
 using Microsoft.AspNetCore.Identity;
@@ -40,10 +41,12 @@ namespace icons.Controllers
             return View(icons);
         }
 
-        public async Task<IActionResult> Icon(int id)
+        public async Task<IActionResult> Icon(int id, EnumReviewSortOptions sort = EnumReviewSortOptions.DateDesc)
         {
             var icon = await _service.GetIconByIdAsync(id);
-            var reviews = await _reviewService.GetAllReviewsByIconIdAsync(id);
+            //var reviews = await _reviewService.GetAllReviewsByIconIdAsync(id);
+
+            var reviews = await _reviewService.GetAllReviewsByIconIdSortedAsync(id, sort);
 
             if (icon == null)
             {
