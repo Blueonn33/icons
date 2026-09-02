@@ -32,6 +32,13 @@ namespace icons.Core.Services
 
             await _repository.AddAsync(newReview);
             await _repository.SaveAsync();
+
+            var icon = await _iconRepository.GetIconWithReviewsByIdAsync(newReview.IconId);
+            icon.AverageRating = icon.Reviews.Any()
+                ? icon.Reviews.Average(r => (int)r.Rating)
+                : 0;
+
+            await _iconRepository.SaveAsync();
         }
 
         public async Task DeleteReviewAsync(int id)
@@ -45,6 +52,13 @@ namespace icons.Core.Services
 
             _repository.Delete(review);
             await _repository.SaveAsync();
+
+            var icon = await _iconRepository.GetIconWithReviewsByIdAsync(review.IconId);
+            icon.AverageRating = icon.Reviews.Any()
+                ? icon.Reviews.Average(r => (int)r.Rating)
+                : 0;
+
+            await _iconRepository.SaveAsync();
         }
 
         public async Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdAsync(int id)

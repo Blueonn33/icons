@@ -16,7 +16,7 @@ namespace icons.Data.Seed
                 {
                     new Icon
                     {
-                        AverageRating = 4.5m,
+                        AverageRating = 4.5,
                         Description =
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                         ImageUrl =
@@ -28,7 +28,7 @@ namespace icons.Data.Seed
                     },
                     new Icon
                     {
-                        AverageRating = 4.7m,
+                        AverageRating = 4.7,
                         Description =
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                         ImageUrl =

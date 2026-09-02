@@ -43,6 +43,7 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
+                AverageRating = i.AverageRating,
                 UserProfilePictureUrl = i.UserProfilePictureUrl,
                 UserId = i.UserId
             });

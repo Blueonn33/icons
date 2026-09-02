@@ -29,7 +29,7 @@ namespace icons.Data.Common
 
         public async Task<IEnumerable<Icon>> GetAllIconsSortedAsync(EnumIconSortOptions sort)
         {
-            var query = _context.Icons.AsNoTracking();
+            var query = _context.Icons;
 
             return sort switch
             {
@@ -42,7 +42,6 @@ namespace icons.Data.Common
         public async Task<Icon?> GetIconWithReviewsByIdAsync(int id)
         {
             return await _context.Icons
-                .AsNoTracking()
                 .Include(i => i.Reviews)
                 .FirstOrDefaultAsync(i => i.Id == id);
         }
