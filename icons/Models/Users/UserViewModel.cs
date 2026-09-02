@@ -1,16 +1,10 @@
-﻿namespace icons.Core.Dtos.User
+﻿namespace icons.Models.Users
 {
-    public class UserGetDto
+    public class UserViewModel
     {
         public string Id
         {
             get; set;
-        } = null!;
-
-        public string ProfilePictureUrl
-        {
-            get;
-            set;
         } = null!;
 
         public string Name
@@ -23,10 +17,10 @@
             get; set;
         } = null!;
 
-        public bool IsDeleted
+        public string ProfilePictureUrl
         {
             get; set;
-        }
+        } = null!;
 
         public IEnumerable<string> Roles
         {

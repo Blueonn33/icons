@@ -1,0 +1,18 @@
+﻿@model icons.Models.Users.UsersViewModel;
+@{
+    ViewData["Title"] = "Users";
+}
+
+<head>
+
+</head>
+<body>
+    <section class="container">
+        <div>
+            @foreach (var user in Model.Users)
+            {
+                <p>@user.Name</p>
+            }
+        </div>
+    </section>
+</body>

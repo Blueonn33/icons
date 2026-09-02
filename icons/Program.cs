@@ -35,6 +35,7 @@ namespace icons
             builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
             builder.Services.AddScoped<IIconService, IconService>();
             builder.Services.AddScoped<IReviewService, ReviewService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
