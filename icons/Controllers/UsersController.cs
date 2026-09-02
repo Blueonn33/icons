@@ -24,13 +24,20 @@ namespace icons.Controllers
                 {
                     Id = u.Id,
                     Name = u.Name,
-                    Username = u.Username,
+                    Email = u.Email,
                     ProfilePictureUrl = u.ProfilePictureUrl,
                     Roles = u.Roles,
                 })
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            await _userService.DeleteUserAsync(id);
+            return RedirectToAction("Index");
         }
     }
 }

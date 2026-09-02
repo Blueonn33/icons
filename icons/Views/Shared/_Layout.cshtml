@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using icons.Data.Constants
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,9 +38,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Icons" asp-action="Index">Icons</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-                        </li>
+                        @if (User.IsInRole(Roles.Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

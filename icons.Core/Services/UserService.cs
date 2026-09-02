@@ -50,7 +50,7 @@ namespace icons.Core.Services
                 {
                     Id = user.Id,
                     Name = user.Name,
-                    Username = user.UserName,
+                    Email = user.Email,
                     ProfilePictureUrl = user.ProfilePictureUrl,
                     IsDeleted = user.IsDeleted,
                     Roles = roles

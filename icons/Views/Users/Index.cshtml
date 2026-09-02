@@ -1,18 +1,41 @@
-﻿@model icons.Models.Users.UsersViewModel;
+﻿@using icons.Data.Constants
+@model icons.Models.Users.UsersViewModel;
 @{
     ViewData["Title"] = "Users";
 }
 
 <head>
-
+    <link rel="stylesheet" href="~/css/users/index.css" asp-append-version="true" />
 </head>
 <body>
-    <section class="container">
-        <div>
-            @foreach (var user in Model.Users)
+<section class="container mt-5">
+    <header class="text-light mb-5">
+        <h1>users</h1>
+    </header>
+    <div class="bg-white p-3 rounded-3">
+        @foreach (var user in Model.Users)
+        {
+            if (!user.Roles.Contains(Roles.Admin))
             {
-                <p>@user.Name</p>
+                <div class="row align-items-center mb-3">
+                    <div class="col-2">
+                        <img src="@user.ProfilePictureUrl" class="img-fluid rounded-circle users-profile-img" />
+                    </div>
+                    <div class="col-4 fs-5">
+                        <p class="mb-0">@user.Name - @String.Join(",",@user.Roles)</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="mb-0">@user.Email</p>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end">
+                        <form asp-action="DeleteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
+                                <button class="btn btn-danger" onclick="return confirm('are you sure? 🤨');">delete</button>
+                        </form>
+                    </div>
+                </div>
+                <hr />
             }
-        </div>
-    </section>
+        }
+    </div>
+</section>
 </body>

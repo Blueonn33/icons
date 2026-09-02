@@ -12,7 +12,7 @@
             get; set;
         } = null!;
 
-        public string Username
+        public string Email
         {
             get; set;
         } = null!;
