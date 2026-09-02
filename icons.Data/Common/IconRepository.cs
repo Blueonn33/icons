@@ -33,6 +33,8 @@ namespace icons.Data.Common
 
             return sort switch
             {
+                EnumIconSortOptions.DateAsc => await query.OrderBy(i => i.PublishedTime).ToListAsync(),
+                EnumIconSortOptions.DateDesc => await query.OrderByDescending(i => i.PublishedTime).ToListAsync(),
                 EnumIconSortOptions.RatingAsc => await query.OrderBy(i => i.AverageRating).ToListAsync(),
                 EnumIconSortOptions.RatingDesc => await query.OrderByDescending(i => i.AverageRating).ToListAsync(),
                 _ => await query.ToListAsync()

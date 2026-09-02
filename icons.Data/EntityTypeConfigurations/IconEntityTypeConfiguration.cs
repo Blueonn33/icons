@@ -16,6 +16,9 @@ namespace icons.Data.EntityConfigurations
                 .WithOne(r => r.Icon)
                 .HasForeignKey(r => r.IconId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Property(i => i.PublishedTime)
+                .HasDefaultValueSql("GETDATE()");
         }
     }
 }

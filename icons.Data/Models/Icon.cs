@@ -41,6 +41,11 @@ namespace icons.Data.Models
             get; set;
         }
 
+        public DateTime PublishedTime
+        {
+            get; set;
+        }
+
         [Required]
         [MinLength(IconUsernameMinLength)]
         [MaxLength(IconUsernameMaxLength)]

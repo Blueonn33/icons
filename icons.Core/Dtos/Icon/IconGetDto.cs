@@ -29,6 +29,11 @@ namespace icons.Core.Dtos.Icon
             get; set;
         }
 
+        public DateTime PublishedTime
+        {
+            get; set;
+        }
+
         public string Username
         {
             get; set;

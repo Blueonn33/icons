@@ -2,7 +2,9 @@
 {
     public enum EnumIconSortOptions
     {
-        RatingAsc = 1,
-        RatingDesc = 2
+        DateAsc = 1,
+        DateDesc = 2,
+        RatingAsc = 3,
+        RatingDesc = 4
     }
 }

@@ -16,6 +16,7 @@ namespace icons.Data.Seed
                 {
                     new Icon
                     {
+                        PublishedTime = new DateTime(2026, 9, 2),
                         AverageRating = 4.5,
                         Description =
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -28,6 +29,7 @@ namespace icons.Data.Seed
                     },
                     new Icon
                     {
+                        PublishedTime = new DateTime(2026, 9, 1),
                         AverageRating = 4.7,
                         Description =
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",

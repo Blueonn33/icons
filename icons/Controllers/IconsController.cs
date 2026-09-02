@@ -24,7 +24,7 @@ namespace icons.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(EnumIconSortOptions sort)
+        public async Task<IActionResult> Index(EnumIconSortOptions sort = EnumIconSortOptions.DateDesc)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -64,6 +64,7 @@ namespace icons.Controllers
                 Username = icon.Username,
                 UserProfilePictureUrl = icon.UserProfilePictureUrl,
                 AverageRating = icon.AverageRating,
+                PublishedTime = icon.PublishedTime,
                 Reviews = reviews.Select(r => new ReviewGetDto
                 {
                     Id = r.Id,
