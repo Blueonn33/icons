@@ -36,7 +36,16 @@ namespace icons.Core.Services
 
         public async Task<IEnumerable<IconGetDto>> GetAllIconsSortedAsync(EnumIconSortOptions sort)
         {
-            throw new NotImplementedException();
+            var icons = await _repository.GetAllIconsSortedAsync(sort);
+
+            return icons.Select(i => new IconGetDto
+            {
+                Id = i.Id,
+                ImageUrl = i.ImageUrl,
+                Title = i.Title,
+                UserProfilePictureUrl = i.UserProfilePictureUrl,
+                UserId = i.UserId
+            });
         }
 
         public async Task<IEnumerable<IconGetDto>> GetAllIconsByUserIdAsync(string userId)

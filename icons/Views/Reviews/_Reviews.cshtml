@@ -20,11 +20,15 @@
     <section class="my-3">
         <form method="get" asp-action="Icon" asp-controller="Icons">
             <input type="hidden" name="id" value="@Model.IconId" />
-
-            <select asp-for="Sort"
-                    asp-items="Html.GetEnumSelectList<EnumReviewSortOptions>()"
-                    onchange="this.form.submit()">
-            </select>
+            
+            <div class="row d-flex justify-content-end">
+                <div class="col-2">
+                    <select class="form-select" asp-for="Sort"
+                            asp-items="Html.GetEnumSelectList<EnumReviewSortOptions>()"
+                            onchange="this.form.submit()">
+                    </select>
+                </div>
+            </div>
         </form>
 
     </section>

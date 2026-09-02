@@ -27,13 +27,17 @@
                 </div>
             </div>
         </section>
-        <section class="container">
-            <form method="get" asp-action="Index" asp-controller="Icons">
-                <select asp-for="Sort"
-                        asp-items="Html.GetEnumSelectList<EnumIconSortOptions>()"
-                        onchange="this.form.submit()">
-                </select>
-            </form>
+        <section class="container mt-3">
+            <div class="row d-flex justify-content-end">
+                <div class="col-2">
+                    <form method="get" asp-action="Index" asp-controller="Icons">
+                        <select class="form-select" asp-for="Sort"
+                                asp-items="Html.GetEnumSelectList<EnumIconSortOptions>()"
+                                onchange="this.form.submit()">
+                        </select>
+                    </form>
+                </div>
+            </div>
         </section>
         <section class="container d-flex justify-content-around mt-5">
             <div class="row">

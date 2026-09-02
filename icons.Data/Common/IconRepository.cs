@@ -1,4 +1,5 @@
-﻿using icons.Data.Models;
+﻿using icons.Data.Enums;
+using icons.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace icons.Data.Common
@@ -13,7 +14,9 @@ namespace icons.Data.Common
 
         public async Task<IEnumerable<Icon>> GetAllIconsAsync()
         {
-            return await _context.Icons.ToListAsync();
+            return await _context.Icons
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Icon>> GetAllIconsByUserIdAsync(string userId)
@@ -22,6 +25,18 @@ namespace icons.Data.Common
                 .AsNoTracking()
                 .Where(i => i.UserId == userId)
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Icon>> GetAllIconsSortedAsync(EnumIconSortOptions sort)
+        {
+            var query = _context.Icons.AsNoTracking();
+
+            return sort switch
+            {
+                EnumIconSortOptions.RatingAsc => await query.OrderBy(i => i.AverageRating).ToListAsync(),
+                EnumIconSortOptions.RatingDesc => await query.OrderByDescending(i => i.AverageRating).ToListAsync(),
+                _ => await query.ToListAsync()
+            };
         }
 
         public async Task<Icon?> GetIconWithReviewsByIdAsync(int id)

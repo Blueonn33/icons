@@ -30,7 +30,7 @@ namespace icons.Controllers
 
             var icons = new IconsViewModel()
             {
-                GetAllIcons = await _service.GetAllIconsAsync(),
+                GetAllIcons = await _service.GetAllIconsSortedAsync(sort),
                 UserId = user?.Id ?? string.Empty,
                 Sort = sort
             };
