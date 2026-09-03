@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using icons.Data.Constants
 @using icons.Data.Enums
 @using icons.Models.Icons
 @model IconsViewModel
@@ -56,15 +57,27 @@
                                 <div class="d-flex justify-content-center flex-column">
                                     <a asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id" class="btn btn-primary mb-3">visit</a>
                                     @{
-                                        if (User.Identity.IsAuthenticated &&
-                                            icon.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                                           )
+                                        bool isAuthenticated = User.Identity.IsAuthenticated &&
+                                               icon.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                                        if (isAuthenticated || !User.IsInRole(Roles.Admin))
                                         {
                                             <a class="form-options btn btn-sm btn-warning rounded-5" asp-action="Update" asp-controller="Icons" asp-route-id="@icon.Id">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                                                     <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
                                                 </svg>
                                             </a>
+                                        }
+
+                                        if (User.IsInRole(Roles.Admin))
+                                        {
+                                            <form asp-action="DeleteIcon" asp-controller="Icons" asp-route-id="@icon.Id" method="post">
+                                                <button class="form-options btn btn-sm btn-danger rounded-5" onclick="return confirm('are you sure? 🤨');">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                                    </svg>
+                                                </button>
+                                            </form>
                                         }
                                     }
                                 </div>

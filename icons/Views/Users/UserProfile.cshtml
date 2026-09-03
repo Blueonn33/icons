@@ -42,12 +42,13 @@
             @foreach (var icon in Model.Icons)
             {
                 <p>@icon.Title</p>
+                <p>@icon.ImageUrl</p>
             }
         }
 
         <hr class="text-light" />
     </section>
-    <section class="text-light mt-5 user-content-container">
+    <section class="row text-light mt-5 user-content-container">
         <h2 class="mb-4">reviews</h2>
         <hr class="text-light mb-0" />
 
@@ -59,31 +60,34 @@
         }
         else
         {
-            @foreach (var review in Model.Reviews)
-            {
-                <div class="col-6 user-review-container bg-light rounded-3 m-2 text-dark p-3 border-info border-5 border shadow">
-                    <div class="row">
-                        <div class="col-11">
-                            <small class="d-inline">@review.PublishedTime</small>
-                            <p class="fs-5">@review.Title</p>
-                            <p class="fs-5 mb-0">@review.Description</p>
-                        </div>
-                        <div class="col-1 d-flex">
-                            <div class="d-flex flex-column justify-content-center align-items-center gap-3">
-                                <img src="@(review.Rating switch
-                                          {
-                                              EnumReviewRating.Poor => Url.Content("~/img/color-blaw.svg"),
-                                              EnumReviewRating.Fair => Url.Content("~/img/color-sad.svg"),
-                                              EnumReviewRating.Good => Url.Content("~/img/color-pocker.svg"),
-                                              EnumReviewRating.VeryGood => Url.Content("~/img/color-smile.svg"),
-                                              EnumReviewRating.Excellent => Url.Content("~/img/color-cool.svg"),
-                                          })" class="img-fluid"/>
-                                <a class="btn btn-outline-info" asp-action="Icon" asp-controller="Icons" asp-route-id="@review.IconId">visit</a>
+            <div class="row d-flex justify-content-center">
+                @foreach (var review in Model.Reviews)
+                {
+                    <div class="col-5 user-review-container bg-light rounded-3 text-dark p-3 border-info my-4 mx-3 border-5 border shadow">
+                        <div class="row">
+                            <div class="col-10">
+                                <small class="d-inline">@review.PublishedTime</small>
+                                <p class="fs-5 mb-0">@review.Title</p>
+                                <hr class="mt-0"/>
+                                <p class="fs-5 mb-0">@review.Description</p>
+                            </div>
+                            <div class="col-1 d-flex">
+                                <div class="d-flex flex-column justify-content-center align-items-center gap-3">
+                                    <img src="@(review.Rating switch
+                                              {
+                                                  EnumReviewRating.Poor => Url.Content("~/img/color-blaw.svg"),
+                                                  EnumReviewRating.Fair => Url.Content("~/img/color-sad.svg"),
+                                                  EnumReviewRating.Good => Url.Content("~/img/color-pocker.svg"),
+                                                  EnumReviewRating.VeryGood => Url.Content("~/img/color-smile.svg"),
+                                                  EnumReviewRating.Excellent => Url.Content("~/img/color-cool.svg"),
+                                              })" class="img-fluid"/>
+                                    <a class="btn btn-outline-info" asp-action="Icon" asp-controller="Icons" asp-route-id="@review.IconId">visit</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         }
 
         <hr class="text-light" />

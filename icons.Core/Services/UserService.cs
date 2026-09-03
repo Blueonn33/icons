@@ -38,6 +38,7 @@ namespace icons.Core.Services
                 Icons = user.Icons.Select(i => new IconUserProfileGetDto()
                 {
                     Id = i.Id,
+                    Title = i.Title,
                     ImageUrl = i.ImageUrl,
                     PublishedTime = i.PublishedTime,
                     UserId = user.Id,
