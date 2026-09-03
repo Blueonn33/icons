@@ -1,4 +1,6 @@
 ﻿using icons.Core.Contracts;
+using icons.Core.Dtos.Icon;
+using icons.Core.Dtos.Review;
 using icons.Core.Dtos.User;
 using icons.Data;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +15,47 @@ namespace icons.Core.Services
         public UserService(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
+        }
+
+        public async Task<UserProfileGetDto> GetUserProfileAsync(string id)
+        {
+            var user = await _userManager.Users
+                .Include(u => u.Icons)
+                    .ThenInclude(i => i.Reviews)
+                .Include(u => u.Reviews)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+
+            return new UserProfileGetDto
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.Name,
+                ProfilePictureUrl = user.ProfilePictureUrl,
+                Icons = user.Icons.Select(i => new IconGetDto()
+                {
+                    Id = i.Id,
+                    AverageRating = i.AverageRating,
+                    Description = i.Description,
+                    ImageUrl = i.ImageUrl,
+                    PublishedTime = i.PublishedTime,
+                    UserId = user.Id,
+                    Username = user.Name,
+                    UserProfilePictureUrl = user.ProfilePictureUrl,
+                    Reviews = i.Reviews.Select(r => new ReviewGetDto
+                    {
+                        Id = r.Id,
+                        Description = r.Description,
+                        IconId = r.IconId,
+                        PublishedTime = r.PublishedTime,
+                        Rating = r.Rating,
+                        Title = r.Title,
+                        Username = r.Username,
+                        UserId = r.UserId,
+                        UserProfilePictureUrl = r.UserProfilePictureUrl
+                    }).ToList()
+                }).ToList(),
+            };
         }
 
         public async Task DeleteUserAsync(string id)

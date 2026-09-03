@@ -1,9 +1,9 @@
 ﻿using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
 
-namespace icons.Models.Users
+namespace icons.Core.Dtos.User
 {
-    public class UserProfileViewModel
+    public class UserProfileGetDto
     {
         public string Id
         {
@@ -29,7 +29,7 @@ namespace icons.Models.Users
         public string IconsCount => Icons.Count.ToString();
         public string ReviewsCount => Reviews.Count.ToString();
 
-        public ICollection<IconGetDto> Icons { get; set; } = new HashSet<IconGetDto>();
+        public ICollection<IconUserProfileGetDto> Icons { get; set; } = new HashSet<IconUserProfileGetDto>();
         public ICollection<ReviewGetDto> Reviews { get; set; } = new HashSet<ReviewGetDto>();
     }
 }
