@@ -63,20 +63,23 @@
             {
                 <div class="col-6 user-review-container bg-light rounded-3 m-2 text-dark p-3 border-info border-5 border shadow">
                     <div class="row">
-                        <small>@review.PublishedTime</small>
                         <div class="col-11">
+                            <small class="d-inline">@review.PublishedTime</small>
                             <p class="fs-5">@review.Title</p>
                             <p class="fs-5 mb-0">@review.Description</p>
                         </div>
                         <div class="col-1 d-flex">
-                            <img src="@(review.Rating switch
-                                      {
-                                          EnumReviewRating.Poor => Url.Content("~/img/color-blaw.svg"),
-                                          EnumReviewRating.Fair => Url.Content("~/img/color-sad.svg"),
-                                          EnumReviewRating.Good => Url.Content("~/img/color-pocker.svg"),
-                                          EnumReviewRating.VeryGood => Url.Content("~/img/color-smile.svg"),
-                                          EnumReviewRating.Excellent => Url.Content("~/img/color-cool.svg"),
-                                      })" class="img-fluid"/>
+                            <div class="d-flex flex-column justify-content-center align-items-center gap-3">
+                                <img src="@(review.Rating switch
+                                          {
+                                              EnumReviewRating.Poor => Url.Content("~/img/color-blaw.svg"),
+                                              EnumReviewRating.Fair => Url.Content("~/img/color-sad.svg"),
+                                              EnumReviewRating.Good => Url.Content("~/img/color-pocker.svg"),
+                                              EnumReviewRating.VeryGood => Url.Content("~/img/color-smile.svg"),
+                                              EnumReviewRating.Excellent => Url.Content("~/img/color-cool.svg"),
+                                          })" class="img-fluid"/>
+                                <a class="btn btn-outline-info" asp-action="Icon" asp-controller="Icons" asp-route-id="@review.IconId">visit</a>
+                            </div>
                         </div>
                     </div>
                 </div>
