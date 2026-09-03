@@ -69,7 +69,7 @@
                                             </a>
                                         }
 
-                                        if (User.IsInRole(Roles.Admin))
+                                        if (User.IsInRole(Roles.Admin) && !isAuthenticated)
                                         {
                                             <form asp-action="DeleteIcon" asp-controller="Icons" asp-route-id="@icon.Id" method="post">
                                                 <button class="form-options btn btn-sm btn-danger rounded-5" onclick="return confirm('are you sure? 🤨');">
