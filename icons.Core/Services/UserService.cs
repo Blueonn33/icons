@@ -24,12 +24,17 @@ namespace icons.Core.Services
                 throw new KeyNotFoundException($"User with Id {id} was not found.");
             }
 
-            var result = await _userManager.DeleteAsync(user);
+            // Remove User from Database (HardDelete)
+            //var result = await _userManager.DeleteAsync(user);
 
-            if (!result.Succeeded)
-            {
-                throw new InvalidOperationException("Failed to delete user.");
-            }
+            //if (!result.Succeeded)
+            //{
+            //    throw new InvalidOperationException("Failed to delete user.");
+            //}
+
+            // Remove User from List not from Database (SoftDelete)
+            user.IsDeleted = true;
+            await _userManager.UpdateAsync(user);
         }
 
         public async Task<IEnumerable<UserGetDto>> GetAllUsersAsync()
