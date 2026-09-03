@@ -33,6 +33,24 @@ namespace icons.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> UserProfile(string id)
+        {
+            var user = await _userService.GetUserProfileAsync(id);
+
+            var model = new UserProfileViewModel()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                ProfilePictureUrl = user.ProfilePictureUrl,
+                Icons = user.Icons,
+                Reviews = user.Reviews
+            };
+
+            return View(model);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)

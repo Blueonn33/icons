@@ -1,0 +1,17 @@
+﻿@model icons.Models.Users.UserProfileViewModel;
+@{
+    ViewData["Title"] = "User";
+}
+
+<head>
+
+</head>
+<body>
+    <section class="container">
+        <div>
+            <p>@Model.Name</p>
+            <p>@Model.Email</p>
+            <img src="@Model.ProfilePictureUrl" />
+        </div>
+    </section>
+</body>

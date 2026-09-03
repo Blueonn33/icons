@@ -28,8 +28,9 @@
                         <p class="mb-0">@user.Email</p>
                     </div>
                     <div class="col-2 d-flex justify-content-end">
+                        <a class="btn btn-info" asp-action="UserProfile" asp-controller="Users" asp-route-id="@user.Id">visit</a>
                         <form asp-action="DeleteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
-                                <button class="btn btn-danger" onclick="return confirm('are you sure? 🤨');">delete</button>
+                            <button class="btn btn-danger" onclick="return confirm('are you sure? 🤨');">delete</button>
                         </form>
                     </div>
                 </div>

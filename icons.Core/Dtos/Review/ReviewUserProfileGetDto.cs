@@ -2,7 +2,7 @@
 
 namespace icons.Core.Dtos.Review
 {
-    public class ReviewGetDto
+    public class ReviewUserProfileGetDto
     {
         public int Id
         {
@@ -29,16 +29,6 @@ namespace icons.Core.Dtos.Review
         {
             get; set;
         }
-
-        public string UserProfilePictureUrl
-        {
-            get; set;
-        } = null!;
-
-        public string Username
-        {
-            get; set;
-        } = null!;
 
         public string UserId
         {

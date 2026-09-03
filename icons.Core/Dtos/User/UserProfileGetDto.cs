@@ -30,6 +30,6 @@ namespace icons.Core.Dtos.User
         public string ReviewsCount => Reviews.Count.ToString();
 
         public ICollection<IconUserProfileGetDto> Icons { get; set; } = new HashSet<IconUserProfileGetDto>();
-        public ICollection<ReviewGetDto> Reviews { get; set; } = new HashSet<ReviewGetDto>();
+        public ICollection<ReviewUserProfileGetDto> Reviews { get; set; } = new HashSet<ReviewUserProfileGetDto>();
     }
 }

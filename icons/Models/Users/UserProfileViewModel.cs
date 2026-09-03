@@ -29,7 +29,7 @@ namespace icons.Models.Users
         public string IconsCount => Icons.Count.ToString();
         public string ReviewsCount => Reviews.Count.ToString();
 
-        public ICollection<IconGetDto> Icons { get; set; } = new HashSet<IconGetDto>();
-        public ICollection<ReviewGetDto> Reviews { get; set; } = new HashSet<ReviewGetDto>();
+        public ICollection<IconUserProfileGetDto> Icons { get; set; } = new HashSet<IconUserProfileGetDto>();
+        public ICollection<ReviewUserProfileGetDto> Reviews { get; set; } = new HashSet<ReviewUserProfileGetDto>();
     }
 }

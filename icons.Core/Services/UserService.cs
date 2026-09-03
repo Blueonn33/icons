@@ -21,10 +21,13 @@ namespace icons.Core.Services
         {
             var user = await _userManager.Users
                 .Include(u => u.Icons)
-                    .ThenInclude(i => i.Reviews)
                 .Include(u => u.Reviews)
                 .FirstOrDefaultAsync(u => u.Id == id);
 
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"User with Id {id} was not found.");
+            }
 
             return new UserProfileGetDto
             {
@@ -32,29 +35,23 @@ namespace icons.Core.Services
                 Email = user.Email,
                 Name = user.Name,
                 ProfilePictureUrl = user.ProfilePictureUrl,
-                Icons = user.Icons.Select(i => new IconGetDto()
+                Icons = user.Icons.Select(i => new IconUserProfileGetDto()
                 {
                     Id = i.Id,
-                    AverageRating = i.AverageRating,
-                    Description = i.Description,
                     ImageUrl = i.ImageUrl,
                     PublishedTime = i.PublishedTime,
                     UserId = user.Id,
-                    Username = user.Name,
-                    UserProfilePictureUrl = user.ProfilePictureUrl,
-                    Reviews = i.Reviews.Select(r => new ReviewGetDto
-                    {
-                        Id = r.Id,
-                        Description = r.Description,
-                        IconId = r.IconId,
-                        PublishedTime = r.PublishedTime,
-                        Rating = r.Rating,
-                        Title = r.Title,
-                        Username = r.Username,
-                        UserId = r.UserId,
-                        UserProfilePictureUrl = r.UserProfilePictureUrl
-                    }).ToList()
                 }).ToList(),
+                Reviews = user.Reviews.Select(r => new ReviewUserProfileGetDto()
+                {
+                    Id = r.Id,
+                    Description = r.Description,
+                    IconId = r.IconId,
+                    PublishedTime = r.PublishedTime,
+                    Rating = r.Rating,
+                    Title = r.Title,
+                    UserId = r.UserId
+                }).ToList()
             };
         }
 
