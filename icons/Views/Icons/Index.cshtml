@@ -60,7 +60,7 @@
                                         bool isAuthenticated = User.Identity.IsAuthenticated &&
                                                icon.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-                                        if (isAuthenticated || !User.IsInRole(Roles.Admin))
+                                        if (isAuthenticated && (User.IsInRole(Roles.User) || User.IsInRole(Roles.Admin)))
                                         {
                                             <a class="form-options btn btn-sm btn-warning rounded-5" asp-action="Update" asp-controller="Icons" asp-route-id="@icon.Id">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
