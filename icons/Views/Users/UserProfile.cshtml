@@ -39,11 +39,22 @@
         }
         else
         {
-            @foreach (var icon in Model.Icons)
-            {
-                <p>@icon.Title</p>
-                <p>@icon.ImageUrl</p>
-            }
+            <div class="row d-flex justify-content-center my-3 gap-3">
+                @foreach (var icon in Model.Icons)
+                {
+                    <div class="card col-4 p-0 shadow" style="width: 18rem">
+                        <img src="@icon.ImageUrl" class="card-img-top img-fluid" alt="icon picture">
+                        <div class="card-body pt-1">
+                            <small class="card-text pb-1 d-block">@icon.PublishedTime</small>
+                            <h5 class="card-title">@icon.Title</h5>
+                            <hr />
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-primary" asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id">visit</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         }
 
         <hr class="text-light" />
