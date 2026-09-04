@@ -73,3 +73,7 @@ body {
 .user-profile-img {
     max-width: 150px;
 }
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+}

@@ -23,3 +23,8 @@
     --bs-tooltip-bg: var(--bd-violet-bg);
     --bs-tooltip-color: var(--bs-white);
 }
+.current-icon-image {
+    max-height: 400px;
+    max-width: 350px;
+/*    object-fit: fill;*/
+}
