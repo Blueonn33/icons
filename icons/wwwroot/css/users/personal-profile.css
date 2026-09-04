@@ -1,0 +1,9 @@
+﻿body {
+    --_noise-texture: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><filter id='n' x='0' y='0' width='100%' height='100%' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='0.3' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 -0.126' in='t' result='g'/></filter></defs><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    --_noise-size: 4.5%;
+    --_gradient: radial-gradient(circle at 50% -20%, #c2f5ff, #fff 50%, #a3edff 100%);
+    background-image: var(--_noise-texture), var(--_gradient);
+    background-size: var(--_noise-size), auto;
+    background-position: center, center;
+    background-repeat: repeat, no-repeat;
+}
