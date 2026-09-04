@@ -21,3 +21,6 @@
     transition: all 3s;
     color: white;
 }
+.user-hr:last-child {
+    display: none;
+}
