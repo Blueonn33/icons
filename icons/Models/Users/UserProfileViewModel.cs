@@ -26,6 +26,16 @@ namespace icons.Models.Users
             get; set;
         } = null!;
 
+        public DateTime DateRegistered
+        {
+            get; set;
+        }
+
+        public int Elixir
+        {
+            get; set;
+        }
+
         public string IconsCount => Icons.Count.ToString();
         public string ReviewsCount => Reviews.Count.ToString();
 

@@ -35,6 +35,8 @@ namespace icons.Core.Services
                 Email = user.Email,
                 Name = user.Name,
                 ProfilePictureUrl = user.ProfilePictureUrl,
+                DateRegistered = user.DateRegistered,
+                Elixir = user.Elixir,
                 Icons = user.Icons.Select(i => new IconUserProfileGetDto()
                 {
                     Id = i.Id,
@@ -99,6 +101,7 @@ namespace icons.Core.Services
                     Email = user.Email,
                     ProfilePictureUrl = user.ProfilePictureUrl,
                     IsDeleted = user.IsDeleted,
+                    Elixir = user.Elixir,
                     Roles = roles
                 });
             }

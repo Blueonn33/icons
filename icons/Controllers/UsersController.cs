@@ -26,6 +26,8 @@ namespace icons.Controllers
                     Name = u.Name,
                     Email = u.Email,
                     ProfilePictureUrl = u.ProfilePictureUrl,
+                    IsDeleted = u.IsDeleted,
+                    Elixir = u.Elixir,
                     Roles = u.Roles,
                 })
             };
@@ -44,6 +46,8 @@ namespace icons.Controllers
                 Name = user.Name,
                 Email = user.Email,
                 ProfilePictureUrl = user.ProfilePictureUrl,
+                DateRegistered = user.DateRegistered,
+                Elixir = user.Elixir,
                 Icons = user.Icons,
                 Reviews = user.Reviews
             };

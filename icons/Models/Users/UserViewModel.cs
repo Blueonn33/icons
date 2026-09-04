@@ -22,6 +22,16 @@
             get; set;
         } = null!;
 
+        public bool IsDeleted
+        {
+            get; set;
+        }
+
+        public int Elixir
+        {
+            get; set;
+        }
+
         public IEnumerable<string> Roles
         {
             get;

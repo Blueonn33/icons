@@ -32,6 +32,10 @@ public class ApplicationUser : IdentityUser
         get; set;
     }
 
+    public DateTime DateRegistered { get; set; }
+
+    public int Elixir { get; set; }
+
     public virtual ICollection<Icon> Icons { get; set; } = new HashSet<Icon>();
     public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
 }

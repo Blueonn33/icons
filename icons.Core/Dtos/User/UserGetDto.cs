@@ -28,6 +28,8 @@
             get; set;
         }
 
+        public int Elixir { get; set; }
+
         public IEnumerable<string> Roles
         {
             get;

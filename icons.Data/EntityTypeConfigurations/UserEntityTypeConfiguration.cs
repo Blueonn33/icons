@@ -7,6 +7,9 @@ namespace icons.Data.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
+            builder.Property(r => r.DateRegistered)
+                .HasDefaultValueSql("GETDATE()");
+
             builder.HasMany(u => u.Icons)
                 .WithOne(i => i.User)
                 .HasForeignKey(i => i.UserId)
