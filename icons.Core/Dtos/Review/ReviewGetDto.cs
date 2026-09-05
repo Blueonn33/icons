@@ -40,6 +40,17 @@ namespace icons.Core.Dtos.Review
             get; set;
         } = null!;
 
+        public string RankImageUrl
+        {
+            get;
+            set;
+        } = null!;
+
+        public EnumUserElixirRank Rank
+        {
+            get; set;
+        }
+
         public string UserId
         {
             get; set;

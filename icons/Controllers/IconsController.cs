@@ -14,12 +14,14 @@ namespace icons.Controllers
     {
         private readonly IIconService _service;
         private readonly IReviewService _reviewService;
+        private readonly IUserService _userService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IconsController(IIconService service, IReviewService reviewService, UserManager<ApplicationUser> userManager)
+        public IconsController(IIconService service, IReviewService reviewService, IUserService userService, UserManager<ApplicationUser> userManager)
         {
             _service = service;
             _reviewService = reviewService;
+            _userService = userService;
             _userManager = userManager;
         }
 
@@ -46,8 +48,6 @@ namespace icons.Controllers
         public async Task<IActionResult> Icon(int id, EnumReviewSortOptions sort = EnumReviewSortOptions.DateDesc)
         {
             var icon = await _service.GetIconByIdAsync(id);
-            //var reviews = await _reviewService.GetAllReviewsByIconIdAsync(id);
-
             var reviews = await _reviewService.GetAllReviewsByIconIdSortedAsync(id, sort);
 
             if (icon == null)
@@ -75,6 +75,8 @@ namespace icons.Controllers
                     Username = r.Username,
                     UserProfilePictureUrl = r.UserProfilePictureUrl,
                     UserId = r.UserId,
+                    RankImageUrl = r.RankImageUrl,
+                    Rank = r.Rank,
                     IconId = r.IconId
                 }).ToList()
             };

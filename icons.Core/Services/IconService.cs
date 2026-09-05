@@ -81,6 +81,7 @@ namespace icons.Core.Services
         public async Task<IconGetDto?> GetIconByIdAsync(int id)
         {
             var icon = await _repository.GetIconWithReviewsByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(icon.UserId);
 
             if (icon == null)
             {
@@ -110,6 +111,8 @@ namespace icons.Core.Services
                     PublishedTime = r.PublishedTime,
                     Username = r.Username,
                     UserProfilePictureUrl = r.UserProfilePictureUrl,
+                    RankImageUrl = _userService.GetRankImage(user.Rank),
+                    Rank = user.Rank,
                     IconId = r.IconId
                 }).ToList()
             };

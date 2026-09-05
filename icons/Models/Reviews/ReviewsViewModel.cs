@@ -1,5 +1,6 @@
 ﻿using icons.Core.Dtos.Review;
 using icons.Core.Enums;
+using icons.Data.Enums;
 
 namespace icons.Models.Reviews
 {
@@ -17,6 +18,20 @@ namespace icons.Models.Reviews
             get; set;
         } = null!;
 
-        public EnumReviewSortOptions Sort { get; set; }
+        public string RankImageUrl
+        {
+            get;
+            set;
+        } = null!;
+
+        public EnumUserElixirRank Rank
+        {
+            get; set;
+        }
+
+        public EnumReviewSortOptions Sort
+        {
+            get; set;
+        }
     }
 }

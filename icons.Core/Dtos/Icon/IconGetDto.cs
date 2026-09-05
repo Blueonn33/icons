@@ -1,4 +1,5 @@
 ﻿using icons.Core.Dtos.Review;
+using icons.Data.Enums;
 
 namespace icons.Core.Dtos.Icon
 {
@@ -48,6 +49,17 @@ namespace icons.Core.Dtos.Icon
         {
             get; set;
         } = null!;
+
+        public string RankImageUrl
+        {
+            get;
+            set;
+        } = null!;
+
+        public EnumUserElixirRank Rank
+        {
+            get; set;
+        }
 
         public List<ReviewGetDto> Reviews
         {

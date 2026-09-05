@@ -1,5 +1,6 @@
 ﻿using icons.Core.Dtos.Review;
 using icons.Core.Enums;
+using icons.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using static icons.Data.Constants.ValidationConstants;
 
@@ -65,6 +66,17 @@ namespace icons.Models.Icons
         {
             get; set;
         } = null!;
+
+        public string RankImageUrl
+        {
+            get;
+            set;
+        } = null!;
+
+        public EnumUserElixirRank Rank
+        {
+            get; set;
+        }
 
         public List<ReviewGetDto> Reviews
         {
