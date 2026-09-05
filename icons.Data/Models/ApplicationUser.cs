@@ -1,3 +1,4 @@
+using icons.Data.Enums;
 using icons.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
@@ -32,9 +33,20 @@ public class ApplicationUser : IdentityUser
         get; set;
     }
 
-    public DateTime DateRegistered { get; set; }
+    public DateTime DateRegistered
+    {
+        get; set;
+    }
 
-    public int Elixir { get; set; }
+    public int Elixir
+    {
+        get; set;
+    }
+
+    public EnumUserElixirRank Rank
+    {
+        get; set;
+    }
 
     public virtual ICollection<Icon> Icons { get; set; } = new HashSet<Icon>();
     public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();

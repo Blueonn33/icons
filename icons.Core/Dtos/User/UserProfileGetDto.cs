@@ -1,5 +1,6 @@
 ﻿using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
+using icons.Data.Enums;
 
 namespace icons.Core.Dtos.User
 {
@@ -35,6 +36,8 @@ namespace icons.Core.Dtos.User
         {
             get; set;
         }
+
+        public EnumUserElixirRank Rank { get; set; }
 
         public string IconsCount => Icons.Count.ToString();
         public string ReviewsCount => Reviews.Count.ToString();

@@ -1,4 +1,6 @@
-﻿namespace icons.Core.Dtos.User
+﻿using icons.Data.Enums;
+
+namespace icons.Core.Dtos.User
 {
     public class UserGetDto
     {
@@ -29,6 +31,8 @@
         }
 
         public int Elixir { get; set; }
+
+        public EnumUserElixirRank Rank { get; set; }
 
         public IEnumerable<string> Roles
         {
