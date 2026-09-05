@@ -1,5 +1,6 @@
 ﻿using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
+using icons.Data.Enums;
 
 namespace icons.Models.Users
 {
@@ -32,6 +33,11 @@ namespace icons.Models.Users
         }
 
         public int Elixir
+        {
+            get; set;
+        }
+
+        public EnumUserElixirRank Rank
         {
             get; set;
         }

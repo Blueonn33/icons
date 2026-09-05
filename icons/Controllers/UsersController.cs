@@ -49,6 +49,7 @@ namespace icons.Controllers
                 DateRegistered = user.DateRegistered,
                 Elixir = user.Elixir,
                 RankImageUrl = _userService.GetRankImage(user.Rank),
+                Rank = user.Rank,
                 Icons = user.Icons,
                 Reviews = user.Reviews
             };
