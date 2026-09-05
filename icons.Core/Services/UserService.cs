@@ -96,6 +96,36 @@ namespace icons.Core.Services
             };
         }
 
+        public EnumUserElixirRank SetRank(int elixir)
+        {
+            if (elixir < 100)
+            {
+                return EnumUserElixirRank.Newbie;
+            }
+
+            if (elixir < 600)
+            {
+                return EnumUserElixirRank.Scout;
+            }
+
+            if (elixir < 1700)
+            {
+                return EnumUserElixirRank.Captain;
+            }
+
+            if (elixir < 3000)
+            {
+                return EnumUserElixirRank.Titan;
+            }
+
+            return EnumUserElixirRank.Moderator;
+        }
+
+        public async Task UpdateRankAsync(ApplicationUser user)
+        {
+            user.Rank = SetRank(user.Elixir);
+            await _userManager.UpdateAsync(user);
+        }
 
         public async Task<IEnumerable<UserGetDto>> GetAllUsersAsync()
         {

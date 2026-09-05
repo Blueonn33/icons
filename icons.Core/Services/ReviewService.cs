@@ -12,12 +12,14 @@ namespace icons.Core.Services
     {
         private readonly IReviewRepository _repository;
         private readonly IIconRepository _iconRepository;
+        private readonly IUserService _userService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ReviewService(IReviewRepository repository, IIconRepository iconRepository, UserManager<ApplicationUser> userManager)
+        public ReviewService(IReviewRepository repository, IIconRepository iconRepository, IUserService userService, UserManager<ApplicationUser> userManager)
         {
             _repository = repository;
             _iconRepository = iconRepository;
+            _userService = userService;
             _userManager = userManager;
         }
 
@@ -47,7 +49,7 @@ namespace icons.Core.Services
             await _iconRepository.SaveAsync();
 
             user.Elixir += 5;
-            await _userManager.UpdateAsync(user);
+            await _userService.UpdateRankAsync(user);
         }
 
         public async Task DeleteReviewAsync(int id)

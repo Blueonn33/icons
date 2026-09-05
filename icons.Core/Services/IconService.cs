@@ -12,11 +12,13 @@ namespace icons.Core.Services
     public class IconService : IIconService
     {
         private readonly IIconRepository _repository;
+        private readonly IUserService _userService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IconService(IIconRepository repository, UserManager<ApplicationUser> userManager)
+        public IconService(IIconRepository repository, IUserService userService, UserManager<ApplicationUser> userManager)
         {
             _repository = repository;
+            _userService = userService;
             _userManager = userManager;
         }
 
@@ -137,7 +139,7 @@ namespace icons.Core.Services
             await _repository.SaveAsync();
 
             user.Elixir += 20;
-            await _userManager.UpdateAsync(user);
+            await _userService.UpdateRankAsync(user);
         }
 
         public async Task UpdateIconAsync(int id, IconUpdateDto icon)
