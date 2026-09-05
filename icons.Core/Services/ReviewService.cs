@@ -1,8 +1,10 @@
 ﻿using icons.Core.Contracts;
 using icons.Core.Dtos.Review;
 using icons.Core.Enums;
+using icons.Data;
 using icons.Data.Common;
 using icons.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace icons.Core.Services
 {
@@ -10,15 +12,19 @@ namespace icons.Core.Services
     {
         private readonly IReviewRepository _repository;
         private readonly IIconRepository _iconRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ReviewService(IReviewRepository repository, IIconRepository iconRepository)
+        public ReviewService(IReviewRepository repository, IIconRepository iconRepository, UserManager<ApplicationUser> userManager)
         {
             _repository = repository;
             _iconRepository = iconRepository;
+            _userManager = userManager;
         }
 
         public async Task AddReviewAsync(ReviewCreateDto review)
         {
+            var user = await _userManager.FindByIdAsync(review.UserId);
+
             var newReview = new Review
             {
                 Title = review.Title,
@@ -39,6 +45,9 @@ namespace icons.Core.Services
                 : 0;
 
             await _iconRepository.SaveAsync();
+
+            user.Elixir += 5;
+            await _userManager.UpdateAsync(user);
         }
 
         public async Task DeleteReviewAsync(int id)

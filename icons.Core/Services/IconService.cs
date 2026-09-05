@@ -135,6 +135,9 @@ namespace icons.Core.Services
 
             await _repository.AddAsync(newIcon);
             await _repository.SaveAsync();
+
+            user.Elixir += 20;
+            await _userManager.UpdateAsync(user);
         }
 
         public async Task UpdateIconAsync(int id, IconUpdateDto icon)
