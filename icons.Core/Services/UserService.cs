@@ -3,6 +3,7 @@ using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
 using icons.Core.Dtos.User;
 using icons.Data;
+using icons.Data.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -80,6 +81,21 @@ namespace icons.Core.Services
             user.IsDeleted = true;
             await _userManager.UpdateAsync(user);
         }
+
+        public string GetRankImage(EnumUserElixirRank rank)
+        {
+            return rank switch
+            {
+                EnumUserElixirRank.Newbie => "/img/ranks/newbie.png",
+                EnumUserElixirRank.Scout => "/img/ranks/scout.png",
+                EnumUserElixirRank.Captain => "/img/ranks/captain.png",
+                EnumUserElixirRank.Titan => "/img/ranks/titan.png",
+                EnumUserElixirRank.Moderator => "/img/ranks/moderator.png",
+                EnumUserElixirRank.Admin => "/img/ranks/admin.png",
+                _ => "/img/ranks/flag.png"
+            };
+        }
+
 
         public async Task<IEnumerable<UserGetDto>> GetAllUsersAsync()
         {

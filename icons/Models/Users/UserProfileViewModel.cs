@@ -36,6 +36,12 @@ namespace icons.Models.Users
             get; set;
         }
 
+        public string RankImageUrl
+        {
+            get;
+            set;
+        } = null!;
+
         public string IconsCount => Icons.Count.ToString();
         public string ReviewsCount => Reviews.Count.ToString();
 

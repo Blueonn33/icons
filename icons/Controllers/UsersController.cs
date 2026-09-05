@@ -48,6 +48,7 @@ namespace icons.Controllers
                 ProfilePictureUrl = user.ProfilePictureUrl,
                 DateRegistered = user.DateRegistered,
                 Elixir = user.Elixir,
+                RankImageUrl = _userService.GetRankImage(user.Rank),
                 Icons = user.Icons,
                 Reviews = user.Reviews
             };

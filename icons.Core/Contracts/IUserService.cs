@@ -1,4 +1,5 @@
 ﻿using icons.Core.Dtos.User;
+using icons.Data.Enums;
 
 namespace icons.Core.Contracts
 {
@@ -7,5 +8,6 @@ namespace icons.Core.Contracts
         Task<IEnumerable<UserGetDto>> GetAllUsersAsync();
         Task<UserProfileGetDto> GetUserProfileAsync(string id);
         Task DeleteUserAsync(string id);
+        string GetRankImage(EnumUserElixirRank rank);
     }
 }
