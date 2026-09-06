@@ -3,7 +3,6 @@ using icons.Core.Services;
 using icons.Core.Services.Email;
 using icons.Data;
 using icons.Data.Common;
-using icons.Data.Seed;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -54,16 +53,16 @@ namespace icons
                 app.UseHsts();
             }
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var configuration = services.GetRequiredService<IConfiguration>();
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var services = scope.ServiceProvider;
+            //    var configuration = services.GetRequiredService<IConfiguration>();
 
-                RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
-                UserSeeder.SeedUsersAsync(services, configuration).GetAwaiter().GetResult();
-                IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
-                ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
-            }
+            //    RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
+            //    UserSeeder.SeedUsersAsync(services, configuration).GetAwaiter().GetResult();
+            //    IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
+            //    ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
+            //}
 
             app.UseHttpsRedirection();
             app.UseRouting();
