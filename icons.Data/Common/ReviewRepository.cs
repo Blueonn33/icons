@@ -38,8 +38,9 @@ namespace icons.Data.Common
             }
 
             var query = _context.Reviews
-                .AsNoTracking()
-                .Where(r => r.IconId == id);
+                .Include(r => r.User)
+                .Where(r => r.IconId == id)
+                .AsNoTracking();
 
             return sort switch
             {

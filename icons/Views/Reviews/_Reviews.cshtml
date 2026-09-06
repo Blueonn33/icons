@@ -41,11 +41,11 @@
             </div>
             <div class="col-10">
                 <div class="d-flex gap-5">
-                    <div>
+                    <div class="d-flex">
                         <p class="mb-0">@review.Username</p>
-                        <img src="@Model.RankImageUrl" class="img-fluid user-rank-img" data-bs-toggle="tooltip" data-bs-placement="top"
+                        <img src="@review.RankImageUrl" class="img-fluid" width="20px" data-bs-toggle="tooltip" data-bs-placement="top"
                              data-bs-custom-class="custom-tooltip"
-                             data-bs-title="@Model.Rank"/>
+                             data-bs-title="@review.Rank" />
                     </div>
                     <p class="mb-0">@review.PublishedTime.ToShortDateString()</p>
                 </div>

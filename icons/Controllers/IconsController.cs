@@ -75,7 +75,7 @@ namespace icons.Controllers
                     Username = r.Username,
                     UserProfilePictureUrl = r.UserProfilePictureUrl,
                     UserId = r.UserId,
-                    RankImageUrl = r.RankImageUrl,
+                    RankImageUrl = _userService.GetRankImage(r.Rank),
                     Rank = r.Rank,
                     IconId = r.IconId
                 }).ToList()

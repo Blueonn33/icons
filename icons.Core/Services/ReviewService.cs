@@ -118,6 +118,8 @@ namespace icons.Core.Services
                 Username = r.Username,
                 UserProfilePictureUrl = r.UserProfilePictureUrl,
                 UserId = r.UserId,
+                RankImageUrl = _userService.GetRankImage(r.User.Rank),
+                Rank = r.User.Rank,
                 IconId = r.IconId
             });
         }
@@ -125,6 +127,7 @@ namespace icons.Core.Services
         public async Task<ReviewGetDto?> GetReviewByIdAsync(int id)
         {
             var review = await _repository.GetByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(review.UserId);
 
             if (review == null)
             {
@@ -141,6 +144,8 @@ namespace icons.Core.Services
                 Username = review.Username,
                 UserProfilePictureUrl = review.UserProfilePictureUrl,
                 UserId = review.UserId,
+                RankImageUrl = _userService.GetRankImage(user.Rank),
+                Rank = user.Rank,
                 IconId = review.IconId
             };
         }

@@ -45,6 +45,7 @@ namespace icons.Data.Common
         {
             return await _context.Icons
                 .Include(i => i.Reviews)
+                .ThenInclude(i => i.User)
                 .FirstOrDefaultAsync(i => i.Id == id);
         }
 
