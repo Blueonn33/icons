@@ -111,7 +111,7 @@ namespace icons.Core.Services
                     PublishedTime = r.PublishedTime,
                     Username = r.Username,
                     UserProfilePictureUrl = r.UserProfilePictureUrl,
-                    RankImageUrl = _userService.GetRankImage(user.Rank),
+                    RankImageUrl = _userService.GetRankImageAsync(user.Rank),
                     Rank = user.Rank,
                     IconId = r.IconId
                 }).ToList()

@@ -118,7 +118,7 @@ namespace icons.Core.Services
                 Username = r.Username,
                 UserProfilePictureUrl = r.UserProfilePictureUrl,
                 UserId = r.UserId,
-                RankImageUrl = _userService.GetRankImage(r.User.Rank),
+                RankImageUrl = _userService.GetRankImageAsync(r.User.Rank),
                 Rank = r.User.Rank,
                 IconId = r.IconId
             });
@@ -144,7 +144,7 @@ namespace icons.Core.Services
                 Username = review.Username,
                 UserProfilePictureUrl = review.UserProfilePictureUrl,
                 UserId = review.UserId,
-                RankImageUrl = _userService.GetRankImage(user.Rank),
+                RankImageUrl = _userService.GetRankImageAsync(user.Rank),
                 Rank = user.Rank,
                 IconId = review.IconId
             };

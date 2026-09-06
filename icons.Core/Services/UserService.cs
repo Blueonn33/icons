@@ -83,7 +83,7 @@ namespace icons.Core.Services
             await _userManager.UpdateAsync(user);
         }
 
-        public string GetRankImage(EnumUserElixirRank rank)
+        public string GetRankImageAsync(EnumUserElixirRank rank)
         {
             return rank switch
             {
@@ -97,7 +97,7 @@ namespace icons.Core.Services
             };
         }
 
-        public async Task<EnumUserElixirRank> SetRank(string userId, int elixir)
+        public async Task<EnumUserElixirRank> SetRankAsync(string userId, int elixir)
         {
             if (elixir < 100)
                 return EnumUserElixirRank.Newbie;
@@ -111,7 +111,7 @@ namespace icons.Core.Services
             if (elixir < 3000)
                 return EnumUserElixirRank.Titan;
 
-            await PromoteUser(userId);
+            await PromoteUserAsync(userId);
             return EnumUserElixirRank.Moderator;
         }
 
@@ -149,7 +149,7 @@ namespace icons.Core.Services
             return result;
         }
 
-        public async Task<bool> PromoteUser(string id)
+        public async Task<bool> PromoteUserAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
 
@@ -170,10 +170,16 @@ namespace icons.Core.Services
 
             var result = await _userManager.AddToRoleAsync(user, Roles.Moderator);
 
-            return result.Succeeded;
+            if (!result.Succeeded)
+                return false;
+
+            user.Rank = EnumUserElixirRank.Moderator;
+            await _userManager.UpdateAsync(user);
+
+            return true;
         }
 
-        public async Task<bool> DemoteUser(string id)
+        public async Task<bool> DemoteUserAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
 
@@ -193,6 +199,7 @@ namespace icons.Core.Services
             }
 
             var result = await _userManager.AddToRoleAsync(user, Roles.User);
+            await UpdateRankAsync(user);
 
             return result.Succeeded;
         }

@@ -48,7 +48,7 @@ namespace icons.Controllers
                 ProfilePictureUrl = user.ProfilePictureUrl,
                 DateRegistered = user.DateRegistered,
                 Elixir = user.Elixir,
-                RankImageUrl = _userService.GetRankImage(user.Rank),
+                RankImageUrl = _userService.GetRankImageAsync(user.Rank),
                 Rank = user.Rank,
                 Icons = user.Icons,
                 Reviews = user.Reviews
@@ -57,12 +57,17 @@ namespace icons.Controllers
             return View(model);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
             await _userService.DeleteUserAsync(id);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PromoteUser(string id)
+        {
+            var result = await _userService.PromoteUserAsync(id);
         }
     }
 }

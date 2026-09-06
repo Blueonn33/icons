@@ -9,10 +9,10 @@ namespace icons.Core.Contracts
         Task<IEnumerable<UserGetDto>> GetAllUsersAsync();
         Task<UserProfileGetDto> GetUserProfileAsync(string id);
         Task DeleteUserAsync(string id);
-        string GetRankImage(EnumUserElixirRank rank);
-        Task<EnumUserElixirRank> SetRank(string userId, int elixir);
-        Task<bool> PromoteUser(string id);
-        Task<bool> DemoteUser(string id);
+        string GetRankImageAsync(EnumUserElixirRank rank);
+        Task<EnumUserElixirRank> SetRankAsync(string userId, int elixir);
+        Task<bool> PromoteUserAsync(string id);
+        Task<bool> DemoteUserAsync(string id);
         Task UpdateRankAsync(ApplicationUser user);
     }
 }
