@@ -28,3 +28,7 @@
     max-width: 350px;
 /*    object-fit: fill;*/
 }
+.review-user-image {
+    max-height: 100px;
+    width: 100%;
+}

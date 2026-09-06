@@ -10,7 +10,9 @@ namespace icons.Core.Contracts
         Task<UserProfileGetDto> GetUserProfileAsync(string id);
         Task DeleteUserAsync(string id);
         string GetRankImage(EnumUserElixirRank rank);
-        EnumUserElixirRank SetRank(int elixir);
+        Task<EnumUserElixirRank> SetRank(string userId, int elixir);
+        Task<bool> PromoteUser(string id);
+        Task<bool> DemoteUser(string id);
         Task UpdateRankAsync(ApplicationUser user);
     }
 }

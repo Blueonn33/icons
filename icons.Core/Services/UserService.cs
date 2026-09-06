@@ -3,6 +3,7 @@ using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
 using icons.Core.Dtos.User;
 using icons.Data;
+using icons.Data.Constants;
 using icons.Data.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -96,34 +97,27 @@ namespace icons.Core.Services
             };
         }
 
-        public EnumUserElixirRank SetRank(int elixir)
+        public async Task<EnumUserElixirRank> SetRank(string userId, int elixir)
         {
             if (elixir < 100)
-            {
                 return EnumUserElixirRank.Newbie;
-            }
 
             if (elixir < 600)
-            {
                 return EnumUserElixirRank.Scout;
-            }
 
             if (elixir < 1700)
-            {
                 return EnumUserElixirRank.Captain;
-            }
 
             if (elixir < 3000)
-            {
                 return EnumUserElixirRank.Titan;
-            }
 
+            await PromoteUser(userId);
             return EnumUserElixirRank.Moderator;
         }
 
         public async Task UpdateRankAsync(ApplicationUser user)
         {
-            user.Rank = SetRank(user.Elixir);
+            user.Rank = await SetRank(user.Id, user.Elixir);
             await _userManager.UpdateAsync(user);
         }
 
@@ -153,6 +147,54 @@ namespace icons.Core.Services
             }
 
             return result;
+        }
+
+        public async Task<bool> PromoteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            if (await _userManager.IsInRoleAsync(user, Roles.Moderator))
+            {
+                return true;
+            }
+
+            if (await _userManager.IsInRoleAsync(user, Roles.User))
+            {
+                await _userManager.RemoveFromRoleAsync(user, Roles.User);
+            }
+
+            var result = await _userManager.AddToRoleAsync(user, Roles.Moderator);
+
+            return result.Succeeded;
+        }
+
+        public async Task<bool> DemoteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            if (await _userManager.IsInRoleAsync(user, Roles.User))
+            {
+                return true;
+            }
+
+            if (await _userManager.IsInRoleAsync(user, Roles.Moderator))
+            {
+                await _userManager.RemoveFromRoleAsync(user, Roles.Moderator);
+            }
+
+            var result = await _userManager.AddToRoleAsync(user, Roles.User);
+
+            return result.Succeeded;
         }
     }
 }
