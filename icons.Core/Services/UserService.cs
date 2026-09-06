@@ -123,7 +123,9 @@ namespace icons.Core.Services
 
         public async Task<IEnumerable<UserGetDto>> GetAllUsersAsync()
         {
-            var users = await _userManager.Users.ToListAsync();
+            var users = await _userManager.Users
+                .OrderByDescending(u => u.Rank)
+                .ToListAsync();
             var result = new List<UserGetDto>();
 
             foreach (var user in users)
