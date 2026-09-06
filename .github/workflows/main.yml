@@ -21,22 +21,19 @@ jobs:
           dotnet-version: '10.x'
 
       - name: Restore
-        run: dotnet restore
-        working-directory: ./icons
+        run: dotnet restore ./icons/icons/icons.csproj
 
       - name: Build
-        run: dotnet build --configuration Release
-        working-directory: ./icons
+        run: dotnet build ./icons/icons/icons.csproj --configuration Release
 
       - name: Publish
-        run: dotnet publish -c Release -o ./publish
-        working-directory: ./icons
+        run: dotnet publish ./icons/icons/icons.csproj -c Release -o ./publish
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: app
-          path: ./icons/publish
+          path: ./publish
 
   deploy:
     runs-on: windows-latest
