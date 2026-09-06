@@ -68,6 +68,26 @@ namespace icons.Controllers
         public async Task<IActionResult> PromoteUser(string id)
         {
             var result = await _userService.PromoteUserAsync(id);
+
+            if (!result)
+            {
+                return BadRequest("Promotion failed.");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DemoteUser(string id)
+        {
+            var result = await _userService.DemoteUserAsync(id);
+
+            if (!result)
+            {
+                return BadRequest("Demotion failed.");
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -117,7 +117,7 @@ namespace icons.Core.Services
 
         public async Task UpdateRankAsync(ApplicationUser user)
         {
-            user.Rank = await SetRank(user.Id, user.Elixir);
+            user.Rank = await SetRankAsync(user.Id, user.Elixir);
             await _userManager.UpdateAsync(user);
         }
 
