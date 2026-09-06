@@ -21,13 +21,13 @@ jobs:
           dotnet-version: '10.x'
 
       - name: Restore
-        run: dotnet restore ./icons/icons/icons.csproj
+        run: dotnet restore ./icons/icons.csproj
 
       - name: Build
-        run: dotnet build ./icons/icons/icons.csproj --configuration Release
+        run: dotnet build ./icons/icons.csproj --configuration Release
 
       - name: Publish
-        run: dotnet publish ./icons/icons/icons.csproj -c Release -o ./publish
+        run: dotnet publish ./icons/icons.csproj -c Release -o ./publish
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
