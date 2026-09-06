@@ -60,7 +60,7 @@
                                         bool isAuthenticated = User.Identity.IsAuthenticated &&
                                                icon.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-                                        if (isAuthenticated && (User.IsInRole(Roles.User) || User.IsInRole(Roles.Admin)))
+                                        if (isAuthenticated && User.IsInRole(Roles.User))
                                         {
                                             <a class="form-options btn btn-sm btn-warning rounded-5" asp-action="Update" asp-controller="Icons" asp-route-id="@icon.Id">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
@@ -68,8 +68,7 @@
                                                 </svg>
                                             </a>
                                         }
-
-                                        if (User.IsInRole(Roles.Admin) && !isAuthenticated)
+                                        else if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Moderator))
                                         {
                                             <form asp-action="DeleteIcon" asp-controller="Icons" asp-route-id="@icon.Id" method="post">
                                                 <button class="form-options btn btn-sm btn-danger rounded-5" onclick="return confirm('are you sure? 🤨');">

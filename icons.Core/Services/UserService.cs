@@ -165,11 +165,6 @@ namespace icons.Core.Services
                 return true;
             }
 
-            if (await _userManager.IsInRoleAsync(user, Roles.User))
-            {
-                await _userManager.RemoveFromRoleAsync(user, Roles.User);
-            }
-
             var result = await _userManager.AddToRoleAsync(user, Roles.Moderator);
 
             if (!result.Succeeded)
@@ -190,14 +185,14 @@ namespace icons.Core.Services
                 return false;
             }
 
-            if (await _userManager.IsInRoleAsync(user, Roles.User))
-            {
-                return true;
-            }
-
             if (await _userManager.IsInRoleAsync(user, Roles.Moderator))
             {
                 await _userManager.RemoveFromRoleAsync(user, Roles.Moderator);
+            }
+
+            if (await _userManager.IsInRoleAsync(user, Roles.User))
+            {
+                return true;
             }
 
             var result = await _userManager.AddToRoleAsync(user, Roles.User);

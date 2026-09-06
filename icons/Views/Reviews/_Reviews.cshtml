@@ -79,10 +79,10 @@
             @{
                 bool isAuthenticated = User.Identity.IsAuthenticated &&
                                        review.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (isAuthenticated || User.IsInRole(Roles.Admin))
+                if (isAuthenticated || User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Moderator))
                 {
                     <div class="d-flex align-items-center gap-1 p-1">
-                        @if (isAuthenticated || !User.IsInRole(Roles.Admin))
+                        @if (isAuthenticated)
                         {
                             <button class="btn btn-sm btn-warning"
                                     data-id="@review.Id"
