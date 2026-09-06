@@ -37,12 +37,14 @@
     {
         <div class="row get-review-container border rounded-3 text-light mb-3 position-relative">
             <div class="col-1 ps-0">
-                <img src="@review.UserProfilePictureUrl" class="img-fluid rounded-start-3"/>
+                <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@review.UserId">
+                    <img src="@review.UserProfilePictureUrl" class="img-fluid rounded-start-3" />
+                </a>
             </div>
             <div class="col-10">
-                <div class="d-flex gap-5">
+                <div class="d-flex gap-5 justify-content-between">
                     <div class="d-flex">
-                        <p class="mb-0">@review.Username</p>
+                        <a class="mb-0 text-info" asp-action="UserProfile" asp-controller="Users" asp-route-id="@review.UserId">@review.Username</a>
                         <img src="@review.RankImageUrl" class="img-fluid" width="20px" data-bs-toggle="tooltip" data-bs-placement="top"
                              data-bs-custom-class="custom-tooltip"
                              data-bs-title="@review.Rank" />

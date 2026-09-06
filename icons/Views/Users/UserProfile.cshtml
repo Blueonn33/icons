@@ -1,4 +1,5 @@
-﻿@using icons.Data.Enums
+﻿@using icons.Data.Constants
+@using icons.Data.Enums
 @model icons.Models.Users.UserProfileViewModel;
 @{
     ViewData["Title"] = "User";
@@ -9,9 +10,12 @@
 </head>
 <body>
     <section class="container mt-5">
-        <section class="mb-5">
-            <a class="btn btn-secondary" asp-action="Index" asp-controller="Users">back</a>
-        </section>
+        @if (User.IsInRole(Roles.Admin))
+        {
+            <section class="mb-5">
+                <a class="btn btn-secondary" asp-action="Index" asp-controller="Users">back</a>
+            </section>
+        }
         <div class="row text-light">
             <div class="col-3">
                 <img src="@Model.ProfilePictureUrl" class="img-fluid rounded-3 current-user-profile-img"/>

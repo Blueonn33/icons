@@ -63,6 +63,7 @@ namespace icons.Controllers
                 Description = icon.Description,
                 Username = icon.Username,
                 UserProfilePictureUrl = icon.UserProfilePictureUrl,
+                UserId = icon.UserId,
                 AverageRating = icon.AverageRating,
                 PublishedTime = icon.PublishedTime,
                 Reviews = reviews.Select(r => new ReviewGetDto
