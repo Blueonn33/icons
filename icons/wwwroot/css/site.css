@@ -77,3 +77,6 @@ body {
     height: 250px;
     object-fit: cover;
 }
+.home-index {
+    margin-bottom: 12rem;
+}
