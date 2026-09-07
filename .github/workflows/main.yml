@@ -56,6 +56,14 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Set Azure SQL Connection String
+        run: |
+          az webapp config connection-string set \
+            --name icons-softuni \
+            --resource-group icons_dbResourceGroup \
+            --settings DefaultConnection=${{ secrets.DEFAULT_CONNECTION }} \
+            --connection-string-type SQLAzure
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
