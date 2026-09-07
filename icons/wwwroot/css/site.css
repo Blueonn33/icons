@@ -55,8 +55,8 @@ body {
 .nav-link:hover {
     color: aqua !important;
 }
-.rukia-theme {
-    background: conic-gradient(from 0deg, #c2f5ff, #fff 66%, #a3edff 100%);
+.mikasa-theme {
+    background: conic-gradient(from 0deg, #c80530, #931625 40%, #000000 100%);
 }
 .nel-theme {
     background: conic-gradient(from 0deg, #7b877a, #154e53 57%, #f1e8e4 100%);

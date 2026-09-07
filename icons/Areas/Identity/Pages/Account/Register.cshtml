@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <section class="row d-flex justify-content-center px-0 mx-0 rukia-theme">
-        <div class="col-4 mt-5">
-            <h1 class="mb-5">@ViewData["Title"]</h1>
+    <section class="row d-flex justify-content-center px-0 mx-0 mikasa-theme">
+        <div class="col-sm-12 col-md-10 col-lg-6 col-xl-4 mt-5">
+            <h1 class="mb-5 text-light">@ViewData["Title"]</h1>
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
@@ -41,18 +41,15 @@
                 <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">REGISTER</button>
                 <div class="mt-5">
                     <p>
-                        <a class="text-dark login-offset" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account? Log In</a>
+                        <a class="text-light login-offset" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account? Log In</a>
                     </p>
                 </div>
             </form>
         </div>
-        <div class="col-6">
-            <img src="~/img/rukia.png" class="img-fluid register-image my-5" alt="rukia" />
+        <div class="col-sm-12 col-md-6 d-flex justify-content-center">
+            <img src="~/img/mikasa.png" class="img-fluid register-image" alt="mikasa" />
         </div>
     </section>
-@* <div class="row bg-white m-5">
-        
-    </div> *@
 </body>
 
 @section Scripts {
