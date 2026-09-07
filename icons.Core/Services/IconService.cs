@@ -45,8 +45,6 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
-                AverageRating = i.AverageRating,
-                UserProfilePictureUrl = i.UserProfilePictureUrl,
                 UserId = i.UserId
             });
         }
@@ -74,7 +72,8 @@ namespace icons.Core.Services
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
                 Username = i.Username,
-                UserProfilePictureUrl = i.UserProfilePictureUrl
+                UserProfilePictureUrl = i.UserProfilePictureUrl,
+                UserId = i.UserId
             });
         }
 
@@ -99,8 +98,8 @@ namespace icons.Core.Services
                 Title = icon.Title,
                 Description = icon.Description,
                 AverageRating = averageRating,
-                Username = icon.Username,
-                UserProfilePictureUrl = icon.UserProfilePictureUrl,
+                Username = user.Name,
+                UserProfilePictureUrl = user.ProfilePictureUrl,
                 UserId = icon.UserId,
                 Reviews = icon.Reviews.Select(r => new ReviewGetDto
                 {
@@ -109,8 +108,8 @@ namespace icons.Core.Services
                     Description = r.Description,
                     Rating = r.Rating,
                     PublishedTime = r.PublishedTime,
-                    Username = r.Username,
-                    UserProfilePictureUrl = r.UserProfilePictureUrl,
+                    Username = user.Name,
+                    UserProfilePictureUrl = user.Name,
                     RankImageUrl = _userService.GetRankImageAsync(user.Rank),
                     Rank = user.Rank,
                     IconId = r.IconId
