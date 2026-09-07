@@ -64,6 +64,19 @@ jobs:
             --settings DefaultConnection=${{ secrets.DEFAULT_CONNECTION }} \
             --connection-string-type SQLAzure
 
+      - name: Set Admin Secrets
+        run: |
+          az webapp config appsettings set \
+            --name icons-softuni \
+            --resource-group icons_dbResourceGroup \
+            --settings \
+              AdminUser__Email=${{ secrets.ADMIN_EMAIL }} \
+              AdminUser__Password=${{ secrets.ADMIN_PASSWORD }} \
+              AdminUser__Name=${{ secrets.ADMIN_NAME }} \
+              AdminUser__ProfilePictureUrl=${{ secrets.ADMIN_PFP }} \
+              AdminUser__Elixir=${{ secrets.ADMIN_ELIXIR }} \
+              AdminUser__Rank=${{ secrets.ADMIN_RANK }}
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
