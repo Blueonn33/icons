@@ -7,3 +7,6 @@
     background-position: center, center;
     background-repeat: repeat, no-repeat;
 }
+.user-profile-container {
+    margin-bottom: 15rem;
+}
