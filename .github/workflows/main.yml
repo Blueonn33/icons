@@ -61,7 +61,7 @@ jobs:
         run: |
           az webapp config connection-string set \
             --name icons-softuni \
-            --resource-group icons_dbResourceGroup \
+            --resource-group icons_group \
             --settings DefaultConnection="${{ secrets.DEFAULT_CONNECTION }}" \
             --connection-string-type SQLAzure
 
@@ -70,7 +70,7 @@ jobs:
         run: |
           az webapp config appsettings set \
             --name icons-softuni \
-            --resource-group icons_dbResourceGroup \
+            --resource-group icons_group \
             --settings \
               AdminUser__Email="${{ secrets.ADMIN_EMAIL }}" \
               AdminUser__Password="${{ secrets.ADMIN_PASSWORD }}" \
