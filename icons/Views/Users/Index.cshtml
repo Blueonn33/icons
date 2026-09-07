@@ -7,52 +7,52 @@
 <head>
     <link rel="stylesheet" href="~/css/users/index.css" asp-append-version="true" />
 </head>
-<body>
-<section class="container mt-5">
-    <header class="text-light mb-5">
-        <h1>users</h1>
-    </header>
-    <div class="bg-white p-3 rounded-3">
-        @foreach (var user in Model.Users)
-        {
-            if (!user.Roles.Contains(Roles.Admin))
+<body class="user-profile-container">
+    <section class="container">
+        <header class="text-light mb-5">
+            <h1>users</h1>
+        </header>
+        <div class="bg-white p-3 rounded-3">
+            @foreach (var user in Model.Users)
             {
-                <div class="user-data-row row rounded-3 align-items-center mb-3 p-1">
-                    <div class="col-2">
-                        <img src="@user.ProfilePictureUrl" class="img-fluid rounded-circle users-profile-img" />
-                    </div>
-                    <div class="col-4 fs-5">
-                        <p class="mb-0">@user.Name - @String.Join(", ",@user.Roles)</p>
-                    </div>
-                    <div class="col-4">
-                        <p class="mb-0">@user.Email</p>
-                    </div>
-                    <div class="col-2">
-                        <div class="row mb-3">
-                            <div class="col d-flex gap-3 justify-content-center">
-                                <a class="btn btn-info" asp-action="UserProfile" asp-controller="Users" asp-route-id="@user.Id">visit</a>
-                                <form asp-action="DeleteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
-                                    <button class="btn btn-danger" onclick="return confirm('are you sure? 🤨');">delete</button>
-                                </form>
-                            </div>
+                if (!user.Roles.Contains(Roles.Admin))
+                {
+                    <div class="user-data-row row rounded-3 align-items-center mb-3 p-1">
+                        <div class="col-sm-12 col-md-2 d-flex justify-content-xs-center justify-content-sm-center justify-content-md-start">
+                            <img src="@user.ProfilePictureUrl" class="img-fluid rounded-circle users-profile-img" />
                         </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col d-flex gap-3 justify-content-center">
-                                <form asp-action="PromoteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
-                                        <button class="btn btn-sm btn-outline-info bg-white" onclick="return confirm('are you sure? 🤨');">promote</button>
-                                </form>
-                                <form asp-action="DemoteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
-                                        <button class="btn btn-sm btn-outline-danger bg-white" onclick="return confirm('are you sure? 🤨');">demote</button>
-                                </form>
-                            </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3 fs-5 d-flex justify-content-center">
+                            <p class="mb-0">@user.Name - @String.Join(", ",@user.Roles)</p>
                         </div>
-                        
+                        <div class="col-sm-12 col-md-4 col-lg-3 d-flex justify-content-center">
+                            <p class="mb-0">@user.Email</p>
+                        </div>
+                        <div class="col-sm-12 col-lg-4 gy-xs-3 gy-sm-3">
+                            <div class="row mb-3">
+                                <div class="col d-flex gap-3 justify-content-center">
+                                    <a class="btn btn-info" asp-action="UserProfile" asp-controller="Users" asp-route-id="@user.Id">visit</a>
+                                    <form asp-action="DeleteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
+                                        <button class="btn btn-danger" onclick="return confirm('are you sure? 🤨');">delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col d-flex gap-3 justify-content-center">
+                                    <form asp-action="PromoteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
+                                            <button class="btn btn-sm btn-outline-info bg-white" onclick="return confirm('are you sure? 🤨');">promote</button>
+                                    </form>
+                                    <form asp-action="DemoteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
+                                            <button class="btn btn-sm btn-outline-danger bg-white" onclick="return confirm('are you sure? 🤨');">demote</button>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
-                </div>
-                <hr class="user-hr"/>
+                    <hr class="user-hr"/>
+                }
             }
-        }
-    </div>
-</section>
+        </div>
+    </section>
 </body>

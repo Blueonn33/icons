@@ -26,3 +26,6 @@
 .user-hr:last-child {
     display: none;
 }
+.user-profile-container {
+    margin-bottom: 15rem;
+}
