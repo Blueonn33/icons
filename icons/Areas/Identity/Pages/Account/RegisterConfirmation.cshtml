@@ -4,21 +4,27 @@
     ViewData["Title"] = "register confirmation";
 }
 
-<div class="container">
-    <h1 class="mb-3">@ViewData["Title"]</h1>
-    @{
-        if (@Model.DisplayConfirmAccountLink)
-        {
-            <p>
-                <a id="confirm-link" href="@Model.EmailConfirmationUrl">click here to confirm your account</a>
-            </p>
+<head>
+    <link rel="stylesheet" href="~/css/users/index.css" asp-append-version="true" />
+</head>
+
+<section class="">
+    <div class="container">
+        <h1 class="mb-3 text-light">@ViewData["Title"]</h1>
+        @{
+            if (@Model.DisplayConfirmAccountLink)
+            {
+                <p class="bg-white p-1 d-inline-block rounded-3">
+                    <a id="confirm-link" href="@Model.EmailConfirmationUrl">click here to confirm your account</a>
+                </p>
+            }
+            else
+            {
+                <p>
+                    Please check your email to confirm your account.
+                </p>
+            }
         }
-        else
-        {
-            <p>
-                Please check your email to confirm your account.
-            </p>
-        }
-    }
-</div>
+    </div>
+</section>
 

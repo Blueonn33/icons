@@ -70,7 +70,6 @@ public class RegisterModel : PageModel
     /// </summary>
     public class InputModel
     {
-        [Required]
         [StringLength(UserProfilePictureUrlLength)]
         [Display(Name = "ProfilePictureUrl")]
         public string? ProfilePictureUrl
@@ -132,7 +131,9 @@ public class RegisterModel : PageModel
             var user = CreateUser();
 
             user.Name = Input.Name;
-            user.ProfilePictureUrl = Input.ProfilePictureUrl;
+            user.ProfilePictureUrl = string.IsNullOrWhiteSpace(Input.ProfilePictureUrl)
+                ? "~/img/default-profile-pic.jpg"
+                : user.ProfilePictureUrl;
 
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

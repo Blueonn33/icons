@@ -4,7 +4,13 @@
     ViewData["Title"] = "confirm email";
 }
 
-<section class="container">
-    <h1 class="mb-5">@ViewData["Title"]</h1>
-    <partial name="_StatusMessage" model="Model.StatusMessage" />
+<head>
+    <link rel="stylesheet" href="~/css/users/index.css" asp-append-version="true" />
+</head>
+
+<section>
+    <div class="container">
+        <h1 class="mb-3 text-light">@ViewData["Title"]</h1>
+        <partial name="_StatusMessage" model="Model.StatusMessage" />
+    </div>
 </section>

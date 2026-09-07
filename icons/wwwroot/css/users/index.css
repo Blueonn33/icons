@@ -29,3 +29,6 @@
 .user-profile-container {
     margin-bottom: 15rem;
 }
+.register-confirm {
+    background: linear-gradient(135deg, #f4eeff 32%, #dcd6f7 55%, #a6b1e1 100%);
+}
