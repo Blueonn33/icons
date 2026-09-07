@@ -16,7 +16,7 @@ namespace icons.Data.Seed
             var adminName = configuration["AdminUser:Name"];
             var adminProfilePictureUrl = configuration["AdminUser:ProfilePictureUrl"];
             var adminElixir = configuration["AdminUser:Elixir"];
-            var adminRank = configuration["Admin:Rank"];
+            var adminRank = configuration["AdminUser:Rank"];
 
             await CreateUserWithRole(userManager, adminEmail, adminPassword, adminName, adminProfilePictureUrl, adminElixir, adminRank,
                 Roles.Admin);
