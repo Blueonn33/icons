@@ -23,4 +23,8 @@
     <ProjectReference Include="..\icons.Core\icons.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\icons\" />
+  </ItemGroup>
+
 </Project>

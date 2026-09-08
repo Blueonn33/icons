@@ -101,9 +101,20 @@ namespace icons.Controllers
                 throw new InvalidOperationException("User must be logged in to create an icon.");
             }
 
+            var folderPath = Path.Combine("wwwroot", "img", "icons");
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ImageFile.FileName);
+            var filePath = Path.Combine(folderPath, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await model.ImageFile.CopyToAsync(stream);
+            }
+
+            var imageUrl = $"/img/icons/{fileName}";
+
             var icon = new IconCreateDto()
             {
-                ImageUrl = model.ImageUrl,
+                ImageUrl = imageUrl,
                 Title = model.Title,
                 Description = model.Description,
                 UserId = user.Id

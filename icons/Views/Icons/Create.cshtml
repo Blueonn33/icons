@@ -8,11 +8,15 @@
 </head>
 <body>
     <section class="container mt-5">
-        <form asp-action="CreateIcon" asp-controller="Icons">
+        <form asp-action="CreateIcon" asp-controller="Icons" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
+            @* <div class="form-floating mb-3">
                 <input asp-for="ImageUrl" class="form-control" aria-required="true" required/>
                 <label asp-for="ImageUrl">icon url</label>
+            </div> *@
+            <div class="form-floating mb-3">
+                <input type="file" asp-for="ImageFile" class="form-control" accept="image/*" />
+                <label asp-for="Title">icon picture</label>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Title" class="form-control" aria-required="true" required />
