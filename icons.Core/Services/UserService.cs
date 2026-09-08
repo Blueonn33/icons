@@ -99,16 +99,16 @@ namespace icons.Core.Services
 
         public async Task<EnumUserElixirRank> SetRankAsync(string userId, int elixir)
         {
-            if (elixir < 100)
+            if (elixir <= 100)
                 return EnumUserElixirRank.Newbie;
 
-            if (elixir < 600)
+            if (elixir <= 600)
                 return EnumUserElixirRank.Scout;
 
-            if (elixir < 1700)
+            if (elixir <= 1700)
                 return EnumUserElixirRank.Captain;
 
-            if (elixir < 3000)
+            if (elixir <= 3000)
                 return EnumUserElixirRank.Titan;
 
             await PromoteUserAsync(userId);
