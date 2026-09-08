@@ -100,6 +100,7 @@ namespace icons.Core.Services
         public async Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort)
         {
             var icon = await _iconRepository.GetByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(icon.UserId);
 
             if (icon == null)
             {
@@ -115,9 +116,9 @@ namespace icons.Core.Services
                 Description = r.Description,
                 Rating = r.Rating,
                 PublishedTime = r.PublishedTime,
-                Username = r.Username,
-                UserProfilePictureUrl = r.UserProfilePictureUrl,
-                UserId = r.UserId,
+                Username = user.Name,
+                UserProfilePictureUrl = user.ProfilePictureUrl,
+                UserId = user.Id,
                 RankImageUrl = _userService.GetRankImageAsync(r.User.Rank),
                 Rank = r.User.Rank,
                 IconId = r.IconId
@@ -141,8 +142,8 @@ namespace icons.Core.Services
                 Description = review.Description,
                 Rating = review.Rating,
                 PublishedTime = review.PublishedTime,
-                Username = review.Username,
-                UserProfilePictureUrl = review.UserProfilePictureUrl,
+                Username = user.Name,
+                UserProfilePictureUrl = user.ProfilePictureUrl,
                 UserId = review.UserId,
                 RankImageUrl = _userService.GetRankImageAsync(user.Rank),
                 Rank = user.Rank,
