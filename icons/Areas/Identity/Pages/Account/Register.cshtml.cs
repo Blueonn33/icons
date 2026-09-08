@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using icons.Core.Services;
 using icons.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -23,13 +24,15 @@ public class RegisterModel : PageModel
     private readonly IUserEmailStore<ApplicationUser> _emailStore;
     private readonly ILogger<RegisterModel> _logger;
     private readonly IEmailSender _emailSender;
+    private readonly CloudinaryService _cloudinary;
 
     public RegisterModel(
         UserManager<ApplicationUser> userManager,
         IUserStore<ApplicationUser> userStore,
         SignInManager<ApplicationUser> signInManager,
         ILogger<RegisterModel> logger,
-        IEmailSender emailSender)
+        IEmailSender emailSender,
+        CloudinaryService cloudinary)
     {
         _userManager = userManager;
         _userStore = userStore;
@@ -37,6 +40,7 @@ public class RegisterModel : PageModel
         _signInManager = signInManager;
         _logger = logger;
         _emailSender = emailSender;
+        _cloudinary = cloudinary;
     }
 
     /// <summary>
@@ -140,22 +144,12 @@ public class RegisterModel : PageModel
 
             if (Input.ProfilePictureFile != null && Input.ProfilePictureFile.Length > 0)
             {
-                var folderPath = Path.Combine("wwwroot", "img", "users");
+                var imageUrl = await _cloudinary.UploadImageAsync(
+                    Input.ProfilePictureFile,
+                    "users"
+                );
 
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-
-                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Input.ProfilePictureFile.FileName);
-                var filePath = Path.Combine(folderPath, fileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await Input.ProfilePictureFile.CopyToAsync(stream);
-                }
-
-                user.ProfilePictureUrl = $"/img/users/{fileName}";
+                user.ProfilePictureUrl = imageUrl;
             }
             else
             {
