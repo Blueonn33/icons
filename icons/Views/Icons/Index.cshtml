@@ -58,7 +58,7 @@
                                     <a asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id" class="btn btn-primary mb-3">visit</a>
                                     @{
                                         bool isAuthenticated = User.Identity.IsAuthenticated &&
-                                               icon.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                                                               icon.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
                                         if (isAuthenticated && User.IsInRole(Roles.User))
                                         {
@@ -86,5 +86,28 @@
                 }
             </div>
         </section>
+        <section>
+            <button id="backToTop" class="back-to-top">
+                ↑
+            </button>
+        </section>
     </div>
+    <script>
+            const btn = document.getElementById("backToTop");
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) {
+                    btn.style.display = "block";
+                } else {
+                    btn.style.display = "none";
+                }
+            });
+
+            btn.addEventListener("click", () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+    </script>
 </body>

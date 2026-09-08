@@ -43,3 +43,22 @@
     height: 50px;
     object-fit: cover;
 }
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    display: none;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+}
+.back-to-top:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
