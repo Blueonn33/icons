@@ -58,7 +58,7 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
-                UserProfilePictureUrl = i.UserProfilePictureUrl
+                UserProfilePictureUrl = i.User.ProfilePictureUrl
             });
         }
 
