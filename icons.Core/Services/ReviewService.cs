@@ -100,7 +100,6 @@ namespace icons.Core.Services
         public async Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort)
         {
             var icon = await _iconRepository.GetByIdAsync(id);
-            var user = await _userManager.FindByIdAsync(icon.UserId);
 
             if (icon == null)
             {
@@ -116,9 +115,9 @@ namespace icons.Core.Services
                 Description = r.Description,
                 Rating = r.Rating,
                 PublishedTime = r.PublishedTime,
-                Username = user.Name,
-                UserProfilePictureUrl = user.ProfilePictureUrl,
-                UserId = user.Id,
+                Username = r.User.Name,
+                UserProfilePictureUrl = r.User.ProfilePictureUrl,
+                UserId = r.UserId,
                 RankImageUrl = _userService.GetRankImageAsync(r.User.Rank),
                 Rank = r.User.Rank,
                 IconId = r.IconId
@@ -128,7 +127,6 @@ namespace icons.Core.Services
         public async Task<ReviewGetDto?> GetReviewByIdAsync(int id)
         {
             var review = await _repository.GetByIdAsync(id);
-            var user = await _userManager.FindByIdAsync(review.UserId);
 
             if (review == null)
             {
@@ -142,11 +140,11 @@ namespace icons.Core.Services
                 Description = review.Description,
                 Rating = review.Rating,
                 PublishedTime = review.PublishedTime,
-                Username = user.Name,
-                UserProfilePictureUrl = user.ProfilePictureUrl,
+                Username = review.User.Name,
+                UserProfilePictureUrl = review.User.ProfilePictureUrl,
                 UserId = review.UserId,
-                RankImageUrl = _userService.GetRankImageAsync(user.Rank),
-                Rank = user.Rank,
+                RankImageUrl = _userService.GetRankImageAsync(review.User.Rank),
+                Rank = review.User.Rank,
                 IconId = review.IconId
             };
         }
