@@ -79,6 +79,17 @@ jobs:
               AdminUser__Elixir="${{ secrets.ADMIN_ELIXIR }}" \
               AdminUser__Rank="${{ secrets.ADMIN_RANK }}"
 
+      - name: Set Cloudinary Secrets
+        shell: bash
+        run: |
+          az webapp config appsettings set \
+            --name icons-softuni \
+            --resource-group icons_group \
+            --settings \
+              Cloudinary__CloudName="${{ secrets.CLOUDINARY_CLOUD_NAME }}" \
+              Cloudinary__ApiKey="${{ secrets.CLOUDINARY_API_KEY }}" \
+              Cloudinary__ApiSecret="${{ secrets.CLOUDINARY_API_SECRET }}" \
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
