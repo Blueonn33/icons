@@ -72,6 +72,14 @@ public class IndexModel : PageModel
             get;
             set;
         } = null!;
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name
+        {
+            get;
+            set;
+        } = null!;
     }
 
     private async Task LoadAsync(ApplicationUser user)
@@ -84,7 +92,8 @@ public class IndexModel : PageModel
         Input = new InputModel
         {
             PhoneNumber = phoneNumber,
-            ProfilePictureUrl = user.ProfilePictureUrl
+            ProfilePictureUrl = user.ProfilePictureUrl,
+            Name = user.Name
         };
     }
 
@@ -141,6 +150,19 @@ public class IndexModel : PageModel
             }
         }
 
+        var name = user.Name;
+
+        if (Input.Name != name)
+        {
+            user.Name = Input.Name;
+            var updateResult = await _userManager.UpdateAsync(user);
+
+            if (!updateResult.Succeeded)
+            {
+                StatusMessage = "Unexpected error when trying to set profile picture.";
+                return RedirectToPage();
+            }
+        }
 
         await _signInManager.RefreshSignInAsync(user);
         StatusMessage = "Your profile has been updated";
