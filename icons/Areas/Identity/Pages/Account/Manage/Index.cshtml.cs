@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
+using icons.Core.Services;
 using icons.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +15,21 @@ public class IndexModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly CloudinaryService _cloudinary;
 
     public IndexModel(
         UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager)
+        SignInManager<ApplicationUser> signInManager,
+        CloudinaryService cloudinary)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _cloudinary = cloudinary;
+    }
+
+    public ApplicationUser CurrentUser
+    {
+        get; set;
     }
 
     /// <summary>
@@ -66,12 +75,12 @@ public class IndexModel : PageModel
             get; set;
         }
 
-        [Display(Name = "Profile picture URL")]
-        public string ProfilePictureUrl
-        {
-            get;
-            set;
-        } = null!;
+        //[Display(Name = "Profile picture URL")]
+        //public string ProfilePictureUrl
+        //{
+        //    get;
+        //    set;
+        //} = null!;
 
         [Display(Name = "Profile picture")]
         public IFormFile? ProfilePictureFile
@@ -99,7 +108,7 @@ public class IndexModel : PageModel
         {
             PhoneNumber = phoneNumber,
             Name = user.Name,
-            ProfilePictureUrl = user.ProfilePictureUrl
+            ProfilePictureFile = null
         };
     }
 
@@ -110,6 +119,8 @@ public class IndexModel : PageModel
         {
             return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
         }
+
+        CurrentUser = user;
 
         await LoadAsync(user);
         return Page();
@@ -142,17 +153,8 @@ public class IndexModel : PageModel
 
         if (Input.ProfilePictureFile != null && Input.ProfilePictureFile.Length > 0)
         {
-            var folderPath = Path.Combine("wwwroot", "img", "users");
-
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Input.ProfilePictureFile.FileName);
-            var filePath = Path.Combine(folderPath, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await Input.ProfilePictureFile.CopyToAsync(stream);
-            }
-
-            user.ProfilePictureUrl = $"/img/users/{fileName}";
+            var imageUrl = await _cloudinary.UploadImageAsync(Input.ProfilePictureFile, "users");
+            user.ProfilePictureUrl = imageUrl;
         }
 
         if (Input.Name != user.Name)

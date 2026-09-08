@@ -36,6 +36,7 @@ namespace icons
             builder.Services.AddScoped<IIconService, IconService>();
             builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddSingleton<CloudinaryService>();
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();

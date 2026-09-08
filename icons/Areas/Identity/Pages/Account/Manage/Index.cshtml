@@ -20,7 +20,7 @@
                 <form id="profile-form" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                     <div class="mb-3 d-flex justify-content-center">
-                        <img src="@Model.Input.ProfilePictureUrl" class="img-fluid rounded-3 user-profile-img" />
+                        <img src="@Model.CurrentUser.ProfilePictureUrl" class="img-fluid rounded-3 user-profile-img" />
                     </div>
                     <div class="form-floating mb-3">
                         <input type="file" asp-for="Input.ProfilePictureFile" class="form-control" accept="image/*" />

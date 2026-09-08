@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.29.3" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.11" />
@@ -21,11 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\icons.Core\icons.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\img\icons\" />
-    <Folder Include="wwwroot\img\users\" />
   </ItemGroup>
 
 </Project>

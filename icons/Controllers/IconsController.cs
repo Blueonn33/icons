@@ -2,6 +2,7 @@
 using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
 using icons.Core.Enums;
+using icons.Core.Services;
 using icons.Data;
 using icons.Data.Enums;
 using icons.Models.Icons;
@@ -16,13 +17,15 @@ namespace icons.Controllers
         private readonly IReviewService _reviewService;
         private readonly IUserService _userService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly CloudinaryService _cloudinary;
 
-        public IconsController(IIconService service, IReviewService reviewService, IUserService userService, UserManager<ApplicationUser> userManager)
+        public IconsController(IIconService service, IReviewService reviewService, IUserService userService, UserManager<ApplicationUser> userManager, CloudinaryService cloudinary)
         {
             _service = service;
             _reviewService = reviewService;
             _userService = userService;
             _userManager = userManager;
+            _cloudinary = cloudinary;
         }
 
         [HttpGet]
@@ -101,21 +104,7 @@ namespace icons.Controllers
                 throw new InvalidOperationException("User must be logged in to create an icon.");
             }
 
-            var folderPath = Path.Combine("wwwroot", "img", "icons");
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ImageFile.FileName);
-            var filePath = Path.Combine(folderPath, fileName);
-
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await model.ImageFile.CopyToAsync(stream);
-            }
-
-            var imageUrl = $"/img/icons/{fileName}";
+            var imageUrl = await _cloudinary.UploadImageAsync(model.ImageFile, "icons");
 
             var icon = new IconCreateDto()
             {
