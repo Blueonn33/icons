@@ -30,7 +30,7 @@ namespace icons.Data.Models
             get; set;
         }
 
-        public EnumReviewRating Rating
+        public EnumReviewRating? Rating
         {
             get; set;
         }

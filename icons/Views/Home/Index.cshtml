@@ -79,8 +79,10 @@
                                 <div class="card-body">
                                     <h5 class="card-title">@icon.Title</h5>
                                     <div class="d-flex gap-3 align-items-center mb-3">
-                                        <img src="@icon.UserProfilePictureUrl" class="img-fluid rounded-circle" width="40"/>
-                                        <p class="card-text">@icon.Username</p>
+                                        <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@icon.UserId" class="card-text text-info">
+                                            <img src="@icon.UserProfilePictureUrl" class="img-fluid rounded-circle" width="40" />
+                                        </a>
+                                        <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@icon.UserId" class="card-text text-info">@icon.Username</a>
                                     </div>
                                     <hr/>
                                     <div class="d-flex justify-content-center">

@@ -11,15 +11,15 @@
         <form asp-action="CreateIcon" asp-controller="Icons">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
-                <input asp-for="ImageUrl" class="form-control" aria-required="true" />
+                <input asp-for="ImageUrl" class="form-control" aria-required="true" required/>
                 <label asp-for="ImageUrl">icon url</label>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Title" class="form-control" aria-required="true" />
+                <input asp-for="Title" class="form-control" aria-required="true" required />
                 <label asp-for="Title">title</label>
             </div>
             <div class="form-floating mb-3">
-                <textarea asp-for="Description" class="form-control icon-description-create" aria-required="true"></textarea>
+                <textarea asp-for="Description" class="form-control icon-description-create" aria-required="true" required></textarea>
                 <label asp-for="Description">description</label>
             </div>
             <div class="form-floating mb-3 d-flex justify-content-evenly mt-5">

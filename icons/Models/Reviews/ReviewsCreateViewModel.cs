@@ -22,7 +22,8 @@ namespace icons.Models.Reviews
             get; set;
         }
 
-        public EnumReviewRating Rating
+        [Required(ErrorMessage = "Rating is required.")]
+        public EnumReviewRating? Rating
         {
             get; set;
         }

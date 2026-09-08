@@ -20,7 +20,7 @@ namespace icons.Core.Dtos.Review
             get; set;
         }
 
-        public EnumReviewRating Rating
+        public EnumReviewRating? Rating
         {
             get; set;
         }

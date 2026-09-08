@@ -132,7 +132,7 @@ public class RegisterModel : PageModel
 
             user.Name = Input.Name;
             user.ProfilePictureUrl = string.IsNullOrWhiteSpace(Input.ProfilePictureUrl)
-                ? "~/img/default-profile-pic.jpg"
+                ? "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.Q0G5FJ3cDjvOc7pLyT_fNAHaIZ%3Fr%3D0%26pid%3DApi&f=1&ipt=a97ddfeab054395da15d6d65fe61b4cbdec86fc218667fe1ef24005d51ef96c8"
                 : user.ProfilePictureUrl;
 
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

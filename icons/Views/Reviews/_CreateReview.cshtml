@@ -36,6 +36,7 @@
                     <img src="~/img/cool.svg" class="rating-img" data-img="cool.svg" onclick="changeImage(this)" />
                 </label>
             </div>
+            <span asp-validation-for="Rating" class="text-danger"></span>
             <div class="col d-flex justify-content-end">
                 @{
                     if (User.Identity.IsAuthenticated)
