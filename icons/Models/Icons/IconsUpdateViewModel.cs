@@ -24,6 +24,13 @@ namespace icons.Models.Icons
             get; set;
         } = null!;
 
+        [Required]
+        public IFormFile ImageFile
+        {
+            get;
+            set;
+        } = null!;
+
         [StringLength(IconDescriptionMaxLength, MinimumLength = IconDescriptionMinLength)]
         public string Description
         {

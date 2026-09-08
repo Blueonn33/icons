@@ -151,12 +151,19 @@ namespace icons.Controllers
         {
             var currentIcon = await _service.GetIconByIdAsync(id);
 
+            string imageUrl = currentIcon.ImageUrl;
+
+            if (model.ImageFile != null && model.ImageFile.Length > 0)
+            {
+                imageUrl = await _cloudinary.UploadImageAsync(
+                    model.ImageFile,
+                    "icons");
+            }
+
             var updateIcon = new IconUpdateDto
             {
                 Id = model.Id,
-                ImageUrl = string.IsNullOrWhiteSpace(model.ImageUrl)
-                    ? currentIcon.ImageUrl
-                    : model.ImageUrl,
+                ImageUrl = imageUrl,
                 Title = string.IsNullOrWhiteSpace(model.Title)
                     ? currentIcon.Title
                     : model.Title,

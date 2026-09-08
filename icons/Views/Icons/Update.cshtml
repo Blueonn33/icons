@@ -19,14 +19,18 @@
         </div>
     </section> 
     <section class="container mt-5">
-        <form asp-action="UpdateIcon" asp-controller="Icons">
+        <form asp-action="UpdateIcon" asp-controller="Icons" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
             <input type="hidden" asp-for="Id"/>
 
-            <div class="form-floating mb-3">
+            @* <div class="form-floating mb-3">
                 <input asp-for="ImageUrl" class="form-control" aria-required="true"/>
                 <label asp-for="ImageUrl">icon url</label>
+            </div> *@
+            <div class="form-floating mb-3">
+                <input type="file" asp-for="ImageFile" class="form-control" accept="image/*" />
+                <label asp-for="ImageFile">icon picture</label>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Title" class="form-control" aria-required="true"/>

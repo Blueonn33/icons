@@ -52,6 +52,7 @@ namespace icons.Data.Common
         public async Task<IEnumerable<Icon>> GetTop3IconsAsync()
         {
             return await _context.Icons
+                .Include(i => i.User)
                 .AsNoTracking()
                 .OrderByDescending(i => i.AverageRating)
                 .Take(3)
