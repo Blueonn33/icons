@@ -73,6 +73,12 @@ public class IndexModel : PageModel
             set;
         } = null!;
 
+        [Display(Name = "Profile picture")]
+        public IFormFile? ProfilePictureFile
+        {
+            get; set;
+        } = null!;
+
         [Required]
         [Display(Name = "Name")]
         public string Name
@@ -92,8 +98,8 @@ public class IndexModel : PageModel
         Input = new InputModel
         {
             PhoneNumber = phoneNumber,
-            ProfilePictureUrl = user.ProfilePictureUrl,
-            Name = user.Name
+            Name = user.Name,
+            ProfilePictureUrl = user.ProfilePictureUrl
         };
     }
 
@@ -124,11 +130,9 @@ public class IndexModel : PageModel
         }
 
         var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
         if (Input.PhoneNumber != phoneNumber)
         {
             var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-
             if (!setPhoneResult.Succeeded)
             {
                 StatusMessage = "Unexpected error when trying to set phone number.";
@@ -136,36 +140,36 @@ public class IndexModel : PageModel
             }
         }
 
-        var profilePictureUrl = user.ProfilePictureUrl;
-
-        if (Input.ProfilePictureUrl != profilePictureUrl)
+        if (Input.ProfilePictureFile != null && Input.ProfilePictureFile.Length > 0)
         {
-            user.ProfilePictureUrl = Input.ProfilePictureUrl;
-            var updateResult = await _userManager.UpdateAsync(user);
+            var folderPath = Path.Combine("wwwroot", "img", "users");
 
-            if (!updateResult.Succeeded)
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Input.ProfilePictureFile.FileName);
+            var filePath = Path.Combine(folderPath, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                StatusMessage = "Unexpected error when trying to set profile picture.";
-                return RedirectToPage();
+                await Input.ProfilePictureFile.CopyToAsync(stream);
             }
+
+            user.ProfilePictureUrl = $"/img/users/{fileName}";
         }
 
-        var name = user.Name;
-
-        if (Input.Name != name)
+        if (Input.Name != user.Name)
         {
             user.Name = Input.Name;
-            var updateResult = await _userManager.UpdateAsync(user);
+        }
 
-            if (!updateResult.Succeeded)
-            {
-                StatusMessage = "Unexpected error when trying to set profile picture.";
-                return RedirectToPage();
-            }
+        var updateResult = await _userManager.UpdateAsync(user);
+        if (!updateResult.Succeeded)
+        {
+            StatusMessage = "Unexpected error when trying to update profile.";
+            return RedirectToPage();
         }
 
         await _signInManager.RefreshSignInAsync(user);
         StatusMessage = "Your profile has been updated";
+
         return RedirectToPage();
     }
 }
