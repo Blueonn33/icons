@@ -126,7 +126,7 @@ namespace icons.Core.Services
 
         public async Task<ReviewGetDto?> GetReviewByIdAsync(int id)
         {
-            var review = await _repository.GetByIdAsync(id);
+            var review = await _repository.GetReviewByIdAsync(id);
 
             if (review == null)
             {

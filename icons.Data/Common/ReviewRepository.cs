@@ -13,6 +13,13 @@ namespace icons.Data.Common
             _context = context;
         }
 
+        public async Task<Review?> GetReviewByIdAsync(int id)
+        {
+            return await _context.Reviews
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(i => i.Id == id);
+        }
+
         public async Task<IEnumerable<Review>> GetAllReviewsByIconIdAsync(int id)
         {
             var icon = await _context.Icons.FindAsync(id);

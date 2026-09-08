@@ -1,7 +1,6 @@
 ﻿using icons.Core.Contracts;
 using icons.Core.Dtos.Review;
 using icons.Data;
-using icons.Data.Models;
 using icons.Models.Reviews;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -80,7 +79,10 @@ namespace icons.Controllers
             }
 
             await _service.DeleteReviewAsync(id);
-            return RedirectToAction("Icon", "Icons", new Icon { Id = review.IconId });
+            return RedirectToAction("Icon", "Icons", new
+            {
+                id = review.IconId
+            });
         }
 
         [HttpPost]
@@ -101,7 +103,10 @@ namespace icons.Controllers
             };
 
             await _service.UpdateReviewAsync(updateReview.Id, updateReview);
-            return RedirectToAction("Icon", "Icons", new Icon { Id = review.IconId });
+            return RedirectToAction("Icon", "Icons", new
+            {
+                id = review.IconId
+            });
         }
     }
 }
