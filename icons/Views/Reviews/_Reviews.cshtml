@@ -43,7 +43,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-10">
+            <div class="col-xs-12 col-sm-12 col-md-10">
                 <div class="d-flex gap-5 justify-content-between">
                     <div class="d-flex">
                         <a class="mb-0 text-info" asp-action="UserProfile" asp-controller="Users" asp-route-id="@review.UserId">@review.Username</a>
@@ -61,7 +61,7 @@
                     <p class="mb-0 pb-2">@review.Description</p>
                 </div>
             </div>
-            <div class="col-xs-1 col-sm-2 col-md-1 d-flex align-items-center justify-content-center px-0">
+            <div class="col-xs-12 col-sm-12 col-md-1 d-flex align-items-center justify-content-center px-0">
                 <div>
                     <img src="@(review.Rating switch
                               {

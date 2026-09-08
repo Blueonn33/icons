@@ -12,14 +12,14 @@
         <a asp-action="Index" asp-controller="Icons" class="btn btn-secondary">back</a>
     </section>
     <section class="container mt-5">
-        <div class="row">
+        <div class="row gap-5">
             <div class="col-sm-12 col-md-4 d-flex justify-content-center ps-0">
                 <div class="d-flex justify-content-sm-center me-3">
                     <img src="@Model.ImageUrl" class="img-fluid rounded-5 current-icon-image d-inline-block"/>
                 </div>
                 <div class="vr vr-blurry d-none d-md-block"></div>
             </div>
-            <div class="col-sm-12 col-md-8 d-flex flex-column">
+            <div class="col-sm-12 col-md-6 d-flex flex-column">
                 <hr class="text-light" />
                 <div class="mb-5">
                     <h1 class="fs-2 text-light"><strong class="text-dark">icon: </strong>@Model.Title</h1>
