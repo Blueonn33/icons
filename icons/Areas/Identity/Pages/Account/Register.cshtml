@@ -11,12 +11,12 @@
     <section class="row d-flex justify-content-center px-0 mx-0 mikasa-theme">
         <div class="col-sm-12 col-md-10 col-lg-6 col-xl-4 mt-5">
             <h1 class="mb-5 text-light">@ViewData["Title"]</h1>
-            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.ProfilePictureUrl" class="form-control" autocomplete="profilePictureUrl" aria-required="true" />
-                    <label asp-for="Input.ProfilePictureUrl">profile picture url</label>
-                    <span asp-validation-for="Input.ProfilePictureUrl" class="text-danger"></span>
+                    <input type="file" asp-for="Input.ProfilePictureFile" class="form-control" accept="image/*" />
+                    <label asp-for="Input.ProfilePictureFile">profile picture</label>
+                    <span asp-validation-for="Input.ProfilePictureFile" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Name" class="form-control" autocomplete="name" aria-required="true" />

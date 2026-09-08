@@ -105,6 +105,11 @@ namespace icons.Controllers
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ImageFile.FileName);
             var filePath = Path.Combine(folderPath, fileName);
 
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await model.ImageFile.CopyToAsync(stream);

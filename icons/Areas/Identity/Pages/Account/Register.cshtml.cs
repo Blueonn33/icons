@@ -70,9 +70,15 @@ public class RegisterModel : PageModel
     /// </summary>
     public class InputModel
     {
-        [StringLength(UserProfilePictureUrlLength)]
-        [Display(Name = "ProfilePictureUrl")]
-        public string? ProfilePictureUrl
+        //[StringLength(UserProfilePictureUrlLength)]
+        //[Display(Name = "ProfilePictureUrl")]
+        //public string? ProfilePictureUrl
+        //{
+        //    get; set;
+        //}
+
+        [Display(Name = "ProfilePicture")]
+        public IFormFile? ProfilePictureFile
         {
             get; set;
         }
@@ -131,9 +137,30 @@ public class RegisterModel : PageModel
             var user = CreateUser();
 
             user.Name = Input.Name;
-            user.ProfilePictureUrl = string.IsNullOrWhiteSpace(Input.ProfilePictureUrl)
-                ? "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.Q0G5FJ3cDjvOc7pLyT_fNAHaIZ%3Fr%3D0%26pid%3DApi&f=1&ipt=a97ddfeab054395da15d6d65fe61b4cbdec86fc218667fe1ef24005d51ef96c8"
-                : user.ProfilePictureUrl;
+
+            if (Input.ProfilePictureFile != null && Input.ProfilePictureFile.Length > 0)
+            {
+                var folderPath = Path.Combine("wwwroot", "img", "users");
+
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Input.ProfilePictureFile.FileName);
+                var filePath = Path.Combine(folderPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Input.ProfilePictureFile.CopyToAsync(stream);
+                }
+
+                user.ProfilePictureUrl = $"/img/users/{fileName}";
+            }
+            else
+            {
+                user.ProfilePictureUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.Q0G5FJ3cDjvOc7pLyT_fNAHaIZ%3Fr%3D0%26pid%3DApi&f=1&ipt=a97ddfeab054395da15d6d65fe61b4cbdec86fc218667fe1ef24005d51ef96c8";
+            }
 
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
