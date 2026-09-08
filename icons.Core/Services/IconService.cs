@@ -71,8 +71,8 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
-                Username = i.Username,
-                UserProfilePictureUrl = i.UserProfilePictureUrl,
+                Username = i.User.Name,
+                UserProfilePictureUrl = i.User.ProfilePictureUrl,
                 UserId = i.UserId
             });
         }
@@ -108,10 +108,10 @@ namespace icons.Core.Services
                     Description = r.Description,
                     Rating = r.Rating,
                     PublishedTime = r.PublishedTime,
-                    Username = user.Name,
-                    UserProfilePictureUrl = user.Name,
-                    RankImageUrl = _userService.GetRankImageAsync(user.Rank),
-                    Rank = user.Rank,
+                    Username = r.User.Name,
+                    UserProfilePictureUrl = r.User.ProfilePictureUrl,
+                    RankImageUrl = _userService.GetRankImageAsync(r.User.Rank),
+                    Rank = r.User.Rank,
                     IconId = r.IconId
                 }).ToList()
             };
