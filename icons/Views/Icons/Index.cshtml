@@ -55,7 +55,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">@icon.Title</h5>
                                 <div class="d-flex justify-content-center flex-column">
-                                    <a asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id" class="btn btn-primary mb-3">visit</a>
+                                    <a asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id" class="btn btn-primary mb-3">преглед</a>
                                     @{
                                         bool isAuthenticated = User.Identity.IsAuthenticated &&
                                                                icon.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
