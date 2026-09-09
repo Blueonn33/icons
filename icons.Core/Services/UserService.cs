@@ -167,13 +167,10 @@ namespace icons.Core.Services
 
             var result = await _userManager.AddToRoleAsync(user, Roles.Moderator);
 
-            if (!result.Succeeded)
-                return false;
+            user.Elixir += 3000;
+            await UpdateRankAsync(user);
 
-            user.Rank = EnumUserElixirRank.Moderator;
-            await _userManager.UpdateAsync(user);
-
-            return true;
+            return result.Succeeded;
         }
 
         public async Task<bool> DemoteUserAsync(string id)
@@ -190,15 +187,13 @@ namespace icons.Core.Services
                 await _userManager.RemoveFromRoleAsync(user, Roles.Moderator);
             }
 
-            if (await _userManager.IsInRoleAsync(user, Roles.User))
+            if (user.Elixir >= 3000)
             {
-                return true;
+                user.Elixir -= 3000;
             }
 
-            var result = await _userManager.AddToRoleAsync(user, Roles.User);
             await UpdateRankAsync(user);
-
-            return result.Succeeded;
+            return true;
         }
     }
 }

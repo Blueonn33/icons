@@ -109,7 +109,8 @@ public class LoginModel : PageModel
 
     public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
     {
-        returnUrl ??= Url.Content("~/");
+        //returnUrl ??= Url.Content("~/");
+        returnUrl ??= Url.Content("~/Icons/Index");
 
         ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
