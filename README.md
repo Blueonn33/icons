@@ -112,9 +112,7 @@
 <img width="2559" height="1355" alt="image" src="https://github.com/user-attachments/assets/07a6b8a0-b2af-4695-92ec-dc05e6018f3e" />
 <img width="2559" height="1351" alt="image" src="https://github.com/user-attachments/assets/09c47788-2c23-476f-8ab2-1ab9ba63bda5" />
 
-:::info
-Администраторът и модераторът могат да трият ревюта на другите потребители, но не могат да ги редактират.
-:::
+> Администраторът и модераторът могат да трият ревюта на другите потребители, но не могат да ги редактират.
 
 ## ⚙️ Използвани технологии
 - ASP.NET MVC
