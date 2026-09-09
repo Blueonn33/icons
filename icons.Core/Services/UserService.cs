@@ -7,16 +7,19 @@ using icons.Data.Constants;
 using icons.Data.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace icons.Core.Services
 {
     public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IConfiguration _configuration;
 
-        public UserService(UserManager<ApplicationUser> userManager)
+        public UserService(UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
+            _configuration = configuration;
         }
 
         public async Task<UserProfileGetDto> GetUserProfileAsync(string id)
@@ -99,6 +102,15 @@ namespace icons.Core.Services
 
         public async Task<EnumUserElixirRank> SetRankAsync(string userId, int elixir)
         {
+            var adminEmail = _configuration["AdminUser:Email"];
+
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user != null && user.Email == adminEmail)
+            {
+                return EnumUserElixirRank.Admin;
+            }
+
             if (elixir <= 100)
                 return EnumUserElixirRank.Newbie;
 
