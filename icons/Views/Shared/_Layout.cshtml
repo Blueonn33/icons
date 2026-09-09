@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=McLaren&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marmelad&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
@@ -39,15 +40,15 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between align-items-center">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark fs-4" asp-area="" asp-controller="Home" asp-action="Index">начало</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Icons" asp-action="Index">Icons</a>
+                            <a class="nav-link text-dark fs-4" asp-area="" asp-controller="Icons" asp-action="Index">икони</a>
                         </li>
                         @if (User.IsInRole(Roles.Admin))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                                <a class="nav-link text-dark fs-4" asp-area="" asp-controller="Users" asp-action="Index">потребители</a>
                             </li>
                         }
                     </ul>
