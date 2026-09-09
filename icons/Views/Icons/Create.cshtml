@@ -16,19 +16,19 @@
             </div> *@
             <div class="form-floating mb-3">
                 <input type="file" asp-for="ImageFile" class="form-control" accept="image/*" />
-                <label asp-for="ImageFile">icon picture</label>
+                <label asp-for="ImageFile">снимка</label>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Title" class="form-control" aria-required="true" required />
-                <label asp-for="Title">title</label>
+                <label asp-for="Title">заглавие</label>
             </div>
             <div class="form-floating mb-3">
                 <textarea asp-for="Description" class="form-control icon-description-create" aria-required="true" required></textarea>
-                <label asp-for="Description">description</label>
+                <label asp-for="Description">описание</label>
             </div>
             <div class="form-floating mb-3 d-flex justify-content-evenly mt-5">
-                <a class="btn btn-light" asp-action="Index" asp-controller="Icons">BACK</a>
-                <button class="btn btn-primary" type="submit">CREATE</button>
+                <a class="btn btn-light" asp-action="Index" asp-controller="Icons">назад</a>
+                <button class="btn btn-primary" type="submit">създай</button>
             </div>
         </form>
     </section>

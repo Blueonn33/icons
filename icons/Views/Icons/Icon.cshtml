@@ -9,7 +9,7 @@
 </head>
 <body class="icon-container">
     <section class="container">
-        <a asp-action="Index" asp-controller="Icons" class="btn btn-secondary">back</a>
+        <a asp-action="Index" asp-controller="Icons" class="btn btn-secondary">назад</a>
     </section>
     <section class="container mt-5">
         <div class="row gap-5">
@@ -22,18 +22,18 @@
             <div class="col-sm-12 col-md-6 d-flex flex-column">
                 <hr class="text-light" />
                 <div class="mb-5">
-                    <h1 class="fs-2 text-light"><strong class="text-dark">icon: </strong>@Model.Title</h1>
+                    <h1 class="fs-2 text-light"><strong class="text-dark">икона: </strong>@Model.Title</h1>
                 </div>
                 <hr class="text-light"/>
                 <div class="text-light">
-                    <p><strong class="text-dark">description: </strong>@Model.Description</p>
+                    <p><strong class="text-info">описание: </strong>@Model.Description</p>
                 </div>
                 <div class="text-light">
-                    <p class="mb-0"><strong class="text-dark">average rating: </strong>@($"{Model.AverageRating:F2}")</p>
+                    <p class="mb-0"><strong class="text-info">оценка: </strong>@($"{Model.AverageRating:F2}")</p>
                 </div>
                 <hr class="text-light"/>
                 <div class="text-light d-flex align-items-center mt-5">
-                    <span><strong class="text-dark">posted by:</strong></span>
+                    <span><strong class="text-info">публикувано от:</strong></span>
                     <img src="@Model.UserProfilePictureUrl" class="img-fluid rounded-circle mx-3 icon-user-profile"/>
                     <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@Model.UserId" class="d-inline-block mb-0 text-light">@Model.Username</a>
                 </div>

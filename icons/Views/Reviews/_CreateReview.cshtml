@@ -6,11 +6,11 @@
         <input type="hidden" asp-for="IconId" />
 
         <div class="mb-3">
-            <label asp-for="@Model.Title"></label>
+            <label asp-for="@Model.Title">заглавие</label>
             <input class="form-control" asp-for="@Model.Title" required/>
         </div>
         <div class="mb-3">
-            <label asp-for="@Model.Description"></label>
+            <label asp-for="@Model.Description">описание</label>
             <textarea class="form-control" asp-for="@Model.Description" required></textarea>
         </div>
         <div class="row">
@@ -41,11 +41,11 @@
                 @{
                     if (User.Identity.IsAuthenticated)
                     {
-                        <button class="btn btn-secondary" type="submit">Add</button>
+                        <button class="btn btn-secondary" type="submit">добави</button>
                     }
                     else
                     {
-                        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-secondary">Add</a>
+                        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-secondary">добави</a>
                     }
                 }
             </div>

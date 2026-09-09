@@ -10,7 +10,7 @@
 <body class="user-profile-container">
     <section class="container">
         <header class="text-light mb-5">
-            <h1>users</h1>
+            <h1>потребители</h1>
         </header>
         <div class="bg-white p-3 rounded-3">
             @foreach (var user in Model.Users)
@@ -30,9 +30,9 @@
                         <div class="col-sm-12 col-lg-4 gy-3 gy-sm-3">
                             <div class="row mb-3">
                                 <div class="col d-flex gap-3 justify-content-center">
-                                    <a class="btn btn-info" asp-action="UserProfile" asp-controller="Users" asp-route-id="@user.Id">visit</a>
+                                    <a class="btn btn-info" asp-action="UserProfile" asp-controller="Users" asp-route-id="@user.Id">преглед</a>
                                     <form asp-action="DeleteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
-                                        <button class="btn btn-danger" onclick="return confirm('are you sure? 🤨');">delete</button>
+                                        <button class="btn btn-danger" onclick="return confirm('наистина ли? 🤨');">изтрий</button>
                                     </form>
                                 </div>
                             </div>
@@ -40,10 +40,10 @@
                             <div class="row">
                                 <div class="col d-flex gap-3 justify-content-center">
                                     <form asp-action="PromoteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
-                                            <button class="btn btn-sm btn-outline-info bg-white" onclick="return confirm('are you sure? 🤨');">promote</button>
+                                            <button class="btn btn-sm btn-outline-info bg-white" onclick="return confirm('наистина ли? 🤨');">повиши</button>
                                     </form>
                                     <form asp-action="DemoteUser" asp-controller="Users" asp-route-id="@user.Id" method="post">
-                                            <button class="btn btn-sm btn-outline-danger bg-white" onclick="return confirm('are you sure? 🤨');">demote</button>
+                                        <button class="btn btn-sm btn-outline-danger bg-white" onclick="return confirm('наистина ли? 🤨');">понижи</button>
                                     </form>
                                 </div>
                             </div>

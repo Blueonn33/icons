@@ -10,10 +10,10 @@
     <section class="container">
         <div class="d-flex justify-content-end mt-3">
             <form asp-action="DeleteIcon" asp-controller="Icons" asp-route-id="@Model.Id" method="post">
-                <button class="btn btn-sm btn-danger rounded-5" onclick="return confirm('are you sure? 🤨');">
+                <button class="btn btn-sm btn-danger rounded-5" onclick="return confirm('наистина ли? 🤨');">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                    </svg> delete
+                    </svg> изтрий
                 </button>
             </form>
         </div>
@@ -30,19 +30,19 @@
             </div> *@
             <div class="form-floating mb-3">
                 <input type="file" asp-for="ImageFile" class="form-control" accept="image/*" />
-                <label asp-for="ImageFile">icon picture</label>
+                <label asp-for="ImageFile">снимка</label>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Title" class="form-control" aria-required="true"/>
-                <label asp-for="Title">title</label>
+                <label asp-for="Title">заглавие</label>
             </div>
             <div class="form-floating mb-3">
                 <textarea asp-for="Description" class="form-control icon-description-create" aria-required="true"></textarea>
-                <label asp-for="Description">description</label>
+                <label asp-for="Description">описание</label>
             </div>
             <div class="form-floating mb-3 d-flex justify-content-evenly mt-5">
-                <a class="btn btn-secondary" asp-action="Index" asp-controller="Icons">BACK</a>
-                <button class="btn btn-warning" type="submit">UPDATE</button>
+                <a class="btn btn-secondary" asp-action="Index" asp-controller="Icons">назад</a>
+                <button class="btn btn-warning" type="submit">запази</button>
             </div>
         </form>
     </section>

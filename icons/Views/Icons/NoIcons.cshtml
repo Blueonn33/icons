@@ -10,17 +10,17 @@
         <div class="row">
             <div class="d-flex flex-column align-items-center justify-content-center col-6">
                 <div class="mb-3">
-                    <h1>no icons available</h1>
+                    <h1>няма налични икони</h1>
                 </div>
                 <div>
                     @{
                         if (User.Identity.IsAuthenticated)
                         {
-                            <a asp-action="Create" asp-controller="Icons" class="btn btn-primary btn-lg btn-block">create</a>
+                            <a asp-action="Create" asp-controller="Icons" class="btn btn-primary btn-lg btn-block">създай</a>
                         }
                         else
                         {
-                            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg btn-block">create</a>
+                            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg btn-block">създай</a>
                         }
                     }
                 </div>
