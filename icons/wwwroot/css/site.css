@@ -19,6 +19,11 @@ html {
 
 body {
     margin-bottom: 60px;
+    font-family: "Marmelad", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.mclaren {
     font-family: "McLaren", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -79,4 +84,7 @@ body {
 }
 .body-container {
     margin-bottom: 12rem;
+}
+.tracking-space {
+    letter-spacing: 0.1em;
 }
