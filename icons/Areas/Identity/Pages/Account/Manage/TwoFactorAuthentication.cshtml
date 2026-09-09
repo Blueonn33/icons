@@ -59,12 +59,12 @@
                     <h4 class="mb-3">приложение за удостоверяване</h4>
                     @if (!Model.HasAuthenticator)
                     {
-                        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Add authenticator app</a>
+                        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">добави</a>
                     }
                     else
                     {
-                        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary me-5">Set up authenticator app</a>
-                        <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">Reset authenticator app</a>
+                        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary me-5">добави</a>
+                        <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-warning">нулирай</a>
                     }
                 }
                 else
