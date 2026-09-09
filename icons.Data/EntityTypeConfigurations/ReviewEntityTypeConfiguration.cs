@@ -9,7 +9,7 @@ namespace icons.Data.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<Review> builder)
         {
             builder.Property(r => r.PublishedTime)
-                .HasDefaultValueSql("GETDATE()");
+                .HasDefaultValueSql("GETUTCDATE()");
         }
     }
 }

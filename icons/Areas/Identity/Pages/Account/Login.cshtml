@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "log in";
+    ViewData["Title"] = "вход";
 }
 
 <head>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                    <label asp-for="Input.Password" class="form-label">password</label>
+                    <label asp-for="Input.Password" class="form-label">парола</label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="checkbox mb-3">
@@ -31,17 +31,17 @@
                     </label>
                 </div>
                 <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">LOG IN</button>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">вход</button>
                 </div>
                 <div class="mt-5">
                     <p>
-                        <a class="text-dark login-offset" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a class="text-dark login-offset" id="forgot-password" asp-page="./ForgotPassword">Забрави ли паролата?</a>
                     </p>
                     <p>
-                        <a class="text-dark login-offset" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a class="text-dark login-offset" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Регистрирай се като нов потребител</a>
                     </p>
                     <p>
-                        <a class="text-dark login-offset" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        <a class="text-dark login-offset" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Изпращане на потвърждение на имейл</a>
                     </p>
                 </div>
             </form>

@@ -8,7 +8,7 @@ namespace icons.Data.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
             builder.Property(r => r.DateRegistered)
-                .HasDefaultValueSql("GETDATE()");
+                .HasDefaultValueSql("GETUTCDATE()");
 
             builder.HasMany(u => u.Icons)
                 .WithOne(i => i.User)

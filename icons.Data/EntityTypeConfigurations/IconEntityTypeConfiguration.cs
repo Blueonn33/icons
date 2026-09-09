@@ -18,7 +18,7 @@ namespace icons.Data.EntityConfigurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(i => i.PublishedTime)
-                .HasDefaultValueSql("GETDATE()");
+                .HasDefaultValueSql("GETUTCDATE()");
         }
     }
 }

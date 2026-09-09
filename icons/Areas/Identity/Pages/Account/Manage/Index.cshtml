@@ -1,7 +1,7 @@
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "profile";
+    ViewData["Title"] = "профил";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
@@ -24,22 +24,22 @@
                     </div>
                     <div class="form-floating mb-3">
                         <input type="file" asp-for="Input.ProfilePictureFile" class="form-control" accept="image/*" />
-                        <label asp-for="Input.ProfilePictureFile" class="form-label"></label>
+                        <label asp-for="Input.ProfilePictureFile" class="form-label">снимка</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input asp-for="Input.Name" class="form-control" placeholder="please choose your name" />
-                        <label asp-for="Input.Name" class="form-label"></label>
+                        <input asp-for="Input.Name" class="form-control" placeholder="моля, въведи име" />
+                        <label asp-for="Input.Name" class="form-label">име</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input asp-for="Username" class="form-control" placeholder="please choose your username" disabled/>
-                        <label asp-for="Username" class="form-label"></label>
+                        <input asp-for="Username" class="form-control" placeholder="моля, въведи email" disabled />
+                        <label asp-for="Username" class="form-label">email</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input asp-for="Input.PhoneNumber" class="form-control" placeholder=""/>
-                        <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                        <label asp-for="Input.PhoneNumber" class="form-label">телефон</label>
                         <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                     </div>
-                    <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+                    <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">запази</button>
                 </form>
             </div>
         </div>
