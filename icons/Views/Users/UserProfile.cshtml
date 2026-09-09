@@ -132,7 +132,7 @@
                         <div class="card col-4 p-0 shadow" style="width: 18rem">
                             <img src="@icon.ImageUrl" class="card-img-top img-fluid" alt="icon picture">
                             <div class="card-body pt-1">
-                                <small class="card-text pb-1 d-block">@icon.PublishedTime</small>
+                                <small class="card-text pb-1 d-block">@icon.PublishedTime.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</small>
                                 <h5 class="card-title">@icon.Title</h5>
                                 <hr/>
                                 <div class="d-flex justify-content-center">
@@ -166,7 +166,7 @@
                         <div class="col-sm-12 col-md-9 col-lg-5 bg-light rounded-3 text-dark p-3 border-info border-5 border shadow mb-3 me-3">
                             <div class="row">
                                 <div class="col-10">
-                                    <small class="d-inline">@review.PublishedTime</small>
+                                    <small class="d-inline">@review.PublishedTime.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</small>
                                     <p class="fs-5 mb-0">@review.Title</p>
                                     <hr class="mt-0"/>
                                     <p class="fs-5 mb-0">@review.Description</p>
