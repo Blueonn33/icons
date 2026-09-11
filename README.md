@@ -156,11 +156,14 @@
 - Material Design for Bootstrap - MDB
 - Figma
 - Flaticon
+- Colorffy
 - Microsoft SQL Server Management Studio
 - Azure
 - Cloudinary
 - GitHub
+- GitHub Desktop
 - GitGuardian
+- Copilot
 
 ### TODO
 
