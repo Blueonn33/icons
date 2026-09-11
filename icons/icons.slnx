@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Documentation/">
+    <File Path="../README.md" />
+  </Folder>
   <Project Path="../icons.Core/icons.Core.csproj" />
   <Project Path="../icons.Data/icons.Data.csproj" />
   <Project Path="icons.csproj" />
