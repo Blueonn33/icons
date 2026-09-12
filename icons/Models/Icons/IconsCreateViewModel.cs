@@ -12,14 +12,6 @@ namespace icons.Models.Icons
             get; set;
         } = null!;
 
-        //[Required]
-        //[Url]
-        //[StringLength(IconImageUrlLength)]
-        //public string ImageUrl
-        //{
-        //    get; set;
-        //} = null!;
-
         [Required]
         public IFormFile ImageFile
         {
