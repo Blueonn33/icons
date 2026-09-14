@@ -6,11 +6,13 @@ using icons.Core.Services;
 using icons.Data;
 using icons.Data.Enums;
 using icons.Models.Icons;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace icons.Controllers
 {
+    [Authorize]
     public class IconsController : Controller
     {
         private readonly IIconService _service;
@@ -28,6 +30,7 @@ namespace icons.Controllers
             _cloudinary = cloudinary;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Index(EnumIconSortOptions sort = EnumIconSortOptions.DateDesc)
         {
@@ -48,6 +51,8 @@ namespace icons.Controllers
             return View(icons);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> Icon(int id, EnumReviewSortOptions sort = EnumReviewSortOptions.DateDesc)
         {
             var icon = await _service.GetIconByIdAsync(id);

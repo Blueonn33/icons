@@ -1,11 +1,13 @@
 using icons.Core.Contracts;
 using icons.Models;
 using icons.Models.Home;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace icons.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly IIconService _service;

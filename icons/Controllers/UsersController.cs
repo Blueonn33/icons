@@ -1,9 +1,12 @@
 ﻿using icons.Core.Contracts;
+using icons.Data.Constants;
 using icons.Models.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace icons.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class UsersController : Controller
     {
         private readonly IUserService _userService;
@@ -35,6 +38,7 @@ namespace icons.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> UserProfile(string id)
         {

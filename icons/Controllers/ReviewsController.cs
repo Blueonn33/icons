@@ -2,11 +2,13 @@
 using icons.Core.Dtos.Review;
 using icons.Data;
 using icons.Models.Reviews;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace icons.Controllers
 {
+    [Authorize]
     public class ReviewsController : Controller
     {
         private readonly IReviewService _service;
