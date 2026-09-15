@@ -43,12 +43,12 @@ git clone https://github.com/Blueonn33/icons.git
 - icons.Core
 - icons.Data
 
-<img width="437" height="auto" alt="image" src="https://github.com/user-attachments/assets/76e3db8a-e2e4-4123-b773-418817fe83e3" />
+<img width="437" height="135" alt="image" src="https://github.com/user-attachments/assets/0e9ee9c6-af77-4d41-a870-fe43c77d51c6" />
 
 За startup проект трябва да бъде зададен `icons`. За целта даваш десен бутон върху `Solution 'icons'`. От менюто избираш `Properties`. 
 Натискаш `Single startup project` и от списъка избираш `icons`. Запазваш промените с OK и всичко е ок.
 
-<img width="500" height="532" alt="image" src="https://github.com/user-attachments/assets/bd2c3595-4143-480c-928a-75aa8f7ee4b9" />
+<img width="500" height="auto" alt="image" src="https://github.com/user-attachments/assets/bd2c3595-4143-480c-928a-75aa8f7ee4b9" />
 
 Ако всичко е минало успешно, разгъни `icons`. В него ще намериш `appsettings.json` файл, който ще отвориш.
 
