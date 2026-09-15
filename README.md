@@ -43,7 +43,7 @@ git clone https://github.com/Blueonn33/icons.git
 - icons.Core
 - icons.Data
 
-<img width="437" height="135" alt="image" src="https://github.com/user-attachments/assets/76e3db8a-e2e4-4123-b773-418817fe83e3" />
+<img width="437" height="auto" alt="image" src="https://github.com/user-attachments/assets/76e3db8a-e2e4-4123-b773-418817fe83e3" />
 
 За startup проект трябва да бъде зададен `icons`. За целта даваш десен бутон върху `Solution 'icons'`. От менюто избираш `Properties`. 
 Натискаш `Single startup project` и от списъка избираш `icons`. Запазваш промените с OK и всичко е ок.
