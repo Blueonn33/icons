@@ -141,7 +141,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 От `Tools / NuGet Package Manager` отвори `Package Manager Console`. След това в `Default Project` избери `icons.Data`.
 
-<img width="793" height="132" alt="image" src="https://github.com/user-attachments/assets/f1da1370-4956-45b7-b35d-8cfb10c52078" />
+<img width="437" height="auto" alt="image" src="https://github.com/user-attachments/assets/f1da1370-4956-45b7-b35d-8cfb10c52078" />
 
 И сега напиши следното
 
