@@ -77,7 +77,7 @@ git clone https://github.com/Blueonn33/icons.git
 
 Изображенията се съхраняват в `Cloudinary`. Това е платформа за управление на изображения и видеа в уеб приложения и сайтове. Използвано е `Cloudinary API`, като конфигурационните му параметри се задават в точно в `appsettings.json`.
 
-Ако имаш създаден профил в Cloudinary, ето <a href="https://cloudinary.com/" target="_blank">линк</a>. В `Home` страницата в `Dashboard` опцията ще видиш секция `Product Environment`. Натисни бутона `Go to API Keys` и оттам вземи нужните стойности.
+Ако имаш създаден профил в Cloudinary, го отвори. В `Home` страницата в `Dashboard` опцията ще видиш секция `Product Environment`. Натисни бутона `Go to API Keys` и оттам вземи нужните стойности.
 
 <img width="2033" height="298" alt="image" src="https://github.com/user-attachments/assets/000cc8e2-53cb-4c00-9245-509a02f7b5bf" />
 
