@@ -52,6 +52,8 @@ git clone https://github.com/Blueonn33/icons.git
 
 Ако всичко е минало успешно, разгъни `icons`. В него ще намериш `appsettings.json` файл, който ще отвориш.
 
+---
+
 #### Потребители
 
 `appsettings.json` файлът съдържа данни за създаване (seed) на потребители в приложението - 1 админ и 2 потребителя.
@@ -68,6 +70,8 @@ git clone https://github.com/Blueonn33/icons.git
   "Rank":  "6"
 }
 ```
+
+---
 
 #### Cloudinary
 
@@ -87,6 +91,8 @@ git clone https://github.com/Blueonn33/icons.git
 }
 ```
 
+---
+
 #### Connection string
 
 `appsettings.json` съдържа и `Connection string`. Той се използва за връзка със сървъра, в който ще се съхраняват данните.
@@ -104,6 +110,8 @@ Server=YOUR_SERVER_NAME;Database=icons;Trusted_Connection=True;TrustServerCertif
 ```
 Server=YOUR_SERVER_NAME;Database=icons;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true
 ```
+
+---
 
 #### Работа с различен сървър
 
@@ -137,6 +145,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 Съответно това ще работи и с други сървъри.
 
+---
+
 #### Миграция
 
 От `Tools / NuGet Package Manager` отвори `Package Manager Console`. След това в `Default Project` избери `icons.Data`.
@@ -150,6 +160,8 @@ Update-Database
 ```
 
 В кода на приложението са включени вече създадените миграции, затова няма нужда да създаваш нова. Можеш директно да актуализираш. По този начин ти попълни базата си данни с моделите. Към този момент, базата ти данни е празна.
+
+---
 
 #### Стартиране на проекта
 
@@ -167,6 +179,8 @@ FROM   AspNetUsers
 ```
 
 Ще видиш, че вече има 3 създадени записа.
+
+---
 
 #### Добавяне на Icons и Reviews
 
