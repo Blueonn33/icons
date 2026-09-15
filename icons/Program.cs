@@ -24,7 +24,7 @@ namespace icons
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = false;
+                    options.SignIn.RequireConfirmedAccount = true;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

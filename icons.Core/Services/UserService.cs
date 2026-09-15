@@ -179,7 +179,7 @@ namespace icons.Core.Services
 
             var result = await _userManager.AddToRoleAsync(user, Roles.Moderator);
 
-            user.Elixir += 3000;
+            user.Elixir += 3001;
             await UpdateRankAsync(user);
 
             return result.Succeeded;
