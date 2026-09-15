@@ -48,7 +48,7 @@ git clone https://github.com/Blueonn33/icons.git
 За startup проект трябва да бъде зададен `icons`. За целта даваш десен бутон върху `Solution 'icons'`. От менюто избираш `Properties`. 
 Натискаш `Single startup project` и от списъка избираш `icons`. Запазваш промените с OK и всичко е ок.
 
-<img width="500" height="auto" alt="image" src="https://github.com/user-attachments/assets/bd2c3595-4143-480c-928a-75aa8f7ee4b9" />
+<img width="437" height="auto" alt="image" src="https://github.com/user-attachments/assets/bd2c3595-4143-480c-928a-75aa8f7ee4b9" />
 
 Ако всичко е минало успешно, разгъни `icons`. В него ще намериш `appsettings.json` файл, който ще отвориш.
 
@@ -86,6 +86,183 @@ git clone https://github.com/Blueonn33/icons.git
   "ApiSecret": "WqILR3BvUcb0T5HK00l5VQaORGM"
 }
 ```
+
+#### Connection string
+
+`appsettings.json` съдържа и `Connection string`. Той се използва за връзка със сървъра, в който ще се съхраняват данните.
+
+Това е стойността, която се подава на `DefaultConnection`:
+
+```
+Server=YOUR_SERVER_NAME;Database=icons;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true
+```
+
+Като на `Server` задаваш името на сървъра, който използваш. Представеният Connection string се използва за работа с Microsoft SQL Server. Ако използваш различен сървър, може да намериш правилния Connection string **[тук](https://www.connectionstrings.com/).**
+
+Освен това, `appsettings.json` съдържа в себе си файл `appsettings.Development.json`, в който трябва да зададеш същия Connection string.
+
+```
+Server=YOUR_SERVER_NAME;Database=icons;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true
+```
+
+#### Работа с различен сървър
+
+Давам пример за използване на `PostgreSQL`
+
+1. Изтегляне на нужните пакети
+
+Tрябва да инсталираш необходимите пакети за работа с PostgreSQL в .NET. Инсталирай следния NuGet пакет:
+
+```
+Npgsql.EntityFrameworkCore.PostgreSQL
+```
+
+2. Program.cs
+
+При използване на различен сървър от Microsoft SQL Server трябва да промениш ето този фрагмент от `Program.cs`. 
+
+```
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+	options.UseSqlServer(connectionString));
+```
+
+В него е зададен Microsoft SQL Server. 
+
+В случая давам пример с PostgreSQL. И при него фрагментът ще изглежда така:
+
+```
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+	options.UseNpgsql(connectionString));
+```
+
+Съответно това ще работи и с други сървъри.
+
+#### Миграция
+
+От `Tools / NuGet Package Manager` отвори `Package Manager Console`. След това в `Default Project` избери `icons.Data`.
+
+<img width="793" height="132" alt="image" src="https://github.com/user-attachments/assets/f1da1370-4956-45b7-b35d-8cfb10c52078" />
+
+И сега напиши следното
+
+```
+Update-Database
+```
+
+В кода на приложението са включени вече създадените миграции, затова няма нужда да създаваш нова. Можеш директно да актуализираш. По този начин ти попълни базата си данни с моделите. Към този момент, базата ти данни е празна.
+
+#### Стартиране на проекта
+
+С клавишна комбинация за `Windows` - **CTRL + F5** или за `Mac` - **⌥ + ⌘ + ⏎** (Option + Command + Enter) стартираш проекта 😯.
+
+Ако си изпълнил успешно всичките стъпки, ще видиш това:
+
+<img width="2559" height="1354" alt="image" src="https://github.com/user-attachments/assets/b485c207-fd5f-44b1-b6a8-667af17d34df" />
+
+А сега, ако си отвориш СУБД (Системата за управление на бази данни), в нашия случай Microsoft SQL Server и в нея изпълниш заявка за извличане на всички потребители:
+
+```
+SELECT *
+FROM   AspNetUsers
+```
+
+Ще видиш, че вече има 3 създадени записа.
+
+#### Добавяне на Icons и Reviews
+
+Тази стъпка е **незадължителна**. Можеш ръчно да си създадеш икони и ревюта от уеб приложението. Но ако искаш да ги зададеш чрез Seed, следвай тези стъпки:
+
+Сега ще добавим няколко `Icons`, както и `Reviews`. В `Program.cs` имаме този фрагмент:
+
+```
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var configuration = services.GetRequiredService<IConfiguration>();
+
+    RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
+    UserSeeder.SeedUsersAsync(services, configuration).GetAwaiter().GetResult();
+    //IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
+    //ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
+}
+```
+
+В момента се създават само потребители. Създаването на икони и ревюта е закоментирано, тъй като без налични потребители няма как да ги създадем.
+
+Разкоментирай този ред за създаване на икони:
+
+```
+IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
+```
+
+Ревютата ги остави коментирани.
+
+Сега отвори `IconSeeder`. Той се намира в `icons.Data / Seed`.
+
+<img width="437" height="auto" alt="image" src="https://github.com/user-attachments/assets/2c30980b-fb15-425a-9998-e2f12d1b3b59" />
+
+От базата данни вземи `ID-то` на потребителя с име Jushiro Ukitake. 
+Постави на мястото на `ENTER_USER_ID`, който е стойността на `UserId` в първия `Icon` обект:
+
+```
+new Icon
+{
+    ...
+    UserId = "ENTER_USER_ID",
+    ...
+}
+```
+
+За втория `Icon` обект вземи ID-то на потребителя с име Byakuya Kuchiki и го постави на мястото на `ENTER_USER_ID`, както вече направи в първия случай.
+
+Сега трябва отново да стартираш приложението с **CTRL + F5**. Вече иконите са създадени.
+
+След като вече имаме икони, сега трябва да добавиш и ревюта.
+Върни се към този фрагмент от код в `Program.cs`:
+
+```
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var configuration = services.GetRequiredService<IConfiguration>();
+
+    RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
+    UserSeeder.SeedUsersAsync(services, configuration).GetAwaiter().GetResult();
+    IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
+    //ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
+}
+```
+
+В него трябва да разкоментираш този ред код
+
+```
+ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
+```
+
+От базата данни вземи `ID-то` на потребителя с име Jushiro Ukitake. 
+Постави на мястото на `ENTER_USER_ID`, който е стойността на `UserId` в първия `Icon` обект. 
+`IconId` е зададено на 1, защото се предполага, че току-що създадените икони са съответно с **ID = 1** и **ID = 2**. Ако си трил икони от базата данни е възможно те да бъдат с различни `ID-та`. В такъв случай ги оправи 
+
+```
+new Review
+{
+    ...
+    IconId = 1,
+    UserId = "ENTER_USER_ID",
+    ...
+}
+```
+
+За втория `Review` обект вземи ID-то на потребителя с име Byakuya Kuchiki и го постави на мястото на `ENTER_USER_ID`, както вече направи в първия случай.
+А за `IconId` въведи 2.
+
+Стартирай приложението още веднъж чрез **CTRL + F5** 😴. Вече иконите са създадени.
+
+Поздравления! 🤩
+Това е. Ти успешно стартира уеб приложението **icons**.
+Можеш да използваш някой от трите потребителски профила.
+
+А сега прочети описанието по-долу, за да разбереш как да използваш приложението. 🥱
 
 ---
 
