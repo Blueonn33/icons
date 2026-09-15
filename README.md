@@ -4,6 +4,87 @@
 
 > Уеб приложението е достъпно на следния линк: <a href="https://icons-softuni-hfcnb5ezg2e6cvfa.francecentral-01.azurewebsites.net/" target="_blank">icons</a>
 
+---
+
+## 🚀 Стартиране на приложението
+
+### 1. Клониране на приложението 🧑🏻‍👩🏻‍👧🏻‍🧒🏻
+
+Във файловия си мениджър създай папка `icons`. В нея отвори терминал. 
+
+В терминала постави този код: 
+
+```
+git clone https://github.com/Blueonn33/icons.git
+```
+
+Приложението е свалено успешно. 🥹
+
+### 2. Стартиране на приложението 🎾
+
+За да стартираш проекта, трябва да отвориш `.slnx` файла. 
+
+Да приемем, че си създал папка `icons`. След клонирането в нея се е появила папка `icons`. 
+
+- Отвори я. 
+- В нея отново ще намериш `icons`. 
+- Отвори я. 
+- Там ще откриеш следния файл `icons.slnx`.
+- Както вече си предположил, следващата стъпка е да го отвориш.
+
+### 3. Настройване на приложението 🛠️
+
+Ще видиш ето тези 3 проекта:
+- icons
+- icons.Core
+- icons.Data
+
+<img width="437" height="135" alt="image" src="https://github.com/user-attachments/assets/76e3db8a-e2e4-4123-b773-418817fe83e3" />
+
+За startup проект трябва да бъде зададен `icons`. За целта даваш десен бутон върху `Solution 'icons'`. От менюто избираш `Properties`. 
+Натискаш `Single startup project` и от списъка избираш `icons`. Запазваш промените с OK и всичко е ок.
+
+<img width="790" height="532" alt="image" src="https://github.com/user-attachments/assets/bd2c3595-4143-480c-928a-75aa8f7ee4b9" />
+
+Ако всичко е минало успешно, разгъни `icons`. В него ще намериш `appsettings.json` файл, който ще отвориш.
+
+#### Потребители
+
+`appsettings.json` файлът съдържа данни за създаване (seed) на потребители в приложението - 1 админ и 2 потребителя.
+
+Данните за двамата потребители са попълнени, но за администратора не са. Примерни данни, които може да използваш:
+
+```
+"AdminUser": {
+  "Email": "admin@icons.com",
+  "Password": "AdminIcons1!",
+  "Name": "Admin",
+  "ProfilePictureUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.J5my_Oqu8UEVn78CF7sNUQHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=277d3f89f5bd02ebe1b545c987ccc5c4a6eb1fb37aa4eb611e638ed9afd33eda",
+  "Elixir": "11117",
+  "Rank":  "6"
+}
+```
+
+#### Cloudinary
+
+Изображенията се съхраняват в `Cloudinary`. Това е платформа за управление на изображения и видеа в уеб приложения и сайтове. Използвано е `Cloudinary API`, като конфигурационните му параметри се задават в точно в `appsettings.json`.
+
+Ако имаш създаден профил в Cloudinary, ето **[линк](https://cloudinary.com/)**. В `Home` страницата в `Dashboard` опцията ще видиш секция `Product Environment`. Натисни бутона `Go to API Keys` и оттам вземи нужните стойности.
+
+<img width="2033" height="298" alt="image" src="https://github.com/user-attachments/assets/000cc8e2-53cb-4c00-9245-509a02f7b5bf" />
+
+Ако нямаш профил и не ти се създава, използвай тези стойности:
+
+```
+"Cloudinary": {
+  "CloudName": "dqrkmpjib",
+  "ApiKey": "427672834337797",
+  "ApiSecret": "WqILR3BvUcb0T5HK00l5VQaORGM"
+}
+```
+
+---
+
 ## ❇️ Характеристики
 ## 🔑 Удостоверяване
 - `Регистрация` - потребителят трябва да се регистрира в приложението, за да може да споделя снимки и да пише ревюта. Във формата за регистрация се въвежда следната информация:
