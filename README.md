@@ -419,6 +419,7 @@ new Review
 - CSS
 - JavaScript
 - Bootstrap
+- Bootstrap Icons
 - Material Design for Bootstrap - MDB
 - Figma
 - Flaticon
