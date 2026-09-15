@@ -20,6 +20,8 @@ git clone https://github.com/Blueonn33/icons.git
 
 Приложението е свалено успешно. 🥹
 
+---
+
 ### 2. Стартиране на приложението 🎾
 
 За да стартираш проекта, трябва да отвориш `.slnx` файла. 
@@ -31,6 +33,8 @@ git clone https://github.com/Blueonn33/icons.git
 - Отвори я. 
 - Там ще откриеш следния файл `icons.slnx`.
 - Както вече си предположил, следващата стъпка е да го отвориш.
+
+---
 
 ### 3. Настройване на приложението 🛠️
 
@@ -44,7 +48,7 @@ git clone https://github.com/Blueonn33/icons.git
 За startup проект трябва да бъде зададен `icons`. За целта даваш десен бутон върху `Solution 'icons'`. От менюто избираш `Properties`. 
 Натискаш `Single startup project` и от списъка избираш `icons`. Запазваш промените с OK и всичко е ок.
 
-<img width="790" height="532" alt="image" src="https://github.com/user-attachments/assets/bd2c3595-4143-480c-928a-75aa8f7ee4b9" />
+<img width="500" height="532" alt="image" src="https://github.com/user-attachments/assets/bd2c3595-4143-480c-928a-75aa8f7ee4b9" />
 
 Ако всичко е минало успешно, разгъни `icons`. В него ще намериш `appsettings.json` файл, който ще отвориш.
 
