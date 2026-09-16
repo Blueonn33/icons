@@ -1,12 +1,10 @@
 ﻿@model icons.Models.Icons.IconsUpdateViewModel;
 @{
     ViewData["Title"] = "Update Icon";
+    ViewData["BodyClass"] = "icons-create-body";
 }
 
-<head>
-    <link rel="stylesheet" href="~/css/icons/create.css" asp-append-version="true" />
-</head>
-<body class="icons-create-container">
+<div>
     <section class="container">
         <div class="d-flex justify-content-end mt-3">
             <form asp-action="DeleteIcon" asp-controller="Icons" asp-route-id="@Model.Id" method="post">
@@ -42,4 +40,4 @@
             </div>
         </form>
     </section>
-</body>
+</div>
