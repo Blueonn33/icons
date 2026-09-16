@@ -5,10 +5,7 @@
     ViewData["Title"] = "User";
 }
 
-<head>
-    <link rel="stylesheet" href="~/css/users/user-profile.css" asp-append-version="true" />
-</head>
-<body class="body-container">
+<div class="user-profile-container">
     <section class="container mt-5">
         @if (User.IsInRole(Roles.Admin))
         {
@@ -192,4 +189,4 @@
             <hr class="text-light" />
         </div>
     </section>
-</body>
+</div>
