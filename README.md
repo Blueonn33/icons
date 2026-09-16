@@ -103,7 +103,7 @@ git clone https://github.com/Blueonn33/icons.git
 Server=YOUR_SERVER_NAME;Database=icons;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true
 ```
 
-Като на `Server` задаваш името на сървъра, който използваш. Представеният Connection string се използва за работа с Microsoft SQL Server. Ако използваш различен сървър, може да намериш правилния Connection string **[тук](https://www.connectionstrings.com/).**
+Като на `Server` задаваш името на сървъра, който използваш. Представеният Connection string се използва за работа с Microsoft SQL Server. Ако използваш различна база данни, може да намериш правилния Connection string **[тук](https://www.connectionstrings.com/).**
 
 Освен това, `appsettings.json` съдържа в себе си файл `appsettings.Development.json`, в който трябва да зададеш същия Connection string.
 
@@ -113,7 +113,7 @@ Server=YOUR_SERVER_NAME;Database=icons;Trusted_Connection=True;TrustServerCertif
 
 ---
 
-#### Работа с различен сървър
+#### Работа с различна база данни
 
 Давам пример за използване на `PostgreSQL`
 
@@ -127,7 +127,7 @@ Npgsql.EntityFrameworkCore.PostgreSQL
 
 2. Program.cs
 
-При използване на различен сървър от Microsoft SQL Server трябва да промениш ето този фрагмент от `Program.cs`. 
+При използване на различна база данни от Microsoft SQL Server трябва да промениш ето този фрагмент от `Program.cs`. 
 
 ```
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -143,7 +143,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseNpgsql(connectionString));
 ```
 
-Съответно това ще работи и с други сървъри.
+Съответно това ще работи и с други бази данни.
 
 ---
 
