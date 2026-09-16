@@ -3,12 +3,10 @@
 @{
     ViewData["Title"] = "профил";
     ViewData["ActivePage"] = ManageNavPages.Index;
+    ViewData["BodyClass"] = "user-personal-profile-body";
 }
 
-<head>
-    <link rel="stylesheet" href="~/css/users/personal-profile.css" asp-append-version="true" />
-</head>
-<body class="user-profile-container">
+<div class="user-profile-container">
     <section class="container">
         <h3 class="mb-5">@ViewData["Title"]</h3>
         <partial name="_StatusMessage" for="StatusMessage" />
@@ -44,7 +42,7 @@
             </div>
         </div>
     </section>
-</body>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
