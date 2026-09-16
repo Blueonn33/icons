@@ -62,3 +62,6 @@
 .back-to-top:hover {
     background-color: rgba(0, 0, 0, 0.7);
 }
+.icons-index-container {
+    margin-bottom: 15rem;
+}
