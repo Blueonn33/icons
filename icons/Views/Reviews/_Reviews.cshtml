@@ -18,21 +18,25 @@
     <section>
         @await Html.PartialAsync("~/Views/Reviews/_UpdateReview.cshtml", new ReviewsUpdateViewModel())
     </section>
-    <section class="my-3">
-        <form method="get" asp-action="Icon" asp-controller="Icons">
-            <input type="hidden" name="id" value="@Model.IconId" />
+    @if (Model.Reviews.Any())
+    {
+        <section class="my-3">
+            <form method="get" asp-action="Icon" asp-controller="Icons">
+                <input type="hidden" name="id" value="@Model.IconId" />
             
-            <div class="row d-flex justify-content-end">
-                <div class="col-sm-4 col-md-3 col-lg-2">
-                    <select class="form-select" asp-for="Sort"
-                            asp-items="Html.GetEnumSelectList<EnumReviewSortOptions>()"
-                            onchange="this.form.submit()">
-                    </select>
+                <div class="row d-flex justify-content-end">
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <select class="form-select" asp-for="Sort"
+                                asp-items="Html.GetEnumSelectList<EnumReviewSortOptions>()"
+                                onchange="this.form.submit()">
+                        </select>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
-    </section>
+        </section>
+    }
+    
     @foreach (var review in Model.Reviews)
     {
         <div class="row get-review-container border rounded-3 text-light mb-3 position-relative">
