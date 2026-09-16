@@ -88,3 +88,6 @@ body {
 .tracking-space {
     letter-spacing: 0.1em;
 }
+.body-white {
+    background-color: white;
+}
