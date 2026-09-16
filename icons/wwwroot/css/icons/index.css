@@ -1,10 +1,10 @@
-﻿.form-options {
+﻿.icons-index-body {
+    background: linear-gradient(135deg, #fff 25%, #7892f0 88%, #608cb3 100%);
+}
+.form-options {
     position: absolute;
     top: 0;
     right: 0;
-}
-.icons-container {
-    background: linear-gradient(135deg, #fff 25%, #7892f0 88%, #608cb3 100%);
 }
 .vr-blurry {
     width: 10px !important;
