@@ -40,6 +40,13 @@ namespace icons.Controllers
 
         [AllowAnonymous]
         [HttpGet]
+        public IActionResult Forbidden()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> UserProfile(string id)
         {
             var user = await _userService.GetUserProfileAsync(id);

@@ -70,6 +70,7 @@ namespace icons
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseStatusCodePagesWithRedirects("/Users/Forbidden");
 
             app.MapStaticAssets();
             app.MapControllerRoute(
