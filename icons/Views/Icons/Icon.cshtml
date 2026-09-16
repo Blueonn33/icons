@@ -2,12 +2,10 @@
 @model icons.Models.Icons.IconViewModel;
 @{
     ViewData["Title"] = "Icon";
+    ViewData["BodyClass"] = "icon-container";
 }
 
-<head>
-    <link rel="stylesheet" href="~/css/icons/index.css" asp-append-version="true" />
-</head>
-<body class="icon-container">
+<div>
     <section class="container">
         <a asp-action="Index" asp-controller="Icons" class="btn btn-secondary">назад</a>
     </section>
@@ -55,4 +53,4 @@
             }
         )
     </section>
-</body>
+</div>
