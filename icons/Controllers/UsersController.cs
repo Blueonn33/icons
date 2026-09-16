@@ -35,6 +35,13 @@ namespace icons.Controllers
                 })
             };
 
+            var nonAdmins = users.Where(u => !u.Roles.Contains(Roles.Admin));
+
+            if (!nonAdmins.Any())
+            {
+                return View("NoUsers");
+            }
+
             return View(model);
         }
 
