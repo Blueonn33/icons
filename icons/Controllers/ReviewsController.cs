@@ -77,7 +77,7 @@ namespace icons.Controllers
 
             if (review == null)
             {
-                throw new KeyNotFoundException($"Review with id {id} was not found");
+                return NotFound();
             }
 
             await _service.DeleteReviewAsync(id);
@@ -94,7 +94,7 @@ namespace icons.Controllers
 
             if (review == null)
             {
-                throw new KeyNotFoundException($"Review with id {id} was not found");
+                return NotFound();
             }
 
             var updateReview = new ReviewUpdateDto
