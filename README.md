@@ -283,7 +283,7 @@ new Review
 ## 🫱🏻‍🫲🏻 Релационни диаграми
 
 <img width="437" height="auto" alt="db diagram" src="https://github.com/user-attachments/assets/64c8dd8b-e1de-4a0a-ba43-0f8a4c7d9da8" />
-<img width="3120" height="1418" alt="er diagram" src="https://github.com/user-attachments/assets/50ad2674-a9d9-463b-996d-7ca7cd7bb8a7" />
+<img width="3120" height="1418" alt="er diagram" src="https://github.com/user-attachments/assets/233f5e7e-a2e3-4871-b011-8f1b389ff670" />
 
 ---
 
