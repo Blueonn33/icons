@@ -89,21 +89,25 @@
         </button>
     </section>
 </div>
-<script>
-    const btn = document.getElementById("backToTop");
 
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-            btn.style.display = "block";
-        } else {
-            btn.style.display = "none";
-        }
-    });
+@section Scripts
+{
+    <script>
+        const btn = document.getElementById("backToTop");
 
-    btn.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
         });
-    });
-</script>
+
+        btn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+}

@@ -120,34 +120,38 @@
         ↑
     </button>
 </section>
-<script>
-    function openUpdateModal(button) {
-        const id = button.getAttribute("data-id");
-        const title = button.getAttribute("data-title");
-        const description = button.getAttribute("data-description");
 
-        document.getElementById("review-id").value = id;
-        document.getElementById("review-title").value = title;
-        document.getElementById("review-description").value = description;
+@section Scripts
+{
+    <script>
+        function openUpdateModal(button) {
+            const id = button.getAttribute("data-id");
+            const title = button.getAttribute("data-title");
+            const description = button.getAttribute("data-description");
 
-        var modal = new bootstrap.Modal(document.getElementById("update-review-modal"));
-        modal.show();
-    }
+            document.getElementById("review-id").value = id;
+            document.getElementById("review-title").value = title;
+            document.getElementById("review-description").value = description;
 
-    const btn = document.getElementById("backToTop");
-
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-            btn.style.display = "block";
-        } else {
-            btn.style.display = "none";
+            var modal = new bootstrap.Modal(document.getElementById("update-review-modal"));
+            modal.show();
         }
-    });
 
-    btn.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        const btn = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
         });
-    });
-</script>
+
+        btn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+}
