@@ -53,6 +53,6 @@ namespace icons.Core.Dtos.Icon
         {
             get;
             set;
-        } = new List<ReviewGetDto>();
+        } = new();
     }
 }
