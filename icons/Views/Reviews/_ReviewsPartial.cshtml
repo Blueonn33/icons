@@ -11,12 +11,12 @@
     </div>
     <section>
         @await Html.PartialAsync(
-            "~/Views/Reviews/_CreateReview.cshtml",
+            "~/Views/Reviews/_CreateReviewPartial.cshtml",
             new ReviewsCreateViewModel { IconId = Model.IconId }
         )
     </section>
     <section>
-        @await Html.PartialAsync("~/Views/Reviews/_UpdateReview.cshtml", new ReviewsUpdateViewModel())
+        @await Html.PartialAsync("~/Views/Reviews/_UpdateReviewPartial.cshtml", new ReviewsUpdateViewModel())
     </section>
     @if (Model.Reviews.Any())
     {
