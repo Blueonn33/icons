@@ -1,11 +1,10 @@
-﻿using icons.Core.Dtos.Icon;
-using icons.Data.Enums;
+﻿using icons.Data.Enums;
 
 namespace icons.Models.Icons
 {
     public class IconsViewModel
     {
-        public IEnumerable<IconGetDto> GetAllIcons { get; set; } = new List<IconGetDto>();
+        public IEnumerable<IconViewModel> GetAllIcons { get; set; } = new List<IconViewModel>();
 
         public string UserId
         {

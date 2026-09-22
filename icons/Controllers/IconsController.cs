@@ -1,4 +1,5 @@
-﻿using icons.Core.Contracts;
+﻿using AutoMapper;
+using icons.Core.Contracts;
 using icons.Core.Dtos.Icon;
 using icons.Core.Dtos.Review;
 using icons.Core.Enums;
@@ -20,14 +21,22 @@ namespace icons.Controllers
         private readonly IUserService _userService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly CloudinaryService _cloudinary;
+        private readonly IMapper _mapper;
 
-        public IconsController(IIconService service, IReviewService reviewService, IUserService userService, UserManager<ApplicationUser> userManager, CloudinaryService cloudinary)
+        public IconsController(
+            IIconService service,
+            IReviewService reviewService,
+            IUserService userService,
+            UserManager<ApplicationUser> userManager,
+            CloudinaryService cloudinary,
+            IMapper mapper)
         {
             _service = service;
             _reviewService = reviewService;
             _userService = userService;
             _userManager = userManager;
             _cloudinary = cloudinary;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
@@ -35,10 +44,11 @@ namespace icons.Controllers
         public async Task<IActionResult> Index(EnumIconSortOptions sort = EnumIconSortOptions.DateDesc)
         {
             var user = await _userManager.GetUserAsync(User);
+            var dtos = await _service.GetAllIconsSortedAsync(sort);
 
             var icons = new IconsViewModel()
             {
-                GetAllIcons = await _service.GetAllIconsSortedAsync(sort),
+                GetAllIcons = _mapper.Map<IEnumerable<IconViewModel>>(dtos),
                 UserId = user?.Id ?? string.Empty,
                 Sort = sort
             };
