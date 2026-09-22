@@ -289,84 +289,83 @@ new Review
 flowchart TD
 
 subgraph group_web["Web experience"]
-  node_icons_controller["Icons controller<br/>[IconsController.cs]"]
-  node_reviews_controller["Reviews controller"]
-  node_users_controller["Users controller<br/>[UsersController.cs]"]
-  node_home["Home pages<br/>[HomeController.cs]"]
+  node_icons_controller["Icon routes<br/>[IconsController.cs]"]
+  node_reviews_controller["Review routes"]
+  node_users_controller["User routes<br/>[UsersController.cs]"]
+  node_home_controller["Home page<br/>[HomeController.cs]"]
 end
 
 subgraph group_domain["Application services"]
   node_icon_service["Icon service<br/>[IconService.cs]"]
   node_review_service["Review service<br/>[ReviewService.cs]"]
   node_user_service["User service<br/>[UserService.cs]"]
-  node_cloudinary["Cloudinary service"]
+  node_cloudinary_service["Image upload"]
 end
 
 subgraph group_data["Persistence"]
-  node_icon_repo["Icon repository<br/>[IconRepository.cs]"]
-  node_review_repo["Review repository"]
-  node_repository["Generic repository<br/>[Repository.cs]"]
-  node_db_context[("Application context")]
+  node_icon_repository["Icon repository<br/>[IconRepository.cs]"]
+  node_review_repository["Review repository"]
+  node_generic_repository["Generic repository<br/>[Repository.cs]"]
+  node_database[("Application database")]
   node_icon_model["Icon records<br/>[Icon.cs]"]
   node_review_model["Review records<br/>[Review.cs]"]
 end
 
-subgraph group_identity["Accounts and roles"]
-  node_identity_pages["Identity pages<br/>[Login.cshtml.cs]"]
-  node_application_user["Application users<br/>[ApplicationUser.cs]"]
-  node_identity["ASP.NET Identity<br/>[Program.cs]"]
+subgraph group_identity["Accounts and identity"]
+  node_user_model["User records<br/>[ApplicationUser.cs]"]
+  node_identity_pages["Account flows<br/>[Login.cshtml.cs]"]
+  node_email_sender["Email sender<br/>[EmailSender.cs]"]
 end
 
-node_user(("Visitor or user"))
-node_cloudinary_platform["Cloudinary"]
+node_visitor(("Visitor"))
+node_member(("Signed-in member"))
+node_administrator(("Administrator"))
+node_cloudinary{{"Cloudinary"}}
 
-node_user -->|"browses or uploads"| node_icons_controller
-node_user -->|"submits review"| node_reviews_controller
-node_user -->|"manages users"| node_users_controller
-node_user -->|"authenticates"| node_identity_pages
-node_user -->|"views home"| node_home
-node_icons_controller -->|"requests icons"| node_icon_service
-node_icons_controller -->|"loads reviews"| node_review_service
-node_icons_controller -->|"gets rank data"| node_user_service
-node_icons_controller -->|"uploads image"| node_cloudinary
-node_cloudinary -->|"stores image"| node_cloudinary_platform
-node_reviews_controller -->|"loads target icon"| node_icon_service
-node_reviews_controller -->|"creates or edits"| node_review_service
-node_reviews_controller -->|"gets current user"| node_identity
-node_users_controller -->|"manages profiles"| node_user_service
-node_users_controller -->|"loads user icons"| node_icon_service
-node_users_controller -->|"loads user reviews"| node_review_service
-node_icon_service -->|"reads and writes"| node_icon_repo
-node_review_service -->|"reads and writes"| node_review_repo
-node_review_service -->|"updates icon rating"| node_icon_repo
+node_visitor -->|"browses"| node_icons_controller
+node_member -->|"manages icons"| node_icons_controller
+node_icons_controller -->|"requests icon operations"| node_icon_service
+node_icons_controller -->|"uploads image"| node_cloudinary_service
+node_cloudinary_service -.->|"stores image"| node_cloudinary
+node_icon_service -->|"uses"| node_icon_repository
+node_icon_repository -->|"reads and writes"| node_database
+node_icon_repository -->|"maps records"| node_icon_model
+node_member -->|"writes reviews"| node_reviews_controller
+node_reviews_controller -->|"requests review operations"| node_review_service
+node_reviews_controller -->|"checks icon"| node_icon_service
+node_review_service -->|"uses"| node_review_repository
+node_review_service -->|"loads and updates rating"| node_icon_repository
 node_review_service -->|"updates rank"| node_user_service
-node_review_service -->|"looks up reviewer"| node_identity
-node_user_service -->|"manages accounts"| node_identity
-node_icon_repo -->|"queries icons"| node_db_context
-node_review_repo -->|"queries reviews"| node_db_context
-node_repository -->|"persists entities"| node_db_context
-node_db_context -->|"stores"| node_icon_model
-node_db_context -->|"stores"| node_review_model
-node_identity -->|"stores identity data"| node_db_context
-node_db_context -->|"stores"| node_application_user
+node_review_repository -->|"reads and writes"| node_database
+node_review_repository -->|"maps records"| node_review_model
+node_administrator -->|"manages users"| node_users_controller
+node_users_controller -->|"requests user operations"| node_user_service
+node_users_controller -->|"loads profile icons"| node_icon_service
+node_users_controller -->|"loads profile reviews"| node_review_service
+node_user_service -->|"manages accounts"| node_user_model
+node_user_service -->|"queries profile data"| node_database
+node_visitor -->|"views home"| node_home_controller
+node_home_controller -->|"requests top icons"| node_icon_service
+node_member -->|"manages account"| node_identity_pages
+node_identity_pages -.->|"sends account email"| node_email_sender
 
 click node_icons_controller "https://github.com/blueonn33/icons/blob/master/icons/Controllers/IconsController.cs"
 click node_reviews_controller "https://github.com/blueonn33/icons/blob/master/icons/Controllers/ReviewsController.cs"
 click node_users_controller "https://github.com/blueonn33/icons/blob/master/icons/Controllers/UsersController.cs"
-click node_home "https://github.com/blueonn33/icons/blob/master/icons/Controllers/HomeController.cs"
-click node_identity_pages "https://github.com/blueonn33/icons/blob/master/icons/Areas/Identity/Pages/Account/Login.cshtml.cs"
+click node_home_controller "https://github.com/blueonn33/icons/blob/master/icons/Controllers/HomeController.cs"
 click node_icon_service "https://github.com/blueonn33/icons/blob/master/icons.Core/Services/IconService.cs"
 click node_review_service "https://github.com/blueonn33/icons/blob/master/icons.Core/Services/ReviewService.cs"
 click node_user_service "https://github.com/blueonn33/icons/blob/master/icons.Core/Services/UserService.cs"
-click node_cloudinary "https://github.com/blueonn33/icons/blob/master/icons.Core/Services/CloudinaryService.cs"
-click node_icon_repo "https://github.com/blueonn33/icons/blob/master/icons.Data/Common/IconRepository.cs"
-click node_review_repo "https://github.com/blueonn33/icons/blob/master/icons.Data/Common/ReviewRepository.cs"
-click node_repository "https://github.com/blueonn33/icons/blob/master/icons.Data/Common/Repository.cs"
-click node_db_context "https://github.com/blueonn33/icons/blob/master/icons.Data/ApplicationDbContext.cs"
+click node_cloudinary_service "https://github.com/blueonn33/icons/blob/master/icons.Core/Services/CloudinaryService.cs"
+click node_icon_repository "https://github.com/blueonn33/icons/blob/master/icons.Data/Common/IconRepository.cs"
+click node_review_repository "https://github.com/blueonn33/icons/blob/master/icons.Data/Common/ReviewRepository.cs"
+click node_generic_repository "https://github.com/blueonn33/icons/blob/master/icons.Data/Common/Repository.cs"
+click node_database "https://github.com/blueonn33/icons/blob/master/icons.Data/ApplicationDbContext.cs"
 click node_icon_model "https://github.com/blueonn33/icons/blob/master/icons.Data/Models/Icon.cs"
 click node_review_model "https://github.com/blueonn33/icons/blob/master/icons.Data/Models/Review.cs"
-click node_application_user "https://github.com/blueonn33/icons/blob/master/icons.Data/Models/ApplicationUser.cs"
-click node_identity "https://github.com/blueonn33/icons/blob/master/icons/Program.cs"
+click node_user_model "https://github.com/blueonn33/icons/blob/master/icons.Data/Models/ApplicationUser.cs"
+click node_identity_pages "https://github.com/blueonn33/icons/blob/master/icons/Areas/Identity/Pages/Account/Login.cshtml.cs"
+click node_email_sender "https://github.com/blueonn33/icons/blob/master/icons.Core/Services/Email/EmailSender.cs"
 
 classDef toneNeutral fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
 classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
@@ -375,11 +374,11 @@ classDef toneMint fill:#dcfce7,stroke:#16a34a,stroke-width:1.5px,color:#14532d
 classDef toneRose fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
 classDef toneIndigo fill:#e0e7ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
 classDef toneTeal fill:#ccfbf1,stroke:#0f766e,stroke-width:1.5px,color:#134e4a
-class node_icons_controller,node_reviews_controller,node_users_controller,node_home,node_user toneBlue
-class node_icon_service,node_review_service,node_user_service,node_cloudinary toneAmber
-class node_icon_repo,node_review_repo,node_repository,node_db_context,node_icon_model,node_review_model toneMint
-class node_identity_pages,node_application_user,node_identity toneRose
-class node_cloudinary_platform toneIndigo
+class node_icons_controller,node_reviews_controller,node_users_controller,node_home_controller toneBlue
+class node_icon_service,node_review_service,node_user_service,node_cloudinary_service toneAmber
+class node_icon_repository,node_review_repository,node_generic_repository,node_database,node_icon_model,node_review_model toneMint
+class node_user_model,node_identity_pages,node_email_sender toneRose
+class node_visitor,node_member,node_administrator,node_cloudinary toneIndigo
 ```
 
 ---
