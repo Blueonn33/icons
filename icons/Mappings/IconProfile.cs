@@ -9,6 +9,7 @@ namespace icons.Mappings
         public IconProfile()
         {
             CreateMap<IconGetDto, IconViewModel>();
+            CreateMap<IconUserProfileGetDto, IconViewModel>();
         }
     }
 }
