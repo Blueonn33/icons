@@ -48,7 +48,8 @@ namespace icons.Core.Services
                     Id = i.Id,
                     Title = i.Title,
                     ImageUrl = i.ImageUrl,
-                    PublishedTime = i.PublishedTime,
+                    Username = i.Username,
+                    UserProfilePictureUrl = i.UserProfilePictureUrl,
                     UserId = user.Id,
                 }).ToList(),
                 Reviews = user.Reviews.Select(r => new ReviewUserProfileGetDto()
@@ -56,7 +57,6 @@ namespace icons.Core.Services
                     Id = r.Id,
                     Description = r.Description,
                     IconId = r.IconId,
-                    PublishedTime = r.PublishedTime,
                     Rating = r.Rating,
                     Title = r.Title,
                     UserId = r.UserId
@@ -73,15 +73,6 @@ namespace icons.Core.Services
                 throw new KeyNotFoundException($"User with Id {id} was not found.");
             }
 
-            // Remove User from Database (HardDelete)
-            //var result = await _userManager.DeleteAsync(user);
-
-            //if (!result.Succeeded)
-            //{
-            //    throw new InvalidOperationException("Failed to delete user.");
-            //}
-
-            // Remove User from List not from Database (SoftDelete)
             user.IsDeleted = true;
             await _userManager.UpdateAsync(user);
         }
