@@ -63,7 +63,7 @@ namespace icons.Controllers
                 return NotFound();
             }
 
-            var model = new IconViewModel
+            var model = new IconDescriptionViewModel
             {
                 Id = icon.Id,
                 ImageUrl = icon.ImageUrl,
