@@ -1,5 +1,8 @@
-﻿using icons.Core.Contracts;
+﻿using AutoMapper;
+using icons.Core.Contracts;
 using icons.Data.Constants;
+using icons.Models.Icons;
+using icons.Models.Reviews;
 using icons.Models.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +13,20 @@ namespace icons.Controllers
     public class UsersController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IIconService _iconService;
+        private readonly IReviewService _reviewService;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUserService userService)
+        public UsersController(
+            IUserService userService,
+            IIconService iconService,
+            IReviewService reviewService,
+            IMapper mapper)
         {
             _userService = userService;
+            _iconService = iconService;
+            _reviewService = reviewService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -57,6 +70,11 @@ namespace icons.Controllers
         public async Task<IActionResult> UserProfile(string id)
         {
             var user = await _userService.GetUserProfileAsync(id);
+            var iconDtos = await _iconService.GetAllIconsByUserIdAsync(id);
+            var reviewsDtos = await _reviewService.GetAllReviewsByUserIdAsync(id);
+
+            var iconModels = _mapper.Map<IEnumerable<IconViewModel>>(iconDtos);
+            var reviewModels = _mapper.Map<IEnumerable<ReviewUserProfileViewModel>>(reviewsDtos);
 
             var model = new UserProfileViewModel()
             {
@@ -68,8 +86,8 @@ namespace icons.Controllers
                 Elixir = user.Elixir,
                 RankImageUrl = _userService.GetRankImageAsync(user.Rank),
                 Rank = user.Rank,
-                Icons = user.Icons,
-                Reviews = user.Reviews
+                Icons = iconModels,
+                Reviews = reviewModels
             };
 
             return View(model);
