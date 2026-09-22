@@ -1,7 +1,4 @@
-﻿using icons.Core.Dtos.Review;
-using icons.Data.Enums;
-
-namespace icons.Core.Dtos.Icon
+﻿namespace icons.Core.Dtos.Icon
 {
     public class IconGetDto
     {
@@ -20,21 +17,6 @@ namespace icons.Core.Dtos.Icon
             get; set;
         } = null!;
 
-        public string? Description
-        {
-            get; set;
-        }
-
-        public double AverageRating
-        {
-            get; set;
-        }
-
-        public DateTime PublishedTime
-        {
-            get; set;
-        }
-
         public string Username
         {
             get; set;
@@ -49,22 +31,5 @@ namespace icons.Core.Dtos.Icon
         {
             get; set;
         } = null!;
-
-        public string RankImageUrl
-        {
-            get;
-            set;
-        } = null!;
-
-        public EnumUserElixirRank Rank
-        {
-            get; set;
-        }
-
-        public List<ReviewGetDto> Reviews
-        {
-            get;
-            set;
-        } = new List<ReviewGetDto>();
     }
 }
