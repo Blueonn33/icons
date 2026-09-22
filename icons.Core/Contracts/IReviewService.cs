@@ -7,6 +7,7 @@ namespace icons.Core.Contracts
     {
         Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdAsync(int id);
         Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort);
+        Task<IEnumerable<ReviewUserProfileGetDto>> GetAllReviewsByUserIdAsync(string userId);
         Task<ReviewGetDto?> GetReviewByIdAsync(int id);
         Task AddReviewAsync(ReviewCreateDto review);
         Task UpdateReviewAsync(int id, ReviewUpdateDto review);
