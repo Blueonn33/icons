@@ -1,0 +1,26 @@
+﻿@model icons.Models.Icons.IconViewModel;
+
+<input type="hidden" asp-for="@Model.Id" />
+<div class="col d-flex justify-content-center mb-3">
+    <div class="card" style="width: 18rem;">
+        <div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+            <img src="@Model.ImageUrl" class="w-100 card-img-top" />
+            <a asp-action="Icon" asp-controller="Icons" asp-route-id="@Model.Id">
+                <div class="mask" style="background-color: hsla(195, 83%, 58%, 0.2)"></div>
+            </a>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@Model.Title</h5>
+            <div class="d-flex gap-3 align-items-center mb-3">
+                <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@Model.UserId" class="card-text text-info">
+                    <img src="@Model.UserProfilePictureUrl" class="img-fluid rounded-circle" width="40" />
+                </a>
+                <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@Model.UserId" class="card-text text-info">@Model.Username</a>
+            </div>
+            <hr/>
+            <div class="d-flex justify-content-center">
+                <a asp-action="Icon" asp-controller="Icons" asp-route-id="@Model.Id" class="btn btn-primary tracking-space">преглед</a>
+            </div>
+        </div>
+    </div>
+</div>

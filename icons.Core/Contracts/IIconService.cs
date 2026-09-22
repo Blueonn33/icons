@@ -9,7 +9,7 @@ namespace icons.Core.Contracts
         Task<IEnumerable<IconGetDto>> GetAllIconsSortedAsync(EnumIconSortOptions sort);
         Task<IEnumerable<IconGetDto>> GetAllIconsByUserIdAsync(string userId);
         Task<IEnumerable<IconGetDto>> GetTop3IconsAsync();
-        Task<IconGetDto?> GetIconByIdAsync(int id);
+        Task<IconGetDescriptionDto?> GetIconByIdAsync(int id);
         Task AddIconAsync(IconCreateDto icon);
         Task UpdateIconAsync(int id, IconUpdateDto icon);
         Task DeleteIconAsync(int id);

@@ -1,6 +1,8 @@
-﻿namespace icons.Core.Dtos.Icon
+﻿using icons.Core.Dtos.Review;
+
+namespace icons.Core.Dtos.Icon
 {
-    public class IconGetDto
+    public class IconGetDescriptionDto
     {
         public int Id
         {
@@ -17,6 +19,21 @@
             get; set;
         } = null!;
 
+        public string? Description
+        {
+            get; set;
+        }
+
+        public double AverageRating
+        {
+            get; set;
+        }
+
+        public DateTime PublishedTime
+        {
+            get; set;
+        }
+
         public string Username
         {
             get; set;
@@ -31,5 +48,11 @@
         {
             get; set;
         } = null!;
+
+        public List<ReviewGetDto> Reviews
+        {
+            get;
+            set;
+        } = new List<ReviewGetDto>();
     }
 }
