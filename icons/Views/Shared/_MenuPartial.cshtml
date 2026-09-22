@@ -1,0 +1,16 @@
+﻿@using icons.Data.Constants
+
+<ul class="navbar-nav mx-auto">
+    <li class="nav-item">
+        <a class="nav-link text-dark fs-4" asp-area="" asp-controller="Home" asp-action="Index">начало</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark fs-4" asp-area="" asp-controller="Icons" asp-action="Index">икони</a>
+    </li>
+    @if (User.IsInRole(Roles.Admin))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark fs-4" asp-area="" asp-controller="Users" asp-action="Index">потребители</a>
+        </li>
+    }
+</ul>
