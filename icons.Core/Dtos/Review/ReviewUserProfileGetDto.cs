@@ -25,11 +25,6 @@ namespace icons.Core.Dtos.Review
             get; set;
         }
 
-        public DateTime PublishedTime
-        {
-            get; set;
-        }
-
         public string UserId
         {
             get; set;
