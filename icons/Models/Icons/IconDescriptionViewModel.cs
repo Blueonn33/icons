@@ -1,6 +1,6 @@
-﻿using icons.Core.Dtos.Review;
-using icons.Core.Enums;
+﻿using icons.Core.Enums;
 using icons.Data.Enums;
+using icons.Models.Reviews;
 using System.ComponentModel.DataAnnotations;
 using static icons.Data.Constants.ValidationConstants;
 
@@ -78,10 +78,10 @@ namespace icons.Models.Icons
             get; set;
         }
 
-        public List<ReviewGetDto> Reviews
+        public IEnumerable<ReviewViewModel> Reviews
         {
             get; set;
-        } = new();
+        } = new List<ReviewViewModel>();
 
         public EnumReviewSortOptions Sort
         {

@@ -1,35 +1,34 @@
-﻿using icons.Core.Dtos.Review;
-using icons.Core.Enums;
+﻿using icons.Core.Enums;
 using icons.Data.Enums;
 
 namespace icons.Models.Reviews
 {
     public class ReviewsViewModel
     {
-        public IEnumerable<ReviewGetDto> Reviews { get; set; } = new List<ReviewGetDto>();
+        public IEnumerable<ReviewViewModel> Reviews { get; set; } = new List<ReviewViewModel>();
 
         public int IconId
         {
             get; set;
         }
 
-        public string UserId
+        public EnumReviewSortOptions Sort
         {
             get; set;
-        } = null!;
+        }
 
-        public string RankImageUrl
+        public string UserId
         {
             get;
             set;
         } = null!;
 
-        public EnumUserElixirRank Rank
+        public string RankImageUrl
         {
             get; set;
-        }
+        } = null!;
 
-        public EnumReviewSortOptions Sort
+        public EnumUserElixirRank Rank
         {
             get; set;
         }

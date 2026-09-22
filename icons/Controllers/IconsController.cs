@@ -7,6 +7,7 @@ using icons.Core.Services;
 using icons.Data;
 using icons.Data.Enums;
 using icons.Models.Icons;
+using icons.Models.Reviews;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -66,7 +67,7 @@ namespace icons.Controllers
         public async Task<IActionResult> Icon(int id, EnumReviewSortOptions sort = EnumReviewSortOptions.DateDesc)
         {
             var icon = await _service.GetIconByIdAsync(id);
-            var reviews = await _reviewService.GetAllReviewsByIconIdSortedAsync(id, sort);
+            var reviewDtos = await _reviewService.GetAllReviewsByIconIdSortedAsync(id, sort);
 
             if (icon == null)
             {
@@ -84,20 +85,7 @@ namespace icons.Controllers
                 UserId = icon.UserId,
                 AverageRating = icon.AverageRating,
                 PublishedTime = icon.PublishedTime,
-                Reviews = reviews.Select(r => new ReviewGetDto
-                {
-                    Id = r.Id,
-                    Title = r.Title,
-                    Description = r.Description,
-                    PublishedTime = r.PublishedTime,
-                    Rating = r.Rating,
-                    Username = r.Username,
-                    UserProfilePictureUrl = r.UserProfilePictureUrl,
-                    UserId = r.UserId,
-                    RankImageUrl = _userService.GetRankImageAsync(r.Rank),
-                    Rank = r.Rank,
-                    IconId = r.IconId
-                }).ToList()
+                Reviews = _mapper.Map<IEnumerable<ReviewViewModel>>(reviewDtos)
             };
 
             return View(model);

@@ -1,30 +1,26 @@
-﻿using icons.Core.Dtos.Review;
+﻿using icons.Data.Enums;
 
-namespace icons.Core.Dtos.Icon
+namespace icons.Models.Reviews
 {
-    public class IconGetDescriptionDto
+    public class ReviewViewModel
     {
         public int Id
         {
             get; set;
         }
 
-        public string ImageUrl
-        {
-            get; set;
-        } = null!;
-
         public string Title
         {
             get; set;
-        } = null!;
+        }
+            = null!;
 
         public string? Description
         {
             get; set;
         }
 
-        public double AverageRating
+        public EnumReviewRating? Rating
         {
             get; set;
         }
@@ -34,25 +30,35 @@ namespace icons.Core.Dtos.Icon
             get; set;
         }
 
+        public string UserProfilePictureUrl
+        {
+            get; set;
+        } = null!;
+
         public string Username
         {
             get; set;
         } = null!;
 
-        public string UserProfilePictureUrl
+        public string RankImageUrl
+        {
+            get;
+            set;
+        } = null!;
+
+        public EnumUserElixirRank Rank
         {
             get; set;
-        } = null!;
+        }
 
         public string UserId
         {
             get; set;
         } = null!;
 
-        public List<ReviewGetDto> Reviews
+        public int IconId
         {
-            get;
-            set;
-        } = new();
+            get; set;
+        }
     }
 }
