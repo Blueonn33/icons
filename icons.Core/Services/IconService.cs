@@ -31,6 +31,7 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
+                Username = i.Username,
                 UserProfilePictureUrl = i.UserProfilePictureUrl,
                 UserId = i.UserId
             });
@@ -45,6 +46,8 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
+                Username = i.Username,
+                UserProfilePictureUrl = i.UserProfilePictureUrl,
                 UserId = i.UserId
             });
         }
@@ -58,7 +61,8 @@ namespace icons.Core.Services
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
-                UserProfilePictureUrl = i.User.ProfilePictureUrl
+                UserProfilePictureUrl = i.User.ProfilePictureUrl,
+                UserId = userId
             });
         }
 
@@ -77,7 +81,7 @@ namespace icons.Core.Services
             });
         }
 
-        public async Task<IconGetDto?> GetIconByIdAsync(int id)
+        public async Task<IconGetDescriptionDto?> GetIconByIdAsync(int id)
         {
             var icon = await _repository.GetIconWithReviewsByIdAsync(id);
             var user = await _userManager.FindByIdAsync(icon.UserId);
@@ -91,7 +95,7 @@ namespace icons.Core.Services
                 ? icon.Reviews.Average(r => (int)r.Rating)
                 : 0;
 
-            return new IconGetDto
+            return new IconGetDescriptionDto
             {
                 Id = icon.Id,
                 ImageUrl = icon.ImageUrl,
