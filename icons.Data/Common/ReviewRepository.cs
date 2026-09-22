@@ -1,5 +1,6 @@
 ﻿using icons.Core.Enums;
 using icons.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace icons.Data.Common
@@ -7,10 +8,12 @@ namespace icons.Data.Common
     public class ReviewRepository : Repository<Review>, IReviewRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ReviewRepository(ApplicationDbContext context) : base(context)
+        public ReviewRepository(ApplicationDbContext context, UserManager<ApplicationUser> userManager) : base(context)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<Review?> GetReviewByIdAsync(int id)
@@ -57,6 +60,21 @@ namespace icons.Data.Common
                 EnumReviewSortOptions.RatingDesc => await query.OrderByDescending(r => r.Rating).ToListAsync(),
                 _ => await query.ToListAsync()
             };
+        }
+
+        public async Task<IEnumerable<Review>> GetAllReviewsByUserIdAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"User was not found.");
+            }
+
+            return await _context.Reviews
+                .AsNoTracking()
+                .Where(r => r.UserId == userId)
+                .ToListAsync();
         }
     }
 }

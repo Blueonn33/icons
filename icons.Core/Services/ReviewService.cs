@@ -124,6 +124,28 @@ namespace icons.Core.Services
             });
         }
 
+        public async Task<IEnumerable<ReviewUserProfileGetDto>> GetAllReviewsByUserIdAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"User was not found");
+            }
+
+            var reviews = await _repository.GetAllReviewsByUserIdAsync(userId);
+
+            return reviews.Select(r => new ReviewUserProfileGetDto
+            {
+                Id = r.Id,
+                Description = r.Description,
+                Rating = r.Rating,
+                Title = r.Title,
+                IconId = r.IconId,
+                UserId = userId
+            });
+        }
+
         public async Task<ReviewGetDto?> GetReviewByIdAsync(int id)
         {
             var review = await _repository.GetReviewByIdAsync(id);

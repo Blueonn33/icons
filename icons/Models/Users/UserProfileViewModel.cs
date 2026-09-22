@@ -1,6 +1,6 @@
-﻿using icons.Core.Dtos.Icon;
-using icons.Core.Dtos.Review;
-using icons.Data.Enums;
+﻿using icons.Data.Enums;
+using icons.Models.Icons;
+using icons.Models.Reviews;
 
 namespace icons.Models.Users
 {
@@ -48,10 +48,10 @@ namespace icons.Models.Users
             set;
         } = null!;
 
-        public string IconsCount => Icons.Count.ToString();
-        public string ReviewsCount => Reviews.Count.ToString();
+        public string IconsCount => Icons.Count().ToString();
+        public string ReviewsCount => Reviews.Count().ToString();
 
-        public ICollection<IconUserProfileGetDto> Icons { get; set; } = new HashSet<IconUserProfileGetDto>();
-        public ICollection<ReviewUserProfileGetDto> Reviews { get; set; } = new HashSet<ReviewUserProfileGetDto>();
+        public IEnumerable<IconViewModel> Icons { get; set; } = new HashSet<IconViewModel>();
+        public IEnumerable<ReviewUserProfileViewModel> Reviews { get; set; } = new HashSet<ReviewUserProfileViewModel>();
     }
 }

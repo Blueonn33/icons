@@ -55,13 +55,15 @@ namespace icons.Core.Services
         public async Task<IEnumerable<IconGetDto>> GetAllIconsByUserIdAsync(string userId)
         {
             var icons = await _repository.GetAllIconsByUserIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId);
 
             return icons.Select(i => new IconGetDto
             {
                 Id = i.Id,
                 ImageUrl = i.ImageUrl,
                 Title = i.Title,
-                UserProfilePictureUrl = i.User.ProfilePictureUrl,
+                Username = user.Name,
+                UserProfilePictureUrl = user.ProfilePictureUrl,
                 UserId = userId
             });
         }

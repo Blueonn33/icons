@@ -9,6 +9,7 @@ namespace icons.Mappings
         public ReviewProfile()
         {
             CreateMap<ReviewGetDto, ReviewViewModel>();
+            CreateMap<ReviewUserProfileGetDto, ReviewUserProfileViewModel>();
         }
     }
 }

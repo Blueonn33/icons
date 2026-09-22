@@ -17,10 +17,15 @@
             get; set;
         } = null!;
 
-        public DateTime PublishedTime
+        public string Username
         {
             get; set;
-        }
+        } = null!;
+
+        public string UserProfilePictureUrl
+        {
+            get; set;
+        } = null!;
 
         public string UserId
         {
