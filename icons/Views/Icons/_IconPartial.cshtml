@@ -1,4 +1,4 @@
-﻿@model icons.Models.Icons.IconViewModel;
+﻿@model icons.Models.Icons.IconViewModel
 
 <input type="hidden" asp-for="@Model.Id" />
 <div class="col d-flex justify-content-center mb-3">
@@ -21,6 +21,16 @@
             <div class="d-flex justify-content-center">
                 <a asp-action="Icon" asp-controller="Icons" asp-route-id="@Model.Id" class="btn btn-primary tracking-space">преглед</a>
             </div>
+
+            @{
+                var action = ViewContext.RouteData.Values["action"]!.ToString();
+                var controller = ViewContext.RouteData.Values["controller"]!.ToString();
+            }
+
+            @if (!(controller == "Home" && action == "Index"))
+            {
+                <partial name="~/Views/Icons/_IconScriptsPartial.cshtml" model="Model"/>
+            }
         </div>
     </div>
 </div>
