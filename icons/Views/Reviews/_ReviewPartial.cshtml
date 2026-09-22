@@ -1,0 +1,45 @@
+﻿@using icons.Data.Enums
+@model icons.Models.Reviews.ReviewViewModel
+
+<div class="col-12 col-sm-12 col-md-1 px-0 d-flex justify-content-center">
+    <div class="col-2 col-sm-2 col-md-12">
+        <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@Model.UserId">
+            <img src="@Model.UserProfilePictureUrl" class="img-fluid rounded-circle review-user-image p-2"/>
+        </a>
+    </div>
+</div>
+<div class="col-12 col-sm-12 col-md-10">
+    <div class="d-flex gap-5 justify-content-between">
+        <div class="d-flex">
+            <a class="mb-0 text-info" asp-action="UserProfile" asp-controller="Users" asp-route-id="@Model.UserId">@Model.Username</a>
+            <img src="@Model.RankImageUrl" class="img-fluid" width="20px" data-bs-toggle="tooltip" data-bs-placement="top"
+                 data-bs-custom-class="custom-tooltip"
+                 data-bs-title="@Model.Rank" />
+        </div>
+        <p class="mb-0">@Model.PublishedTime.ToShortDateString()</p>
+    </div>
+    <hr class="my-1"/>
+    <div>
+        <h4>@Model.Title</h4>
+    </div>
+    <div>
+        <p class="mb-0 pb-2">@Model.Description</p>
+    </div>
+</div>
+<div class="col-12 col-sm-12 col-md-1 d-flex align-items-center justify-content-center px-0">
+    <div>
+        <img src="@(Model.Rating switch
+                  {
+                      EnumReviewRating.Poor => Url.Content("~/img/color-blaw.svg"),
+                      EnumReviewRating.Fair => Url.Content("~/img/color-sad.svg"),
+                      EnumReviewRating.Good => Url.Content("~/img/color-pocker.svg"),
+                      EnumReviewRating.VeryGood => Url.Content("~/img/color-smile.svg"),
+                      EnumReviewRating.Excellent => Url.Content("~/img/color-cool.svg"),
+                  })" class="img-fluid"
+
+             data-bs-toggle="tooltip" data-bs-placement="top"
+             data-bs-custom-class="custom-tooltip"
+             data-bs-title="@Model.Rating"/>
+
+    </div>
+</div>
