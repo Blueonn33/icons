@@ -548,4 +548,5 @@ class node_cloudinary_platform toneIndigo
 - GitHub
 - GitHub Desktop
 - GitGuardian
+- GitDiagram
 - Copilot
