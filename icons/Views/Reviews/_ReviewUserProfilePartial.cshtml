@@ -1,0 +1,25 @@
+﻿@using icons.Data.Enums
+@model icons.Models.Reviews.ReviewUserProfileViewModel
+
+<div class="col-sm-12 col-md-9 col-lg-5 bg-light rounded-3 text-dark p-3 border-info border-5 border shadow mb-3 me-3">
+    <div class="row">
+        <div class="col-10">
+            <p class="fs-5 mb-0">@Model.Title</p>
+            <hr class="mt-0"/>
+            <p class="fs-5 mb-0">@Model.Description</p>
+        </div>
+        <div class="col-2">
+            <div class="d-flex flex-column justify-content-center align-items-center gap-3">
+                <img src="@(Model.Rating switch
+                          {
+                              EnumReviewRating.Poor => Url.Content("~/img/color-blaw.svg"),
+                              EnumReviewRating.Fair => Url.Content("~/img/color-sad.svg"),
+                              EnumReviewRating.Good => Url.Content("~/img/color-pocker.svg"),
+                              EnumReviewRating.VeryGood => Url.Content("~/img/color-smile.svg"),
+                              EnumReviewRating.Excellent => Url.Content("~/img/color-cool.svg"),
+                          })" class="img-fluid"/>
+                <a class="btn btn-sm btn-outline-info" asp-action="Icon" asp-controller="Icons" asp-route-id="@Model.IconId">преглед</a>
+            </div>
+        </div>
+    </div>
+</div>
