@@ -64,30 +64,7 @@
             <div class="row">
                 @foreach (var icon in Model.Top3Icons)
                 {
-                    <input type="hidden" asp-for="@icon.Id" />
-                    <div class="col d-flex justify-content-center mb-3">
-                        <div class="card" style="width: 18rem;">
-                            <div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
-                                <img src="@icon.ImageUrl" class="w-100 card-img-top" />
-                                <a asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id">
-                                    <div class="mask" style="background-color: hsla(195, 83%, 58%, 0.2)"></div>
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">@icon.Title</h5>
-                                <div class="d-flex gap-3 align-items-center mb-3">
-                                    <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@icon.UserId" class="card-text text-info">
-                                        <img src="@icon.UserProfilePictureUrl" class="img-fluid rounded-circle" width="40" />
-                                    </a>
-                                    <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@icon.UserId" class="card-text text-info">@icon.Username</a>
-                                </div>
-                                <hr/>
-                                <div class="d-flex justify-content-center">
-                                    <a asp-action="Icon" asp-controller="Icons" asp-route-id="@icon.Id" class="btn btn-primary tracking-space">преглед</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <partial name="~/Views/Icons/_IconPartial.cshtml" model="icon"/>
                 }
             </div>
         </div>
