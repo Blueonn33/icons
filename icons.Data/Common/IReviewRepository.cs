@@ -8,5 +8,6 @@ namespace icons.Data.Common
         Task<Review?> GetReviewByIdAsync(int id);
         Task<IEnumerable<Review>> GetAllReviewsByIconIdAsync(int id);
         Task<IEnumerable<Review>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort);
+        Task<IEnumerable<Review>> GetAllReviewsByUserIdAsync(string userId);
     }
 }
