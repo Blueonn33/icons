@@ -1,7 +1,4 @@
-﻿using icons.Core.Dtos.Review;
-using icons.Core.Enums;
-using icons.Data.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static icons.Data.Constants.ValidationConstants;
 
 namespace icons.Models.Icons
@@ -29,24 +26,6 @@ namespace icons.Models.Icons
             get; set;
         } = null!;
 
-        [MinLength(IconDescriptionMinLength)]
-        [MaxLength(IconDescriptionMaxLength)]
-        public string? Description
-        {
-            get; set;
-        }
-
-        [Range(IconAverageRangeMinValue, IconAverageRangeMaxValue)]
-        public double AverageRating
-        {
-            get; set;
-        }
-
-        public DateTime PublishedTime
-        {
-            get; set;
-        }
-
         [Required]
         [MinLength(IconUsernameMinLength)]
         [MaxLength(IconUsernameMaxLength)]
@@ -66,26 +45,5 @@ namespace icons.Models.Icons
         {
             get; set;
         } = null!;
-
-        public string RankImageUrl
-        {
-            get;
-            set;
-        } = null!;
-
-        public EnumUserElixirRank Rank
-        {
-            get; set;
-        }
-
-        public List<ReviewGetDto> Reviews
-        {
-            get; set;
-        } = new();
-
-        public EnumReviewSortOptions Sort
-        {
-            get; set;
-        }
     }
 }
