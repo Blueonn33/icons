@@ -27,7 +27,7 @@
                 var controller = ViewContext.RouteData.Values["controller"]!.ToString();
             }
 
-            @if (!(controller == "Home" && action == "Index"))
+            @if (controller == "Icons" && action == "Index")
             {
                 <partial name="~/Views/Icons/_IconScriptsPartial.cshtml" model="Model"/>
             }
