@@ -4,6 +4,7 @@ using icons.Core.Services.Email;
 using icons.Data;
 using icons.Data.Common;
 using icons.Data.Seed;
+using icons.Mappings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,8 @@ namespace icons
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+
+            builder.Services.AddAutoMapper(cfg => { }, typeof(IconProfile));
 
             var app = builder.Build();
 
