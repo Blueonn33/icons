@@ -15,12 +15,14 @@ namespace icons.Core.Dtos.Review
         }
             = null!;
 
+        [Required]
         [MinLength(ReviewDescriptionMinLength)]
         [MaxLength(ReviewDescriptionMaxLength)]
-        public string? Description
+        public string Description
         {
-            get; set;
-        }
+            get;
+            set;
+        } = null!;
 
         public EnumReviewRating? Rating
         {

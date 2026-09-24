@@ -16,14 +16,14 @@ namespace icons.Core.Dtos.Review
         public string Title
         {
             get; set;
-        }
-            = null!;
+        } = null!;
 
+        [Required]
         [MinLength(ReviewDescriptionMinLength)]
         [MaxLength(ReviewDescriptionMaxLength)]
-        public string? Description
+        public string Description
         {
             get; set;
-        }
+        } = null!;
     }
 }

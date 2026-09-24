@@ -28,12 +28,13 @@ namespace icons.Data.Models
             get; set;
         } = null!;
 
+        [Required]
         [MinLength(IconDescriptionMinLength)]
         [MaxLength(IconDescriptionMaxLength)]
-        public string? Description
+        public string Description
         {
             get; set;
-        }
+        } = null!;
 
         [Range(IconAverageRangeMinValue, IconAverageRangeMaxValue)]
         public double AverageRating
