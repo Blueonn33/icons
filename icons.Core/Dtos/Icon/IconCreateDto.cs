@@ -20,12 +20,14 @@ namespace icons.Core.Dtos.Icon
             get; set;
         } = null!;
 
+        [Required]
         [MinLength(IconDescriptionMinLength)]
         [MaxLength(IconDescriptionMaxLength)]
-        public string? Description
+        public string Description
         {
-            get; set;
-        }
+            get;
+            set;
+        } = null!;
 
         [Required]
         public string UserId

@@ -12,8 +12,8 @@ using icons.Data;
 namespace icons.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260831163138_FixUserProfilePictureUrl")]
-    partial class FixUserProfilePictureUrl
+    [Migration("20260924091446_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -170,6 +170,14 @@ namespace icons.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateRegistered")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<int>("Elixir")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -213,6 +221,9 @@ namespace icons.Data.Migrations
                         .HasMaxLength(900)
                         .HasColumnType("nvarchar(900)");
 
+                    b.Property<int>("Rank")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -244,11 +255,12 @@ namespace icons.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("AverageRating")
+                    b.Property<double>("AverageRating")
                         .HasPrecision(2, 1)
-                        .HasColumnType("decimal(2,1)");
+                        .HasColumnType("float(2)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
@@ -256,6 +268,11 @@ namespace icons.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(900)
                         .HasColumnType("nvarchar(900)");
+
+                    b.Property<DateTime>("PublishedTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -292,6 +309,7 @@ namespace icons.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
@@ -301,9 +319,9 @@ namespace icons.Data.Migrations
                     b.Property<DateTime>("PublishedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasDefaultValueSql("GETUTCDATE()");
 
-                    b.Property<int>("Rating")
+                    b.Property<int?>("Rating")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -390,7 +408,7 @@ namespace icons.Data.Migrations
                     b.HasOne("icons.Data.ApplicationUser", "User")
                         .WithMany("Icons")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -407,7 +425,7 @@ namespace icons.Data.Migrations
                     b.HasOne("icons.Data.ApplicationUser", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Icon");

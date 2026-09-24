@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace icons.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class PublishDate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,6 +33,9 @@ namespace icons.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ProfilePictureUrl = table.Column<string>(type: "nvarchar(900)", maxLength: 900, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    Elixir = table.Column<int>(type: "int", nullable: false),
+                    Rank = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -167,9 +170,11 @@ namespace icons.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ImageUrl = table.Column<string>(type: "nvarchar(900)", maxLength: 900, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    AverageRating = table.Column<decimal>(type: "decimal(2,1)", precision: 2, scale: 1, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    AverageRating = table.Column<double>(type: "float(2)", precision: 2, scale: 1, nullable: false),
+                    PublishedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UserProfilePictureUrl = table.Column<string>(type: "nvarchar(900)", maxLength: 900, nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -179,7 +184,8 @@ namespace icons.Data.Migrations
                         name: "FK_Icons_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,9 +195,9 @@ namespace icons.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    Rating = table.Column<int>(type: "int", nullable: false),
-                    PublishedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: true),
+                    PublishedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     UserProfilePictureUrl = table.Column<string>(type: "nvarchar(900)", maxLength: 900, nullable: false),
                     Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IconId = table.Column<int>(type: "int", nullable: false),
@@ -204,8 +210,7 @@ namespace icons.Data.Migrations
                         name: "FK_Reviews_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Reviews_Icons_IconId",
                         column: x => x.IconId,

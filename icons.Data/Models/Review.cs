@@ -23,12 +23,13 @@ namespace icons.Data.Models
         }
             = null!;
 
+        [Required]
         [MinLength(ReviewDescriptionMinLength)]
         [MaxLength(ReviewDescriptionMaxLength)]
-        public string? Description
+        public string Description
         {
             get; set;
-        }
+        } = null!;
 
         public EnumReviewRating? Rating
         {
