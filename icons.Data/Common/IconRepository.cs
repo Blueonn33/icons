@@ -37,6 +37,7 @@ namespace icons.Data.Common
         {
             var query = _context.Icons
                 .Include(i => i.User)
+                .AsNoTracking()
                 .Where(i => i.User.IsDeleted == false);
 
             return sort switch
