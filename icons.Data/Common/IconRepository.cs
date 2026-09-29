@@ -18,6 +18,8 @@ namespace icons.Data.Common
                 .Include(i => i.User)
                 .Where(i => i.User.IsDeleted == false)
                 .AsNoTracking()
+                .OrderByDescending(i => i.PublishedTime)
+                .ThenBy(i => i.Title)
                 .ToListAsync();
         }
 
@@ -26,6 +28,8 @@ namespace icons.Data.Common
             return await _context.Icons
                 .AsNoTracking()
                 .Where(i => i.UserId == userId)
+                .OrderByDescending(i => i.PublishedTime)
+                .ThenBy(i => i.Title)
                 .ToListAsync();
         }
 
@@ -41,7 +45,10 @@ namespace icons.Data.Common
                 EnumIconSortOptions.DateDesc => await query.OrderByDescending(i => i.PublishedTime).ToListAsync(),
                 EnumIconSortOptions.RatingAsc => await query.OrderBy(i => i.AverageRating).ToListAsync(),
                 EnumIconSortOptions.RatingDesc => await query.OrderByDescending(i => i.AverageRating).ToListAsync(),
-                _ => await query.ToListAsync()
+                _ => await query
+                    .OrderByDescending(i => i.PublishedTime)
+                    .ThenBy(i => i.Title)
+                    .ToListAsync()
             };
         }
 
