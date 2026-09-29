@@ -15,6 +15,8 @@ namespace icons.Data.Common
         public async Task<IEnumerable<Icon>> GetAllIconsAsync()
         {
             return await _context.Icons
+                .Include(i => i.User)
+                .Where(i => i.User.IsDeleted == false)
                 .AsNoTracking()
                 .ToListAsync();
         }
@@ -29,7 +31,9 @@ namespace icons.Data.Common
 
         public async Task<IEnumerable<Icon>> GetAllIconsSortedAsync(EnumIconSortOptions sort)
         {
-            var query = _context.Icons;
+            var query = _context.Icons
+                .Include(i => i.User)
+                .Where(i => i.User.IsDeleted == false);
 
             return sort switch
             {
@@ -53,6 +57,7 @@ namespace icons.Data.Common
         {
             return await _context.Icons
                 .Include(i => i.User)
+                .Where(i => i.User.IsDeleted == false)
                 .AsNoTracking()
                 .OrderByDescending(i => i.AverageRating)
                 .Take(3)
