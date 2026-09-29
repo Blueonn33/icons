@@ -35,6 +35,7 @@ namespace icons.Data.Common
             return await _context.Reviews
                 .AsNoTracking()
                 .Where(r => r.IconId == id)
+                .OrderByDescending(r => r.PublishedTime)
                 .ToListAsync();
         }
 
@@ -49,8 +50,8 @@ namespace icons.Data.Common
 
             var query = _context.Reviews
                 .Include(r => r.User)
-                .Where(r => r.IconId == id)
-                .AsNoTracking();
+                .AsNoTracking()
+                .Where(r => r.IconId == id);
 
             return sort switch
             {
@@ -58,7 +59,9 @@ namespace icons.Data.Common
                 EnumReviewSortOptions.DateDesc => await query.OrderByDescending(r => r.PublishedTime).ToListAsync(),
                 EnumReviewSortOptions.RatingAsc => await query.OrderBy(r => r.Rating).ToListAsync(),
                 EnumReviewSortOptions.RatingDesc => await query.OrderByDescending(r => r.Rating).ToListAsync(),
-                _ => await query.ToListAsync()
+                _ => await query
+                    .OrderByDescending(r => r.PublishedTime)
+                    .ToListAsync()
             };
         }
 
@@ -74,6 +77,7 @@ namespace icons.Data.Common
             return await _context.Reviews
                 .AsNoTracking()
                 .Where(r => r.UserId == userId)
+                .OrderByDescending(r => r.PublishedTime)
                 .ToListAsync();
         }
     }

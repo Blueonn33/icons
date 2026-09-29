@@ -15,7 +15,11 @@ namespace icons.Data.Common
         public async Task<IEnumerable<Icon>> GetAllIconsAsync()
         {
             return await _context.Icons
+                .Include(i => i.User)
+                .Where(i => i.User.IsDeleted == false)
                 .AsNoTracking()
+                .OrderByDescending(i => i.PublishedTime)
+                .ThenBy(i => i.Title)
                 .ToListAsync();
         }
 
@@ -24,12 +28,17 @@ namespace icons.Data.Common
             return await _context.Icons
                 .AsNoTracking()
                 .Where(i => i.UserId == userId)
+                .OrderByDescending(i => i.PublishedTime)
+                .ThenBy(i => i.Title)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Icon>> GetAllIconsSortedAsync(EnumIconSortOptions sort)
         {
-            var query = _context.Icons;
+            var query = _context.Icons
+                .Include(i => i.User)
+                .AsNoTracking()
+                .Where(i => i.User.IsDeleted == false);
 
             return sort switch
             {
@@ -37,7 +46,10 @@ namespace icons.Data.Common
                 EnumIconSortOptions.DateDesc => await query.OrderByDescending(i => i.PublishedTime).ToListAsync(),
                 EnumIconSortOptions.RatingAsc => await query.OrderBy(i => i.AverageRating).ToListAsync(),
                 EnumIconSortOptions.RatingDesc => await query.OrderByDescending(i => i.AverageRating).ToListAsync(),
-                _ => await query.ToListAsync()
+                _ => await query
+                    .OrderByDescending(i => i.PublishedTime)
+                    .ThenBy(i => i.Title)
+                    .ToListAsync()
             };
         }
 
@@ -53,6 +65,7 @@ namespace icons.Data.Common
         {
             return await _context.Icons
                 .Include(i => i.User)
+                .Where(i => i.User.IsDeleted == false)
                 .AsNoTracking()
                 .OrderByDescending(i => i.AverageRating)
                 .Take(3)
