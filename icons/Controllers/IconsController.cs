@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using icons.Core.Contracts;
 using icons.Core.Dtos.Icon;
-using icons.Core.Dtos.Review;
 using icons.Core.Enums;
 using icons.Core.Services;
 using icons.Data;
@@ -19,7 +18,6 @@ namespace icons.Controllers
     {
         private readonly IIconService _service;
         private readonly IReviewService _reviewService;
-        private readonly IUserService _userService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly CloudinaryService _cloudinary;
         private readonly IMapper _mapper;
@@ -27,14 +25,12 @@ namespace icons.Controllers
         public IconsController(
             IIconService service,
             IReviewService reviewService,
-            IUserService userService,
             UserManager<ApplicationUser> userManager,
             CloudinaryService cloudinary,
             IMapper mapper)
         {
             _service = service;
             _reviewService = reviewService;
-            _userService = userService;
             _userManager = userManager;
             _cloudinary = cloudinary;
             _mapper = mapper;
@@ -84,7 +80,6 @@ namespace icons.Controllers
                 UserProfilePictureUrl = icon.UserProfilePictureUrl,
                 UserId = icon.UserId,
                 AverageRating = icon.AverageRating,
-                PublishedTime = icon.PublishedTime,
                 Reviews = _mapper.Map<IEnumerable<ReviewViewModel>>(reviewDtos)
             };
 
