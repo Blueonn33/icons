@@ -21,11 +21,11 @@ namespace icons.Data.Seed
                         Description =
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                         ImageUrl =
-                            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pfps.gg%2Fpfps%2F4476-ichigo-kurosaki-profile-picture.png&f=1&nofb=1&ipt=7f770419003930f526f3ad713588eaaeec3057d45cc43cb6ca0296025f2699cd",
-                        Title = "Ichigo Kurosaki",
+                            "https://aniyuki.com/wp-content/uploads/2021/07/aniyuki-mikasa_ackerman-74.jpg",
+                        Title = "Mikasa Ackerman",
                         UserId = "ENTER_USER_ID",
-                        Username = "Jushiro Ukitake",
-                        UserProfilePictureUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-wixmp-ed30a86b8c4ca887773594c2.wixmp.com%2Fi%2F1b75e5cf-332b-48f1-a8fa-a7dd279deef9%2Fdadyw2o-761b1f04-995a-422d-acc3-905fe4ea7f39.png%2Fv1%2Ffill%2Fw_748%2Ch_476%2Cq_80%2Cstrp%2Ftwo__jushiro_ukitake_x_reader__bleach__by_truth4sanity_dadyw2o-fullview.jpg&f=1&nofb=1&ipt=a3ca84031f93347162a224fd1575cdb8a98f0d71c2f179bef4b407155f8952a9"
+                        Username = "Levi Ackerman",
+                        UserProfilePictureUrl = "https://aniyuki.com/wp-content/uploads/2025/03/aniyuki-Levi-Ackerman-avatar-15.jpg"
                     },
                     new Icon
                     {

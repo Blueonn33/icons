@@ -24,9 +24,9 @@ namespace icons.Data.Seed
                         PublishedTime = new DateTime(2026, 8, 25),
                         IconId = 1,
                         UserId = "ENTER_USER_ID",
-                        Username = "Jushiro Ukitake",
+                        Username = "Levi Ackerman",
                         UserProfilePictureUrl =
-                            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-wixmp-ed30a86b8c4ca887773594c2.wixmp.com%2Fi%2F1b75e5cf-332b-48f1-a8fa-a7dd279deef9%2Fdadyw2o-761b1f04-995a-422d-acc3-905fe4ea7f39.png%2Fv1%2Ffill%2Fw_748%2Ch_476%2Cq_80%2Cstrp%2Ftwo__jushiro_ukitake_x_reader__bleach__by_truth4sanity_dadyw2o-fullview.jpg&f=1&nofb=1&ipt=a3ca84031f93347162a224fd1575cdb8a98f0d71c2f179bef4b407155f8952a9"
+                            "https://aniyuki.com/wp-content/uploads/2025/03/aniyuki-Levi-Ackerman-avatar-15.jpg"
                     },
                     new Review
                     {
