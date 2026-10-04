@@ -2,7 +2,7 @@
 {
     public class UsersViewModel
     {
-        public IEnumerable<UserViewModel> Users
+        public IEnumerable<UserViewModel>? Users
         {
             get;
             set;
