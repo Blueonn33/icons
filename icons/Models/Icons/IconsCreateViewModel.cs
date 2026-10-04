@@ -5,22 +5,22 @@ namespace icons.Models.Icons
 {
     public class IconsCreateViewModel
     {
-        [Required]
-        [StringLength(IconTitleMaxLength, MinimumLength = IconTitleMinLength)]
+        [Required(ErrorMessage = "Въведи заглавие")]
+        [StringLength(IconTitleMaxLength, MinimumLength = IconTitleMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1} символа")]
         public string Title
         {
             get; set;
         } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Прикачи снимка")]
         public IFormFile ImageFile
         {
             get;
             set;
         } = null!;
 
-        [Required]
-        [StringLength(IconDescriptionMaxLength, MinimumLength = IconDescriptionMinLength)]
+        [Required(ErrorMessage = "Напиши описание")]
+        [StringLength(IconDescriptionMaxLength, MinimumLength = IconDescriptionMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1} символа")]
         public string Description
         {
             get; set;
