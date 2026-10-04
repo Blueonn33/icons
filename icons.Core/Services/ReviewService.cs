@@ -27,6 +27,11 @@ namespace icons.Core.Services
         {
             var user = await _userManager.FindByIdAsync(review.UserId);
 
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"Потребителят не е открит");
+            }
+
             var newReview = new Review
             {
                 Title = review.Title,
@@ -52,13 +57,18 @@ namespace icons.Core.Services
             await _userService.UpdateRankAsync(user);
         }
 
-        public async Task DeleteReviewAsync(int id)
+        public async Task<bool> DeleteReviewAsync(int id)
         {
+            if (id <= 0)
+            {
+                return false;
+            }
+
             var review = await _repository.GetByIdAsync(id);
 
             if (review == null)
             {
-                throw new KeyNotFoundException($"Review with id {id} was not found");
+                return false;
             }
 
             _repository.Delete(review);
@@ -70,6 +80,7 @@ namespace icons.Core.Services
                 : 0;
 
             await _iconRepository.SaveAsync();
+            return true;
         }
 
         public async Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdAsync(int id)
@@ -78,7 +89,7 @@ namespace icons.Core.Services
 
             if (icon == null)
             {
-                throw new KeyNotFoundException($"Icon with id {id} was not found");
+                throw new KeyNotFoundException($"Икона с ID: {id} не е открита");
             }
 
             var reviews = await _repository.GetAllReviewsByIconIdAsync(id);
@@ -103,7 +114,7 @@ namespace icons.Core.Services
 
             if (icon == null)
             {
-                throw new KeyNotFoundException($"Icon with id {id} was not found");
+                throw new KeyNotFoundException($"Икона с ID: {id} не е открита");
             }
 
             var reviews = await _repository.GetAllReviewsByIconIdSortedAsync(id, sort);
@@ -130,7 +141,7 @@ namespace icons.Core.Services
 
             if (user == null)
             {
-                throw new KeyNotFoundException($"User was not found");
+                throw new KeyNotFoundException($"Потребителят не е открит");
             }
 
             var reviews = await _repository.GetAllReviewsByUserIdAsync(userId);
@@ -152,7 +163,7 @@ namespace icons.Core.Services
 
             if (review == null)
             {
-                throw new KeyNotFoundException($"Review with id {id} was not found");
+                throw new KeyNotFoundException($"Ревю с ID: {id} не е открито");
             }
 
             return new ReviewGetDto
@@ -171,13 +182,18 @@ namespace icons.Core.Services
             };
         }
 
-        public async Task UpdateReviewAsync(int id, ReviewUpdateDto review)
+        public async Task<bool> UpdateReviewAsync(int id, ReviewUpdateDto review)
         {
+            if (id <= 0)
+            {
+                return false;
+            }
+
             var updateReview = await _repository.GetByIdAsync(id);
 
             if (updateReview == null)
             {
-                throw new KeyNotFoundException($"Review with id {id} was not found");
+                return false;
             }
 
             updateReview.Title = review.Title;
@@ -185,6 +201,7 @@ namespace icons.Core.Services
 
             _repository.Update(updateReview);
             await _repository.SaveAsync();
+            return true;
         }
     }
 }
