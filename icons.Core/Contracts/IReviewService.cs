@@ -10,7 +10,7 @@ namespace icons.Core.Contracts
         Task<IEnumerable<ReviewUserProfileGetDto>> GetAllReviewsByUserIdAsync(string userId);
         Task<ReviewGetDto?> GetReviewByIdAsync(int id);
         Task AddReviewAsync(ReviewCreateDto review);
-        Task UpdateReviewAsync(int id, ReviewUpdateDto review);
-        Task DeleteReviewAsync(int id);
+        Task<bool> UpdateReviewAsync(int id, ReviewUpdateDto review);
+        Task<bool> DeleteReviewAsync(int id);
     }
 }
