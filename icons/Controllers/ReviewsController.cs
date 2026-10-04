@@ -68,7 +68,7 @@ namespace icons.Controllers
             catch (Exception e)
             {
                 _logger.LogCritical("Възникна грешка. Провери logs");
-                TempData["Error"] = "Възникна грешка при създаването на ревю";
+                TempData["Error"] = "Не е въведена оценка";
             }
 
             return RedirectToAction("Icon", "Icons", new
