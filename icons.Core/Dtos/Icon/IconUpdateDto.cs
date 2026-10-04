@@ -12,7 +12,6 @@ namespace icons.Core.Dtos.Icon
         }
 
         [Required]
-        [StringLength(IconImageUrlLength)]
         public string ImageUrl
         {
             get; set;
