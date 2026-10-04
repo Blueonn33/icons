@@ -54,8 +54,14 @@ namespace icons.Core.Services
 
         public async Task<IEnumerable<IconGetDto>> GetAllIconsByUserIdAsync(string userId)
         {
-            var icons = await _repository.GetAllIconsByUserIdAsync(userId);
             var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"Потребителят не е открит");
+            }
+
+            var icons = await _repository.GetAllIconsByUserIdAsync(userId);
 
             return icons.Select(i => new IconGetDto
             {
@@ -85,12 +91,23 @@ namespace icons.Core.Services
 
         public async Task<IconGetDescriptionDto?> GetIconByIdAsync(int id)
         {
+            if (id <= 0)
+            {
+                return null;
+            }
+
             var icon = await _repository.GetIconWithReviewsByIdAsync(id);
-            var user = await _userManager.FindByIdAsync(icon.UserId);
 
             if (icon == null)
             {
-                throw new KeyNotFoundException($"Icon with Id {id} was not found.");
+                return null;
+            }
+
+            var user = await _userManager.FindByIdAsync(icon.UserId);
+
+            if (user == null)
+            {
+                return null;
             }
 
             var averageRating = icon.Reviews.Any()
@@ -129,7 +146,7 @@ namespace icons.Core.Services
 
             if (user == null)
             {
-                throw new KeyNotFoundException($"User with Id {icon.UserId} was not found.");
+                throw new KeyNotFoundException($"Потребителят не е открит");
             }
 
             var newIcon = new Icon
@@ -150,13 +167,18 @@ namespace icons.Core.Services
             await _userService.UpdateRankAsync(user);
         }
 
-        public async Task UpdateIconAsync(int id, IconUpdateDto icon)
+        public async Task<bool> UpdateIconAsync(int id, IconUpdateDto icon)
         {
+            if (id <= 0)
+            {
+                return false;
+            }
+
             var updateIcon = await _repository.GetByIdAsync(id);
 
             if (updateIcon == null)
             {
-                throw new KeyNotFoundException($"Icon with Id {id} was not found.");
+                return false;
             }
 
             updateIcon.ImageUrl = icon.ImageUrl;
@@ -165,19 +187,28 @@ namespace icons.Core.Services
 
             _repository.Update(updateIcon);
             await _repository.SaveAsync();
+
+            return true;
         }
 
-        public async Task DeleteIconAsync(int id)
+        public async Task<bool> DeleteIconAsync(int id)
         {
-            var icon = await _repository.GetByIdAsync(id);
-
-            if (icon == null)
+            if (id <= 0)
             {
-                throw new KeyNotFoundException($"Icon with Id {id} was not found.");
+                return false;
             }
 
-            _repository.Delete(icon);
+            var deletingIcon = await _repository.GetByIdAsync(id);
+
+            if (deletingIcon == null)
+            {
+                return false;
+            }
+
+            _repository.Delete(deletingIcon);
             await _repository.SaveAsync();
+
+            return true;
         }
     }
 }
