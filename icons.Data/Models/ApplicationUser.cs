@@ -8,8 +8,7 @@ namespace icons.Data;
 public class ApplicationUser : IdentityUser
 {
     [Required]
-    [MinLength(UserNameMinLength)]
-    [MaxLength(UserNameMaxLength)]
+    [StringLength(UserNameMaxLength, MinimumLength = UserNameMinLength)]
     public string Name
     {
         get; set;
