@@ -60,7 +60,7 @@ namespace icons.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Forbidden()
+        public IActionResult NoContent()
         {
             return View();
         }

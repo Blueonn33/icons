@@ -11,7 +11,7 @@ namespace icons.Core.Contracts
         Task<IEnumerable<IconGetDto>> GetTop3IconsAsync();
         Task<IconGetDescriptionDto?> GetIconByIdAsync(int id);
         Task AddIconAsync(IconCreateDto icon);
-        Task UpdateIconAsync(int id, IconUpdateDto icon);
-        Task DeleteIconAsync(int id);
+        Task<bool> UpdateIconAsync(int id, IconUpdateDto icon);
+        Task<bool> DeleteIconAsync(int id);
     }
 }

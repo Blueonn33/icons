@@ -11,16 +11,15 @@ namespace icons.Core.Dtos.Review
             get; set;
         }
 
-        [MinLength(ReviewTitleMinLength)]
-        [MaxLength(ReviewTitleMaxLength)]
+        [Required]
+        [StringLength(ReviewTitleMaxLength, MinimumLength = ReviewTitleMinLength)]
         public string Title
         {
             get; set;
         } = null!;
 
         [Required]
-        [MinLength(ReviewDescriptionMinLength)]
-        [MaxLength(ReviewDescriptionMaxLength)]
+        [StringLength(ReviewDescriptionMaxLength, MinimumLength = ReviewDescriptionMinLength)]
         public string Description
         {
             get; set;

@@ -15,22 +15,20 @@ namespace icons.Data.Models
         }
 
         [Required]
-        [MinLength(ReviewTitleMinLength)]
-        [MaxLength(ReviewTitleMaxLength)]
+        [StringLength(ReviewTitleMaxLength, MinimumLength = ReviewTitleMinLength)]
         public string Title
         {
             get; set;
-        }
-            = null!;
+        } = null!;
 
         [Required]
-        [MinLength(ReviewDescriptionMinLength)]
-        [MaxLength(ReviewDescriptionMaxLength)]
+        [StringLength(ReviewDescriptionMaxLength, MinimumLength = ReviewDescriptionMinLength)]
         public string Description
         {
             get; set;
         } = null!;
 
+        [Required]
         public EnumReviewRating? Rating
         {
             get; set;
@@ -49,8 +47,7 @@ namespace icons.Data.Models
         } = null!;
 
         [Required]
-        [MinLength(ReviewUsernameMinLength)]
-        [MaxLength(ReviewUsernameMaxLength)]
+        [StringLength(ReviewUsernameMaxLength, MinimumLength = ReviewUsernameMinLength)]
         public string Username
         {
             get; set;

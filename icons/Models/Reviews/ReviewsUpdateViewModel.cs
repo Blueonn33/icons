@@ -5,22 +5,25 @@ namespace icons.Models.Reviews
 {
     public class ReviewsUpdateViewModel
     {
-        [Key]
         public int Id
         {
             get; set;
         }
 
-        [StringLength(ReviewTitleMaxLength, MinimumLength = ReviewTitleMinLength)]
+        [Required(ErrorMessage = "Въведи заглавие")]
+        [StringLength(ReviewTitleMaxLength, MinimumLength = ReviewTitleMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1}")]
         public string Title
         {
             get; set;
-        } = null!;
+        }
+            = null!;
 
-        [StringLength(ReviewDescriptionMaxLength, MinimumLength = ReviewDescriptionMinLength)]
+        [Required(ErrorMessage = "Напиши описание")]
+        [StringLength(ReviewDescriptionMaxLength, MinimumLength = ReviewDescriptionMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1}")]
         public string Description
         {
-            get; set;
+            get;
+            set;
         } = null!;
     }
 }

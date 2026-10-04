@@ -29,7 +29,7 @@ namespace icons.Data.Common
 
             if (icon == null)
             {
-                throw new KeyNotFoundException($"Icon with id {id} was not found");
+                throw new KeyNotFoundException($"Икона с ID: {id} не беше открита");
             }
 
             return await _context.Reviews
@@ -45,7 +45,7 @@ namespace icons.Data.Common
 
             if (icon == null)
             {
-                throw new KeyNotFoundException($"Icon with id {id} was not found");
+                throw new KeyNotFoundException($"Икона с ID: {id} не беше открита");
             }
 
             var query = _context.Reviews
@@ -71,7 +71,7 @@ namespace icons.Data.Common
 
             if (user == null)
             {
-                throw new KeyNotFoundException($"User was not found.");
+                throw new KeyNotFoundException("Потребителят не беше открит");
             }
 
             return await _context.Reviews

@@ -14,23 +14,20 @@ namespace icons.Data.Models
         }
 
         [Required]
-        [StringLength(IconImageUrlLength)]
         public string ImageUrl
         {
             get; set;
         } = null!;
 
         [Required]
-        [MinLength(IconTitleMinLength)]
-        [MaxLength(IconTitleMaxLength)]
+        [StringLength(IconTitleMaxLength, MinimumLength = IconTitleMinLength)]
         public string Title
         {
             get; set;
         } = null!;
 
         [Required]
-        [MinLength(IconDescriptionMinLength)]
-        [MaxLength(IconDescriptionMaxLength)]
+        [StringLength(IconDescriptionMaxLength, MinimumLength = IconDescriptionMinLength)]
         public string Description
         {
             get; set;
@@ -48,8 +45,7 @@ namespace icons.Data.Models
         }
 
         [Required]
-        [MinLength(IconUsernameMinLength)]
-        [MaxLength(IconUsernameMaxLength)]
+        [StringLength(IconUsernameMaxLength, MinimumLength = IconUsernameMinLength)]
         public string Username
         {
             get; set;

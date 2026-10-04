@@ -7,7 +7,6 @@
         public const int IconTitleMaxLength = 50;
         public const int IconDescriptionMinLength = 15;
         public const int IconDescriptionMaxLength = 2000;
-        public const int IconImageUrlLength = 900;
         public const double IconAverageRangeMinValue = 1.0;
         public const double IconAverageRangeMaxValue = 5.0;
         public const int IconUsernameMinLength = 3;

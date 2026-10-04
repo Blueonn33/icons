@@ -6,7 +6,6 @@ namespace icons.Core.Dtos.Icon
     public class IconCreateDto
     {
         [Required]
-        [StringLength(IconImageUrlLength)]
         public string ImageUrl
         {
             get; set;

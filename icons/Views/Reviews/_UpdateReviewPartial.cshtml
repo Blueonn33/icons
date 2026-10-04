@@ -8,17 +8,21 @@
                     <h5 class="modal-title">редакция</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form asp-action="UpdateReview" asp-controller="Reviews" method="post">
+                <form asp-action="UpdateReview" asp-controller="Reviews">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
                     <div class="modal-body">
-                        <input asp-for="@Model.Id" type="hidden" id="review-id" />
-                        
+                        <input asp-for="Id" type="hidden" id="review-id"/>
+
                         <div class="mb-3">
-                            <label asp-for="@Model.Title" class="form-label">заглавие</label>
-                            <input asp-for="@Model.Title" class="form-control" id="review-title"/>
-                        </div> 
+                            <label asp-for="Title" class="form-label">заглавие</label>
+                            <input asp-for="Title" class="form-control" id="review-title"/>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
                         <div class="mb-3">
-                            <label asp-for="@Model.Description" class="form-label">описание</label>
-                            <input asp-for="@Model.Description" class="form-control" id="review-description" />
+                            <label asp-for="Description" class="form-label">описание</label>
+                            <input asp-for="Description" class="form-control" id="review-description"/>
+                            <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="modal-footer">

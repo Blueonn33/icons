@@ -5,33 +5,26 @@ namespace icons.Models.Icons
 {
     public class IconsUpdateViewModel
     {
-        [Key]
         public int Id
         {
             get; set;
         }
 
-        [StringLength(IconTitleMaxLength, MinimumLength = IconTitleMinLength)]
+        [Required(ErrorMessage = "Въведи заглавие")]
+        [StringLength(IconTitleMaxLength, MinimumLength = IconTitleMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1} символа")]
         public string Title
         {
             get; set;
         } = null!;
 
-        [Url]
-        [StringLength(IconImageUrlLength)]
-        public string ImageUrl
-        {
-            get; set;
-        } = null!;
-
-        [Required]
-        public IFormFile ImageFile
+        public IFormFile? ImageFile
         {
             get;
             set;
-        } = null!;
+        }
 
-        [StringLength(IconDescriptionMaxLength, MinimumLength = IconDescriptionMinLength)]
+        [Required(ErrorMessage = "Напиши описание")]
+        [StringLength(IconDescriptionMaxLength, MinimumLength = IconDescriptionMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1} символа")]
         public string Description
         {
             get; set;

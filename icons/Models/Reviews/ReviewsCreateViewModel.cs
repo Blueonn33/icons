@@ -6,23 +6,23 @@ namespace icons.Models.Reviews
 {
     public class ReviewsCreateViewModel
     {
-        [Required]
-        [MinLength(ReviewTitleMinLength)]
-        [MaxLength(ReviewTitleMaxLength)]
+        [Required(ErrorMessage = "Въведи заглавие")]
+        [StringLength(ReviewTitleMaxLength, MinimumLength = ReviewTitleMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1}")]
         public string Title
         {
             get; set;
         }
             = null!;
 
-        [MinLength(ReviewDescriptionMinLength)]
-        [MaxLength(ReviewDescriptionMaxLength)]
-        public string? Description
+        [Required(ErrorMessage = "Напиши описание")]
+        [StringLength(ReviewDescriptionMaxLength, MinimumLength = ReviewDescriptionMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1}")]
+        public string Description
         {
-            get; set;
-        }
+            get;
+            set;
+        } = null!;
 
-        [Required(ErrorMessage = "Rating is required.")]
+        [Required(ErrorMessage = "Постави оценка")]
         public EnumReviewRating? Rating
         {
             get; set;
