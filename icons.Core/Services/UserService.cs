@@ -31,7 +31,7 @@ namespace icons.Core.Services
 
             if (user == null)
             {
-                throw new KeyNotFoundException($"User with Id {id} was not found.");
+                throw new KeyNotFoundException("Потребителят не е открит");
             }
 
             return new UserProfileGetDto
@@ -70,7 +70,7 @@ namespace icons.Core.Services
 
             if (user == null)
             {
-                throw new KeyNotFoundException($"User with Id {id} was not found.");
+                throw new KeyNotFoundException("Потребителят не е открит");
             }
 
             user.IsDeleted = true;
