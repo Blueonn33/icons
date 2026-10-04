@@ -1,23 +1,23 @@
 @page
 @model RegisterConfirmationModel
 @{
-    ViewData["Title"] = "register confirmation";
+    ViewData["Title"] = "потвържение на регистрацията";
 }
 
 <section class="">
     <div class="container">
-        <h1 class="mb-3 text-light">@ViewData["Title"]</h1>
+        <h1 class="mb-3 text-dark">@ViewData["Title"]</h1>
         @{
             if (@Model.DisplayConfirmAccountLink)
             {
                 <p class="bg-white p-1 d-inline-block rounded-3">
-                    <a id="confirm-link" href="@Model.EmailConfirmationUrl">click here to confirm your account</a>
+                    <a id="confirm-link" class="btn btn-info" href="@Model.EmailConfirmationUrl">натисни тук</a>
                 </p>
             }
             else
             {
                 <p>
-                    Please check your email to confirm your account.
+                    Провери имейла си, за да потвърдиш регистрацията
                 </p>
             }
         }
