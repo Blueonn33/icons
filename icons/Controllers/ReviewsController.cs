@@ -14,20 +14,28 @@ namespace icons.Controllers
         private readonly IReviewService _service;
         private readonly IIconService _iconService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<ReviewsController> _logger;
 
         public ReviewsController(
             IReviewService service,
             IIconService iconService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ILogger<ReviewsController> logger)
         {
             _service = service;
             _iconService = iconService;
             _userManager = userManager;
+            _logger = logger;
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateReview(ReviewsCreateViewModel model)
         {
+            if (model.Rating == null)
+            {
+                ModelState.AddModelError(nameof(ReviewsCreateViewModel.Rating), "Не си поставил оценка");
+            }
+
             var icon = await _iconService.GetIconByIdAsync(model.IconId);
             var user = await _userManager.GetUserAsync(User);
 
@@ -38,29 +46,30 @@ namespace icons.Controllers
 
             if (user == null)
             {
-                return Unauthorized();
+                return NotFound();
             }
 
-            if (model.Rating == null)
+            try
             {
-                return RedirectToAction("Icon", "Icons", new
+                var review = new ReviewCreateDto
                 {
-                    id = model.IconId
-                });
+                    Title = model.Title,
+                    Description = model.Description,
+                    Rating = model.Rating,
+                    IconId = model.IconId,
+                    UserProfilePictureUrl = user.ProfilePictureUrl,
+                    Username = user.Name,
+                    UserId = user.Id
+                };
+
+                await _service.AddReviewAsync(review);
+                TempData["Success"] = "Успешно написа ревю";
             }
-
-            var review = new ReviewCreateDto
+            catch (Exception e)
             {
-                Title = model.Title,
-                Description = model.Description,
-                Rating = model.Rating,
-                IconId = model.IconId,
-                UserProfilePictureUrl = user.ProfilePictureUrl,
-                Username = user.Name,
-                UserId = user.Id
-            };
-
-            await _service.AddReviewAsync(review);
+                _logger.LogCritical("Възникна грешка. Провери logs");
+                TempData["Error"] = "Възникна грешка при създаването на ревю";
+            }
 
             return RedirectToAction("Icon", "Icons", new
             {
@@ -78,7 +87,23 @@ namespace icons.Controllers
                 return NotFound();
             }
 
-            await _service.DeleteReviewAsync(id);
+            try
+            {
+                bool isDeleted = await _service.DeleteReviewAsync(id);
+
+                if (!isDeleted)
+                {
+                    return NotFound();
+                }
+
+                TempData["Success"] = "Успешно изтри ревюто";
+            }
+            catch (Exception _)
+            {
+                _logger.LogCritical("Възникна грешка. Провери logs");
+                TempData["Error"] = "Възникна грешка при изтриването на ревюто";
+            }
+
             return RedirectToAction("Icon", "Icons", new
             {
                 id = review.IconId
@@ -95,14 +120,30 @@ namespace icons.Controllers
                 return NotFound();
             }
 
-            var updateReview = new ReviewUpdateDto
+            try
             {
-                Id = review.Id,
-                Title = string.IsNullOrWhiteSpace(model.Title) ? review.Title : model.Title,
-                Description = string.IsNullOrWhiteSpace(model.Description) ? review.Description : model.Description
-            };
+                var updateReview = new ReviewUpdateDto
+                {
+                    Id = model.Id,
+                    Title = model.Title,
+                    Description = model.Description
+                };
 
-            await _service.UpdateReviewAsync(updateReview.Id, updateReview);
+                bool isUpdated = await _service.UpdateReviewAsync(updateReview.Id, updateReview);
+
+                if (!isUpdated)
+                {
+                    return NotFound();
+                }
+
+                TempData["Success"] = "Успешно редактира ревюто";
+            }
+            catch (Exception _)
+            {
+                _logger.LogCritical("Възникна грешка. Провери logs");
+                TempData["Error"] = "Възникна грешка при редактирането на ревюто";
+            }
+
             return RedirectToAction("Icon", "Icons", new
             {
                 id = review.IconId
