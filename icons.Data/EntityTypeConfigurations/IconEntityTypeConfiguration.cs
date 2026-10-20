@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace icons.Data.EntityConfigurations
+namespace icons.Data.EntityTypeConfigurations
 {
     public class IconEntityTypeConfiguration : IEntityTypeConfiguration<Icon>
     {
