@@ -1,10 +1,11 @@
 using icons.Core.Contracts;
+using icons.Core.Mappings;
 using icons.Core.Services;
 using icons.Core.Services.Email;
 using icons.Data;
 using icons.Data.Common;
+using icons.Data.Models;
 using icons.Data.Seed;
-using icons.Mappings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace icons
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string was not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
@@ -49,7 +50,7 @@ namespace icons
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseMigrationsEndPoint();
+                // app.UseMigrationsEndPoint();
             }
             else
             {
