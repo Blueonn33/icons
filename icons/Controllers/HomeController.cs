@@ -1,8 +1,5 @@
-using AutoMapper;
 using icons.Core.Contracts;
-using icons.Models;
-using icons.Models.Home;
-using icons.Models.Icons;
+using icons.Core.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -10,27 +7,12 @@ using System.Diagnostics;
 namespace icons.Controllers
 {
     [AllowAnonymous]
-    public class HomeController : Controller
+    public class HomeController(IIconService _service) : Controller
     {
-        private readonly IIconService _service;
-        private readonly IMapper _mapper;
-
-        public HomeController(IIconService service, IMapper mapper)
-        {
-            _service = service;
-            _mapper = mapper;
-        }
-
         public async Task<IActionResult> Index()
         {
-            var dtos = await _service.GetTop3IconsAsync();
-
-            var model = new Top3IconsViewModel
-            {
-                Top3Icons = _mapper.Map<IEnumerable<IconViewModel>>(dtos)
-            };
-
-            return View(model);
+            var icons = await _service.GetTop3IconsAsync();
+            return View(icons);
         }
 
 
