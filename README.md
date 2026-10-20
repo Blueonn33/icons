@@ -315,10 +315,10 @@ new Review
     - `Вход` - води към формата за вход.
 
   - Навигация - администратор
-  <img width="2559" height="144" alt="image" src="https://github.com/user-attachments/assets/87fe8442-707f-41ec-b19f-f2a648e7d316" />
+  <img width="1271" height="87" alt="image" src="https://github.com/user-attachments/assets/32e4b9d2-3d07-430b-a1cb-f645bc9e6bfb" />
 
   - Навигация - потребител
-  <img width="2559" height="143" alt="image" src="https://github.com/user-attachments/assets/95e432b0-7591-4805-a20c-3b99fe074e14" />
+  <img width="1272" height="84" alt="image" src="https://github.com/user-attachments/assets/ed444004-d3a1-4816-90f0-3aaf3f4fa347" />
 
 ## 👇 Долен колонтитул
 - Съдържа авторските права над icons
