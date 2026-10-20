@@ -1,54 +1,24 @@
-﻿using AutoMapper;
-using icons.Core.Contracts;
+﻿using icons.Core.Contracts;
+using icons.Core.ViewModels.Users;
 using icons.Data.Constants;
-using icons.Models.Icons;
-using icons.Models.Reviews;
-using icons.Models.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace icons.Controllers
 {
     [Authorize(Roles = Roles.Admin)]
-    public class UsersController : Controller
+    public class UsersController(IUserService _userService) : Controller
     {
-        private readonly IUserService _userService;
-        private readonly IIconService _iconService;
-        private readonly IReviewService _reviewService;
-        private readonly IMapper _mapper;
-
-        public UsersController(
-            IUserService userService,
-            IIconService iconService,
-            IReviewService reviewService,
-            IMapper mapper)
-        {
-            _userService = userService;
-            _iconService = iconService;
-            _reviewService = reviewService;
-            _mapper = mapper;
-        }
-
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var users = await _userService.GetAllUsersAsync();
-
-            var model = new UsersViewModel
-            {
-                Users = users.Select(u => new UserViewModel()
-                {
-                    Id = u.Id,
-                    Name = u.Name,
-                    Email = u.Email,
-                    ProfilePictureUrl = u.ProfilePictureUrl,
-                    IsDeleted = u.IsDeleted,
-                    Elixir = u.Elixir,
-                    Roles = u.Roles,
-                })
-            };
-
             var nonAdmins = users.Where(u => !u.Roles.Contains(Roles.Admin));
+
+            var model = new UsersAllViewModel()
+            {
+                Users = users
+            };
 
             if (!nonAdmins.Any())
             {
@@ -70,27 +40,8 @@ namespace icons.Controllers
         public async Task<IActionResult> UserProfile(string id)
         {
             var user = await _userService.GetUserProfileAsync(id);
-            var iconDtos = await _iconService.GetAllIconsByUserIdAsync(id);
-            var reviewsDtos = await _reviewService.GetAllReviewsByUserIdAsync(id);
 
-            var iconModels = _mapper.Map<IEnumerable<IconViewModel>>(iconDtos);
-            var reviewModels = _mapper.Map<IEnumerable<ReviewUserProfileViewModel>>(reviewsDtos);
-
-            var model = new UserProfileViewModel()
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                ProfilePictureUrl = user.ProfilePictureUrl,
-                DateRegistered = user.DateRegistered,
-                Elixir = user.Elixir,
-                RankImageUrl = _userService.GetRankImageAsync(user.Rank),
-                Rank = user.Rank,
-                Icons = iconModels,
-                Reviews = reviewModels
-            };
-
-            return View(model);
+            return View(user);
         }
 
         [HttpPost]
