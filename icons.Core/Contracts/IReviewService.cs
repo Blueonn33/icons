@@ -1,16 +1,15 @@
-﻿using icons.Core.Dtos.Review;
-using icons.Core.Enums;
+﻿using icons.Core.ViewModels.Reviews;
+using icons.Data.Enums;
 
 namespace icons.Core.Contracts
 {
     public interface IReviewService
     {
-        Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdAsync(int id);
-        Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort);
-        Task<IEnumerable<ReviewUserProfileGetDto>> GetAllReviewsByUserIdAsync(string userId);
-        Task<ReviewGetDto?> GetReviewByIdAsync(int id);
-        Task AddReviewAsync(ReviewCreateDto review);
-        Task<bool> UpdateReviewAsync(int id, ReviewUpdateDto review);
+        Task<IEnumerable<ReviewViewModel>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort);
+        Task<IEnumerable<ReviewUserProfileViewModel>> GetAllReviewsByUserIdAsync(string userId);
+        Task<ReviewViewModel?> GetReviewByIdAsync(int id);
+        Task AddReviewAsync(ReviewInputModel review);
+        Task<bool> UpdateReviewAsync(int id, ReviewInputModel review);
         Task<bool> DeleteReviewAsync(int id);
     }
 }
