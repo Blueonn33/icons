@@ -12,17 +12,6 @@ namespace icons.Data.Common
             _context = context;
         }
 
-        public async Task<IEnumerable<Icon>> GetAllIconsAsync()
-        {
-            return await _context.Icons
-                .Include(i => i.User)
-                .Where(i => i.User.IsDeleted == false)
-                .AsNoTracking()
-                .OrderByDescending(i => i.PublishedTime)
-                .ThenBy(i => i.Title)
-                .ToListAsync();
-        }
-
         public async Task<IEnumerable<Icon>> GetAllIconsByUserIdAsync(string userId)
         {
             return await _context.Icons
@@ -30,6 +19,7 @@ namespace icons.Data.Common
                 .Where(i => i.UserId == userId)
                 .OrderByDescending(i => i.PublishedTime)
                 .ThenBy(i => i.Title)
+                .Take(20)
                 .ToListAsync();
         }
 
@@ -49,6 +39,7 @@ namespace icons.Data.Common
                 _ => await query
                     .OrderByDescending(i => i.PublishedTime)
                     .ThenBy(i => i.Title)
+                    .Take(20)
                     .ToListAsync()
             };
         }
