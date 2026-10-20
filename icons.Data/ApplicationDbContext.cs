@@ -1,4 +1,4 @@
-﻿using icons.Data.EntityConfigurations;
+﻿using icons.Data.EntityTypeConfigurations;
 using icons.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
