@@ -15,14 +15,14 @@ namespace icons.Data.Models
         }
 
         [Required]
-        [StringLength(ReviewTitleMaxLength, MinimumLength = ReviewTitleMinLength)]
+        [MaxLength(ReviewTitleMaxLength)]
         public string Title
         {
             get; set;
         } = null!;
 
         [Required]
-        [StringLength(ReviewDescriptionMaxLength, MinimumLength = ReviewDescriptionMinLength)]
+        [MaxLength(ReviewDescriptionMaxLength)]
         public string Description
         {
             get; set;
@@ -40,14 +40,14 @@ namespace icons.Data.Models
         }
 
         [Required]
-        [StringLength(ReviewUserProfilePictureUrlLength)]
+        [MaxLength(ReviewUserProfilePictureUrlLength)]
         public string UserProfilePictureUrl
         {
             get; set;
         } = null!;
 
         [Required]
-        [StringLength(ReviewUsernameMaxLength, MinimumLength = ReviewUsernameMinLength)]
+        [MaxLength(ReviewUsernameMaxLength)]
         public string Username
         {
             get; set;
@@ -68,8 +68,7 @@ namespace icons.Data.Models
         [ForeignKey(nameof(User))]
         public string UserId
         {
-            get;
-            set;
+            get; set;
         } = null!;
 
         public virtual ApplicationUser User
