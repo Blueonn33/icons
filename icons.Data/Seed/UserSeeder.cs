@@ -1,5 +1,6 @@
 ﻿using icons.Data.Constants;
 using icons.Data.Enums;
+using icons.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
