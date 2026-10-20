@@ -1,7 +1,7 @@
-﻿using icons.Core.Contracts;
-using icons.Core.Dtos.Review;
-using icons.Data;
-using icons.Models.Reviews;
+﻿using AutoMapper;
+using icons.Core.Contracts;
+using icons.Core.ViewModels.Reviews;
+using icons.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,34 +9,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace icons.Controllers
 {
     [Authorize]
-    public class ReviewsController : Controller
+    public class ReviewsController(
+        IReviewService _reviewService,
+        IIconService _iconService,
+        UserManager<ApplicationUser> _userManager,
+        IMapper _mapper,
+        ILogger<ReviewsController> _logger) : Controller
     {
-        private readonly IReviewService _service;
-        private readonly IIconService _iconService;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<ReviewsController> _logger;
-
-        public ReviewsController(
-            IReviewService service,
-            IIconService iconService,
-            UserManager<ApplicationUser> userManager,
-            ILogger<ReviewsController> logger)
-        {
-            _service = service;
-            _iconService = iconService;
-            _userManager = userManager;
-            _logger = logger;
-        }
-
         [HttpPost]
-        public async Task<IActionResult> CreateReview(ReviewsCreateViewModel model)
+        public async Task<IActionResult> CreateReview(int iconId, ReviewInputModel model)
         {
             if (model.Rating == null)
             {
-                ModelState.AddModelError(nameof(ReviewsCreateViewModel.Rating), "Не си поставил оценка");
+                ModelState.AddModelError(nameof(ReviewInputModel.Rating), "Не си поставил оценка");
             }
 
-            var icon = await _iconService.GetIconByIdAsync(model.IconId);
+            var icon = await _iconService.GetIconByIdAsync(iconId);
             var user = await _userManager.GetUserAsync(User);
 
             if (icon == null)
@@ -51,18 +39,18 @@ namespace icons.Controllers
 
             try
             {
-                var review = new ReviewCreateDto
+                var review = new ReviewInputModel()
                 {
                     Title = model.Title,
                     Description = model.Description,
-                    Rating = model.Rating,
                     IconId = model.IconId,
-                    UserProfilePictureUrl = user.ProfilePictureUrl,
+                    Rating = model.Rating,
+                    UserId = user.Id,
                     Username = user.Name,
-                    UserId = user.Id
+                    UserProfilePictureUrl = user.ProfilePictureUrl
                 };
 
-                await _service.AddReviewAsync(review);
+                await _reviewService.AddReviewAsync(review);
                 TempData["Success"] = "Успешно написа ревю";
             }
             catch (Exception e)
@@ -80,7 +68,7 @@ namespace icons.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteReview(int id)
         {
-            var review = await _service.GetReviewByIdAsync(id);
+            var review = await _reviewService.GetReviewByIdAsync(id);
 
             if (review == null)
             {
@@ -89,7 +77,7 @@ namespace icons.Controllers
 
             try
             {
-                bool isDeleted = await _service.DeleteReviewAsync(id);
+                bool isDeleted = await _reviewService.DeleteReviewAsync(id);
 
                 if (!isDeleted)
                 {
@@ -111,9 +99,9 @@ namespace icons.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateReview(int id, ReviewsUpdateViewModel model)
+        public async Task<IActionResult> UpdateReview(int id, ReviewInputModel model)
         {
-            var review = await _service.GetReviewByIdAsync(id);
+            var review = await _reviewService.GetReviewByIdAsync(id);
 
             if (review == null)
             {
@@ -122,14 +110,14 @@ namespace icons.Controllers
 
             try
             {
-                var updateReview = new ReviewUpdateDto
+                var updateReview = new ReviewInputModel
                 {
                     Id = model.Id,
                     Title = model.Title,
                     Description = model.Description
                 };
 
-                bool isUpdated = await _service.UpdateReviewAsync(updateReview.Id, updateReview);
+                bool isUpdated = await _reviewService.UpdateReviewAsync(updateReview.Id, updateReview);
 
                 if (!isUpdated)
                 {
