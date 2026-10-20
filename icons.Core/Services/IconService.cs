@@ -1,7 +1,7 @@
 ﻿using icons.Core.Contracts;
-using icons.Core.Dtos.Icon;
-using icons.Core.Dtos.Review;
-using icons.Data;
+using icons.Core.ViewModels.Home;
+using icons.Core.ViewModels.Icons;
+using icons.Core.ViewModels.Reviews;
 using icons.Data.Common;
 using icons.Data.Enums;
 using icons.Data.Models;
@@ -9,50 +9,32 @@ using Microsoft.AspNetCore.Identity;
 
 namespace icons.Core.Services
 {
-    public class IconService : IIconService
+    public class IconService(
+        IIconRepository _repository,
+        IUserService _userService,
+        UserManager<ApplicationUser> _userManager) : IIconService
     {
-        private readonly IIconRepository _repository;
-        private readonly IUserService _userService;
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        public IconService(IIconRepository repository, IUserService userService, UserManager<ApplicationUser> userManager)
-        {
-            _repository = repository;
-            _userService = userService;
-            _userManager = userManager;
-        }
-
-        public async Task<IEnumerable<IconGetDto>> GetAllIconsAsync()
-        {
-            var icons = await _repository.GetAllIconsAsync();
-
-            return icons.Select(i => new IconGetDto
-            {
-                Id = i.Id,
-                ImageUrl = i.ImageUrl,
-                Title = i.Title,
-                Username = i.User.Name,
-                UserProfilePictureUrl = i.User.ProfilePictureUrl,
-                UserId = i.UserId
-            });
-        }
-
-        public async Task<IEnumerable<IconGetDto>> GetAllIconsSortedAsync(EnumIconSortOptions sort)
+        public async Task<IconsAllViewModel> GetAllIconsSortedAsync(EnumIconSortOptions sort)
         {
             var icons = await _repository.GetAllIconsSortedAsync(sort);
 
-            return icons.Select(i => new IconGetDto
+            var model = new IconsAllViewModel()
             {
-                Id = i.Id,
-                ImageUrl = i.ImageUrl,
-                Title = i.Title,
-                Username = i.User.Name,
-                UserProfilePictureUrl = i.User.ProfilePictureUrl,
-                UserId = i.UserId
-            });
+                GetAllIcons = icons.Select(i => new IconViewModel()
+                {
+                    Id = i.Id,
+                    Title = i.Title,
+                    ImageUrl = i.ImageUrl,
+                    UserId = i.User.Id,
+                    UserProfilePictureUrl = i.User.ProfilePictureUrl,
+                    Username = i.User.Name
+                })
+            };
+
+            return model;
         }
 
-        public async Task<IEnumerable<IconGetDto>> GetAllIconsByUserIdAsync(string userId)
+        public async Task<IEnumerable<IconViewModel>> GetAllIconsByUserIdAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
 
@@ -63,33 +45,38 @@ namespace icons.Core.Services
 
             var icons = await _repository.GetAllIconsByUserIdAsync(userId);
 
-            return icons.Select(i => new IconGetDto
+            return icons.Select(i => new IconViewModel()
             {
                 Id = i.Id,
-                ImageUrl = i.ImageUrl,
                 Title = i.Title,
-                Username = user.Name,
-                UserProfilePictureUrl = user.ProfilePictureUrl,
-                UserId = userId
+                ImageUrl = i.ImageUrl,
+                UserId = i.User.Id,
+                UserProfilePictureUrl = i.User.ProfilePictureUrl,
+                Username = i.User.Name
             });
         }
 
-        public async Task<IEnumerable<IconGetDto>> GetTop3IconsAsync()
+        public async Task<Top3IconsViewModel> GetTop3IconsAsync()
         {
             var icons = await _repository.GetTop3IconsAsync();
 
-            return icons.Select(i => new IconGetDto
+            var model = new Top3IconsViewModel()
             {
-                Id = i.Id,
-                ImageUrl = i.ImageUrl,
-                Title = i.Title,
-                Username = i.User.Name,
-                UserProfilePictureUrl = i.User.ProfilePictureUrl,
-                UserId = i.UserId
-            });
+                Top3Icons = icons.Select(i => new IconViewModel()
+                {
+                    Id = i.Id,
+                    Title = i.Title,
+                    ImageUrl = i.ImageUrl,
+                    UserId = i.User.Id,
+                    UserProfilePictureUrl = i.User.ProfilePictureUrl,
+                    Username = i.User.Name
+                })
+            };
+
+            return model;
         }
 
-        public async Task<IconGetDescriptionDto?> GetIconByIdAsync(int id)
+        public async Task<IconDetailsViewModel?> GetIconByIdAsync(int id)
         {
             if (id <= 0)
             {
@@ -114,7 +101,7 @@ namespace icons.Core.Services
                 ? icon.Reviews.Average(r => (int)r.Rating)
                 : 0;
 
-            return new IconGetDescriptionDto
+            return new IconDetailsViewModel()
             {
                 Id = icon.Id,
                 ImageUrl = icon.ImageUrl,
@@ -124,23 +111,31 @@ namespace icons.Core.Services
                 Username = user.Name,
                 UserProfilePictureUrl = user.ProfilePictureUrl,
                 UserId = icon.UserId,
-                Reviews = icon.Reviews.Select(r => new ReviewGetDto
+                Reviews = new ReviewsAllViewModel()
                 {
-                    Id = r.Id,
-                    Title = r.Title,
-                    Description = r.Description,
-                    Rating = r.Rating,
-                    PublishedTime = r.PublishedTime,
-                    Username = r.User.Name,
-                    UserProfilePictureUrl = r.User.ProfilePictureUrl,
-                    RankImageUrl = _userService.GetRankImageAsync(r.User.Rank),
-                    Rank = r.User.Rank,
-                    IconId = r.IconId
-                }).ToList()
+                    Reviews = icon.Reviews.Select(r => new ReviewViewModel()
+                    {
+                        Id = r.Id,
+                        Title = r.Title,
+                        Description = r.Description,
+                        PublishedTime = r.PublishedTime,
+                        IconId = r.IconId,
+                        Rank = r.User.Rank,
+                        RankImageUrl = _userService.GetRankImage(r.User.Rank),
+                        Rating = r.Rating,
+                        UserId = r.UserId,
+                        Username = r.User.Name,
+                        UserProfilePictureUrl = r.User.ProfilePictureUrl
+                    }),
+                    IconId = icon.Id,
+                    UserId = user.Id,
+                    Rank = user.Rank,
+                    RankImageUrl = _userService.GetRankImage(user.Rank)
+                }
             };
         }
 
-        public async Task AddIconAsync(IconCreateDto icon)
+        public async Task AddIconAsync(IconInputModel icon)
         {
             var user = await _userManager.FindByIdAsync(icon.UserId);
 
@@ -167,7 +162,7 @@ namespace icons.Core.Services
             await _userService.UpdateRankAsync(user);
         }
 
-        public async Task<bool> UpdateIconAsync(int id, IconUpdateDto icon)
+        public async Task<bool> UpdateIconAsync(int id, IconUpdateInputModel icon)
         {
             if (id <= 0)
             {
