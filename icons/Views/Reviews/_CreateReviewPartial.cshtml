@@ -1,10 +1,10 @@
 ﻿@using icons.Data.Enums
-@model ReviewsCreateViewModel;
+@model ReviewInputModel;
 
 <section class="container p-0">
     <form class="add-review-form border rounded-3 p-3 text-light mb-5" asp-action="CreateReview" asp-controller="Reviews">
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-        <input type="hidden" asp-for="IconId"/>
+        <input type="hidden" name="iconId" value="@Model.IconId" />
 
         <div class="mb-3">
             <label asp-for="Title">заглавие</label>
@@ -48,7 +48,7 @@
                     }
                     else
                     {
-                        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-secondary">добави</a>
+                        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-secondary">добави</a>
                     }
                 }
             </div>

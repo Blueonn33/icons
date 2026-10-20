@@ -1,18 +1,10 @@
-﻿using icons.Data.Enums;
-
-namespace icons.Core.Dtos.User
+﻿namespace icons.Core.ViewModels.Users
 {
-    public class UserGetDto
+    public class UserViewModel
     {
         public string Id
         {
             get; set;
-        } = null!;
-
-        public string ProfilePictureUrl
-        {
-            get;
-            set;
         } = null!;
 
         public string Name
@@ -25,14 +17,20 @@ namespace icons.Core.Dtos.User
             get; set;
         } = null!;
 
+        public string ProfilePictureUrl
+        {
+            get; set;
+        } = null!;
+
         public bool IsDeleted
         {
             get; set;
         }
 
-        public int Elixir { get; set; }
-
-        public EnumUserElixirRank Rank { get; set; }
+        public int Elixir
+        {
+            get; set;
+        }
 
         public IEnumerable<string> Roles
         {

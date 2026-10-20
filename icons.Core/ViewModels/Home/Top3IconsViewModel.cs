@@ -1,6 +1,6 @@
-﻿using icons.Models.Icons;
+﻿using icons.Core.ViewModels.Icons;
 
-namespace icons.Models.Home
+namespace icons.Core.ViewModels.Home
 {
     public class Top3IconsViewModel
     {

@@ -1,4 +1,4 @@
-namespace icons.Models
+namespace icons.Core.ViewModels
 {
     public class ErrorViewModel
     {

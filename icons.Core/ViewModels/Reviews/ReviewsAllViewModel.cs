@@ -1,9 +1,8 @@
-﻿using icons.Core.Enums;
-using icons.Data.Enums;
+﻿using icons.Data.Enums;
 
-namespace icons.Models.Reviews
+namespace icons.Core.ViewModels.Reviews
 {
-    public class ReviewsViewModel
+    public class ReviewsAllViewModel
     {
         public IEnumerable<ReviewViewModel> Reviews { get; set; } = new List<ReviewViewModel>();
 

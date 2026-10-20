@@ -1,4 +1,4 @@
-﻿namespace icons.Core.Enums
+﻿namespace icons.Data.Enums
 {
     public enum EnumReviewSortOptions
     {

@@ -1,4 +1,4 @@
-﻿using icons.Core.Enums;
+﻿using icons.Data.Enums;
 using icons.Data.Models;
 
 namespace icons.Data.Common

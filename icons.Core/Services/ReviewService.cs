@@ -1,29 +1,21 @@
-﻿using icons.Core.Contracts;
-using icons.Core.Dtos.Review;
-using icons.Core.Enums;
-using icons.Data;
+﻿using AutoMapper;
+using icons.Core.Contracts;
+using icons.Core.ViewModels.Reviews;
 using icons.Data.Common;
+using icons.Data.Enums;
 using icons.Data.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace icons.Core.Services
 {
-    public class ReviewService : IReviewService
+    public class ReviewService(
+        IReviewRepository _repository,
+        IIconRepository _iconRepository,
+        IUserService _userService,
+        UserManager<ApplicationUser> _userManager,
+        IMapper _mapper) : IReviewService
     {
-        private readonly IReviewRepository _repository;
-        private readonly IIconRepository _iconRepository;
-        private readonly IUserService _userService;
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        public ReviewService(IReviewRepository repository, IIconRepository iconRepository, IUserService userService, UserManager<ApplicationUser> userManager)
-        {
-            _repository = repository;
-            _iconRepository = iconRepository;
-            _userService = userService;
-            _userManager = userManager;
-        }
-
-        public async Task AddReviewAsync(ReviewCreateDto review)
+        public async Task AddReviewAsync(ReviewInputModel review)
         {
             var user = await _userManager.FindByIdAsync(review.UserId);
 
@@ -83,32 +75,7 @@ namespace icons.Core.Services
             return true;
         }
 
-        public async Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdAsync(int id)
-        {
-            var icon = await _iconRepository.GetByIdAsync(id);
-
-            if (icon == null)
-            {
-                throw new KeyNotFoundException($"Икона с ID: {id} не е открита");
-            }
-
-            var reviews = await _repository.GetAllReviewsByIconIdAsync(id);
-
-            return reviews.Select(r => new ReviewGetDto
-            {
-                Id = r.Id,
-                Title = r.Title,
-                Description = r.Description,
-                Rating = r.Rating,
-                PublishedTime = r.PublishedTime,
-                Username = r.Username,
-                UserProfilePictureUrl = r.UserProfilePictureUrl,
-                UserId = r.UserId,
-                IconId = r.IconId
-            });
-        }
-
-        public async Task<IEnumerable<ReviewGetDto>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort)
+        public async Task<IEnumerable<ReviewViewModel>> GetAllReviewsByIconIdSortedAsync(int id, EnumReviewSortOptions sort)
         {
             var icon = await _iconRepository.GetByIdAsync(id);
 
@@ -119,23 +86,23 @@ namespace icons.Core.Services
 
             var reviews = await _repository.GetAllReviewsByIconIdSortedAsync(id, sort);
 
-            return reviews.Select(r => new ReviewGetDto
+            return reviews.Select(r => new ReviewViewModel()
             {
                 Id = r.Id,
                 Title = r.Title,
                 Description = r.Description,
-                Rating = r.Rating,
                 PublishedTime = r.PublishedTime,
-                Username = r.User.Name,
-                UserProfilePictureUrl = r.User.ProfilePictureUrl,
-                UserId = r.UserId,
-                RankImageUrl = _userService.GetRankImageAsync(r.User.Rank),
+                IconId = r.IconId,
                 Rank = r.User.Rank,
-                IconId = r.IconId
+                RankImageUrl = _userService.GetRankImage(r.User.Rank),
+                Rating = r.Rating,
+                UserId = r.UserId,
+                Username = r.User.Name,
+                UserProfilePictureUrl = r.User.ProfilePictureUrl
             });
         }
 
-        public async Task<IEnumerable<ReviewUserProfileGetDto>> GetAllReviewsByUserIdAsync(string userId)
+        public async Task<IEnumerable<ReviewUserProfileViewModel>> GetAllReviewsByUserIdAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
 
@@ -146,18 +113,10 @@ namespace icons.Core.Services
 
             var reviews = await _repository.GetAllReviewsByUserIdAsync(userId);
 
-            return reviews.Select(r => new ReviewUserProfileGetDto
-            {
-                Id = r.Id,
-                Description = r.Description,
-                Rating = r.Rating,
-                Title = r.Title,
-                IconId = r.IconId,
-                UserId = userId
-            });
+            return _mapper.Map<IEnumerable<ReviewUserProfileViewModel>>(reviews);
         }
 
-        public async Task<ReviewGetDto?> GetReviewByIdAsync(int id)
+        public async Task<ReviewViewModel?> GetReviewByIdAsync(int id)
         {
             var review = await _repository.GetReviewByIdAsync(id);
 
@@ -166,23 +125,22 @@ namespace icons.Core.Services
                 throw new KeyNotFoundException($"Ревю с ID: {id} не е открито");
             }
 
-            return new ReviewGetDto
+            return new ReviewViewModel()
             {
                 Id = review.Id,
                 Title = review.Title,
                 Description = review.Description,
-                Rating = review.Rating,
+                IconId = review.IconId,
                 PublishedTime = review.PublishedTime,
-                Username = review.User.Name,
-                UserProfilePictureUrl = review.User.ProfilePictureUrl,
-                UserId = review.UserId,
-                RankImageUrl = _userService.GetRankImageAsync(review.User.Rank),
                 Rank = review.User.Rank,
-                IconId = review.IconId
+                RankImageUrl = _userService.GetRankImage(review.User.Rank),
+                Rating = review.Rating,
+                UserId = review.UserId,
+                Username = review.Username
             };
         }
 
-        public async Task<bool> UpdateReviewAsync(int id, ReviewUpdateDto review)
+        public async Task<bool> UpdateReviewAsync(int id, ReviewInputModel review)
         {
             if (id <= 0)
             {

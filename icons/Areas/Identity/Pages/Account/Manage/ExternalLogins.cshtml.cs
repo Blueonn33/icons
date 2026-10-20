@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using icons.Data;
+using icons.Data.Models;
 
 namespace icons.Areas.Identity.Pages.Account.Manage;
 

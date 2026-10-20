@@ -1,15 +1,10 @@
 ﻿using icons.Data.Enums;
 
-namespace icons.Models.Icons
+namespace icons.Core.ViewModels.Icons
 {
-    public class IconsViewModel
+    public class IconsAllViewModel
     {
         public IEnumerable<IconViewModel> GetAllIcons { get; set; } = new List<IconViewModel>();
-
-        public string UserId
-        {
-            get; set;
-        } = null!;
 
         public EnumIconSortOptions Sort
         {

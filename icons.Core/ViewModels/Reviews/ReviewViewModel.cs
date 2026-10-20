@@ -1,6 +1,6 @@
 ﻿using icons.Data.Enums;
 
-namespace icons.Models.Reviews
+namespace icons.Core.ViewModels.Reviews
 {
     public class ReviewViewModel
     {

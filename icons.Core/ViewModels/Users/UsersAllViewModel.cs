@@ -1,6 +1,6 @@
-﻿namespace icons.Models.Users
+﻿namespace icons.Core.ViewModels.Users
 {
-    public class UsersViewModel
+    public class UsersAllViewModel
     {
         public IEnumerable<UserViewModel>? Users
         {

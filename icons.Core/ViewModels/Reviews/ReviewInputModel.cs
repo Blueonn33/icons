@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using icons.Data.Enums;
+using System.ComponentModel.DataAnnotations;
 using static icons.Data.Constants.ValidationConstants;
 
-namespace icons.Models.Reviews
+namespace icons.Core.ViewModels.Reviews
 {
-    public class ReviewsUpdateViewModel
+    public class ReviewInputModel
     {
         public int Id
         {
@@ -24,6 +25,32 @@ namespace icons.Models.Reviews
         {
             get;
             set;
+        } = null!;
+
+        [Required(ErrorMessage = "Постави оценка")]
+        public EnumReviewRating? Rating
+        {
+            get; set;
+        }
+
+        public int IconId
+        {
+            get; set;
+        }
+
+        public string Username
+        {
+            get; set;
+        } = null!;
+
+        public string UserProfilePictureUrl
+        {
+            get; set;
+        } = null!;
+
+        public string UserId
+        {
+            get; set;
         } = null!;
     }
 }

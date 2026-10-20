@@ -1,18 +1,15 @@
-﻿@using icons.Core.Enums
-@model ReviewsViewModel
+﻿@using icons.Data.Enums
+@model ReviewsAllViewModel
 
 <section class="container mt-5 pb-5 body-container">
     <div class="mb-4">
         <h2 class="text-light">напиши ревю</h2>
     </div>
     <section>
-        @await Html.PartialAsync(
-            "~/Views/Reviews/_CreateReviewPartial.cshtml",
-            new ReviewsCreateViewModel { IconId = Model.IconId }
-        )
+        <partial name="~/Views/Reviews/_CreateReviewPartial.cshtml" model="@(new ReviewInputModel { IconId = Model.IconId })" />
     </section>
     <section>
-        @await Html.PartialAsync("~/Views/Reviews/_UpdateReviewPartial.cshtml", new ReviewsUpdateViewModel())
+        <partial name="~/Views/Reviews/_UpdateReviewPartial.cshtml" model="@(new ReviewInputModel())" />
     </section>
     @if (Model.Reviews.Any())
     {
@@ -29,8 +26,15 @@
                     </div>
                 </div>
             </form>
-
         </section>
+    }
+    else
+    {
+        <div class="container mt-5" style="padding-bottom: 20vh">
+            <hr/>
+            <p class="fs-5 text-light">бъди първия написал ревю</p>
+            <hr/>
+        </div>
     }
     
     @foreach (var review in Model.Reviews)

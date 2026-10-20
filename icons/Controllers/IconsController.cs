@@ -1,12 +1,8 @@
-﻿using AutoMapper;
-using icons.Core.Contracts;
-using icons.Core.Dtos.Icon;
-using icons.Core.Enums;
+﻿using icons.Core.Contracts;
 using icons.Core.Services;
-using icons.Data;
+using icons.Core.ViewModels.Icons;
 using icons.Data.Enums;
-using icons.Models.Icons;
-using icons.Models.Reviews;
+using icons.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,46 +10,20 @@ using Microsoft.AspNetCore.Mvc;
 namespace icons.Controllers
 {
     [Authorize]
-    public class IconsController : Controller
+    public class IconsController(
+        IIconService _service,
+        IReviewService _reviewService,
+        UserManager<ApplicationUser> _userManager,
+        CloudinaryService _cloudinary,
+        ILogger<IconsController> _logger) : Controller
     {
-        private readonly IIconService _service;
-        private readonly IReviewService _reviewService;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly CloudinaryService _cloudinary;
-        private readonly IMapper _mapper;
-        private readonly ILogger<IconsController> _logger;
-
-        public IconsController(
-            IIconService service,
-            IReviewService reviewService,
-            UserManager<ApplicationUser> userManager,
-            CloudinaryService cloudinary,
-            IMapper mapper,
-            ILogger<IconsController> logger)
-        {
-            _service = service;
-            _reviewService = reviewService;
-            _userManager = userManager;
-            _cloudinary = cloudinary;
-            _mapper = mapper;
-            _logger = logger;
-        }
-
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Index(EnumIconSortOptions sort = EnumIconSortOptions.DateDesc)
         {
-            var user = await _userManager.GetUserAsync(User);
-            var dtos = await _service.GetAllIconsSortedAsync(sort);
+            var icons = await _service.GetAllIconsSortedAsync(sort);
 
-            var icons = new IconsViewModel()
-            {
-                GetAllIcons = _mapper.Map<IEnumerable<IconViewModel>>(dtos),
-                UserId = user?.Id ?? string.Empty,
-                Sort = sort
-            };
-
-            if (!icons.GetAllIcons.Any())
+            if (icons.GetAllIcons.Any() == false)
             {
                 return View("NoIcons");
             }
@@ -77,22 +47,10 @@ namespace icons.Controllers
                 return NotFound();
             }
 
-            var reviewDtos = await _reviewService.GetAllReviewsByIconIdSortedAsync(id, sort);
+            icon.Reviews.Reviews = await _reviewService.GetAllReviewsByIconIdSortedAsync(id, sort);
+            icon.Reviews.Sort = sort;
 
-            var model = new IconDescriptionViewModel
-            {
-                Id = icon.Id,
-                ImageUrl = icon.ImageUrl,
-                Title = icon.Title,
-                Description = icon.Description,
-                Username = icon.Username,
-                UserProfilePictureUrl = icon.UserProfilePictureUrl,
-                UserId = icon.UserId,
-                AverageRating = icon.AverageRating,
-                Reviews = _mapper.Map<IEnumerable<ReviewViewModel>>(reviewDtos)
-            };
-
-            return View(model);
+            return View(icon);
         }
 
         [HttpGet]
@@ -102,13 +60,8 @@ namespace icons.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateIcon(IconsCreateViewModel model)
+        public async Task<IActionResult> CreateIcon(IconInputModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(nameof(Create), model);
-            }
-
             var user = await _userManager.GetUserAsync(User);
 
             if (user == null)
@@ -120,9 +73,11 @@ namespace icons.Controllers
             {
                 var imageUrl = await _cloudinary.UploadImageAsync(model.ImageFile, "icons");
 
-                var icon = new IconCreateDto()
+                var icon = new IconInputModel()
                 {
+                    Id = model.Id,
                     ImageUrl = imageUrl,
+                    ImageFile = model.ImageFile,
                     Title = model.Title,
                     Description = model.Description,
                     UserId = user.Id
@@ -184,10 +139,11 @@ namespace icons.Controllers
                 return NotFound();
             }
 
-            var updateIcon = new IconsUpdateViewModel()
+            var updateIcon = new IconUpdateInputModel()
             {
                 Id = id,
                 Title = icon.Title,
+                ImageUrl = icon.ImageUrl,
                 Description = icon.Description
             };
 
@@ -195,11 +151,11 @@ namespace icons.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateIcon(int id, IconsUpdateViewModel model)
+        public async Task<IActionResult> UpdateIcon(int id, IconUpdateInputModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(nameof(Create), model);
+                return View(nameof(Update), model);
             }
 
             var icon = await _service.GetIconByIdAsync(id);
@@ -214,10 +170,11 @@ namespace icons.Controllers
                         "icons");
                 }
 
-                var updateIcon = new IconUpdateDto
+                var updateIcon = new IconUpdateInputModel
                 {
                     Id = model.Id,
                     ImageUrl = imageUrl,
+                    ImageFile = model.ImageFile,
                     Title = model.Title,
                     Description = model.Description
                 };

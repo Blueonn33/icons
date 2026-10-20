@@ -1,8 +1,8 @@
-﻿using icons.Data.Enums;
-using icons.Models.Icons;
-using icons.Models.Reviews;
+﻿using icons.Core.ViewModels.Icons;
+using icons.Core.ViewModels.Reviews;
+using icons.Data.Enums;
 
-namespace icons.Models.Users
+namespace icons.Core.ViewModels.Users
 {
     public class UserProfileViewModel
     {

@@ -1,6 +1,8 @@
-﻿namespace icons.Models.Icons
+﻿using icons.Core.ViewModels.Reviews;
+
+namespace icons.Core.ViewModels.Icons
 {
-    public class IconViewModel
+    public class IconDetailsViewModel
     {
         public int Id
         {
@@ -17,6 +19,16 @@
             get; set;
         } = null!;
 
+        public string? Description
+        {
+            get; set;
+        }
+
+        public double AverageRating
+        {
+            get; set;
+        }
+
         public string Username
         {
             get; set;
@@ -28,6 +40,11 @@
         } = null!;
 
         public string UserId
+        {
+            get; set;
+        } = null!;
+
+        public ReviewsAllViewModel Reviews
         {
             get; set;
         } = null!;

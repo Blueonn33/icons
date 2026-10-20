@@ -1,8 +1,6 @@
-﻿using icons.Core.Dtos.Review;
-
-namespace icons.Core.Dtos.Icon
+﻿namespace icons.Core.ViewModels.Icons
 {
-    public class IconGetDescriptionDto
+    public class IconViewModel
     {
         public int Id
         {
@@ -19,21 +17,6 @@ namespace icons.Core.Dtos.Icon
             get; set;
         } = null!;
 
-        public string? Description
-        {
-            get; set;
-        }
-
-        public double AverageRating
-        {
-            get; set;
-        }
-
-        public DateTime PublishedTime
-        {
-            get; set;
-        }
-
         public string Username
         {
             get; set;
@@ -48,11 +31,5 @@ namespace icons.Core.Dtos.Icon
         {
             get; set;
         } = null!;
-
-        public List<ReviewGetDto> Reviews
-        {
-            get;
-            set;
-        } = new();
     }
 }

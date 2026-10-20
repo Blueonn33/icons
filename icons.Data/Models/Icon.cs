@@ -20,14 +20,14 @@ namespace icons.Data.Models
         } = null!;
 
         [Required]
-        [StringLength(IconTitleMaxLength, MinimumLength = IconTitleMinLength)]
+        [MaxLength(IconTitleMaxLength)]
         public string Title
         {
             get; set;
         } = null!;
 
         [Required]
-        [StringLength(IconDescriptionMaxLength, MinimumLength = IconDescriptionMinLength)]
+        [MaxLength(IconDescriptionMaxLength)]
         public string Description
         {
             get; set;
@@ -45,14 +45,14 @@ namespace icons.Data.Models
         }
 
         [Required]
-        [StringLength(IconUsernameMaxLength, MinimumLength = IconUsernameMinLength)]
+        [MaxLength(IconUsernameMaxLength)]
         public string Username
         {
             get; set;
         } = null!;
 
         [Required]
-        [StringLength(UserProfilePictureUrlLength)]
+        [MaxLength(UserProfilePictureUrlLength)]
         public string UserProfilePictureUrl
         {
             get;

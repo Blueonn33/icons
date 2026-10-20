@@ -1,28 +1,23 @@
-﻿using icons.Core.Contracts;
-using icons.Core.Dtos.Icon;
-using icons.Core.Dtos.Review;
-using icons.Core.Dtos.User;
-using icons.Data;
+﻿using AutoMapper;
+using icons.Core.Contracts;
+using icons.Core.ViewModels.Icons;
+using icons.Core.ViewModels.Reviews;
+using icons.Core.ViewModels.Users;
 using icons.Data.Constants;
 using icons.Data.Enums;
+using icons.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace icons.Core.Services
 {
-    public class UserService : IUserService
+    public class UserService(
+        UserManager<ApplicationUser> _userManager,
+        IConfiguration _configuration,
+        IMapper _mapper) : IUserService
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IConfiguration _configuration;
-
-        public UserService(UserManager<ApplicationUser> userManager, IConfiguration configuration)
-        {
-            _userManager = userManager;
-            _configuration = configuration;
-        }
-
-        public async Task<UserProfileGetDto> GetUserProfileAsync(string id)
+        public async Task<UserProfileViewModel> GetUserProfileAsync(string id)
         {
             var user = await _userManager.Users
                 .Include(u => u.Icons)
@@ -34,34 +29,28 @@ namespace icons.Core.Services
                 throw new KeyNotFoundException("Потребителят не е открит");
             }
 
-            return new UserProfileGetDto
+            var model = new UserProfileViewModel()
             {
                 Id = user.Id,
-                Email = user.Email,
+                Email = user.Email!,
                 Name = user.Name,
                 ProfilePictureUrl = user.ProfilePictureUrl,
                 DateRegistered = user.DateRegistered,
                 Elixir = user.Elixir,
                 Rank = user.Rank,
-                Icons = user.Icons.Select(i => new IconUserProfileGetDto()
+                RankImageUrl = GetRankImage(user.Rank),
+                Icons = user.Icons.Select(i => new IconViewModel()
                 {
                     Id = i.Id,
-                    Title = i.Title,
                     ImageUrl = i.ImageUrl,
-                    Username = i.Username,
-                    UserProfilePictureUrl = i.UserProfilePictureUrl,
-                    UserId = user.Id,
-                }).ToList(),
-                Reviews = user.Reviews.Select(r => new ReviewUserProfileGetDto()
-                {
-                    Id = r.Id,
-                    Description = r.Description,
-                    IconId = r.IconId,
-                    Rating = r.Rating,
-                    Title = r.Title,
-                    UserId = r.UserId
-                }).ToList()
+                    UserId = i.UserId,
+                    UserProfilePictureUrl = i.User.ProfilePictureUrl,
+                    Username = i.User.Name
+                }),
+                Reviews = _mapper.Map<IEnumerable<ReviewUserProfileViewModel>>(user.Reviews)
             };
+
+            return model;
         }
 
         public async Task DeleteUserAsync(string id)
@@ -77,7 +66,7 @@ namespace icons.Core.Services
             await _userManager.UpdateAsync(user);
         }
 
-        public string GetRankImageAsync(EnumUserElixirRank rank)
+        public string GetRankImage(EnumUserElixirRank rank)
         {
             return rank switch
             {
@@ -124,12 +113,13 @@ namespace icons.Core.Services
             await _userManager.UpdateAsync(user);
         }
 
-        public async Task<IEnumerable<UserGetDto>> GetAllUsersAsync()
+        public async Task<IEnumerable<UserViewModel>> GetAllUsersAsync()
         {
             var users = await _userManager.Users
                 .OrderByDescending(u => u.Rank)
                 .ToListAsync();
-            var result = new List<UserGetDto>();
+
+            var result = new List<UserViewModel>();
 
             foreach (var user in users)
             {
@@ -140,11 +130,11 @@ namespace icons.Core.Services
 
                 var roles = await _userManager.GetRolesAsync(user);
 
-                result.Add(new UserGetDto
+                result.Add(new UserViewModel()
                 {
                     Id = user.Id,
                     Name = user.Name,
-                    Email = user.Email,
+                    Email = user.Email!,
                     ProfilePictureUrl = user.ProfilePictureUrl,
                     IsDeleted = user.IsDeleted,
                     Roles = roles

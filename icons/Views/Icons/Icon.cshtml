@@ -1,4 +1,4 @@
-﻿@model IconDescriptionViewModel;
+﻿@model IconDetailsViewModel;
 @{
     ViewData["Title"] = "Icon";
     ViewData["BodyClass"] = "icon-container";
@@ -40,18 +40,7 @@
     </section>
     <section>
         <partial name="~/Views/Reviews/_ReviewScriptsPartial.cshtml"/>
-        @await Html.PartialAsync(
-            "~/Views/Reviews/_ReviewsPartial.cshtml",
-            new ReviewsViewModel
-            {
-                Reviews = Model.Reviews,
-                IconId = Model.Id,
-                UserId = Model.UserId,
-                Sort = Model.Sort,
-                RankImageUrl = Model.RankImageUrl,
-                Rank = Model.Rank
-            }
-        )
+        <partial name="~/Views/Reviews/_ReviewsAllPartial.cshtml" model="Model.Reviews" />
     </section>
 </div>
 

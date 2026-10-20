@@ -3,7 +3,7 @@
 
 
 using icons.Core.Services;
-using icons.Data;
+using icons.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

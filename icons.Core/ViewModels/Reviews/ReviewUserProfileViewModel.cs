@@ -1,8 +1,8 @@
 ﻿using icons.Data.Enums;
 
-namespace icons.Core.Dtos.Review
+namespace icons.Core.ViewModels.Reviews
 {
-    public class ReviewUserProfileGetDto
+    public class ReviewUserProfileViewModel
     {
         public int Id
         {
