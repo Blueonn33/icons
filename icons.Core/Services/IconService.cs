@@ -35,7 +35,7 @@ namespace icons.Core.Services
             return model;
         }
 
-        public async Task<IEnumerable<IconViewModel>> GetAllIconsByUserIdAsync(string userId)
+        public async Task<IEnumerable<IconUserProfileViewModel>> GetAllIconsByUserIdAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
 
@@ -46,14 +46,12 @@ namespace icons.Core.Services
 
             var icons = await _repository.GetAllIconsByUserIdAsync(userId);
 
-            return icons.Select(i => new IconViewModel()
+            return icons.Select(i => new IconUserProfileViewModel()
             {
                 Id = i.Id,
                 Title = i.Title,
                 ImageUrl = i.ImageUrl,
-                UserId = i.User.Id,
-                UserProfilePictureUrl = i.User.ProfilePictureUrl,
-                Username = i.User.Name
+                UserId = i.User.Id
             });
         }
 
