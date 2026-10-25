@@ -11,6 +11,7 @@ namespace icons.Core.Mappings
         {
             CreateMap<Icon, IconViewModel>();
             CreateMap<Icon, Top3IconsViewModel>();
+            CreateMap<Icon, IconUserProfileViewModel>();
         }
     }
 }
