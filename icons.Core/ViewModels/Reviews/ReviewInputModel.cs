@@ -23,8 +23,7 @@ namespace icons.Core.ViewModels.Reviews
         [StringLength(ReviewDescriptionMaxLength, MinimumLength = ReviewDescriptionMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1}")]
         public string Description
         {
-            get;
-            set;
+            get; set;
         } = null!;
 
         [Required(ErrorMessage = "Постави оценка")]

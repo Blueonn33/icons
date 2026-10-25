@@ -42,8 +42,7 @@ namespace icons.Core.ViewModels.Reviews
 
         public string RankImageUrl
         {
-            get;
-            set;
+            get; set;
         } = null!;
 
         public EnumUserElixirRank Rank

@@ -16,8 +16,7 @@ public class ApplicationUser : IdentityUser
     [StringLength(UserProfilePictureUrlLength)]
     public string ProfilePictureUrl
     {
-        get;
-        set;
+        get; set;
     }
 
     public bool IsDeleted

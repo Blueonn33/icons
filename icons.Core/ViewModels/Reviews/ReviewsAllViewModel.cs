@@ -18,8 +18,7 @@ namespace icons.Core.ViewModels.Reviews
 
         public string UserId
         {
-            get;
-            set;
+            get; set;
         } = null!;
 
         public string RankImageUrl

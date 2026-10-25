@@ -32,10 +32,6 @@
             get; set;
         }
 
-        public IEnumerable<string> Roles
-        {
-            get;
-            set;
-        } = new List<string>();
+        public IEnumerable<string> Roles { get; set; } = new List<string>();
     }
 }

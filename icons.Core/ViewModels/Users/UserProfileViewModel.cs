@@ -8,8 +8,7 @@ namespace icons.Core.ViewModels.Users
     {
         public string Id
         {
-            get;
-            set;
+            get; set;
         } = null!;
 
         public string Name
@@ -44,8 +43,7 @@ namespace icons.Core.ViewModels.Users
 
         public string RankImageUrl
         {
-            get;
-            set;
+            get; set;
         } = null!;
 
         public string IconsCount => Icons.Count().ToString();
