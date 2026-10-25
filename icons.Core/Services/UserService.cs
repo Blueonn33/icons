@@ -39,15 +39,7 @@ namespace icons.Core.Services
                 Elixir = user.Elixir,
                 Rank = user.Rank,
                 RankImageUrl = GetRankImage(user.Rank),
-                Icons = user.Icons.Select(i => new IconViewModel()
-                {
-                    Id = i.Id,
-                    Title = i.Title,
-                    ImageUrl = i.ImageUrl,
-                    UserId = i.UserId,
-                    UserProfilePictureUrl = i.User.ProfilePictureUrl,
-                    Username = i.User.Name
-                }),
+                Icons = _mapper.Map<IEnumerable<IconUserProfileViewModel>>(user.Icons),
                 Reviews = _mapper.Map<IEnumerable<ReviewUserProfileViewModel>>(user.Reviews)
             };
 

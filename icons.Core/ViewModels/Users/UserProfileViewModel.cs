@@ -49,7 +49,7 @@ namespace icons.Core.ViewModels.Users
         public string IconsCount => Icons.Count().ToString();
         public string ReviewsCount => Reviews.Count().ToString();
 
-        public IEnumerable<IconViewModel> Icons { get; set; } = new HashSet<IconViewModel>();
+        public IEnumerable<IconUserProfileViewModel> Icons { get; set; } = new HashSet<IconUserProfileViewModel>();
         public IEnumerable<ReviewUserProfileViewModel> Reviews { get; set; } = new HashSet<ReviewUserProfileViewModel>();
     }
 }
