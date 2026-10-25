@@ -114,7 +114,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 В случая давам пример с PostgreSQL. И при него фрагментът ще изглежда така:
 
 ```
-var connectionString = builder.Configuration.GetConnectionString("PostgreServerDev") ?? throw new InvalidOperationException("Connection string was not found.");
+var connectionString = builder.Configuration.GetConnectionString("PostgreDev") ?? throw new InvalidOperationException("Connection string was not found.");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
