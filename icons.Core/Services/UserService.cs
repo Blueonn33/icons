@@ -151,6 +151,11 @@ namespace icons.Core.Services
                 return true;
             }
 
+            if (await _userManager.IsInRoleAsync(user, Roles.Admin))
+            {
+                return true;
+            }
+
             var result = await _userManager.AddToRoleAsync(user, Roles.Moderator);
 
             user.Elixir += 3001;
