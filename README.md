@@ -101,8 +101,12 @@ Npgsql.EntityFrameworkCore.PostgreSQL
 При използване на различна база данни от Microsoft SQL Server трябва да промениш ето този фрагмент от `Program.cs`. 
 
 ```
+var connectionString = builder.Configuration.GetConnectionString("SqlServerDev") ?? throw new InvalidOperationException("Connection string was not found.");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-	options.UseSqlServer(connectionString));
+{
+    options.UseSqlServer(connectionString);
+});
 ```
 
 В него е зададен Microsoft SQL Server. 
@@ -110,11 +114,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 В случая давам пример с PostgreSQL. И при него фрагментът ще изглежда така:
 
 ```
+var connectionString = builder.Configuration.GetConnectionString("PostgreServerDev") ?? throw new InvalidOperationException("Connection string was not found.");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-	options.UseNpgsql(connectionString));
+{
+    options.UseNpgsql(connectionString);
+});
 ```
 
-Съответно това ще работи и с други бази данни.
+Стойността `SqlServerDev` се променя в `appsettings.Development.json`. Промяната му не е задължителна, но е правилно да се смени при работа с друга база данни.
+А `UseSqlServer` се задава на `UseNpgsql`.
+
+Съответно могат да се използват и други бази данни.
 
 ---
 
