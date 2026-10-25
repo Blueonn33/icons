@@ -165,7 +165,7 @@ FROM AspNetUsers
 
 <img width="437" height="auto" alt="db diagram" src="https://github.com/user-attachments/assets/64c8dd8b-e1de-4a0a-ba43-0f8a4c7d9da8" />
 <img width="3120" height="1418" alt="er diagram" src="https://github.com/user-attachments/assets/233f5e7e-a2e3-4871-b011-8f1b389ff670" />
-<img width="6413" height="4989" alt="diagram" src="https://github.com/user-attachments/assets/3f085719-1930-4e1a-ba8b-72b8ac96e315" />
+[![Architecture diagram of blueonn33/icons](https://gitdiagram.com/blueonn33/icons/diagram.png)](https://gitdiagram.com/blueonn33/icons?utm_source=readme&utm_medium=picture)
 
 ---
 
