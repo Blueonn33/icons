@@ -2,19 +2,17 @@
 using icons.Core.Contracts;
 using icons.Core.ViewModels.Reviews;
 using icons.Data.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace icons.Controllers
 {
-    [Authorize]
     public class ReviewsController(
         IReviewService _reviewService,
         IIconService _iconService,
         UserManager<ApplicationUser> _userManager,
         IMapper _mapper,
-        ILogger<ReviewsController> _logger) : Controller
+        ILogger<ReviewsController> _logger) : BaseController
     {
         [HttpPost]
         public async Task<IActionResult> CreateReview(int iconId, ReviewInputModel model)

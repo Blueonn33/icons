@@ -12,6 +12,11 @@
             get; set;
         } = null!;
 
+        public double AverageRating
+        {
+            get; set;
+        }
+
         public string Title
         {
             get; set;

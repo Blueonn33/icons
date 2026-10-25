@@ -30,7 +30,7 @@ namespace icons.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult NoContent()
+        public IActionResult NoContentToShow()
         {
             return View();
         }

@@ -42,6 +42,7 @@ namespace icons.Core.Services
                 Icons = user.Icons.Select(i => new IconViewModel()
                 {
                     Id = i.Id,
+                    Title = i.Title,
                     ImageUrl = i.ImageUrl,
                     UserId = i.UserId,
                     UserProfilePictureUrl = i.User.ProfilePictureUrl,

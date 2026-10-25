@@ -12,15 +12,15 @@ using icons.Data;
 namespace icons.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261003202130_NotNullDescriptionReviews")]
-    partial class NotNullDescriptionReviews
+    [Migration("20261025162442_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.11")
+                .HasAnnotation("ProductVersion", "10.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -158,7 +158,7 @@ namespace icons.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("icons.Data.ApplicationUser", b =>
+            modelBuilder.Entity("icons.Data.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -362,7 +362,7 @@ namespace icons.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("icons.Data.ApplicationUser", null)
+                    b.HasOne("icons.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -371,7 +371,7 @@ namespace icons.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("icons.Data.ApplicationUser", null)
+                    b.HasOne("icons.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -386,7 +386,7 @@ namespace icons.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("icons.Data.ApplicationUser", null)
+                    b.HasOne("icons.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -395,7 +395,7 @@ namespace icons.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("icons.Data.ApplicationUser", null)
+                    b.HasOne("icons.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -404,7 +404,7 @@ namespace icons.Data.Migrations
 
             modelBuilder.Entity("icons.Data.Models.Icon", b =>
                 {
-                    b.HasOne("icons.Data.ApplicationUser", "User")
+                    b.HasOne("icons.Data.Models.ApplicationUser", "User")
                         .WithMany("Icons")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -421,7 +421,7 @@ namespace icons.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("icons.Data.ApplicationUser", "User")
+                    b.HasOne("icons.Data.Models.ApplicationUser", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -432,7 +432,7 @@ namespace icons.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("icons.Data.ApplicationUser", b =>
+            modelBuilder.Entity("icons.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Icons");
 

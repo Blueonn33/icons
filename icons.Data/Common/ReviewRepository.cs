@@ -55,12 +55,21 @@ namespace icons.Data.Common
 
             return sort switch
             {
-                EnumReviewSortOptions.DateAsc => await query.OrderBy(r => r.PublishedTime).ToListAsync(),
-                EnumReviewSortOptions.DateDesc => await query.OrderByDescending(r => r.PublishedTime).ToListAsync(),
-                EnumReviewSortOptions.RatingAsc => await query.OrderBy(r => r.Rating).ToListAsync(),
-                EnumReviewSortOptions.RatingDesc => await query.OrderByDescending(r => r.Rating).ToListAsync(),
+                EnumReviewSortOptions.DateAsc => await query.OrderBy(r => r.PublishedTime)
+                    .Take(20)
+                    .ToListAsync(),
+                EnumReviewSortOptions.DateDesc => await query.OrderByDescending(r => r.PublishedTime)
+                    .Take(20)
+                    .ToListAsync(),
+                EnumReviewSortOptions.RatingAsc => await query.OrderBy(r => r.Rating)
+                    .Take(20)
+                    .ToListAsync(),
+                EnumReviewSortOptions.RatingDesc => await query.OrderByDescending(r => r.Rating)
+                    .Take(20)
+                    .ToListAsync(),
                 _ => await query
                     .OrderByDescending(r => r.PublishedTime)
+                    .Take(20)
                     .ToListAsync()
             };
         }
