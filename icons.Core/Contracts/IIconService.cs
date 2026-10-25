@@ -7,7 +7,7 @@ namespace icons.Core.Contracts
     public interface IIconService
     {
         Task<IconsAllViewModel> GetAllIconsSortedAsync(EnumIconSortOptions sort);
-        Task<IEnumerable<IconViewModel>> GetAllIconsByUserIdAsync(string userId);
+        Task<IEnumerable<IconUserProfileViewModel>> GetAllIconsByUserIdAsync(string userId);
         Task<Top3IconsViewModel> GetTop3IconsAsync();
         Task<IconDetailsViewModel?> GetIconByIdAsync(int id);
         Task AddIconAsync(IconInputModel icon);
