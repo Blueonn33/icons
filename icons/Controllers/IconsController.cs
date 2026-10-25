@@ -9,13 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace icons.Controllers
 {
-    [Authorize]
     public class IconsController(
         IIconService _service,
         IReviewService _reviewService,
         UserManager<ApplicationUser> _userManager,
         CloudinaryService _cloudinary,
-        ILogger<IconsController> _logger) : Controller
+        ILogger<IconsController> _logger) : BaseController
     {
         [AllowAnonymous]
         [HttpGet]
