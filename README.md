@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 Стартиране на приложението
+## 🚀 Конфигуриране на приложението
 
 ### 1. Клониране на приложението 🧑🏻‍👩🏻‍👧🏻‍🧒🏻
 
@@ -52,25 +52,6 @@ git clone https://github.com/Blueonn33/icons.git
 
 ---
 
-#### Потребители
-
-`appsettings.json` файлът съдържа данни за създаване (seed) на потребители в приложението - 1 админ и 2 потребителя.
-
-Данните за двамата потребители са попълнени, но за администратора не са. Примерни данни, които може да използваш:
-
-```
-"AdminUser": {
-  "Email": "admin@icons.com",
-  "Password": "AdminIcons1!",
-  "Name": "Admin",
-  "ProfilePictureUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.J5my_Oqu8UEVn78CF7sNUQHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=277d3f89f5bd02ebe1b545c987ccc5c4a6eb1fb37aa4eb611e638ed9afd33eda",
-  "Elixir": "11117",
-  "Rank":  "6"
-}
-```
-
----
-
 #### Cloudinary
 
 Изображенията се съхраняват в `Cloudinary`. Това е платформа за управление на изображения и видеа в уеб приложения и сайтове. Използвано е `Cloudinary API`, като конфигурационните му параметри се задават точно в `appsettings.json`.
@@ -79,15 +60,7 @@ git clone https://github.com/Blueonn33/icons.git
 
 <img width="2033" height="298" alt="image" src="https://github.com/user-attachments/assets/000cc8e2-53cb-4c00-9245-509a02f7b5bf" />
 
-Ако нямаш профил и не ти се създава, използвай тези стойности:
-
-```
-"Cloudinary": {
-  "CloudName": "dqrkmpjib",
-  "ApiKey": "427672834337797",
-  "ApiSecret": "WqILR3BvUcb0T5HK00l5VQaORGM"
-}
-```
+Ако нямаш профил и не ти се създава, използвай вече зададените стойности.
 
 ---
 
@@ -147,7 +120,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 #### Миграция
 
-От `Tools / NuGet Package Manager` отвори `Package Manager Console`. След това в `Default Project` избери `icons.Data`.
+От `Tools / NuGet Package Manager` отвори `Package Manager Console`. След това на `Default Project` задай `icons.Data`.
 
 <img width="437" height="auto" alt="image" src="https://github.com/user-attachments/assets/f1da1370-4956-45b7-b35d-8cfb10c52078" />
 
@@ -157,7 +130,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 Update-Database
 ```
 
-В кода на приложението са включени вече създадените миграции, затова няма нужда да създаваш нова. Можеш директно да актуализираш. По този начин ти попълни базата си данни с моделите. Към този момент, базата ти данни е празна.
+В кода на приложението са включени вече създадените миграции, затова няма нужда да създаваш нова. Можеш директно да актуализираш. По този начин ти попълни базата си данни с моделите. Към този момент, нямаш записи в базата данни.
 
 ---
 
@@ -173,102 +146,12 @@ Update-Database
 
 ```
 SELECT *
-FROM   AspNetUsers
+FROM AspNetUsers
 ```
 
 Ще видиш, че вече има 3 създадени записа.
 
 ---
-
-#### Добавяне на Icons и Reviews
-
-Тази стъпка е **незадължителна**. Можеш ръчно да си създадеш икони и ревюта от уеб приложението. Но ако искаш да ги зададеш чрез Seed, следвай тези стъпки:
-
-Сега ще добавим няколко `Icons`, както и `Reviews`. В `Program.cs` имаме този фрагмент:
-
-```
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var configuration = services.GetRequiredService<IConfiguration>();
-
-    RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
-    UserSeeder.SeedUsersAsync(services, configuration).GetAwaiter().GetResult();
-    //IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
-    //ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
-}
-```
-
-В момента се създават само потребители. Създаването на икони и ревюта е закоментирано, тъй като без налични потребители няма как да ги създадем.
-
-Разкоментирай този ред за създаване на икони:
-
-```
-IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
-```
-
-Ревютата ги остави коментирани.
-
-Сега отвори `IconSeeder`. Той се намира в `icons.Data / Seed`.
-
-<img width="437" height="auto" alt="image" src="https://github.com/user-attachments/assets/2c30980b-fb15-425a-9998-e2f12d1b3b59" />
-
-От базата данни вземи `ID-то` на потребителя с име Jushiro Ukitake. 
-Постави на мястото на `ENTER_USER_ID`, който е стойността на `UserId` в първия `Icon` обект:
-
-```
-new Icon
-{
-    ...
-    UserId = "ENTER_USER_ID",
-    ...
-}
-```
-
-За втория `Icon` обект вземи ID-то на потребителя с име Byakuya Kuchiki и го постави на мястото на `ENTER_USER_ID`, както вече направи в първия случай.
-
-Сега трябва отново да стартираш приложението с **CTRL + F5**. Вече иконите са създадени.
-
-След като вече имаме икони, сега трябва да добавиш и ревюта.
-Върни се към този фрагмент от код в `Program.cs`:
-
-```
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var configuration = services.GetRequiredService<IConfiguration>();
-
-    RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
-    UserSeeder.SeedUsersAsync(services, configuration).GetAwaiter().GetResult();
-    IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
-    //ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
-}
-```
-
-В него трябва да разкоментираш този ред код
-
-```
-ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
-```
-
-От базата данни вземи `ID-то` на потребителя с име Jushiro Ukitake. 
-Постави на мястото на `ENTER_USER_ID`, който е стойността на `UserId` в първия `Icon` обект. 
-`IconId` е зададено на 1, защото се предполага, че току-що създадените икони са съответно с **ID = 1** и **ID = 2**. Ако си трил икони от базата данни е възможно те да бъдат с различни `ID-та`. В такъв случай ги оправи 
-
-```
-new Review
-{
-    ...
-    IconId = 1,
-    UserId = "ENTER_USER_ID",
-    ...
-}
-```
-
-За втория `Review` обект вземи ID-то на потребителя с име Byakuya Kuchiki и го постави на мястото на `ENTER_USER_ID`, както вече направи в първия случай.
-А за `IconId` въведи 2.
-
-Стартирай приложението още веднъж чрез **CTRL + F5** 😴. Вече иконите са създадени.
 
 Поздравления! 🤩
 Това е. Ти успешно стартира уеб приложението **icons**.
@@ -297,6 +180,13 @@ new Review
   - <img width="2559" height="1354" alt="register" src="https://github.com/user-attachments/assets/4f193cba-6c35-49c4-9a8e-4e6225c084b2" />
 
 - `Вход` - след успешна регистрация, потребителят може да влезе в профила си, като въведе имейл и парола.
+  - За да използваш admin профила, въведи следните данни:
+  	- Email: admin@icons.com,
+    - Password: Admin123!
+  - За да използваш профил на потребител, въведи следните данни:
+  	- Email: levi119@gmail.com,
+   	- Password: Levi119@
+  	- или просто създай свой потребителски профил 😯
   - <img width="2559" height="1354" alt="login" src="https://github.com/user-attachments/assets/55fd6533-a690-43fa-a394-0bc972577ef4" />
 
 - `Профил` - потребителят може да преглежда съдържанието, което е качил в приложението.
