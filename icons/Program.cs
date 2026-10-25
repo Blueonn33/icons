@@ -20,13 +20,17 @@ namespace icons
 
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("SqlServerDev") ?? throw new InvalidOperationException("Connection string was not found.");
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            {
+                options.UseSqlServer(connectionString);
+            });
+
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = true;
+                    ConfigureIdentityOptions(options, builder.Configuration);
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -50,7 +54,7 @@ namespace icons
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                // app.UseMigrationsEndPoint();
+                app.UseMigrationsEndPoint();
             }
             else
             {
@@ -62,12 +66,11 @@ namespace icons
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var configuration = services.GetRequiredService<IConfiguration>();
 
                 RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
-                UserSeeder.SeedUsersAsync(services, configuration).GetAwaiter().GetResult();
-                //IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
-                //ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
+                UserSeeder.SeedUsersAsync(services).GetAwaiter().GetResult();
+                IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
+                ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
             }
 
             app.UseHttpsRedirection();
@@ -85,6 +88,18 @@ namespace icons
                .WithStaticAssets();
 
             app.Run();
+        }
+
+        private static void ConfigureIdentityOptions(IdentityOptions options, IConfiguration configuration)
+        {
+            options.Password.RequireNonAlphanumeric = configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
+            options.Password.RequireDigit = configuration.GetValue<bool>("Identity:Password:RequireDigit");
+            options.Password.RequiredUniqueChars = configuration.GetValue<int>("Identity:Password:RequiredUniqueChars");
+            options.Password.RequiredLength = configuration.GetValue<int>("Identity:Password:RequiredLength");
+
+            options.SignIn.RequireConfirmedAccount = configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
+
+            options.User.RequireUniqueEmail = configuration.GetValue<bool>("Identity:User:RequireUniqueEmail");
         }
     }
 }
