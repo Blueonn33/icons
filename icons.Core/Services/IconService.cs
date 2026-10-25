@@ -25,6 +25,7 @@ namespace icons.Core.Services
                     Id = i.Id,
                     Title = i.Title,
                     ImageUrl = i.ImageUrl,
+                    AverageRating = i.AverageRating,
                     UserId = i.User.Id,
                     UserProfilePictureUrl = i.User.ProfilePictureUrl,
                     Username = i.User.Name
