@@ -75,7 +75,7 @@ namespace icons.Core.Services
 
         public async Task<EnumUserElixirRank> SetRankAsync(string userId, int elixir)
         {
-            var adminEmail = _configuration["AdminUser:Email"];
+            var adminEmail = "admin@icons.com";
 
             var user = await _userManager.FindByIdAsync(userId);
 
