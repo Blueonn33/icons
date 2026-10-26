@@ -77,7 +77,7 @@ namespace icons
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseStatusCodePagesWithRedirects("/Users/NoContent");
+            app.UseStatusCodePagesWithRedirects("/Users/NoContentToShow");
 
             app.MapStaticAssets();
             app.MapControllerRoute(
