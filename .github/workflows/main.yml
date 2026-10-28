@@ -39,7 +39,7 @@ jobs:
                 DEPLOY_SERVER: ${{ secrets.MONSTER_WEBDEPLOY_SERVER }}
                 DEPLOY_USERNAME: ${{ secrets.MONSTER_WEBDEPLOY_USERNAME }}
                 DEPLOY_PASSWORD: ${{ secrets.MONSTER_WEBDEPLOY_PASSWORD }}
-              run: |
+        run: |
                 Write-Host "WEBSITE_NAME present: $(-not [string]::IsNullOrWhiteSpace($env:WEBSITE_NAME))"
                 Write-Host "DEPLOY_SERVER present: $(-not [string]::IsNullOrWhiteSpace($env:DEPLOY_SERVER))"
                 Write-Host "DEPLOY_USERNAME present: $(-not [string]::IsNullOrWhiteSpace($env:DEPLOY_USERNAME))"
