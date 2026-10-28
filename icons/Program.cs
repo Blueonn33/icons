@@ -31,6 +31,7 @@ namespace icons
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
                     ConfigureIdentityOptions(options, builder.Configuration);
+                    options.Password.RequireUppercase = false;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -96,6 +97,8 @@ namespace icons
             options.Password.RequireDigit = configuration.GetValue<bool>("Identity:Password:RequireDigit");
             options.Password.RequiredUniqueChars = configuration.GetValue<int>("Identity:Password:RequiredUniqueChars");
             options.Password.RequiredLength = configuration.GetValue<int>("Identity:Password:RequiredLength");
+            options.Password.RequiredLength = configuration.GetValue<int>("Identity:Password:RequireLowercase");
+            options.Password.RequiredLength = configuration.GetValue<int>("Identity:Password:RequireUppercase");
 
             options.SignIn.RequireConfirmedAccount = configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
 
