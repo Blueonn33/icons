@@ -28,9 +28,9 @@ jobs:
 
       - name: Build application
         run: dotnet build ./icons/icons.csproj --configuration Release --no-restore
-
+      
       - name: Publish application
-        run: dotnet publish ./icons/icons.csproj --configuration Release --no-build --output ./publish --runtime win-x86
+        run: dotnet publish ./icons/icons.csproj --configuration Release --output ./publish
 
       - name: Deploy to MonsterASP.NET
         uses: rasmusbuchholdt/simply-web-deploy@2.1.0
