@@ -1,21 +1,44 @@
-name: Build ASP.NET Core App
+
+name: Build and Deploy ASP.NET Core MVC to MonsterASP.NET
 
 on:
   push:
     branches:
-      - master
+      - ICN-012-Hosting
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-dotnet@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.x'
+          dotnet-version: '10.0.x'
 
-      - run: dotnet restore ./icons/icons.csproj
-      - run: dotnet build ./icons/icons.csproj --configuration Release
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build application
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build
+
+      - name: Publish application
+        run: dotnet publish --configuration Release --output ./publish
+
+      - name: Deploy to MonsterASP.NET
+        uses: rasmusbuchholdt/simply-web-deploy@2.1.0
+        with:
+          website-name: ${{ secrets.MONSTER_WEBSITE_NAME }}
+          server-computer-name: ${{ secrets.MONSTER_SERVER_NAME }}
+          server-username: ${{ secrets.MONSTER_USER_ID }}
+          server-password: ${{ secrets.MONSTER_PASSWORD }}
