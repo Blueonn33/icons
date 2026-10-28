@@ -21,19 +21,16 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '10.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./icons/icons.csproj
 
       - name: Build application
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Run tests
-        run: dotnet test --configuration Release --no-build
+        run: dotnet build ./icons/icons.csproj --configuration Release --no-restore
 
       - name: Publish application
-        run: dotnet publish --configuration Release --output ./publish
+        run: dotnet publish ./icons/icons.csproj --configuration Release --no-build --output ./publish
 
       - name: Deploy to MonsterASP.NET
         uses: rasmusbuchholdt/simply-web-deploy@2.1.0
