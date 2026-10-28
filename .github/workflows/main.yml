@@ -32,6 +32,33 @@ jobs:
       - name: Publish application
         run: dotnet publish ./icons/icons.csproj --configuration Release --output ./publish
 
+      - name: Validate deployment configuration
+        shell: pwsh
+        env:
+                WEBSITE_NAME: ${{ secrets.MONSTER_WEBSITE_NAME }}
+                DEPLOY_SERVER: ${{ secrets.MONSTER_WEBDEPLOY_SERVER }}
+                DEPLOY_USERNAME: ${{ secrets.MONSTER_WEBDEPLOY_USERNAME }}
+                DEPLOY_PASSWORD: ${{ secrets.MONSTER_WEBDEPLOY_PASSWORD }}
+              run: |
+                Write-Host "WEBSITE_NAME present: $(-not [string]::IsNullOrWhiteSpace($env:WEBSITE_NAME))"
+                Write-Host "DEPLOY_SERVER present: $(-not [string]::IsNullOrWhiteSpace($env:DEPLOY_SERVER))"
+                Write-Host "DEPLOY_USERNAME present: $(-not [string]::IsNullOrWhiteSpace($env:DEPLOY_USERNAME))"
+                Write-Host "DEPLOY_PASSWORD present: $(-not [string]::IsNullOrWhiteSpace($env:DEPLOY_PASSWORD))"
+      
+                if ([string]::IsNullOrWhiteSpace($env:DEPLOY_SERVER)) {
+                  throw "MONSTER_WEBDEPLOY_SERVER is empty."
+                }
+      
+                try {
+                  $serverUri = [System.Uri]::new($env:DEPLOY_SERVER)
+                  Write-Host "DEPLOY_SERVER is an absolute URI: $($serverUri.IsAbsoluteUri)"
+                  Write-Host "DEPLOY_SERVER scheme: $($serverUri.Scheme)"
+                  Write-Host "DEPLOY_SERVER has hostname: $(-not [string]::IsNullOrWhiteSpace($serverUri.Host))"
+                }
+                catch {
+                  throw "MONSTER_WEBDEPLOY_SERVER is not a valid absolute URL."
+                }
+
       - name: Deploy to MonsterASP.NET
         uses: rasmusbuchholdt/simply-web-deploy@2.1.0
         with:
