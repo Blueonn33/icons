@@ -30,12 +30,12 @@ jobs:
         run: dotnet build ./icons/icons.csproj --configuration Release --no-restore
 
       - name: Publish application
-        run: dotnet publish ./icons/icons.csproj --configuration Release --no-build --output ./publish
+        run: dotnet publish ./icons/icons.csproj --configuration Release --no-build --output ./publish --runtime win-x86
 
       - name: Deploy to MonsterASP.NET
         uses: rasmusbuchholdt/simply-web-deploy@2.1.0
         with:
           website-name: ${{ secrets.MONSTER_WEBSITE_NAME }}
-          server-computer-name: ${{ secrets.MONSTER_SERVER_NAME }}
-          server-username: ${{ secrets.MONSTER_USER_ID }}
-          server-password: ${{ secrets.MONSTER_PASSWORD }}
+          server-computer-name: ${{ secrets.MONSTER_WEBDEPLOY_SERVER }}
+          server-username: ${{ secrets.MONSTER_WEBDEPLOY_USERNAME }}
+          server-password: ${{ secrets.MONSTER_WEBDEPLOY_PASSWORD }}
