@@ -10,7 +10,7 @@
         @if (User.IsInRole(Roles.Admin))
         {
             <section class="mb-5">
-                <a class="btn btn-secondary" asp-action="Index" asp-controller="Users">назад</a>
+                <a class="btn btn-secondary" asp-action="Index" asp-controller="Icons">назад</a>
             </section>
         }
         <div class="row text-light">
@@ -38,9 +38,40 @@
                 <p class="fs-5 text-dark-emphasis"><strong class="text-light">дата на регистрация: </strong>@Model.DateRegistered.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
                 </p>
             </div>
+            <div class="mt-5">
+                @if (Model.Id != ViewBag.CurrentUserId)
+                {
+                    <div class="d-flex justify-content-center">
+                        <button onclick="openNoteModal(this)" class="create-note-btn">напиши бележка</button>
+                    </div>
+                }
+                else
+                {
+                    <h2 class="mb-4">бележки</h2>
+                    <hr class="text-light mb-0"/>
+                    <div class="container">
+                        @if (Model.Notes.Any())
+                        {
+                            @foreach (var note in Model.Notes)
+                            {
+                                <div class="position-relative">
+                                    <partial name="~/Views/Notes/_NotePartial.cshtml" model="note" />
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p class="fs-5 mt-3">няма налични икони</p>
+                        }
+                    </div>
+                    <hr class="text-light"/>
+                }
+            </div>
         </div>
+        <partial name="~/Views/Notes/_CreateNotePartial.cshtml"
+                 model="@(new NoteInputModel { ReceiverId = Model.Id })" />
     </section>
-    <section class="row text-light mt-5 d-flex justify-content-center mx-2">
+    <section class="user-icons-container row text-light mt-5 d-flex justify-content-center mx-2">
         <div class="col-10">
             <h2 class="mb-4">икони</h2>
             <hr class="text-light mb-0"/>
@@ -84,5 +115,8 @@
             }
             <hr class="text-light" />
         </div>
+    </section>
+    <section>
+        <partial name="~/Views/Notes/_NoteScriptsPartial.cshtml"/>
     </section>
 </div>
