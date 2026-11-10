@@ -46,12 +46,7 @@ namespace icons.Controllers
             var user = await _userService.GetUserProfileAsync(id);
             var currentUser = await _userManager.GetUserAsync(User);
 
-            if (currentUser == null)
-            {
-                return NotFound();
-            }
-
-            ViewBag.CurrentUserId = currentUser.Id;
+            ViewBag.CurrentUserId = currentUser?.Id;
 
             return View(user);
         }
