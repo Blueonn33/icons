@@ -1,4 +1,5 @@
 ﻿using icons.Core.ViewModels.Icons;
+using icons.Core.ViewModels.Notes;
 using icons.Core.ViewModels.Reviews;
 using icons.Data.Enums;
 
@@ -51,5 +52,6 @@ namespace icons.Core.ViewModels.Users
 
         public IEnumerable<IconUserProfileViewModel> Icons { get; set; } = new HashSet<IconUserProfileViewModel>();
         public IEnumerable<ReviewUserProfileViewModel> Reviews { get; set; } = new HashSet<ReviewUserProfileViewModel>();
+        public IEnumerable<NoteUserProfileViewModel> Notes { get; set; } = new HashSet<NoteUserProfileViewModel>();
     }
 }

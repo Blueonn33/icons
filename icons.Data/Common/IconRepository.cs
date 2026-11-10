@@ -4,17 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace icons.Data.Common
 {
-    public class IconRepository : Repository<Icon>, IIconRepository
+    public class IconRepository(ApplicationDbContext context) : Repository<Icon>(context), IIconRepository
     {
-        private readonly ApplicationDbContext _context;
-        public IconRepository(ApplicationDbContext context) : base(context)
-        {
-            _context = context;
-        }
-
         public async Task<IEnumerable<Icon>> GetAllIconsByUserIdAsync(string userId)
         {
-            return await _context.Icons
+            return await context.Icons
                 .AsNoTracking()
                 .Where(i => i.UserId == userId)
                 .OrderByDescending(i => i.PublishedTime)
@@ -25,7 +19,7 @@ namespace icons.Data.Common
 
         public async Task<IEnumerable<Icon>> GetAllIconsSortedAsync(EnumIconSortOptions sort)
         {
-            var query = _context.Icons
+            var query = context.Icons
                 .Include(i => i.User)
                 .AsNoTracking()
                 .Where(i => i.User.IsDeleted == false);
@@ -54,7 +48,7 @@ namespace icons.Data.Common
 
         public async Task<Icon?> GetIconWithReviewsByIdAsync(int id)
         {
-            return await _context.Icons
+            return await context.Icons
                 .Include(i => i.Reviews)
                 .ThenInclude(i => i.User)
                 .FirstOrDefaultAsync(i => i.Id == id);
@@ -62,7 +56,7 @@ namespace icons.Data.Common
 
         public async Task<IEnumerable<Icon>> GetTop3IconsAsync()
         {
-            return await _context.Icons
+            return await context.Icons
                 .Include(i => i.User)
                 .Where(i => i.User.IsDeleted == false)
                 .AsNoTracking()

@@ -1,0 +1,33 @@
+﻿.create-note-btn {
+    background-color: #F1DEC9;
+    outline: 3px dashed #A4907C;
+    outline-offset: 0;
+    padding: 20px 40px;
+    color: #8D7B68;
+    border: none;
+    transition: all 0.7s;
+}
+
+.create-note-btn:hover {
+    outline: 3px dashed #A4907C;
+    border-radius: 30px;
+    color: #8D7B68;
+}
+
+.create-note-btn:focus,
+.create-note-btn:active,
+.create-note-btn:focus-visible {
+    outline: 3px dashed #A4907C;
+    box-shadow: none;
+}
+
+.note-body {
+    background-color: #443C68;
+    border-radius: 5px;
+    word-break: break-all;
+    width: 200px;
+    height: 200px;
+}
+.notes-container {
+    margin-bottom: 300px;
+}

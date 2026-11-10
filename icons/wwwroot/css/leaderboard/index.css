@@ -1,0 +1,115 @@
+﻿.leaderboard-body {
+    background: linear-gradient(135deg, #fff 25%, #7892f0 88%, #608cb3 100%);
+    margin-bottom: 30vh;
+}
+
+.leaderboard-user-row-container{
+    width: 100%;
+}
+
+.leaderboard-user-picture {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
+.leaderboard-user-name{
+    word-break: break-all;
+}
+
+.leaderboard-row-fragment {
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+    isolation: isolate;
+}
+
+.leaderboard-gold {
+    background: #050505;
+}
+
+.leaderboard-silver {
+    background: #454545;
+}
+
+.leaderboard-bronze {
+    background: #382014;
+}
+
+.leaderboard-default {
+    background: linear-gradient(90deg, #102b49, #174a7a);
+}
+
+.leaderboard-gold::before,
+.leaderboard-silver::before,
+.leaderboard-bronze::before {
+    content: "";
+    position: absolute;
+    width: 180%;
+    height: 180%;
+    top: -40%;
+    left: -40%;
+    filter: blur(15px);
+    animation: stormFlow 10s ease-in-out infinite alternate;
+}
+
+.leaderboard-gold::before {
+    background: radial-gradient( ellipse at 30% 50%, rgba(212, 165, 55, 0.95) 0%, rgba(160, 112, 27, 0.7) 18%, transparent 45% ), radial-gradient( ellipse at 65% 40%, rgba(255, 224, 145, 0.65) 0%, rgba(150, 105, 25, 0.5) 20%, transparent 48% ), radial-gradient( ellipse at 75% 75%, rgba(180, 130, 40, 0.7) 0%, transparent 40% );
+}
+
+.leaderboard-silver::before {
+    background: radial-gradient( ellipse at 30% 50%, rgba(220, 225, 230, 0.95) 0%, rgba(130, 140, 150, 0.7) 18%, transparent 45% ), radial-gradient( ellipse at 65% 40%, rgba(245, 248, 255, 0.65) 0%, rgba(150, 160, 175, 0.5) 20%, transparent 48% ), radial-gradient( ellipse at 75% 75%, rgba(180, 190, 205, 0.7) 0%, transparent 40% );
+}
+
+.leaderboard-bronze::before {
+    background: radial-gradient( ellipse at 30% 50%, rgba(205, 127, 50, 0.95) 0%, rgba(140, 75, 30, 0.7) 18%, transparent 45% ), radial-gradient( ellipse at 65% 40%, rgba(235, 170, 110, 0.65) 0%, rgba(150, 85, 40, 0.5) 20%, transparent 48% ), radial-gradient( ellipse at 75% 75%, rgba(180, 100, 45, 0.7) 0%, transparent 40% );
+}
+
+.leaderboard-gold::after,
+.leaderboard-silver::after,
+.leaderboard-bronze::after {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background: linear-gradient( 115deg, transparent 35%, rgba(255, 225, 160, 0.5) 43%, rgba(255, 255, 255, 0.25) 46%, transparent 53% );
+    filter: blur(8px);
+    animation: stormShine 7s ease-in-out infinite alternate;
+}
+
+@keyframes stormFlow {
+    0% {
+        transform: translate(-12%, -5%) rotate(-8deg) scale(1);
+        border-radius: 40% 60% 55% 45%;
+    }
+
+    35% {
+        transform: translate(5%, 8%) rotate(5deg) scale(1.15);
+        border-radius: 65% 35% 40% 60%;
+    }
+
+    70% {
+        transform: translate(12%, -8%) rotate(-4deg) scale(1.05);
+        border-radius: 35% 65% 60% 40%;
+    }
+
+    100% {
+        transform: translate(-5%, 5%) rotate(8deg) scale(1.2);
+        border-radius: 55% 45% 35% 65%;
+    }
+}
+
+@keyframes stormShine {
+    0% {
+        transform: translateX(-25%) translateY(10%) rotate(-12deg);
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateX(25%) translateY(-10%) rotate(12deg);
+        opacity: 0.3;
+    }
+}

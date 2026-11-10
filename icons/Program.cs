@@ -19,7 +19,7 @@ namespace icons
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string was not found.");
+            var connectionString = builder.Configuration.GetConnectionString("SqlServerDev") ?? throw new InvalidOperationException("Connection string was not found.");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -39,9 +39,13 @@ namespace icons
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IIconRepository, IconRepository>();
             builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+            builder.Services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
+            builder.Services.AddScoped<INoteRepository, NoteRepository>();
             builder.Services.AddScoped<IIconService, IconService>();
             builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<ILeaderboardService, LeaderboardService>();
+            builder.Services.AddScoped<INoteService, NoteService>();
             builder.Services.AddSingleton<CloudinaryService>();
 
             builder.Services.AddControllersWithViews();

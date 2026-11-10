@@ -1,13 +1,17 @@
 ﻿using icons.Core.Contracts;
 using icons.Core.ViewModels.Users;
 using icons.Data.Constants;
+using icons.Data.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace icons.Controllers
 {
     [Authorize(Roles = Roles.Admin)]
-    public class UsersController(IUserService _userService) : Controller
+    public class UsersController(
+        IUserService _userService,
+        UserManager<ApplicationUser> _userManager) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -40,6 +44,14 @@ namespace icons.Controllers
         public async Task<IActionResult> UserProfile(string id)
         {
             var user = await _userService.GetUserProfileAsync(id);
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.CurrentUserId = currentUser.Id;
 
             return View(user);
         }

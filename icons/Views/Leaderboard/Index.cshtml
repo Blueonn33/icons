@@ -1,0 +1,54 @@
+﻿@model AllUsersLeaderboardViewModel
+@{
+    ViewData["Title"] = "Leaderboard";
+    ViewData["BodyClass"] = "leaderboard-body";
+    var counter = 1;
+}
+
+<div class="container mt-5">
+    @foreach (var user in Model.Users)
+    {
+        var position = counter++;
+
+        <div class="row align-items-center mb-3">
+            <div class="col-2 col-sm-1">
+                <p class="mb-0 fs-3">@(position).</p>
+            </div>
+
+            <div class="col-10 col-sm-11">
+                <div class="row align-items-stretch">
+                    <div class="col-9 rounded-start-3 bg-white d-flex flex-column flex-md-row align-items-center border border-2">
+
+                        <div class="col-12 col-md-2 rounded-2 d-flex justify-content-center justify-content-md-start pt-2 pt-md-0">
+                            <a asp-action="UserProfile" asp-controller="Users" asp-route-id="@user.Id" class="bg-image hover-overlay hover-zoom hover-shadow ripple rounded-2">
+                                <img class="img-fluid leaderboard-user-picture" src="@user.ProfilePictureUrl" />
+                                <div class="mask" style="background-color: hsla(195, 83%, 58%, 0.2)"></div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-md-7 col-lg-5 text-center text-md-center text-lg-start">
+                            <p class="mb-0 leaderboard-user-name">@user.Name</p>
+                        </div>
+
+                        <div class="col-12 col-md-3 col-lg-5 d-flex justify-content-center justify-content-md-end pb-2 pb-md-0">
+                            <div class="d-flex align-items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="#431264" class="bi bi-droplet-fill" viewBox="0 0 16 16">
+                                    <path d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0c0 0-6 5.686-6 10a6 6 0 0 0 6 6M6.646 4.646l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448c.82-1.641 1.717-2.753 2.093-3.13"/>
+                                </svg>
+                                <p class="mb-0">@user.Elixir</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-1 col-sm-2 col-md-3 rounded-end-3 leaderboard-row-fragment 
+                        @(
+                             position == 1 ? "leaderboard-gold" :
+                             position == 2 ? "leaderboard-silver" :
+                             position == 3 ? "leaderboard-bronze" :
+                             "leaderboard-default")">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

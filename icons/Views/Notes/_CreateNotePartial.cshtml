@@ -1,0 +1,36 @@
+﻿@model NoteInputModel;
+
+<section>
+    <div class="modal fade" id="create-note-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">създаване</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form asp-action="CreateNote" asp-controller="Notes" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                    <div class="modal-body">
+                        <input asp-for="Id" type="hidden" id="note-id"/>
+                        <input asp-for="ReceiverId" type="hidden" />
+
+                        <div class="mb-3">
+                            <label asp-for="Content" class="form-label">съдържание</label>
+                            <input asp-for="Content" class="form-control" id="note-content"/>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">затвори</button>
+                        <button type="submit" class="btn btn-primary">запиши</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

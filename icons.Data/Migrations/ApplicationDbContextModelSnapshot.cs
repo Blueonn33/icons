@@ -214,9 +214,8 @@ namespace icons.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProfilePictureUrl")
-                        .IsRequired()
-                        .HasMaxLength(900)
-                        .HasColumnType("nvarchar(900)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<int>("Rank")
                         .HasColumnType("int");
@@ -263,7 +262,8 @@ namespace icons.Data.Migrations
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<DateTime>("PublishedTime")
                         .ValueGeneratedOnAdd()
@@ -281,8 +281,8 @@ namespace icons.Data.Migrations
 
                     b.Property<string>("UserProfilePictureUrl")
                         .IsRequired()
-                        .HasMaxLength(900)
-                        .HasColumnType("nvarchar(900)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -294,6 +294,35 @@ namespace icons.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Icons");
+                });
+
+            modelBuilder.Entity("icons.Data.Models.Note", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Notes");
                 });
 
             modelBuilder.Entity("icons.Data.Models.Review", b =>
@@ -410,6 +439,25 @@ namespace icons.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("icons.Data.Models.Note", b =>
+                {
+                    b.HasOne("icons.Data.Models.ApplicationUser", "Receiver")
+                        .WithMany("Notes")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("icons.Data.Models.ApplicationUser", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
             modelBuilder.Entity("icons.Data.Models.Review", b =>
                 {
                     b.HasOne("icons.Data.Models.Icon", "Icon")
@@ -432,6 +480,8 @@ namespace icons.Data.Migrations
             modelBuilder.Entity("icons.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Icons");
+
+                    b.Navigation("Notes");
 
                     b.Navigation("Reviews");
                 });

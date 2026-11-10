@@ -3,6 +3,7 @@
     public static class ValidationConstants
     {
         // Icon
+        public const int IconImageUrlMaxLength = 2000;
         public const int IconTitleMinLength = 3;
         public const int IconTitleMaxLength = 50;
         public const int IconDescriptionMinLength = 15;
@@ -24,8 +25,13 @@
 
 
         // User
-        public const int UserProfilePictureUrlLength = 900;
+        public const int UserProfilePictureUrlLength = 2000;
         public const int UserNameMinLength = 3;
         public const int UserNameMaxLength = 50;
+
+
+        // Note
+        public const int NoteContentMinLength = 3;
+        public const int NoteContentMaxLength = 500;
     }
 }
