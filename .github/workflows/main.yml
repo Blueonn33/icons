@@ -4,7 +4,7 @@ name: Build and Deploy ASP.NET Core MVC to MonsterASP.NET
 on:
   push:
     branches:
-      - ICN-012-Hosting
+      - master
   workflow_dispatch:
 
 permissions:
