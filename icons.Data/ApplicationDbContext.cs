@@ -14,6 +14,7 @@ namespace icons.Data
 
         public virtual DbSet<Icon> Icons { get; set; } = null!;
         public virtual DbSet<Review> Reviews { get; set; } = null!;
+        public virtual DbSet<Note> Notes { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
