@@ -5,7 +5,6 @@ using icons.Core.Services.Email;
 using icons.Data;
 using icons.Data.Common;
 using icons.Data.Models;
-using icons.Data.Seed;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +18,7 @@ namespace icons
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("SqlServerDev") ?? throw new InvalidOperationException("Connection string was not found.");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string was not found.");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -71,10 +70,10 @@ namespace icons
             {
                 var services = scope.ServiceProvider;
 
-                RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
-                UserSeeder.SeedUsersAsync(services).GetAwaiter().GetResult();
-                IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
-                ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
+                //RoleSeeder.SeedRolesAsync(services).GetAwaiter().GetResult();
+                //UserSeeder.SeedUsersAsync(services).GetAwaiter().GetResult();
+                //IconSeeder.SeedIconsAsync(services).GetAwaiter().GetResult();
+                //ReviewSeeder.SeedReviewsAsync(services).GetAwaiter().GetResult();
             }
 
             app.UseHttpsRedirection();

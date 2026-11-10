@@ -32,6 +32,6 @@
 
         // Note
         public const int NoteContentMinLength = 3;
-        public const int NoteContentMaxLength = 500;
+        public const int NoteContentMaxLength = 100;
     }
 }
