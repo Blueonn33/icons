@@ -14,6 +14,7 @@ namespace icons.Data.Models
         }
 
         [Required]
+        [MaxLength(IconImageUrlMaxLength)]
         public string ImageUrl
         {
             get; set;
