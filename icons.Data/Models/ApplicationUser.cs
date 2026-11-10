@@ -14,7 +14,7 @@ public class ApplicationUser : IdentityUser
     } = null!;
 
     [StringLength(UserProfilePictureUrlLength)]
-    public string ProfilePictureUrl
+    public string? ProfilePictureUrl
     {
         get; set;
     }
@@ -41,4 +41,5 @@ public class ApplicationUser : IdentityUser
 
     public virtual ICollection<Icon> Icons { get; set; } = new HashSet<Icon>();
     public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+    public virtual ICollection<Note> Notes { get; set; } = new HashSet<Note>();
 }
