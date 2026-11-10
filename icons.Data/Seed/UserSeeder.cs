@@ -29,7 +29,7 @@ namespace icons.Data.Seed
                 Email = "levi119@gmail.com",
                 Name = "Levi Ackerman",
                 ProfilePictureUrl =
-                    "https://aniyuki.com/wp-content/uploads/2025/03/aniyuki-Levi-Ackerman-avatar-15.jpg",
+                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F8f%2F92%2F15%2F8f9215e40b0b0b45f8182b38a77f6403.jpg&f=1&nofb=1&ipt=33f4de0e68bcd16ace61b4b2179a8fc9702416e8009ff30d59eb95b93a137243&ipo=images",
                 Elixir = 2578,
                 Rank = EnumUserElixirRank.Captain
             };
