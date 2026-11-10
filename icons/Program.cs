@@ -19,7 +19,7 @@ namespace icons
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("SqlServerDev") ?? throw new InvalidOperationException("Connection string was not found.");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string was not found.");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -96,6 +96,8 @@ namespace icons
             options.Password.RequireDigit = configuration.GetValue<bool>("Identity:Password:RequireDigit");
             options.Password.RequiredUniqueChars = configuration.GetValue<int>("Identity:Password:RequiredUniqueChars");
             options.Password.RequiredLength = configuration.GetValue<int>("Identity:Password:RequiredLength");
+            options.Password.RequireLowercase = configuration.GetValue<bool>("Identity:Password:RequireLowercase");
+            options.Password.RequireUppercase = configuration.GetValue<bool>("Identity:Password:RequireUppercase");
 
             options.SignIn.RequireConfirmedAccount = configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
 
