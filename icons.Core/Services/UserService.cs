@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using icons.Core.Contracts;
 using icons.Core.ViewModels.Icons;
+using icons.Core.ViewModels.Notes;
 using icons.Core.ViewModels.Reviews;
 using icons.Core.ViewModels.Users;
 using icons.Data.Constants;
@@ -8,13 +9,11 @@ using icons.Data.Enums;
 using icons.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace icons.Core.Services
 {
     public class UserService(
         UserManager<ApplicationUser> _userManager,
-        IConfiguration _configuration,
         IMapper _mapper) : IUserService
     {
         public async Task<UserProfileViewModel> GetUserProfileAsync(string id)
@@ -22,6 +21,7 @@ namespace icons.Core.Services
             var user = await _userManager.Users
                 .Include(u => u.Icons)
                 .Include(u => u.Reviews)
+                .Include(u => u.Notes)
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             if (user == null)
@@ -40,7 +40,8 @@ namespace icons.Core.Services
                 Rank = user.Rank,
                 RankImageUrl = GetRankImage(user.Rank),
                 Icons = _mapper.Map<IEnumerable<IconUserProfileViewModel>>(user.Icons),
-                Reviews = _mapper.Map<IEnumerable<ReviewUserProfileViewModel>>(user.Reviews)
+                Reviews = _mapper.Map<IEnumerable<ReviewUserProfileViewModel>>(user.Reviews),
+                Notes = _mapper.Map<IEnumerable<NoteUserProfileViewModel>>(user.Notes)
             };
 
             return model;
