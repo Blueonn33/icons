@@ -20,6 +20,16 @@ namespace icons.Data.EntityTypeConfigurations
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(n => n.Notes)
+                .WithOne(n => n.Receiver)
+                .HasForeignKey(n => n.ReceiverId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany<Note>()
+                .WithOne(n => n.Sender)
+                .HasForeignKey(n => n.SenderId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
