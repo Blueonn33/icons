@@ -22,6 +22,7 @@ namespace icons.Core.Services
                 .Include(u => u.Icons)
                 .Include(u => u.Reviews)
                 .Include(u => u.Notes)
+                    .ThenInclude(n => n.Sender)
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             if (user == null)
@@ -34,14 +35,19 @@ namespace icons.Core.Services
                 Id = user.Id,
                 Email = user.Email!,
                 Name = user.Name,
-                ProfilePictureUrl = user.ProfilePictureUrl,
+                ProfilePictureUrl = user.ProfilePictureUrl!,
                 DateRegistered = user.DateRegistered,
                 Elixir = user.Elixir,
                 Rank = user.Rank,
                 RankImageUrl = GetRankImage(user.Rank),
                 Icons = _mapper.Map<IEnumerable<IconUserProfileViewModel>>(user.Icons),
                 Reviews = _mapper.Map<IEnumerable<ReviewUserProfileViewModel>>(user.Reviews),
-                Notes = _mapper.Map<IEnumerable<NoteUserProfileViewModel>>(user.Notes)
+                Notes = user.Notes.Select(n => new NoteUserProfileViewModel()
+                {
+                    Content = n.Content,
+                    UserProfilePicture = n.Sender.ProfilePictureUrl!,
+                    SenderId = n.SenderId
+                })
             };
 
             return model;
