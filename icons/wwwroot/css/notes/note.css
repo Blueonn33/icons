@@ -23,11 +23,68 @@
 
 .note-body {
     background-color: #443C68;
-    border-radius: 5px;
+    border-radius: 10px;
     word-break: break-all;
     width: 200px;
     height: 200px;
+    border: 2px solid #A99BCB;
+    padding: 10px;
+    box-sizing: content-box;
 }
 .notes-container {
-    margin-bottom: 300px;
+    margin-bottom: 200px;
+}
+.note-user-pic {
+    width: 60px;
+    height: 60px;
+}
+
+.burn {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    animation: burn-background 4s ease-in-out forwards;
+}
+.burn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient( to top, #000 0%, #000 15%, #8b0000 25%, #ff2400 35%, #ff6a00 42%, transparent 65% );
+    background-size: 100% 300%;
+    background-position: bottom;
+    opacity: 0;
+    animation: fire 4s ease-in-out forwards;
+}
+
+@keyframes fire {
+    0% {
+        background-position: bottom;
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    65% {
+        background-position: top;
+        opacity: 1;
+    }
+
+    100% {
+        background-position: top;
+        opacity: 1;
+        background: #000;
+    }
+}
+
+@keyframes burn-background {
+    0%, 40% {
+        background-color: #fff;
+    }
+
+    100% {
+        background-color: #000;
+    }
 }

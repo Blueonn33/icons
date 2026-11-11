@@ -6,5 +6,15 @@
         {
             get; set;
         } = null!;
+
+        public string SenderId
+        {
+            get; set;
+        } = null!;
+
+        public string UserProfilePicture
+        {
+            get; set;
+        } = null!;
     }
 }
