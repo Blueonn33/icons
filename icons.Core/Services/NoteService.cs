@@ -29,6 +29,7 @@ namespace icons.Core.Services
 
             var notes = await _noteRepository.GetAllNotesByUserIdAsync(userId);
             var notesDto = _mapper.Map<IEnumerable<GetNoteResponseData>>(notes);
+
             GetAllNotesResponseData allNotes = new GetAllNotesResponseData()
             {
                 Notes = notesDto
