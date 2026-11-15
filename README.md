@@ -373,15 +373,17 @@ FROM AspNetUsers
 Условието изисква поне 3 Entity модела. Домейн моделите са само два – Icon и Review. ApplicationUser наследява IdentityUser и затова не се брои към минимума. 
 Останалото е покрито: 4 контролера, над 6 view-та, EF Core със SQL Server, миграции, DI, репозитории (Repositories) и услуги (Services). 
 
-**Изпълнено**
+**`Изпълнено`**
 
 ### Functionality (basic CRUD) [30/30] 
 
-**Изпълнено**
+**`Изпълнено`**
 
 ### Data validation [16/20] 
 
 Server-side валидацията е непълна: CreateIcon и CreateReview не проверяват ModelState.IsValid. В CreateReview се добавя грешка към ModelState, но след това не се проверява. UpdateIcon проверява ModelState. Client-side валидацията е налична (\_ValidationScriptsPartial и asp-validation-for). 
+
+**`Изпълнено`**
 
 ### Code quality & formatting [9/10] 
 
