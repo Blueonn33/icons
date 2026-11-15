@@ -365,3 +365,27 @@ FROM AspNetUsers
 - GitGuardian
 - GitDiagram
 - Copilot
+
+## ASP.NET Fundamentals - забележки
+
+### Architecture, DB & MVC structure [17/20] 
+
+Условието изисква поне 3 Entity модела. Домейн моделите са само два – Icon и Review. ApplicationUser наследява IdentityUser и затова не се брои към минимума. 
+Останалото е покрито: 4 контролера, над 6 view-та, EF Core със SQL Server, миграции, DI, репозитории (Repositories) и услуги (Services). 
+
+### Functionality (basic CRUD) [30/30] 
+
+### Data validation [16/20] 
+
+Server-side валидацията е непълна: CreateIcon и CreateReview не проверяват ModelState.IsValid. В CreateReview се добавя грешка към ModelState, но след това не се проверява. UpdateIcon проверява ModelState. Client-side валидацията е налична (\_ValidationScriptsPartial и asp-validation-for). 
+
+### Code quality & formatting [9/10] 
+
+Дребни проблеми: закоментиран код, дублиран mapping код в услугите и JS грешка в Login.cshtml (липсващ елемент toggleConfirmPassword). 
+
+### GitHub activity and Documentation [19/20] 
+
+README е подробен, но е объркващ за connection string-а. Program.cs чете ключа SqlServerDev от appsettings.Development.json, а README обяснява основно DefaultConnection в appsettings.json. 
+
+### Бонус (+5): 
+Реална допълнителна функционалност: ASP.NET Identity с роли (Admin/Moderator), качване на изображения в Cloudinary, система от рангове и еликсир, повишаване и понижаване на потребители, сортиране на икони и ревюта, среден рейтинг, топ 3 икони, 2FA и страница за неоторизиран достъп.

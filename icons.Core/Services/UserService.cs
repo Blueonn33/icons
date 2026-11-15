@@ -44,9 +44,11 @@ namespace icons.Core.Services
                 Reviews = _mapper.Map<IEnumerable<ReviewUserProfileViewModel>>(user.Reviews),
                 Notes = user.Notes.Select(n => new NoteUserProfileViewModel()
                 {
+                    Id = n.Id,
                     Content = n.Content,
                     UserProfilePicture = n.Sender.ProfilePictureUrl!,
-                    SenderId = n.SenderId
+                    SenderId = n.SenderId,
+                    ReceiverId = user.Id
                 })
             };
 
