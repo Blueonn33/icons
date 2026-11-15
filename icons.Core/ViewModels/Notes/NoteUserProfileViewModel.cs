@@ -2,7 +2,17 @@
 {
     public class NoteUserProfileViewModel
     {
+        public int Id
+        {
+            get; set;
+        }
+
         public string Content
+        {
+            get; set;
+        } = null!;
+
+        public string ReceiverId
         {
             get; set;
         } = null!;
