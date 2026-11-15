@@ -15,27 +15,6 @@ namespace icons.Controllers
         IMapper _mapper,
         ILogger<NotesController> _logger) : BaseController
     {
-        //[HttpGet]
-        //public async Task<IActionResult> Index()
-        //{
-        //    string? userId = _userManager.GetUserId(User);
-
-        //    if (userId == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var notes = await _notesService.GetAllNotesByUserIdAsync(userId);
-        //    var notesViewModel = _mapper.Map<IEnumerable<NoteViewModel>>(notes);
-
-        //    AllNotesViewModel allNotes = new AllNotesViewModel()
-        //    {
-        //        Notes = notesViewModel
-        //    };
-
-        //    return View(allNotes);
-        //}
-
         [HttpPost]
         public async Task<IActionResult> CreateNote(NoteInputModel model)
         {
@@ -67,6 +46,30 @@ namespace icons.Controllers
             return RedirectToAction(nameof(UserProfile), "Users", new
             {
                 id = model.ReceiverId
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteNote(int id)
+        {
+            try
+            {
+                bool isDeleted = await _notesService.DeleteNoteAsync(id);
+
+                if (!isDeleted)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception _)
+            {
+                _logger.LogCritical("Възникна грешка. Провери logs");
+                TempData["Error"] = "Възникна грешка при изтриването на бележката";
+            }
+
+            return RedirectToAction("UserProfile", "Users", new
+            {
+                id = _userManager.GetUserId(User)
             });
         }
     }
