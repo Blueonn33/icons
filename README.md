@@ -66,21 +66,15 @@ git clone https://github.com/Blueonn33/icons.git
 
 #### Connection string
 
-`appsettings.json` съдържа и `Connection string`. Той се използва за връзка със сървъра, в който ще се съхраняват данните.
+`appsettings.json` служи за задаване на `Connection string`, който се използва за връзка със сървъра, в който ще се съхраняват данните. Във файла `appsettings.json` фигурира файла `appsettings.Development.json`.
 
-Това е стойността, която се подава на `DefaultConnection`:
+Това е стойността, която се подава на `SqlServerDev`:
 
 ```
 Server=YOUR_SERVER_NAME;Database=icons;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true
 ```
 
 Като на `Server` задаваш името на сървъра, който използваш. Представеният Connection string се използва за работа с Microsoft SQL Server. Ако използваш различна база данни, може да намериш правилния Connection string **[тук](https://www.connectionstrings.com/).**
-
-Освен това, `appsettings.json` съдържа в себе си файл `appsettings.Development.json`, в който трябва да зададеш същия Connection string.
-
-```
-Server=YOUR_SERVER_NAME;Database=icons;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true
-```
 
 ---
 
@@ -122,7 +116,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 ```
 
-Стойността `SqlServerDev` се променя в `appsettings.Development.json`. Промяната му не е задължителна, но е правилно да се смени при работа с друга база данни.
+Стойността на `SqlServerDev` се променя в `appsettings.Development.json`. Препоръчително е да се промени и самата дума `SqlServerDev` с подходящата база данни.
 А `UseSqlServer` се задава на `UseNpgsql`.
 
 Съответно могат да се използват и други бази данни.
@@ -394,6 +388,8 @@ Server-side валидацията е непълна: CreateIcon и CreateReview
 ### GitHub activity and Documentation [19/20] 
 
 README е подробен, но е объркващ за connection string-а. Program.cs чете ключа SqlServerDev от appsettings.Development.json, а README обяснява основно DefaultConnection в appsettings.json. 
+
+**`Изпълнено`**
 
 ### Бонус (+5): 
 Реална допълнителна функционалност: ASP.NET Identity с роли (Admin/Moderator), качване на изображения в Cloudinary, система от рангове и еликсир, повишаване и понижаване на потребители, сортиране на икони и ревюта, среден рейтинг, топ 3 икони, 2FA и страница за неоторизиран достъп.
