@@ -77,7 +77,7 @@ public class LoginModel : PageModel
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [Required(ErrorMessage = "Въведи парола")]
-        [StringLength(100, ErrorMessage = "Паролата трябва да е между {2} и {1} символа", MinimumLength = 6)]
+        [StringLength(30, ErrorMessage = "Паролата трябва да е между {2} и {1} символа", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; } = default!;
