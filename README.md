@@ -389,6 +389,8 @@ Server-side валидацията е непълна: CreateIcon и CreateReview
 
 Дребни проблеми: закоментиран код, дублиран mapping код в услугите и JS грешка в Login.cshtml (липсващ елемент toggleConfirmPassword). 
 
+**`Изпълнено`**
+
 ### GitHub activity and Documentation [19/20] 
 
 README е подробен, но е объркващ за connection string-а. Program.cs чете ключа SqlServerDev от appsettings.Development.json, а README обяснява основно DefaultConnection в appsettings.json. 
