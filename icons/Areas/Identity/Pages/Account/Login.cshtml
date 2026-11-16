@@ -74,17 +74,5 @@
                 this.setAttribute("aria-label", "Покажи паролата");
             }
         });
-        document.getElementById("toggleConfirmPassword").addEventListener("click", function() {
-            const password = document.getElementById("confirmPasswordInput");
-            if (password.type === "password") {
-                password.type = "text";
-                this.textContent = "🙈";
-                this.setAttribute("aria-label", "Скрий паролата");
-            } else {
-                password.type = "password";
-                this.textContent = "👁️";
-                this.setAttribute("aria-label", "Покажи паролата");
-            }
-        });
     </script>
 }
