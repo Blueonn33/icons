@@ -32,13 +32,21 @@
     box-sizing: content-box;
 }
 .notes-container {
-    margin-bottom: 200px;
+    margin-bottom: 250px;
 }
 .note-user-pic {
     width: 60px;
     height: 60px;
 }
-
+.note-delete-btn {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
 .burn {
     position: relative;
     overflow: hidden;

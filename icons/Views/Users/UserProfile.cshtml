@@ -48,23 +48,26 @@
                 else if (User.Identity!.IsAuthenticated)
                 {
                     <h2 class="mb-4">бележки - @Model.Notes.Count()</h2>
-                    <div class="container notes-container ps-0">
-                        @if (Model.Notes.Any())
-                        {
+                    @if (Model.Notes.Any())
+                    {
+                        <div class="container notes-container ps-0">
                             @foreach (var note in Model.Notes)
                             {
                                 <div class="position-relative">
-                                    <partial name="~/Views/Notes/_NotePartial.cshtml" model="note" />
+                                    <partial name="~/Views/Notes/_NotePartial.cshtml" model="note"/>
                                 </div>
                             }
-                        }
-                        else
-                        {
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="container ps-0">
                             <hr class="text-light mb-0"/>
                             <p class="fs-5 mt-3">няма налични бележки</p>
                             <hr class="text-light mb-0"/>
-                        }
-                    </div>
+                        </div>
+                        
+                    }
                 }
             </div>
         </div>
