@@ -12,8 +12,8 @@ using icons.Data;
 namespace icons.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261102203537_AddNoteEntity")]
-    partial class AddNoteEntity
+    [Migration("20261116134732_ValidationConstants")]
+    partial class ValidationConstants
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -260,8 +260,8 @@ namespace icons.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -309,7 +309,8 @@ namespace icons.Data.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ReceiverId")
                         .IsRequired()
@@ -338,8 +339,8 @@ namespace icons.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("IconId")
                         .HasColumnType("int");
@@ -363,8 +364,8 @@ namespace icons.Data.Migrations
 
                     b.Property<string>("UserProfilePictureUrl")
                         .IsRequired()
-                        .HasMaxLength(900)
-                        .HasColumnType("nvarchar(900)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("Username")
                         .IsRequired()

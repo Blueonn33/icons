@@ -61,6 +61,11 @@ namespace icons.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateIcon(IconInputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(nameof(Create), model);
+            }
+
             var user = await _userManager.GetUserAsync(User);
 
             if (user == null)

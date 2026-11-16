@@ -12,8 +12,8 @@ using icons.Data;
 namespace icons.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261110131445_NoteMaxContent")]
-    partial class NoteMaxContent
+    [Migration("20261116134408_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using static icons.Data.Constants.ValidationConstants;
 
@@ -24,10 +25,10 @@ namespace icons.Core.ViewModels.Icons
             get; set;
         } = null!;
 
-        public string ImageUrl
+        public string? ImageUrl
         {
             get; set;
-        } = null!;
+        }
 
         [Required(ErrorMessage = "Напиши описание")]
         [StringLength(IconDescriptionMaxLength, MinimumLength = IconDescriptionMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1} символа")]
@@ -36,6 +37,7 @@ namespace icons.Core.ViewModels.Icons
             get; set;
         } = null!;
 
+        [ValidateNever]
         public string UserId
         {
             get; set;
