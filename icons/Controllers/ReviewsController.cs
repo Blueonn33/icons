@@ -22,15 +22,20 @@ namespace icons.Controllers
                 ModelState.AddModelError(nameof(ReviewInputModel.Rating), "Не си поставил оценка");
             }
 
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Попълни правилно всички полета.";
+
+                return RedirectToAction("Icon", "Icons", new
+                {
+                    id = model.IconId
+                });
+            }
+
             var icon = await _iconService.GetIconByIdAsync(iconId);
             var user = await _userManager.GetUserAsync(User);
 
-            if (icon == null)
-            {
-                return NotFound();
-            }
-
-            if (user == null)
+            if (icon == null || user == null)
             {
                 return NotFound();
             }
@@ -45,7 +50,7 @@ namespace icons.Controllers
                     Rating = model.Rating,
                     UserId = user.Id,
                     Username = user.Name,
-                    UserProfilePictureUrl = user.ProfilePictureUrl
+                    UserProfilePictureUrl = user.ProfilePictureUrl!
                 };
 
                 await _reviewService.AddReviewAsync(review);
