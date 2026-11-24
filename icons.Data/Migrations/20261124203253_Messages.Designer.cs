@@ -12,7 +12,7 @@ using icons.Data;
 namespace icons.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261124202613_Messages")]
+    [Migration("20261124203253_Messages")]
     partial class Messages
     {
         /// <inheritdoc />
@@ -309,7 +309,8 @@ namespace icons.Data.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ReceiverId")
                         .IsRequired()
