@@ -1,4 +1,4 @@
-﻿body {
+﻿.messages-body {
     background: radial-gradient( ellipse at 15% 10%, rgba(112, 67, 170, 0.22), transparent 45% ), radial-gradient( ellipse at 85% 85%, rgba(75, 45, 120, 0.18), transparent 45% ), linear-gradient( 135deg, #100D19 0%, #171224 50%, #0E0B16 100% );
     background-attachment: fixed;
     min-height: 100vh;
