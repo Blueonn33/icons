@@ -1,0 +1,73 @@
+﻿body {
+    background: radial-gradient( ellipse at 15% 10%, rgba(112, 67, 170, 0.22), transparent 45% ), radial-gradient( ellipse at 85% 85%, rgba(75, 45, 120, 0.18), transparent 45% ), linear-gradient( 135deg, #100D19 0%, #171224 50%, #0E0B16 100% );
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.messages-user-profile-container {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #292343;
+}
+
+.messages-user-profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.messages-content {
+    padding-bottom: 90px;
+}
+
+.message {
+    background: linear-gradient(135deg, #29213B, #211A30);
+    border: 1px solid rgba(167, 139, 250, 0.15);
+    border-radius: 16px 16px 16px 4px;
+    color: white;
+}
+
+.messages-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.message-user-pic {
+    width: 30px;
+    height: 30px;
+}
+
+.messages-form {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(700px, calc(100% - 30px));
+    z-index: 1000;
+    padding: 12px;
+    background: rgba(23, 18, 36, 0.95);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+}
+
+.messages-form .form-control {
+    background-color: #211A30;
+    border: 1px solid #49365F;
+    color: #F3EFFF;
+}
+
+.messages-form .form-control::placeholder {
+    color: #A99DBD;
+}
+
+.messages-form .form-control:focus {
+    background-color: #211A30;
+    border-color: #A78BFA;
+    box-shadow: 0 0 0 0.2rem rgba(167, 139, 250, 0.15);
+}
