@@ -296,6 +296,41 @@ namespace icons.Data.Migrations
                     b.ToTable("Icons");
                 });
 
+            modelBuilder.Entity("icons.Data.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("SentTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("icons.Data.Models.Note", b =>
                 {
                     b.Property<int>("Id")
@@ -440,6 +475,25 @@ namespace icons.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("icons.Data.Models.Message", b =>
+                {
+                    b.HasOne("icons.Data.Models.ApplicationUser", "Receiver")
+                        .WithMany("Messages")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("icons.Data.Models.ApplicationUser", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
             modelBuilder.Entity("icons.Data.Models.Note", b =>
                 {
                     b.HasOne("icons.Data.Models.ApplicationUser", "Receiver")
@@ -481,6 +535,8 @@ namespace icons.Data.Migrations
             modelBuilder.Entity("icons.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Icons");
+
+                    b.Navigation("Messages");
 
                     b.Navigation("Notes");
 

@@ -2,7 +2,6 @@
 using icons.Core.Contracts;
 using icons.Core.DTO.Notes.Request;
 using icons.Core.DTO.Notes.Response;
-using icons.Data;
 using icons.Data.Common;
 using icons.Data.Models;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +11,6 @@ namespace icons.Core.Services
     public class NoteService(
         INoteRepository _noteRepository,
         UserManager<ApplicationUser> _userManager,
-        ApplicationDbContext _context,
         IMapper _mapper) : INoteService
     {
         public async Task<GetNoteResponseData?> GetNoteByIdAsync(int noteId)
@@ -40,8 +38,8 @@ namespace icons.Core.Services
                 return false;
             }
 
-            _context.Remove(note);
-            await _context.SaveChangesAsync();
+            _noteRepository.Delete(note);
+            await _noteRepository.SaveAsync();
 
             return true;
         }

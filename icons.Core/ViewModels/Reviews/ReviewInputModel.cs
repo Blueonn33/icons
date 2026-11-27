@@ -37,19 +37,19 @@ namespace icons.Core.ViewModels.Reviews
             get; set;
         }
 
-        public string Username
+        public string? Username
         {
             get; set;
-        } = null!;
+        }
 
-        public string UserProfilePictureUrl
+        public string? UserProfilePictureUrl
         {
             get; set;
-        } = null!;
+        }
 
-        public string UserId
+        public string? UserId
         {
             get; set;
-        } = null!;
+        }
     }
 }

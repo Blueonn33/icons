@@ -41,11 +41,14 @@ namespace icons
             builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
             builder.Services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
             builder.Services.AddScoped<INoteRepository, NoteRepository>();
+            builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+
             builder.Services.AddScoped<IIconService, IconService>();
             builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<ILeaderboardService, LeaderboardService>();
             builder.Services.AddScoped<INoteService, NoteService>();
+            builder.Services.AddScoped<IMessageService, MessageService>();
             builder.Services.AddSingleton<CloudinaryService>();
 
             builder.Services.AddControllersWithViews();

@@ -7,7 +7,7 @@ namespace icons.Data.Models;
 public class ApplicationUser : IdentityUser
 {
     [Required]
-    [StringLength(UserNameMaxLength, MinimumLength = UserNameMinLength)]
+    [StringLength(UserNameMaxLength)]
     public string Name
     {
         get; set;
@@ -42,4 +42,5 @@ public class ApplicationUser : IdentityUser
     public virtual ICollection<Icon> Icons { get; set; } = new HashSet<Icon>();
     public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
     public virtual ICollection<Note> Notes { get; set; } = new HashSet<Note>();
+    public virtual ICollection<Message> Messages { get; set; } = new HashSet<Message>();
 }

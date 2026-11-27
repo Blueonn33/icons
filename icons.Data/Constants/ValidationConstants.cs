@@ -33,5 +33,10 @@
         // Note
         public const int NoteContentMinLength = 3;
         public const int NoteContentMaxLength = 100;
+
+
+        // Message
+        public const int MessageContentMinLength = 1;
+        public const int MessageContentMaxLength = 500;
     }
 }
