@@ -1,4 +1,3 @@
-
 name: Build and Deploy ASP.NET Core MVC to MonsterASP.NET
 
 on:
@@ -29,7 +28,13 @@ jobs:
 
       - name: Build application
         run: dotnet build ./icons/icons.csproj --configuration Release --no-restore
-      
+
+      - name: Install EF Core Tools
+        run: dotnet tool install --global dotnet-ef
+
+      - name: Apply Database Migrations
+        run: dotnet ef database update --project ./icons.Data/icons.Data.csproj --startup-project ./icons/icons.csproj --no-build --configuration Release --connection "${{ secrets.MONSTER_DB_CONNECTION_STRING }}"
+
       - name: Publish application
         run: dotnet publish ./icons/icons.csproj --configuration Release --output ./publish
 
