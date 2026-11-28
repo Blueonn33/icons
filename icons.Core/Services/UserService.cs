@@ -189,7 +189,7 @@ namespace icons.Core.Services
 
             if (user.Elixir >= 3000)
             {
-                user.Elixir -= 3000;
+                user.Elixir = 1;
             }
 
             await UpdateRankAsync(user);
