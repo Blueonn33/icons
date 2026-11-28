@@ -12,12 +12,12 @@
             get; set;
         } = null!;
 
-        public string SenderId
+        public DateTime SentTime
         {
             get; set;
-        } = null!;
+        }
 
-        public string ReceiverId
+        public string SenderId
         {
             get; set;
         } = null!;
