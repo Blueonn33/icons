@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using icons.Core.Contracts;
+﻿using icons.Core.Contracts;
 using icons.Core.DTO.Notes.Request;
 using icons.Core.Mappings;
 using icons.Core.ViewModels.Notes;
@@ -12,7 +11,6 @@ namespace icons.Controllers
     public class NotesController(
         INoteService _notesService,
         UserManager<ApplicationUser> _userManager,
-        IMapper _mapper,
         ILogger<NotesController> _logger) : BaseController
     {
         [HttpPost]
