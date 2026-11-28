@@ -1,41 +1,34 @@
-﻿@{
+﻿@model AllMessagesViewModel
+@{
     ViewData["Title"] = "Message";
     ViewData["BodyClass"] = "messages-body";
 }
 
 <div class="messages-container container">
-    @* Action = UserProfile, Controller = Users, asp-route-id = ReceiverId *@
-    <a class="btn btn-light" asp-action="Index" asp-controller="Icons">назад</a>
+    <a class="btn btn-light" asp-action="UserProfile" asp-controller="Users" asp-route-id="@Model.ReceiverId">назад</a>
 
     <div class="messages-user-profile d-flex align-items-center flex-column">
         <div class="messages-user-profile-container">
-            @* User Profile Picture *@
-            <img src="img/nelliel.png" class="img-fluid messages-user-profile-pic"/>
+            <img src="@Model.ReceiverProfilePic" class="img-fluid messages-user-profile-pic"/>
         </div>
         <div class="my-3">
-            @* User Name *@
-            <p class="text-light">Nelliel</p>
+            <p class="text-light">@Model.ReceiverName</p>
         </div>
     </div>
 
     <div class="messages-content">
         <div class="messages-messages">
-            <div class="message-container row">
-                <div class="col-1 p-0 d-flex justify-content-center align-items-center">
-                    <img src="img/color-smile.svg" class="img-fluid message-user-pic"/>
-                </div>
-                <div class="message col-11">
-                    <p class="ps-3 py-1 mb-0">Здрасти</p>
-                </div>
-            </div>
-            <div class="message-container row">
-                <div class="col-1 p-0 d-flex justify-content-center align-items-center">
-                    <img src="img/color-pocker.svg" class="img-fluid message-user-pic"/>
-                </div>
-                <div class="message col-11">
-                    <p class="ps-3 py-1 mb-0">Картоф?</p>
-                </div>
-            </div>
+            @foreach (var message in Model.Messages)
+            {
+                if (message is MessageSenderViewModel)
+                {
+                    <partial name="_SenderMessagePartial" model="message" />
+                }
+                else if (message is MessageReceiverViewModel)
+                {
+                    <partial name="_ReceiverMessagePartial" model="message" />
+                }
+            }
         </div>
 
         <form class="messages-form">
