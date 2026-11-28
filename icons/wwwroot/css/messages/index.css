@@ -23,9 +23,16 @@
     padding-bottom: 90px;
 }
 
-.message {
+.message-sender {
     background: linear-gradient(135deg, #29213B, #211A30);
     border: 1px solid rgba(167, 139, 250, 0.15);
+    border-radius: 16px 16px 16px 4px;
+    color: white;
+}
+
+.message-receiver {
+    background: linear-gradient(135deg, #1E1C26, #17151E);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px 16px 16px 4px;
     color: white;
 }
