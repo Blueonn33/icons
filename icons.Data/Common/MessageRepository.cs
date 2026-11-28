@@ -8,7 +8,8 @@ namespace icons.Data.Common
         public async Task<IEnumerable<Message>> GetAllMessagesByChatIdsAsync(string senderId, string receiverId)
         {
             return await context.Messages
-                .Where(m => m.SenderId == senderId && m.ReceiverId == receiverId)
+                .Where(m => m.SenderId == senderId && m.ReceiverId == receiverId ||
+                            m.SenderId == receiverId && m.ReceiverId == senderId)
                 .Include(m => m.Receiver)
                 .Include(m => m.Sender)
                 .OrderBy(m => m.SentTime)
