@@ -1,4 +1,5 @@
 ﻿using icons.Core.Contracts;
+using icons.Core.DTO.Messages.Request;
 using icons.Core.DTO.Messages.Response;
 using icons.Core.ViewModels.Messages;
 using icons.Data.Models;
@@ -10,7 +11,8 @@ namespace icons.Controllers
 {
     public class MessagesController(
         IMessageService _messageService,
-        UserManager<ApplicationUser> _userManager) : BaseController
+        UserManager<ApplicationUser> _userManager,
+        ILogger<MessagesController> _logger) : BaseController
     {
         [HttpGet]
         public async Task<IActionResult> Index(string receiverId)
@@ -55,6 +57,48 @@ namespace icons.Controllers
             };
 
             return View(messages);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateMessage(MessageInputModel model)
+        {
+            var sender = await _userManager.GetUserAsync(User);
+            var receiver = await _userManager.FindByIdAsync(model.ReceiverId);
+
+            if (sender == null || receiver == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index), new
+                {
+                    receiverId = model.ReceiverId
+                });
+            }
+
+            try
+            {
+                var message = new AddMessageRequestData()
+                {
+                    Content = model.Content,
+                    SenderId = sender.Id,
+                    ReceiverId = model.ReceiverId
+                };
+
+                await _messageService.AddMessageAsync(message);
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical("Възникна грешка. Провери logs");
+                TempData["Error"] = "Възникна грешка при изпращането на съобщение";
+            }
+
+            return RedirectToAction(nameof(Index), new
+            {
+                receiverId = model.ReceiverId
+            });
         }
     }
 }

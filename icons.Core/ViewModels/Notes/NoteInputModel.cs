@@ -16,7 +16,7 @@ namespace icons.Core.ViewModels.Notes
         } = null!;
 
         [Required(ErrorMessage = "Въведи съдържание")]
-        [StringLength(NoteContentMaxLength, MinimumLength = NoteContentMinLength)]
+        [StringLength(NoteContentMaxLength, MinimumLength = NoteContentMinLength, ErrorMessage = "Дължината трябва да е между {2} и {1} символа")]
         public string Content
         {
             get; set;
